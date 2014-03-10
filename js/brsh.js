@@ -142,7 +142,7 @@
     };
 
     addOutput = function(output) {
-        var lines, output, input,
+        var lines,
             contentLines = [],
             o = this._options || {};
 
