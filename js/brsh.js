@@ -9,11 +9,14 @@
 } (this, function ($) {
 
     var BrowserShell, init, createStructure, attachEvents,
-        handleCommand, addOutput, showPrevHistory, showNextHistory, showHistory
+        handleCommand, commandComplete, addOutput, scrollToBottom,
+        showPrevHistory, showNextHistory, showHistoryEntry,
+        clearOutput, showHistory, showHelp,
         defaults = {
             initialPrompt: '$',
             classPrefix: 'brsh',
-            eventPrfix: 'brsh'
+            eventPrfix: 'brsh',
+            commandHandler: function(c,cb) { cb(); }
         };
 
     BrowserShell = function(node, options) {
@@ -65,6 +68,7 @@
             if (e.keyCode === 13) {
                 // enter (execute command)
                 $el.command(this.value);
+                this.value = '';
             } else if (e.keyCode === 38) {
                 // up arrow (prev in history)
                 $el.prevHistory();
@@ -78,6 +82,7 @@
         $el.output = addOutput.bind($el);
         $el.prevHistory = showPrevHistory.bind($el);
         $el.nextHistory = showNextHistory.bind($el);
+        $el.clear = clearOutput.bind($el);
     };
 
     handleCommand = function(input) {
@@ -105,9 +110,11 @@
             }
         });
 
+        this.find('.' + o.classPrefix + '-input').hide();
         this.output("<span class='" + o.classPrefix + "-prompt'>$</span> " + input);
 
         if (!command) {
+            commandComplete.bind(this)();
             return null;
         }
 
@@ -117,16 +124,29 @@
 
         this.trigger(options.eventPrfix + '.command', [command, params, options]);
 
+        // Check for a command-specific handler, otherwise call the generic version
+        if (o.commands[command]) {
+            o.commands[command].bind(this)([command, params, options], commandComplete.bind(this));
+        } else {
+            o.commandHandler([command, params, options], commandComplete.bind(this));
+        }
+
         return [command, params, options];
     };
 
-    addOutput = function(output, doClearInput) {
-        var lines,
+    commandComplete = function() {
+        var o = this._options || {};
+
+        this.find('.' + o.classPrefix + '-input').show();
+        scrollToBottom.bind(this)(false);
+    };
+
+    addOutput = function(output) {
+        var lines, output, input,
             contentLines = [],
             o = this._options || {};
 
         output = '' + output;
-        doClearInput = (doClearInput === false) ? false : true;
         
         lines = output.split(/\n/);
 
@@ -134,35 +154,71 @@
             contentLines.push("<p class='" + o.classPrefix + "-line'>" + line + "</p>");
         });
 
-        this.find('.' + o.classPrefix + '-output')
-            .append(contentLines.join("\n"));
+        this.find('.' + o.classPrefix + '-output').append(contentLines.join("\n"));
+        scrollToBottom.bind(this)(true);
+    };
 
-        if (doClearInput) {
-            this.find('input').val('');
+    scrollToBottom = function(hideInput) {
+        var o = this._options || {};
+
+        hideInput = !!hideInput;
+
+        output = this.find('.' + o.classPrefix + '-output');
+        input = this.find('.' + o.classPrefix + '-input');
+        this.scrollTop(output.height() - this.height() + input.show().height());
+        if (hideInput) {
+            input.hide();
         }
     };
 
     showPrevHistory = function() {
-        showHistory.bind(this)(this._historyPointer - 1);
+        showHistoryEntry.bind(this)(this._historyPointer - 1);
     };
 
     showNextHistory = function() {
         var index = this._historyPointer + 1;
         if (this._history[index]) {
-            showHistory.bind(this)(index);
+            showHistoryEntry.bind(this)(index);
         } else {
             this._historyPointer = this._history.length;
             this.find('input').val('');
+            scrollToBottom.bind(this)(false);
         }
     };
 
-    showHistory = function(index) {
+    showHistoryEntry = function(index) {
         if (this._history[index]) {
             this._historyPointer = index;
             this.find('input').val(this._history[this._historyPointer]);
+            scrollToBottom.bind(this)(false);
         }
     };
 
+
+    // ---------------- Command Handlers ---------------- //
+
+    clearOutput = function(command, cb) {
+        var o = this._options || {};
+        this.find('.' + o.classPrefix + '-output').empty();
+        cb();
+    };
+
+    showHistory = function(command, cb) {
+        this.output(this._history.join("\n"));
+        cb();
+    };
+
+    showHelp = function(command, cb) {
+        cb();
+    };
+
+
+    // We need to assign these down here, otherwise the variables will be undefined!
+    defaults.commands = {
+        clear: clearOutput,
+        history: showHistory,
+        help: showHelp
+    };
 
     return BrowserShell;
 

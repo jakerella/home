@@ -6,7 +6,8 @@ header {
 
 .brsh-console {
     width: 100%;
-    height: 100%;
+    height: 300px;
+    overflow-y: scroll;
     background-color: #eee;
     font-family: monospace;
     line-height: 1.2em;
