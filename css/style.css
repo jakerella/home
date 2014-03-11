@@ -22,6 +22,7 @@ header {
 }
 
 .brsh-output {
+    margin: 0;
     letter-spacing: 1px;
 }
 

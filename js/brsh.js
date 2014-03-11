@@ -53,10 +53,11 @@
 
         $el
             .addClass('brsh-console')
-            .append("<section class='" + o.classPrefix + "-output'>" +
-                "</section><section class='" + o.classPrefix + "-input'>" +
+            .append("<pre class='" + o.classPrefix + "-output'></pre>" +
+                "<section class='" + o.classPrefix + "-input'>" +
                 "<span class='" + o.classPrefix + "-prompt'>$</span> " +
-                "<input type='text' /></section>");
+                "<input type='text' />" +
+                "</section>");
 
         $el.trigger(o.eventPrfix + '.DOMReady');
     };
@@ -125,8 +126,8 @@
         this.trigger(options.eventPrfix + '.command', [command, params, options]);
 
         // Check for a command-specific handler, otherwise call the generic version
-        if (o.commands[command]) {
-            o.commands[command].bind(this)([command, params, options], commandComplete.bind(this));
+        if (o.commands[command] && typeof o.commands[command].handler === 'function') {
+            o.commands[command].handler.bind(this)([command, params, options], commandComplete.bind(this));
         } else {
             o.commandHandler([command, params, options], commandComplete.bind(this));
         }
@@ -151,10 +152,10 @@
         lines = output.split(/\n/);
 
         lines.forEach(function buildLine(line) {
-            contentLines.push("<p class='" + o.classPrefix + "-line'>" + line + "</p>");
+            contentLines.push("<span class='" + o.classPrefix + "-line'>" + line + "</span>");
         });
 
-        this.find('.' + o.classPrefix + '-output').append(contentLines.join("\n"));
+        this.find('.' + o.classPrefix + '-output').append(contentLines.join("\n") + "\n");
         scrollToBottom.bind(this)(true);
     };
 
@@ -209,15 +210,76 @@
     };
 
     showHelp = function(command, cb) {
+        var commandName,
+            help = [],
+            o = this._options || {};
+
+        if (command[1].length && o.commands[command[1][0]]) {
+
+            if (o.commands[command[1][0]].extendedHelp) {
+                help = o.commands[command[1][0]].extendedHelp;
+            } else {
+                help.push(o.commands[command[1][0]].helpLine || '(no help available)');
+            }
+
+        } else if (command[1].length) {
+            help.push('Sorry, but I don\'t know that command.');
+            help.push('You can see the commands I know by typing \'help\'');
+
+        } else {
+            help.push('Below are the commands I know about (in no particular order).');
+            help.push('Note that there may be other commands I don\'t know about!');
+            help.push('You can get help on a specific command by typing:');
+            help.push('  $ help [command]');
+            help.push('');
+
+            $.each(o.commands, function(name, data) {
+                commandName = name;
+                if (commandName.length < 19) {
+                    commandName += Array(19 + 1 - commandName.length).join(' ');
+                }
+                help.push(commandName + ' ' + data.helpLine);
+            });
+        }
+
+        this.output(help.join("\n"));
         cb();
     };
 
 
     // We need to assign these down here, otherwise the variables will be undefined!
     defaults.commands = {
-        clear: clearOutput,
-        history: showHistory,
-        help: showHelp
+        clear: {
+            handler: clearOutput,
+            helpLine: 'Clears all output',
+            extendedHelp: [
+                'Clears all output in the terminal window. This command accepts no ',
+                'parameters. Use it by simply typing the command:',
+                '    $ clear'
+            ]
+        },
+        history: {
+            handler: showHistory,
+            helpLine: 'Shows all recent command history',
+            extendedHelp: [
+                'Displays each of the recent commands, one per line. Note that the ',
+                'most recent command will be at the bottom. This command accepts no ',
+                'parameters. Use it like so:',
+                '  $ history'
+            ]
+        },
+        help: {
+            handler: showHelp,
+            helpLine: 'Displays this help information',
+            extendedHelp: [
+                'Displays general help information and command-specific help (if ',
+                'requested). You can get help on a specific command by typing:',
+                '  $ help [command]',
+                '',
+                'For example:',
+                '  $ help history'
+            ]
+        }
     };
 
     return BrowserShell;
