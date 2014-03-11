@@ -16,7 +16,10 @@
             initialPrompt: '$',
             classPrefix: 'brsh',
             eventPrfix: 'brsh',
-            commandHandler: function(c,cb) { cb(); }
+            commandHandler: function(c,cb) {
+                this.output('Sorry, but I don\'t know this command!');
+                cb();
+            }
         };
 
     BrowserShell = function(node, options) {
@@ -55,7 +58,7 @@
             .addClass('brsh-console')
             .append("<pre class='" + o.classPrefix + "-output'></pre>" +
                 "<section class='" + o.classPrefix + "-input'>" +
-                "<span class='" + o.classPrefix + "-prompt'>$</span> " +
+                "<span class='" + o.classPrefix + "-prompt'>" + $el._prompt + "</span> " +
                 "<input type='text' />" +
                 "</section>");
 
@@ -87,7 +90,7 @@
     };
 
     handleCommand = function(input) {
-        var all, command,
+        var all, command, handler,
             params = [],
             options = [],
             o = this._options || {};
@@ -112,7 +115,7 @@
         });
 
         this.find('.' + o.classPrefix + '-input').hide();
-        this.output("<span class='" + o.classPrefix + "-prompt'>$</span> " + input);
+        this.output("<span class='" + o.classPrefix + "-prompt'>" + this._prompt + "</span> " + input);
 
         if (!command) {
             commandComplete.bind(this)();
@@ -126,11 +129,11 @@
         this.trigger(options.eventPrfix + '.command', [command, params, options]);
 
         // Check for a command-specific handler, otherwise call the generic version
+        handler = o.commandHandler;
         if (o.commands[command] && typeof o.commands[command].handler === 'function') {
-            o.commands[command].handler.bind(this)([command, params, options], commandComplete.bind(this));
-        } else {
-            o.commandHandler([command, params, options], commandComplete.bind(this));
+            handler = o.commands[command].handler;
         }
+        handler.bind(this)([command, params, options], commandComplete.bind(this));
 
         return [command, params, options];
     };

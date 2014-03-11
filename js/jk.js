@@ -2,7 +2,10 @@
 
     var brshNode = $('.console');
 
-    var brsh = BrowserShell(brshNode);
+    BrowserShell(brshNode, {
+        initialPrompt: 'jk$'
+    });
+
     brshNode.find('input').focus();
 
 
