@@ -1,4 +1,4 @@
-# Saple Site
+# Sample Site
 
 This is some content
 
