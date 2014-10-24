@@ -1,1 +1,3 @@
-js/vendor/
+node_modules/
+app/public/js/vendor/
+app/config.json
