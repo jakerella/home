@@ -9,6 +9,7 @@
     "express": "^4.9.8",
     "jade": "^1.7.0",
     "lodash": "^2.4.1",
+    "marked": "^0.3.2",
     "vhost": "^3.0.0"
   },
   "devDependencies": {},
