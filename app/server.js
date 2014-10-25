@@ -4,6 +4,7 @@ var express = require('express'),
     serveStatic = require('serve-static'),
     path = require('path'),
     _ = require('lodash'),
+    router = require('./router'),
     config = require('./config.json'),
     options = {},
     sites = {};
@@ -57,7 +58,7 @@ options.sites.forEach(function(site) {
     sites[site.slug] = express();
     
     sites[site.slug].use(serveStatic(path.join('templates', site.template, site.publicDir)));
-    require('./router')(sites[site.slug], site);
+    router(sites[site.slug], site);
     
     server.use(vhost(site.host, sites[site.slug]));
     usedHosts.push(site.host);
