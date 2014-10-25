@@ -3,3 +3,5 @@ app/public/js/vendor/
 app/config.json
 content/*
 !content/sample/
+templates/*
+!templates/sample/

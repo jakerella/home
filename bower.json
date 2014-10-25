@@ -1,7 +1,0 @@
-{
-    "name": "jordan-kasper-home",
-    "version": "0.1.0",
-    "dependencies": {
-        "jQuery": "~1.1"
-    }
-}

@@ -5,7 +5,7 @@ var path = require('path'),
 module.exports = {
 
     build: function (slug, options) {
-        return jade.renderFile('app/layout/base.jade', {
+        return jade.renderFile(path.join('templates', options.template, 'base.jade'), {
             title: (options.title || 'My Site'),
             renderContent: function() {
                 return jade.render(

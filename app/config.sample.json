@@ -1,9 +1,9 @@
 {
     "sites": [
         {
-            "name": "jordankasper",
-            "host": "jordankasper.com",
-            "contentDir": "content/jordankasper",
+            "name": "sample",
+            "host": "sample.com",
+            "contentDir": "content/sample",
             "devOptions": {
                 "host": "localhost"
             }
