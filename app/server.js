@@ -63,7 +63,20 @@ options.sites.forEach(function(site) {
     server.use(vhost(site.host, sites[site.slug]));
     usedHosts.push(site.host);
 
+    sites[site.slug].use(function(err, req, res, next){
+        console.error('Error on site "' + site.slug + '":', err.stack);
+        res.status(500).send('Sorry, but there was a nasty error. Please try again later.');
+    });
+
     console.log('Added vhost for "' + site.slug + '" at "' + site.host + '"');
+});
+
+
+// ----------------- Error Handling for vhost ---------------- //
+
+server.use(function(err, req, res, next){
+    console.error(err.stack);
+    res.status(500).send('Sorry, but there was a nasty error. Please try again later.');
 });
 
 
