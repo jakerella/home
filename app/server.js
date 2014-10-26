@@ -53,6 +53,7 @@ options.sites.forEach(function(site) {
     }
     site.template = site.template || 'sample';
     site.publicDir = site.publicDir || 'public';
+    site.pageData = site.pageData || {};
 
     // Create vhost's express app and set up routes
     sites[site.slug] = express();

@@ -3,16 +3,17 @@ var path = require('path'),
     jade = require('jade'),
     _ = require('lodash');
 
-module.exports = function (slug, options) {
-    var data = options.pageData[slug] || {};
+module.exports = function (slug, site) {
+    var data = site.pageData[slug] || {};
 
-    data.template = data.template || options.defaultTemplate || 'base.jade';
-    data.title = data.title || options.title || 'My Site - %slug%';
+    data.slug = slug;
+    data.template = data.template || site.defaultTemplate || 'base.jade';
+    data.title = data.title || site.title || 'My Site - %slug%';
 
     _.extend(data, {
         renderContent: function() {
             return jade.render(
-                'include:markdown ' + path.join(options.contentDir, slug + '.md'),
+                'include:markdown ' + path.join(site.contentDir, slug + '.md'),
                 { filename: 'FOOBAR' } // this option must be here, but is not used
             );
         }
@@ -20,5 +21,5 @@ module.exports = function (slug, options) {
 
     data.title = data.title.replace(/%slug%/g, slug.replace(/\-/g, ' ').replace(/\w*/g, function(t){ return t.charAt(0).toUpperCase()+t.substr(1).toLowerCase(); }));
 
-    return jade.renderFile(path.join('templates', options.template, data.template), data);
+    return jade.renderFile(path.join('templates', site.template, data.template), data);
 };
