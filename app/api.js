@@ -13,7 +13,8 @@ module.exports = function(site) {
 
         options = _.extend({
             includeStatic: false,
-            sortByTime: null
+            sortByTime: null,
+            limit: 0
         }, options);
 
         dir = options.dir;
@@ -21,14 +22,21 @@ module.exports = function(site) {
         fs.readdir(dir, function(err, files) {
             if (err) { def.reject(err); return; }
 
-            var fileList = files.map(function(fname) { 
-                var slug = fname.replace(/\..+/, '');
+            var fileList = files
+                .map(function(fname) {
+                    var slug = fname.replace(/\..+/, ''),
+                        stat = fs.statSync(path.join(dir, fname));
 
-                return {
-                    slug: slug,
-                    time: fs.statSync(path.join(dir, fname)).mtime.getTime()
-                };
-            });
+                    if (stat.isFile()) {
+                        return {
+                            slug: slug,
+                            time: stat.mtime.getTime()
+                        };
+                    }
+                })
+                .filter(function(file) {
+                    return !!file;
+                });
 
             if (!options.includeStatic) {
                 fileList = fileList.filter(function(file) {
@@ -46,6 +54,10 @@ module.exports = function(site) {
                 });
             }
 
+            if (options.limit) {
+                fileList = fileList.slice(0, options.limit);
+            }
+
             def.resolve(fileList);
         });
 
@@ -57,7 +69,11 @@ module.exports = function(site) {
     return {
     
         getAllContent: function(req, res) {
-            getContent({ dir: site.contentDir, includeStatic: true })
+            getContent({
+                dir: site.contentDir,
+                includeStatic: true,
+                limit: 0
+            })
                 .then(function(fileList) {
                     res.json(fileList);
                 })
@@ -71,13 +87,29 @@ module.exports = function(site) {
             getContent({
                 dir: site.contentDir,
                 includeStatic: false,
-                sortByTime: 'DESC'
+                limit: 0
             })
                 .then(function(fileList) {
                     res.json(fileList);
                 })
                 .fail(function(err) {
                     console.log('API ERROR (getAllPosts): ' + err);
+                    res.status(500).send('Unable to complete request');
+                });
+        },
+
+        getRecentPosts: function(req, res) {
+            getContent({
+                dir: site.contentDir,
+                includeStatic: false,
+                limit: site.pageSearchLimit || 5,
+                sortByTime: 'DESC'
+            })
+                .then(function(fileList) {
+                    res.json(fileList);
+                })
+                .fail(function(err) {
+                    console.log('API ERROR (getRecentPosts): ' + err);
                     res.status(500).send('Unable to complete request');
                 });
         }

@@ -15,6 +15,7 @@ module.exports = function(app, site) {
     // API endpoints
     app.get('/api/content', api.getAllContent);
     app.get('/api/content/posts', api.getAllPosts);
+    app.get('/api/content/posts/recent', api.getRecentPosts);
 
     // Router for all other pages/posts
     app.get('*', function(req, res) {
