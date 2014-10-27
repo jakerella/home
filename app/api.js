@@ -5,66 +5,6 @@ var fs = require('fs'),
 
 module.exports = function(site) {
 
-    // ------------ Private Helpers, Site-Specific ------------ //
-
-    function getContent(options) {
-        var dir,
-            def = q.defer();
-
-        options = _.extend({
-            includeStatic: false,
-            sortByTime: null,
-            limit: 0
-        }, options);
-
-        dir = options.dir;
-
-        fs.readdir(dir, function(err, files) {
-            if (err) { def.reject(err); return; }
-
-            var fileList = files
-                .map(function(fname) {
-                    var slug = fname.replace(/\..+/, ''),
-                        stat = fs.statSync(path.join(dir, fname));
-
-                    if (stat.isFile()) {
-                        return {
-                            slug: slug,
-                            time: stat.mtime.getTime()
-                        };
-                    }
-                })
-                .filter(function(file) {
-                    return !!file;
-                });
-
-            if (!options.includeStatic) {
-                fileList = fileList.filter(function(file) {
-                    return !(site.pageData[file.slug] && site.pageData[file.slug].isStatic);
-                });
-            }
-
-            if (options.sortByTime) {
-                fileList.sort(function(a, b) {
-                    if (options.sortByTime === 'DESC') {
-                        return b.time - a.time;
-                    } else {
-                        return a.time - b.time;
-                    }
-                });
-            }
-
-            if (options.limit) {
-                fileList = fileList.slice(0, options.limit);
-            }
-
-            def.resolve(fileList);
-        });
-
-        return def.promise;
-    }
-
-
     // --------------- Public API methods --------------------- //
     return {
     
@@ -115,4 +55,101 @@ module.exports = function(site) {
         }
 
     };
+
+
+    // ------------ Private Helpers, Site-Specific ------------ //
+
+    function getContent(options) {
+        var def = q.defer();
+
+        options = _.extend({
+            includeStatic: false,
+            sortByTime: null,
+            limit: 0
+        }, options);
+
+        fs.readdir(options.dir, function(err, files) {
+            if (err) { def.reject(err); return; }
+
+            getAllFiles(files, options)
+                .then(function(fileList) {
+                    return filterFiles(fileList, options);
+                })
+                .then(function(fileList) {
+                    return sortFiles(fileList, options);
+                })
+                .then(function(fileList) {
+                    return pageFiles(fileList, options);
+                })
+                .then(def.resolve)
+                .fail(def.reject);
+        });
+
+        return def.promise;
+    }
+
+    function getAllFiles(fileList, options) {
+        var def = q.defer();
+
+        fileList = fileList
+            .map(function(fname) {
+                var slug = fname.replace(/\..+/, ''),
+                    stat = fs.statSync(path.join(options.dir, fname));
+
+                if (stat.isFile()) {
+                    return {
+                        slug: slug,
+                        time: stat.mtime.getTime()
+                    };
+                }
+            })
+            .filter(function(file) {
+                return !!file;
+            });
+
+        def.resolve(fileList);
+        return def.promise;
+    }
+
+    function filterFiles(fileList, options) {
+        var def = q.defer();
+
+        if (!options.includeStatic) {
+            fileList = fileList.filter(function(file) {
+                return !(site.pageData[file.slug] && site.pageData[file.slug].isStatic);
+            });
+        }
+
+        def.resolve(fileList);
+        return def.promise;
+    }
+
+    function sortFiles(fileList, options) {
+        var def = q.defer();
+
+        if (options.sortByTime) {
+            fileList.sort(function(a, b) {
+                if (options.sortByTime === 'DESC') {
+                    return b.time - a.time;
+                } else {
+                    return a.time - b.time;
+                }
+            });
+        }
+
+        def.resolve(fileList);
+        return def.promise;
+    }
+
+    function pageFiles(fileList, options) {
+        var def = q.defer();
+
+        if (options.limit) {
+            fileList = fileList.slice(0, options.limit);
+        }
+
+        def.resolve(fileList);
+        return def.promise;
+    }
+
 };
