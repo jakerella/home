@@ -2,10 +2,12 @@
 var fs = require('fs'),
     path = require('path'),
     q = require('q'),
-    _ = require('lodash');
+    _ = require('lodash'),
+    marked = require('marked');
 
 module.exports = function(site) {
-    
+    var WORD_COUNT = 100;
+
     // ------------------ Public Methods ------------------ //
     var methods = {
         getContent: function (options) {
@@ -15,7 +17,9 @@ module.exports = function(site) {
                 includeStatic: false,
                 sortByTime: null,
                 limit: 0,
-                includeBrief: true
+                includeBrief: true,
+                briefWordCount: site.briefWordCount,
+                briefIncludeTitles: !!site.briefIncludeTitles,
             }, options);
 
             fs.readdir(options.dir, function(err, files) {
@@ -142,8 +146,7 @@ module.exports = function(site) {
     }
 
     function getContentBrief(file, options) {
-        var length = options.length || site.briefWordCount || 100,
-            def = q.defer();
+        var def = q.defer();
 
         fs.readFile(
             path.join(options.dir, file.slug + '.md'),
@@ -151,7 +154,8 @@ module.exports = function(site) {
             function(err, content) {
                 if (err) { def.reject(err); }
 
-                file.brief = content.substr(0, length);
+                file.brief = getContentWords(content, options);
+
                 def.resolve(file);
             }
         );
@@ -159,8 +163,19 @@ module.exports = function(site) {
         return def.promise;
     }
 
-    function getContentWords() {
-        
+    function getContentWords(content, options) {
+        var re,
+            brief = content,
+            length = options.briefWordCount || WORD_COUNT;
+
+        if (!options.briefIncludeTitles) {
+            brief = brief.replace(/^\#+\s+.+\n/gm, '');
+        }
+
+        re = new RegExp('[^a-z]*([\\w]+[^\\w]+){' + length + '}', 'i');
+        brief = brief.match(re);
+
+        return marked(brief[0] + '...');
     }
 
     return methods;
