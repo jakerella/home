@@ -2,20 +2,12 @@
 var express = require('express'),
     vhost = require('vhost'),
     serveStatic = require('serve-static'),
-    fs = require('fs'),
     path = require('path'),
-    jade = require('jade'),
     _ = require('lodash'),
-    router = require('./router'),
+    router = require('./helpers/router.js'),
     config = require('./config.json'),
     options = {},
-    sites = {},
-    ERROR_MSG = {
-        '400': 'Bad Request',
-        '403': 'Unauthorized',
-        '404': 'Not Found',
-        '500': 'Server Error'
-    };
+    sites = {};
 
 
 // ---------------- Primary vhost Server Config --------------- //
@@ -39,7 +31,7 @@ server.set('port', options.port || 8686);
 
 console.log('Starting vhost server with config: ', JSON.stringify(options));
 
-require('marked').setOptions(require('./markdownOptions.js'));
+require('marked').setOptions(require('./helpers/markdownOptions.js'));
 
 
 // ------------------ Individual vhost Config ----------------- //
@@ -74,21 +66,7 @@ options.sites.forEach(function(site) {
     server.use(vhost(site.host, sites[site.slug]));
     usedHosts.push(site.host);
 
-    sites[site.slug].use(function(err, req, res, next){
-        console.error('Error on site "' + site.slug + '":', err.stack);
-        
-        if (err.status) {
-            fs.exists(path.join('templates', site.template, err.status + '.jade'), function(exists) {
-                var content = ERROR_MSG['' + err.status] || 'Server Error';
-                if (exists) {
-                    content = jade.renderFile(path.join('templates', site.template, err.status + '.jade'));
-                }
-                res.status(err.status).send(content);
-            });
-        } else {
-            res.status(500).send('Sorry, but there was a nasty error. Please try again later.');
-        }
-    });
+    sites[site.slug].use(require('./helpers/httpErrors.js')(site));
 
     console.log('Added vhost for "' + site.slug + '" at "' + site.host + '"');
 });
