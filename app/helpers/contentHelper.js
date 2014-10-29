@@ -155,7 +155,7 @@ module.exports = function(site) {
                 if (err) { def.reject(err); }
 
                 file.brief = getContentWords(content, options);
-                
+                file.tags = getContentTags(content);
 
                 def.resolve(file);
             }
@@ -177,6 +177,17 @@ module.exports = function(site) {
         brief = brief.match(re);
 
         return marked(brief[0] + '...');
+    }
+
+    function getContentTags(content) {
+        var tags = [],
+            m = content.match(/@@\s([\w\s]+(?:,\s*[\w\s]+)*)/g);
+
+        if (m) {
+            tags = m[0].replace(/\n/, '').substr(3).split(/\s*\,\s*/);
+        }
+
+        return tags;
     }
 
     return methods;
