@@ -16,6 +16,7 @@ module.exports = function(site) {
             options = _.extend({
                 includeStatic: false,
                 sortByTime: null,
+                sortByModTime: null,
                 limit: 0,
                 includeBrief: true,
                 briefWordCount: site.briefWordCount,
@@ -29,14 +30,16 @@ module.exports = function(site) {
                     .then(function(fileList) {
                         return filterFiles(fileList, options);
                     })
+                    // wow... this is inefficient, we have to read every file
+                    // before we can sort or page... maybe we can cache this info?
+                    .then(function(fileList) {
+                        return getFileData(fileList, options);
+                    })
                     .then(function(fileList) {
                         return sortFiles(fileList, options);
                     })
                     .then(function(fileList) {
                         return pageFiles(fileList, options);
-                    })
-                    .then(function(fileList) {
-                        return getFileData(fileList, options);
                     })
                     .then(def.resolve)
                     .fail(def.reject);
@@ -60,7 +63,7 @@ module.exports = function(site) {
                 if (stat.isFile()) {
                     return {
                         slug: slug,
-                        time: stat.mtime.getTime()
+                        modtime: stat.mtime.getTime()
                     };
                 }
             })
@@ -88,12 +91,22 @@ module.exports = function(site) {
     function sortFiles(fileList, options) {
         var def = q.defer();
 
+        if (options.sortByModTime) {
+            fileList.sort(function(a, b) {
+                if (options.sortByModTime === 'DESC') {
+                    return b.modtime - a.modtime;
+                } else {
+                    return a.modtime - b.modtime;
+                }
+            });
+        }
+
         if (options.sortByTime) {
             fileList.sort(function(a, b) {
                 if (options.sortByTime === 'DESC') {
-                    return b.time - a.time;
+                    return b.publishTime - a.publishTime;
                 } else {
-                    return a.time - b.time;
+                    return a.publishTime - b.publishTime;
                 }
             });
         }
@@ -131,6 +144,8 @@ module.exports = function(site) {
                         } else {
                             console.error('Unable to read file contents: ', result.reason);
                             fileList[i].brief = '[Sorry, that content is not available]';
+                            fileList[i].tags = [];
+                            fileList[i].publishTime = null;
                         }
                     });
 
@@ -156,6 +171,7 @@ module.exports = function(site) {
 
                 file.brief = getContentWords(content, options);
                 file.tags = getContentTags(content);
+                file.publishTime = getContentPublishTime(content);
 
                 def.resolve(file);
             }
@@ -181,13 +197,26 @@ module.exports = function(site) {
 
     function getContentTags(content) {
         var tags = [],
-            m = content.match(/@@\s([\w\s]+(?:,\s*[\w\s]+)*)/g);
+            m = /@@\s([\w\s]+(?:,\s*[\w\s]+)*)/g.exec(content);
 
         if (m) {
-            tags = m[0].replace(/\n/, '').substr(3).split(/\s*\,\s*/);
+            tags = m[1].replace(/\n/, '').split(/\s*\,\s*/);
         }
 
         return tags;
+    }
+
+    function getContentPublishTime(content) {
+        var d,
+            publishTime = null,
+            m = /\{{2}\s*([^\}]+)\s*\}{2}/g.exec(content);
+
+        if (m) {
+            d = (new Date(m[1]));
+            publishTime = d.getTime() || m[1];
+        }
+
+        return publishTime;
     }
 
     return methods;
