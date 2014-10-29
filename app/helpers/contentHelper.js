@@ -120,7 +120,7 @@ module.exports = function(site) {
         if (options.includeBrief) {
 
             fileList.forEach(function(file) {
-                fileReads.push(getContentBrief(file, options));
+                fileReads.push(getContentData(file, options));
             });
 
             q.allSettled(fileReads)
@@ -145,7 +145,7 @@ module.exports = function(site) {
         return def.promise;
     }
 
-    function getContentBrief(file, options) {
+    function getContentData(file, options) {
         var def = q.defer();
 
         fs.readFile(
@@ -155,6 +155,7 @@ module.exports = function(site) {
                 if (err) { def.reject(err); }
 
                 file.brief = getContentWords(content, options);
+                
 
                 def.resolve(file);
             }

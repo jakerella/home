@@ -31,7 +31,7 @@ server.set('port', options.port || 8686);
 
 console.log('Starting vhost server with config: ', JSON.stringify(options));
 
-require('marked').setOptions(require('./helpers/markdownOptions.js'));
+require('marked').setOptions(require('./helpers/markdownOptions.js')(options));
 
 
 // ------------------ Individual vhost Config ----------------- //
