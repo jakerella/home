@@ -3,10 +3,13 @@ var fs = require('fs'),
     path = require('path'),
     q = require('q'),
     _ = require('lodash'),
-    marked = require('marked');
+    marked = require('marked'),
+    
+    WORD_COUNT = 100,
+    CACHE_FILE = path.join(__dirname, '..', 'tmp', 'contentcache.json'),
+    EXPIRE_TIME = (30 * 24 * 60 * 60 * 1000);
 
 module.exports = function(site) {
-    var WORD_COUNT = 100;
 
     // ------------------ Public Methods ------------------ //
     var methods = {
@@ -18,7 +21,6 @@ module.exports = function(site) {
                 sortByTime: null,
                 sortByModTime: null,
                 limit: 0,
-                includeBrief: true,
                 briefWordCount: site.briefWordCount,
                 briefIncludeTitles: !!site.briefIncludeTitles,
             }, options);
@@ -127,35 +129,81 @@ module.exports = function(site) {
     }
 
     function getFileData(fileList, options) {
-        var fileReads = [],
+        var cache = {},
+            fileReads = [],
+            data = [],
+            now = (new Date()).getTime(),
             def = q.defer();
 
-        if (options.includeBrief) {
+        try {
+            // first we clear out the content cache file from require's own cache
+            // otherwise cache updates won't be detected by any other request
+            require.cache[CACHE_FILE] = null;
+            cache = require(CACHE_FILE);
+        } catch(err) {
+            // ignore me! The default (empty) value will be used
+        }
 
-            fileList.forEach(function(file) {
+        fileList.forEach(function(file) {
+            if (cache[file.slug] && cache[file.slug].expires > now) {
+                file.brief = cache[file.slug].brief || "";
+                file.tags = cache[file.slug].tags || [];
+                file.publishTime = cache[file.slug].publishTime || null;
+                data.push(file);
+            } else {
                 fileReads.push(getContentData(file, options));
-            });
+            }
+        });
 
-            q.allSettled(fileReads)
-                .then(function(results) {
-                    results.forEach(function(result, i) {
-                        if (result.state === 'fulfilled') {
-                            fileList[i] = result.value;
-                        } else {
-                            console.error('Unable to read file contents: ', result.reason);
-                            fileList[i].brief = '[Sorry, that content is not available]';
-                            fileList[i].tags = [];
-                            fileList[i].publishTime = null;
-                        }
-                    });
-
-                    def.resolve(fileList);
+        q.allSettled(fileReads)
+            .then(function(results) {
+                results.forEach(function(result, i) {
+                    if (result.state === 'fulfilled') {
+                        data.push(result.value);
+                        setCacheForFile(cache, result.value);
+                    } else {
+                        console.error('Unable to read file contents: ', result.reason);
+                    }
                 });
 
-        } else {
-            // No briefs requested
-            def.resolve(fileList);
-        }
+                // We'll initiate the cache writing here, but we will not wait
+                // to resolve the parent action. If cache writing fails, we'll 
+                // just build it again on the next request
+                if (results.length) {
+                    writeNewCacheFile(cache);
+                }
+
+                def.resolve(data);
+            });
+
+        return def.promise;
+    }
+
+    function setCacheForFile(cache, file) {
+        cache[file.slug] = {
+            slug: file.slug,
+            brief: file.brief || "",
+            tags: file.tags || [],
+            publishTime: file.publishTime || null,
+            expires: (new Date()).getTime() + EXPIRE_TIME
+        };
+    }
+
+    function writeNewCacheFile(cache) {
+        var def = q.defer();
+
+        fs.writeFile(
+            CACHE_FILE,
+            JSON.stringify(cache),
+            { encoding: 'utf-8', mode: 420 },
+            function(err) {
+                if (err) {
+                    console.error('Error writing to cache (' + CACHE_FILE + '):', err.stack);
+                    def.reject(err);
+                }
+                def.resolve(CACHE_FILE);
+            }
+        );
 
         return def.promise;
     }
