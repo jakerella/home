@@ -1,0 +1,19 @@
+doctype html
+html
+    head
+        include head.jade
+    
+    body.off-canvas-contain(data-slug=slug)
+        include header.jade
+
+        section.main-body.row
+
+            section.recent-posts.sm-12.md-9.left
+                h2 Recent Posts
+
+            aside.speaking.sm-12.md-3.right
+                include:markdown ../../content/jordankasper/speaking.md
+
+        include footer.jade
+
+        include scripts.jade

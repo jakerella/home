@@ -1,0 +1,17 @@
+doctype html
+html
+    head
+        include head.jade
+    
+    body(data-slug=slug)
+        include header.jade
+
+        section.content
+            != renderContent()
+
+        section.recent-posts
+            h2 Recent Posts
+
+        include footer.jade
+
+        include scripts.jade

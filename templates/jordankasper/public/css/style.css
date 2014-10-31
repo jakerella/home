@@ -1,0 +1,100 @@
+
+/* ---------------- Modules -------------- */
+
+/* Header and Nav */
+body > header {
+    background-color: #444;
+    min-height: 3.5em;
+    color: #eee;
+}
+header h1 {
+    font-size: 1.25em;
+    padding: 0.25em 0 0 1em;
+}
+nav ul {
+    margin: 0;
+}
+nav li {
+    display: inline-block;
+    background-color: #444;
+    padding: 1.25em 0;
+    transition: background 0.3s linear;
+}
+nav li:hover {
+    background-color: #99a;
+}
+nav a {
+    color: #ddd;
+    font-size: 1.1em;
+    text-decoration: none;
+    padding: 1em 3em;
+}
+
+.off-canvas-right {
+    background-color: #222;
+}
+.off-canvas-right ul {
+    padding: 0;
+}
+.off-canvas-right li {
+    display: block;
+    background-color: #222;
+    border-bottom: 1px solid #eee;
+}
+.off-canvas-trigger-right {
+    height: 2em;
+    position: absolute;
+    right: 1em;
+    top: 0.5em;
+    width: 1.875em;
+}
+
+
+/* Main Content */
+.main-body {
+    padding-top: 4em;
+}
+
+
+/* ---------------- Utility -------------- */
+
+.hamburger-icon:before {
+    top: -0.5em;
+}
+.hamburger-icon:before, .hamburger-icon:after {
+    background: none repeat scroll 0 0 #fff;
+    content: "";
+    height: 0.0625em;
+    left: 0;
+    position: absolute;
+    width: 1.875em;
+}
+.hamburger-icon:after {
+    bottom: -0.5em;
+}
+.hamburger-icon:before, .hamburger-icon:after {
+    background: none repeat scroll 0 0 #fff;
+    content: "";
+    height: 0.0625em;
+    left: 0;
+    position: absolute;
+    width: 1.875em;
+}
+.hamburger-icon {
+    background: none repeat scroll 0 0 #fff;
+    display: block;
+    height: 0.0625em;
+    position: relative;
+    top: 1em;
+    width: 100%;
+}
+
+
+/* ------------- Page-specific ----------- */
+
+
+
+.top-sticky {
+    position: fixed;
+    top: 0;
+}

@@ -1,0 +1,14 @@
+doctype html
+html
+    head
+        include head.jade
+    
+    body.off-canvas-contain(data-slug=slug)
+        include header.jade
+
+        section.main-body.row
+            != renderContent()
+
+        include footer.jade
+
+        include scripts.jade
