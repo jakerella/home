@@ -57,7 +57,7 @@ function getContentForRoute(url, site) {
             }
 
         } else {
-            err = new Error('Sorry, but that page does not exist.');
+            err = new Error('Sorry, but that page does not exist: ', req.url);
             err.status = 404;
             def.reject(err);
         }
