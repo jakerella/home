@@ -58,6 +58,11 @@ nav a {
 
 /* ---------------- Utility -------------- */
 
+.top-sticky {
+    position: fixed;
+    top: 0;
+}
+
 .hamburger-icon:before {
     top: -0.5em;
 }
@@ -92,9 +97,16 @@ nav a {
 
 /* ------------- Page-specific ----------- */
 
-
-
-.top-sticky {
-    position: fixed;
-    top: 0;
+[data-slug=home] .speaking {
+    font-size: 0.8em;
 }
+[data-slug=home] .speaking h2:after {
+    content: " Talks";
+}
+[data-slug=home] .speaking h2 {
+    font-size: 1.1em;
+}
+[data-slug=home] .speaking h1, #past, #past + ul {
+    display: none;
+}
+

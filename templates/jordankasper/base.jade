@@ -3,10 +3,10 @@ html
     head
         include head.jade
     
-    body(data-slug=slug)
+    body.off-canvas-contain(data-slug=slug)
         include header.jade
 
-        section.content
+        section.main-body.row
             != renderContent()
 
         section.recent-posts
