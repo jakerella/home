@@ -229,7 +229,7 @@ module.exports = function(site) {
     }
 
     function getContentWords(content, options) {
-        var re,
+        var re, briefContent,
             brief = content,
             length = options.briefWordCount || WORD_COUNT;
 
@@ -239,8 +239,9 @@ module.exports = function(site) {
 
         re = new RegExp('[^a-z]*([\\w]+[^\\w]+){' + length + '}', 'i');
         brief = brief.match(re);
+        briefContent = (brief && brief[0] && marked(brief[0] + '...')) || '';
 
-        return marked(brief[0] + '...');
+        return briefContent;
     }
 
     function getContentTags(content) {

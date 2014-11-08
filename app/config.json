@@ -20,12 +20,17 @@
             "pageData": {
                 "home": {
                     "template": "home.jade",
-                    "title": "Jordan Kasper - Home",
+                    "title": "Jordan Kasper",
                     "isStatic": true
                 },
                 "speaking": {
                     "template": "base.jade",
-                    "title": "Jordan Kasper - Speaking Schedule",
+                    "title": "Speaking Schedule",
+                    "isStatic": true
+                },
+                "profile": {
+                    "template": "base.jade",
+                    "title": "All About Me",
                     "isStatic": true
                 }
             },
