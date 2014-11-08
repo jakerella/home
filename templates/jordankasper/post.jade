@@ -7,7 +7,12 @@ html
         include header.jade
 
         section.main-body.row
-            != renderContent()
+
+            article.blog-post.sm-12.md-9.left
+                != renderContent()
+
+            aside.sidebar.speaking.sm-12.md-3.right
+                include:markdown ../../content/jordankasper/speaking.md
 
         include footer.jade
 

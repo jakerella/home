@@ -53,7 +53,37 @@ nav a {
 /* Main Content */
 .main-body {
     padding-top: 4em;
+    background-color: #eee;
 }
+
+.blog-post {
+    background-color: #fff;
+    padding: 1em;
+}
+.blog-post img {
+    padding: 1em;
+}
+
+.blog-post h1, .blog-post h2, .blog-post h3, .blog-post h4 {
+    clear: both;
+}
+
+
+/* Sidebar */
+.sidebar {
+    font-size: 0.8em;
+    padding-left: 1em;
+}
+.sidebar h2:after {
+    content: " Talks";
+}
+.sidebar h2 {
+    font-size: 1.1em;
+}
+.sidebar h1, #past, #past + ul {
+    display: none;
+}
+
 
 
 /* ---------------- Utility -------------- */
@@ -96,19 +126,6 @@ nav a {
 
 
 /* ------------- Page-specific ----------- */
-
-[data-slug=home] .speaking {
-    font-size: 0.8em;
-}
-[data-slug=home] .speaking h2:after {
-    content: " Talks";
-}
-[data-slug=home] .speaking h2 {
-    font-size: 1.1em;
-}
-[data-slug=home] .speaking h1, #past, #past + ul {
-    display: none;
-}
 
 [data-slug=profile] img {
     width: 1em;
