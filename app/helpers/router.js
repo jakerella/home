@@ -27,6 +27,14 @@ module.exports = function(app, site) {
 
     // Router for all other pages/posts
     app.get('*', function(req, res, next) {
+        // Site redirects
+        var redirect = getRedirectUrl(req.url, site);
+        if (redirect) {
+            res.redirect(redirect);
+            return;
+        }
+
+        // All other content
         getContentForRoute(req.url, site)
             .then(function(content) {
                 res.send(content);
@@ -57,7 +65,7 @@ function getContentForRoute(url, site) {
             }
 
         } else {
-            err = new Error('Sorry, but that page does not exist: ', url);
+            err = new Error('Sorry, but that page does not exist: ' + url);
             err.status = 404;
             def.reject(err);
         }
@@ -65,3 +73,19 @@ function getContentForRoute(url, site) {
 
     return def.promise;
 }
+
+function getRedirectUrl(url, site) {
+    var redirect = null,
+        rules = site.urlRedirects || [];
+
+    rules.forEach(function(rule) {
+        var re = new RegExp(rule.match);
+        if (re && re.test(url)) {
+            console.log('found match, replacing with ' + url.replace(re, rule.redirect));
+            redirect = url.replace(re, rule.redirect);
+        }
+    });
+
+    return redirect;
+}
+
