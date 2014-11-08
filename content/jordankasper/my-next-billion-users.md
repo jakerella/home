@@ -10,13 +10,13 @@ At the time I was thinking: "Sure, the creator of PHP can say such things, but h
 
 ### Cat Pictures Galore
 
-<img title='Facebook' src='/images/facebook.png' class='right' style='width: 15%'>
+<img title='Facebook' src='/uploads/facebook.png' class='right' style='width: 15%'>
 
 Facebook, Twitter, Instagram... these are all amazing projects that have undoubtedly changed how we share information and communicate. Facebook has well over a billion *active* users. Even discounting for fake accounts that is a monumental number. But Rasmus asked an interesting question: "Where is Facebook going to get its next billion users?"
 
 The fact is, that next billion users is still worried about getting adequate food and shelter; they do not care what your cat looks like with a piece of bread around its face.
 
-<img title='Mexican Plates' src='/images/mexican_plates.jpg' class='left' style='width: 30%'>
+<img title='Mexican Plates' src='/uploads/mexican_plates.jpg' class='left' style='width: 30%'>
 
 Rasmus continued with his talk, telling us about how the company he works for, [Etsy](http://etsy.com/ "Etsy"), is helping artists in other countries sell their work without the traditional "middle-man" who marks up a product for sale to first-world customers, cutting the artist out of almost all of the profit. This isn't just removing a social leech from the chain, it's helping people elevate themselves.
 

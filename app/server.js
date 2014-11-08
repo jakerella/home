@@ -61,6 +61,7 @@ options.sites.forEach(function(site) {
     sites[site.slug] = express();
     
     sites[site.slug].use(serveStatic(path.join('templates', site.template, site.publicDir)));
+    sites[site.slug].use(serveStatic(path.join('content', site.template, site.publicDir)));
     router(sites[site.slug], site);
     
     server.use(vhost(site.host, sites[site.slug]));
