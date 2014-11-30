@@ -1,0 +1,60 @@
+doctype html
+html
+    head
+        include head.jade
+    
+    body
+        div#wrapper
+            div#header
+                p#sideNote
+                h1
+                    img(src='/jquery/jQuery_logo.png', alt='jQuery', height='45')
+                    = 'Plugins'
+                    cite
+                        = 'by'
+                        a(href='http://jordankasper.com') Jordan Kasper
+
+            ul#nav
+                li
+                    a(href='/jquery', title='Go to the home page') Home
+                li
+                    a(href='/jquery/captcha/', title='Read more about the simpleCaptcha plug-in') simpleCaptcha
+                li
+                    a(href='/jquery/faq/', title='Read more about the simpleFAQ plug-in') simpleFAQ
+                li
+                    a(href='/jquery/filter/', title='Read more about the simpleFilter plug-in') simpleFilter
+                li
+                    a(href='/jquery/imagecheck/', title='Read more about the simpleImageCheck plug-in') simpleImageCheck
+                li
+                    a(href='/jquery/meter/', title='Read more about the simplePassMeter plug-in') simplePassMeter
+                li
+                    a(href='/jquery/preview/', title='Read more about the simpleFilePreview plug-in') simpleFilePreview
+                li
+                    a(href='/jquery/prefill/', title='Read more about the prefillForm plug-in') prefillForm
+
+            ul#subNav
+                li
+                    a(href='/jquery/', title='Go to the plug-in overview page') Overview
+                li
+                    a(href='/jquery/', title='View documentation for this plug-in') Documentation
+                li
+                    a(href='/jquery/', title='See example usage for this plug-in') Examples
+
+            div#content
+                form(id='donateform', action='https://www.paypal.com/cgi-bin/webscr' method='post')
+                    input(type='hidden' name='cmd' value='_s-xclick')
+                    input(type='hidden' name='hosted_button_id' value='N7J7TPK8TCDRE')
+                    input(type='image' src='https://www.paypalobjects.com/en_US/i/btn/btn_donate_SM.gif' border='0' name='submit' alt='PayPal - The safer, easier way to pay online!')
+                    img(alt='' border='0' src='https://www.paypalobjects.com/en_US/i/scr/pixel.gif' width='1' height='1')
+
+                block content
+
+            div#footer
+                p#copyright
+                    != '&copy; jordan kasper 2008 - '
+                    = (new Date()).getFullYear()
+
+                p#contact
+                    != "<a href='ma&#105;lt&#111;:&#106;query&#064;&#106;&#111;rd&#97;nk&#97;sper.c&#111;m' title='Send an email to Jordan'>"
+                    != '&#106;query&#064;&#106;&#111;rd&#97;nk&#97;sper.c&#111;m'
+                    != '</a>'

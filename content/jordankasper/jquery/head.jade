@@ -1,0 +1,23 @@
+meta(charset='UTF-8')
+meta(http-equiv='content-type', content='text/html; charset=utf-8')
+
+title #{title}
+
+meta(name='description', content='jQuery Plugins by Jordan Kasper.')
+meta(name='viewport', content='width=device-width, initial-scale=1')
+
+link(rel='stylesheet', href='/jquery/reset.css')
+link(rel='stylesheet', href='/jquery/style.css')
+
+script(src='http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js')
+script(src='/jquery/core.js')
+
+script.
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-18307662-1']);
+    _gaq.push(['_trackPageview']);
+    (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();

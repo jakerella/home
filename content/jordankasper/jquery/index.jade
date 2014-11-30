@@ -1,0 +1,49 @@
+extends base.jade
+
+block content
+    h2 What are you looking for?
+
+    div#pluginList
+        div.plugin
+            h3: a(class='subLink', href='/jquery/captcha', title='Visit the simpleCaptcha page') simpleCaptcha
+            p
+                = 'A drop-in, easy to use, easy to configure '
+                a(href='http://en.wikipedia.org/wiki/Captcha', title='captcha on Wikipedia') captcha
+                = ' system to help curb spambots. Highly customizable, but with minimal necesssary options to use effectively.'
+
+        div.plugin
+            h3: a(class='subLink', href='/jquery/faq', title='Visit the simpleFAQ page') simpleFAQ
+            p
+                = 'Customizable and interactive lists of questions and answers (useful for site '
+                a(href='http://en.wikipedia.org/wiki/FAQ', title='FAQ on Wikipedia') FAQs
+                = '). Allows for relevance-based searching and sorting (via Quicksilver) as well.'
+        
+        div.plugin
+            h3: a(class='subLink', href='/jquery/filer', title='Visit the simpleFilter page') simpleFilter
+            p.
+                Matches results from a data array and displays them in a list directly below the input 
+                field with smart searching (via Quicksilver). Inclues keyboard controls and is highly 
+                customizable.
+
+        div.plugin
+            h3: a(class='subLink', href='/jquery/imagecheck', title='Visit the simpleImageCheck page') simpleImageCheck
+            p.
+                Make custom image checkboxes and radio buttons super easy. Use standard form inputs and 
+                labels with custom images for display.
+
+        div.plugin
+            h3: a(class='subLink', href='/jquery/meter', title='Visit the simplePassMeter page') simplePassMeter
+            p.
+                Makes checking the requirements for - and the strength of - passwords very easy. 
+                Configure any/all requirements, look and feel of the meter, and strength levels - or 
+                use standard options for simple drop-in functionality.
+
+        div.plugin
+            h3: a(class='subLink', href='/jquery/preview', title='Visit the simpleFilePreview page') simpleFilePreview
+            p.
+                Allows for pre-form submission file previews on images and icon previews for non-images (and in unsupported browsers).
+
+        div.plugin
+            h3: a(class='subLink', href='/jquery/prefill', title='Visit the prefillForm page') prefillForm
+            p.
+                Pre-fills form inputs based on JSON data passed in. It is smart enough to find the correct form to autofill for you and it knows how to fill all different kinds of inputs.
