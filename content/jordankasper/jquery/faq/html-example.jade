@@ -1,0 +1,307 @@
+extends ../examples.jade
+
+block styles
+    link(rel='stylesheet', href='https://rawgit.com/jakerella/jquerySimpleFAQ/master/src/jquery.simpleFAQ.css')
+
+block title
+    h1 jQuery simpleFAQ Examples
+
+block content
+    ul
+        li: a(href='html-example') Example using HTML data source
+        li: a(href='json-example') Example using JSON data source
+        li: a(href='search-example') Example with searching
+        li: a(href='jump-to-example#moreHelp') Example with direct URL jumping
+
+    div
+        h3 Example Using HTML Data Source
+
+        pre(class='block-code').
+            $('#faqList').simpleFAQ();
+
+        p.
+            This is a simple example using existing HTML content. Note
+            that the structure is relatively loose, although you need a
+            container (in this case a "ul") and each FAQ needs a root
+            node (our "li") with a question (with the proper question
+            class) and an answer (with the proper answer class).
+
+        p.
+            The classes can be changed using the options. Here is an
+            example of the html for one of these FAQ nodes:
+
+        pre(class='block-code').
+            &lt;li&gt;
+              &lt;p class='question'&gt;How can I get more help?&lt;/p&gt;
+              &lt;div class='answer'&gt;
+                &lt;p&gt;
+                  If you can't find your answer here, feel free to send us an email
+                  any time. We will try to respond to your concern as soon as possible.
+                &lt;/p&gt;
+                &lt;p class='tags'&gt;help, contact us, email&lt;/p&gt;
+              &lt;/div&gt;
+            &lt;/li&gt;
+
+        ul#faqList.
+            <li>
+              <p class='question'>How do I log in?</p>
+              <div class='answer'>
+                <p>
+                  We won't ask you to log in until you have to, but you can do
+                  so by clicking on the login icon above.
+                </p>
+                <p>
+                  Once you land on the Log In page, simply enter your email
+                  address and password. and hit enter or click on the "Log In"
+                  button. If you have forgotten your password, simply click on
+                  the link on the Log In page that says:
+                  "Did you forget your password?".
+                </p>
+                <p class='tags'>log in, user account, reset password</p>
+              </div>
+            </li>
+            <li>
+              <p class='question'>I forgot my password, what do I do?</p>
+              <div class='answer'>
+                <p>
+                  If you have forgotten your password you will need to reset
+                  it to something else. From the Log In page, click on the
+                  "Did you forget your password?"
+                  link. You will need to type in your email address (the one
+                  you use to log into this site) and click on
+                  the button.
+                </p>
+                <p>
+                  After resetting your password you will receive an email
+                  with a new, temporary password. Use this to log in, and then
+                  change your password on the "Settings" page.
+                </p>
+                <p class='tags'>log in, forgot password, reset password</p>
+              </div>
+            </li>
+            <li>
+              <p class='question'>My account is locked, how do I unlock it?</p>
+              <div class='answer'>
+                <p>
+                  User accounts can be locked for a variety of reasons, the
+                  most common of which is that you tried to log in too many
+                  times with the incorrect password. When your account is
+                  locked you cannot log in to this site at all.
+                </p>
+                <p>
+                  Only an administrator can unlock your account. You will need
+                  to send us an email
+                  from the email address on your account requesting it to be
+                  unliocked.
+                </p>
+                <p><em>
+                  If your account is locked for a reason other than incorrect
+                  log in attempts you may be asked to explain the circumstances
+                  surrounding the lock.
+                </em></p>
+                <p class='tags'>locked account, reset account, log in, incorrect password, unlock account</p>
+              </div>
+            </li>
+            <li>
+              <p class='question'>How do I register for a user account?</p>
+              <div class='answer'>
+                <p>
+                  You can actually use most of this site without
+                  registering for a user account, but you may see a note that
+                  indicates that some features are not available without
+                  registering.
+                </p>
+                <p>
+                  In order to register for an account, go to the
+                  Log In page and
+                  enter your email address and desired password. <strong>You
+                  must also check the box that says "Register my new account!"</strong>
+                </p>
+                <p>
+                  As soon as you register, you will be automatically logged in
+                  and you can begin using all of this site. You
+                  will also receive an email confirming your registration.
+                </p>
+                <p class='tags'>register, user account, confirm, registration</p>
+              </div>
+            </li>
+            <li>
+              <p class='question'>How do I save my information?</p>
+              <div class='answer'>
+                <p>
+                  Your information is automatically saved whenever you make
+                  an update, there is no need to click on a "Save" button. On
+                  some pages you will see a small notice that indicates that
+                  your work has been saved.
+                </p>
+                <p><strong>
+                  Note that you cannot save your information without logging in.
+                  Your information is still saved while you are working on
+                  it, but it won't be there the next time you visit this site
+                  unless you log in.
+                </strong></p>
+                <p class='tags'>save, saving widget information, saved</p>
+              </div>
+            </li>
+            <li>
+              <p class='question'>How do I create a new Widget?</p>
+              <div class='answer'>
+                <p>
+                  You can create a new Widget by clicking on the
+                  "New Widget" icon above. This will be on every page,
+                  so no matter where you are on this site you can create a
+                  new Widget.
+                </p>
+                <p>
+                  Note that you do not need to be logged in to create a Widget, but
+                  <strong>you cannot save a Widget without being logged in</strong>.
+                </p>
+                <p class='tags'>create widget, creating, new widget</p>
+              </div>
+            </li>
+            <li>
+              <p class='question'>What are the terms for using this application?</p>
+              <div class='answer'>
+                <p>
+                  Thanks for asking! Our Terms of Use
+                  are fair and only intend to cover misuse of the site. We are
+                  not trying to steal your data or claim it as our own. In fact,
+                  we also have a separate Privacy Policy
+                  which describes a little about how we protect your data.
+                </p>
+                <p>
+                  If you have any questions or concerns about our
+                  Terms of use, please send us an email!
+                </p>
+                <p class='tags'>terms of use, privacy, policy, policies, conditions</p>
+              </div>
+            </li>
+            <li>
+              <p class='question'>How can I get more help?</p>
+              <div class='answer'>
+                <p>
+                  If you can't find your answer here, feel free to send us an email
+                  any time. We will try to respond to your concern as soon as possible.
+                </p>
+                <p class='tags'>help, contact us, email</p>
+              </div>
+            </li>
+            <li>
+              <p class='question'>I received an error that said I should contact you, what do I do?</p>
+              <div class='answer'>
+                <p>
+                  Wow, sorry about that. We hope to minimize those errors, but
+                  sometimes they slip through. Please send us an email
+                  if you can and let us know what page you were on, and what
+                  you were doing when you received the error.
+                </p>
+                <p>
+                  It would also be helpful if you could send us what Operating
+                  System (Windows, Mac, Linux) and browser (Internet Explorer,
+                  Firefox, Safari, etc.) you are using. If you're not sure how
+                  to get this information, try
+                  <a class='external' href='http://supportdetails.com/' title='Support Details web site'>visiting this site</a>.
+                  It will print out all of the information we need. Once you get
+                  there, you can export the details as a CSV or PDF file, or
+                  just copy and paste them into your email.
+                </p>
+                <p class='tags'>help, error message, support, email, issue, problem</p>
+              </div>
+            </li>
+            <li>
+              <p class='question'>I received an email that someone shared a Widget with me, what's that mean?</p>
+              <div class='answer'>
+                <p>
+                  When a user creates a Widget they can then share that Widget with
+                  other people, in this case you! The email you received was
+                  simply informing you that a Widget was shared with you.
+                </p>
+                <p>
+                  In the email you received you should be able to see the email
+                  address of the person who shared the Widget with you. You can
+                  contact them if you're not sure why they shared this
+                  information with you.
+                </p>
+                <p>
+                  If you believe that you receive an email from us in error,
+                  please contact us and we will investigate the issue.
+                </p>
+                <p class='tags'>widget sharing, shared, email</p>
+              </div>
+            </li>
+            <li>
+              <p class='question'>How do I share a Widget with someone else?</p>
+              <div class='answer'>
+                <p>
+                  Once you have saved a new Widget, you can share it with other
+                  people. While viewing the Widget, click on the "Sharing" icon
+                  near the top. This will open a dialog box for you
+                  to add or remove email addresses that this Widget is shared with.
+                </p>
+                <p>
+                  Note that only the owner of the Widget (the original creator)
+                  can view, add, or remove other users! Also, <strong>you must
+                  be logged in</strong> to share a Widget (or view shared Widgets).
+                </p>
+                <p class='tags'>widget sharing, shared, how to share, owner, remove users, add</p>
+              </div>
+            </li>
+            <li>
+              <p class='question'>What are the technical requirements for this site</p>
+              <div class='answer'>
+                <p>
+                  This site is run entirely in your browser,
+                  thus all you need is a web browser and an Internet connection.
+                  However, your browser does need to support JavaScript and
+                  have it turned on (this is the default for most browsers).
+                  We strive to make sure this site operates
+                  as expected in as many browsers as possible, but we officially
+                  only support a smaller number of browsers.
+                </p>
+                <h4>Fully Supported Browsers</h4>
+                <ul>
+                  <li>Firefox 2</li>
+                  <li>Firefox 3</li>
+                  <li>Internet Explorer 7</li>
+                  <li>Internet Explorer 8</li>
+                </ul>
+                <p>
+                  If you notice any issues while using this site
+                  please send us an email.
+                  It would also be helpful if you could send us what Operating
+                  System (Windows, Mac, Linux) and browser (Internet Explorer,
+                  Firefox, etc.) you are using. If you're not sure how to get
+                  this information, try
+                  <a href='http://supportdetails.com/' title='Support Details web site'>visiting this site</a>.
+                  It will print out all of the information we need. Once you get
+                  there, you can export the details as a CSV or PDF file, or
+                  just copy and paste them into your email.
+                </p>
+                <p class='tags'>technical requirements, browsers, support, javascript</p>
+              </div>
+            </li>
+            <li>
+              <p class='question'>How do I change my password or email address?</p>
+              <div class='answer'>
+                <p>
+                  Any time you need to change your password or email address,
+                  just visit the "Settings"
+                  page by clicking on the link at the bottom of every page.
+                  When changing your password, simply enter the new password,
+                  click on the button, and then confirm your old password.
+                </p>
+                <p><strong>
+                  Note that if you change your email address, you will need to
+                  log in with the new address thereafter!
+                </strong></p>
+                <p class='tags'>change password, change email address, account settings, user settings</p>
+              </div>
+            </li>
+
+
+    script(src='https://rawgit.com/jakerella/jquerySimpleFAQ/master/src/jquery.quicksilver.js')
+    script(src='https://rawgit.com/jakerella/jquerySimpleFAQ/master/src/jquery.simpleFAQ.js')
+    script.
+        $(document).ready(function() {
+            $('#faqList').simpleFAQ();
+        });
