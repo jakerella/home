@@ -66,19 +66,31 @@ function getContentForRoute(url, site) {
 
         } else {
 
-            fs.exists(path.join(site.contentDir, url, 'index.jade'), function(exists) {
+            fs.exists(path.join(site.contentDir, url + '.jade'), function(exists) {
                 var err, content;
 
                 if (exists) {
 
-                    def.resolve(jade.renderFile(path.join(site.contentDir, url + '/index.jade'), {
+                    def.resolve(jade.renderFile(path.join(site.contentDir, url + '.jade'), {
                         url: url
                     }));
 
                 } else {
-                    err = new Error('Sorry, but that page does not exist: ' + url);
-                    err.status = 404;
-                    def.reject(err);
+                    fs.exists(path.join(site.contentDir, url, 'index.jade'), function(exists) {
+                        var err, content;
+
+                        if (exists) {
+
+                            def.resolve(jade.renderFile(path.join(site.contentDir, url + '/index.jade'), {
+                                url: url
+                            }));
+
+                        } else {
+                            err = new Error('Sorry, but that page does not exist: ' + url);
+                            err.status = 404;
+                            def.reject(err);
+                        }
+                    });
                 }
             });
         }
