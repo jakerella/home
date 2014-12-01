@@ -1,18 +1,12 @@
 doctype html
 html
     head
-        include head.jade
+        include head-examples.jade
     
     body
         div#wrapper
             div#header
-                h1
-                    img(src='/jquery/jQuery_logo.png', alt='jQuery', height='45')
-                    = 'Plugins'
-                    cite
-                        = 'by'
-                        a(href='http://jordankasper.com') Jordan Kasper
-                        a(href='http://twitter.com/jakerella', style='border-bottom:none; margin-left:0.7em;'): img(src='/images/twitter.png', alt='Twitter', width='20', style='top:0.2em;')
+                block title
 
             div#content
                 form(id='donateform', action='https://www.paypal.com/cgi-bin/webscr' method='post')

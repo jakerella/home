@@ -1,0 +1,47 @@
+extends ../examples.jade
+
+block styles
+    link(rel='stylesheet', href='https://raw.githubusercontent.com/jakerella/jquerySimpleCaptcha/master/src/jquery.simpleCaptcha.css')
+
+block title
+    h1 jQuery simpleCaptcha Examples
+
+block content
+    div(style='border:1px solid red;background-color:#fcc;padding:1em;')
+        p
+            strong Please note that this example page will not work currently.
+        p.
+            The code is good, but this server does not run PHP, thus it will not work yet.
+
+    p(style='float:right;').
+        See <a href='examples2' title='See another example'>Example 2</a>
+
+    div
+        h3 Example
+
+        //- form(method='POST')
+        //-     div(id='captcha1')
+        //-     div
+        //-         input(type='submit')
+      
+        pre(class='block-code').
+            &lt;!-- html code for the form --&gt;
+            &lt;form method='POST'&gt;
+              &lt;div id='captcha1'&gt;&lt;/div&gt;
+              &lt;input type='submit' /&gt;
+            &lt;/form&gt;
+                
+            // JavaScript code
+            $('#captcha1').simpleCaptcha();
+
+            &lt;?php // PHP code on the server where the form is submitted to
+            if (isset($_SESSION['simpleCaptchaAnswer']) && $_POST['captchaSelection'] == $_SESSION['simpleCaptchaAnswer']) {
+              // You're human!
+            }
+            ?&gt;
+
+    script(src='https://raw.githubusercontent.com/jakerella/jquerySimpleCaptcha/master/src/jquery.simpleCaptcha.js')
+    script.
+        $(document).ready(function() {
+            $('#captcha1').simpleCaptcha();
+        });
