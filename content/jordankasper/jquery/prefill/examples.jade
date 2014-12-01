@@ -1,0 +1,108 @@
+extends ../examples.jade
+
+block styles
+    link(rel='stylesheet', href='https://rawgit.com/jakerella/jquerySimpleFAQ/master/src/jquery.simpleFAQ.css')
+
+block title
+    h1 jQuery prefillForm Examples
+
+block content
+    p.
+        Example using PHP to get form data...
+
+    pre(class='block-code').
+        &lt;?php if (isset($_REQUEST['text'])) { // just checking that the form was submitted ?&gt;
+          $('#getForm').prefillForm({
+            data: eval(&lt;?=json_encode($_REQUEST)?&gt;),
+            method: "&lt;?=$_SERVER['REQUEST_METHOD']?&gt;"
+          });
+        &lt;?php } ?&gt;
+
+    p.
+        NOTE: Submitting this form will not re-prefill the data as there is no server to submit the form to...
+
+    form#getForm(action='', method='GET').
+        <h3>GET method, various field types</h3>
+        
+        <div class='group'>
+          <label for='f1_text'>Text</label>
+          <input type='text' id='f1_text' name='text' />
+        </div>
+
+        <div class='group'>
+          <label for='f1_date'>Text Date Input</label>
+          <input type='text' id='f1_date' name='date' class='date' />
+        </div>
+
+        <div class='group'>
+          <label for='f1_pass'>Password</label>
+          <input type='password' id='f1_pass' name='pass' />
+        </div>
+
+        <div class='group'>
+          <label for='f1_radio_a'>Radio</label>
+          <input type='radio' id='f1_radio_a' name='radio' value='a' /> a
+          <input type='radio' id='f1_radio_b' name='radio' value='b' /> b
+          <input type='radio' id='f1_radio_c' name='radio' value='c' /> c
+        </div>
+
+        <div class='group'>
+          <label for='f1_checkbox_a'>Checkbox</label>
+          <input type='checkbox' id='f1_checkbox_a' name='checkbox[]' value='a' /> a
+          <input type='checkbox' id='f1_checkbox_b' name='checkbox[]' value='b' /> b
+          <input type='checkbox' id='f1_checkbox_c' name='checkbox[]' value='c' /> c
+        </div>
+
+        <div class='group'>
+          <label for='f1_select_single'>Select Single</label>
+          <select id='f1_select_single' name='select_single'>
+            <option value='a'>Option a</option>
+            <option value='b'>Option b</option>
+            <option value='c'>Option c</option>
+            <option value='d'>Option d</option>
+          </select>
+        </div>
+
+        <div class='group'>
+          <label for='f1_select_multiple'>Select Multiple</label>
+          <select id='f1_select_multiple' name='select_multiple[]' multiple='multiple'>
+            <option value='a'>Option a</option>
+            <option value='b'>Option b</option>
+            <option value='c'>Option c</option>
+            <option value='d'>Option d</option>
+          </select>
+        </div>
+
+        <div class='group'>
+          <label for='f1_textarea'>Textarea</label>
+          <textarea id='f1_textarea' name='textarea'></textarea>
+        </div>
+
+        <div class='group'>
+          <label>Hidden (view source)</label>
+          <input type='hidden' id='f1_hidden' name='hidden' />
+        </div>
+
+        <div>
+            <input type='button' id='f1_button' value='some button' />
+        </div>
+
+
+    script(src='https://rawgit.com/jakerella/jqueryPrefillForm/master/src/jquery.prefillForm.js')
+    script.
+        $(document).ready(function() {
+            $('#getForm').prefillForm({
+                data: {
+                    text: 'foobar',
+                    date: '12/01/2014',
+                    pass: 'batbaz',
+                    radio: 'b',
+                    checkbox: ['b', 'c'],
+                    select_single: 'b',
+                    select_multiple: ['a', 'd'],
+                    textarea: 'This is sweet!',
+                    hidden: 'secret!'
+                },
+                method: "GET"
+            });
+        });
