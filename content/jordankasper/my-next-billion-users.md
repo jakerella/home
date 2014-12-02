@@ -30,6 +30,6 @@ What else are you doing do help others? Do you develop with purpose? And where w
 
 <cite>The [mexican painted plate](http://flic.kr/p/6cVcp2 "Mexican painted plate") photo above is courtesy of @EvelynGiggles on Flickr.</cite>
 
-{{March 5th, 2014}}
+{{March 5, 2014}}
 
 @@ conference, purpose

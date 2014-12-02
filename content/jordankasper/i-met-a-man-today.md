@@ -18,6 +18,7 @@ After another ten minutes or so I finally stood up and we said our goodbyes. I r
 
 I am unfathomably grateful for the life I am able to live today. I am grateful for all of the people who helped make this possible. And I hope that I find the courage to share this good fortune with many more good people like James.
 
-{{November 26th, 2013}}
+{{November 26, 2013}}
+
 
 @@ learning, miscellaneous

@@ -222,6 +222,6 @@ Notice that Grunt waits for something to change, sees the change and runs the "q
 
 Hope you enjoyed the tutorial, let me know if you have questions, corrections, or improvements!
 
-{{April 21st, 2013}}
+{{April 21, 2013}}
 
 @@ javascript, testing, qunit, phantomjs, grunt, automation
