@@ -51,7 +51,7 @@ options.sites.forEach(function(site) {
         throw new Error('Duplicate site slug detected: ' + site.slug);
     }
     if (usedHosts.indexOf(site.host) > -1) {
-        throw new Error('Duplicate host dedected: ' + site.host);
+        throw new Error('Duplicate host detected: ' + site.host);
     }
     site.template = site.template || 'sample';
     site.publicDir = site.publicDir || 'public';
