@@ -13,8 +13,8 @@ module.exports = function(site) {
                 includeStatic: true,
                 limit: 0
             })
-                .then(function(fileList) {
-                    res.json(fileList);
+                .then(function(data) {
+                    res.json(data.files);
                 })
                 .fail(function(err) {
                     console.log('API ERROR (getAllContent): ' + err);
@@ -28,8 +28,8 @@ module.exports = function(site) {
                 includeStatic: false,
                 limit: 0
             })
-                .then(function(fileList) {
-                    res.json(fileList);
+                .then(function(data) {
+                    res.json(data);
                 })
                 .fail(function(err) {
                     console.log('API ERROR (getAllPosts): ' + err);
@@ -42,10 +42,11 @@ module.exports = function(site) {
                 dir: site.contentDir,
                 includeStatic: false,
                 limit: site.pageSearchLimit || 5,
-                sortByTime: 'DESC'
+                sortByTime: 'DESC',
+                skip: Number(req.query.skip) || 0
             })
-                .then(function(fileList) {
-                    res.json(fileList);
+                .then(function(data) {
+                    res.json(data);
                 })
                 .fail(function(err) {
                     console.log('API ERROR (getRecentPosts): ' + err);

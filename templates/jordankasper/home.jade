@@ -10,9 +10,16 @@ html
 
             section.recent-posts.sm-12.md-9.left
 
+            footer.paging
+                a.prev-page(href='?page=1', title='View previous page') &lt;&lt; Newer
+                a.next-page(href='?page=2', title='View next page') Older &gt;&gt;
+
             aside.sidebar.speaking.sm-12.md-3.right
                 include:markdown ../../content/jordankasper/speaking.md
 
         include footer.jade
 
         include scripts.jade
+
+        script.
+            jk.init();

@@ -23,6 +23,7 @@ module.exports = function(site) {
                 limit: 0,
                 briefWordCount: site.briefWordCount,
                 briefIncludeTitles: !!site.briefIncludeTitles,
+                skip: 0
             }, options);
 
             fs.readdir(options.dir, function(err, files) {
@@ -118,13 +119,20 @@ module.exports = function(site) {
     }
 
     function pageFiles(fileList, options) {
-        var def = q.defer();
+        var def = q.defer(),
+            start = options.skip || 0,
+            stop = (options.limit && (options.limit + options.skip)) || 9999,
+            hasMore = (fileList.length - start) > options.limit;
 
-        if (options.limit) {
-            fileList = fileList.slice(0, options.limit);
-        }
+        fileList = fileList.slice(start, stop);
 
-        def.resolve(fileList);
+        def.resolve({
+            files: fileList,
+            hasPrevPage: (start > 0),
+            hasNextPage: hasMore,
+            prevSkip: (start > 0) && Math.max(0, (start - options.limit)),
+            nextSkip: hasMore && (start + options.limit)
+        });
         return def.promise;
     }
 
