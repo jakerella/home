@@ -17,6 +17,7 @@ var express = require('express'),
         templateDir: 'templates',
         defaultTemplate: 'post.jade',
         pageData: {
+            // These are "static" pages that should not show up as "blog" posts
             home: {
                 template: 'home.jade',
                 title: 'Jordan Kasper',
