@@ -29,7 +29,7 @@ module.exports = function (slug, site) {
     data.title = data.title.replace(/%slug%/g, slug.replace(/\-/g, ' ').replace(/\w*/g, function(t){ return t.charAt(0).toUpperCase()+t.substr(1).toLowerCase(); }));
 
     try {
-        content = jade.renderFile(path.join('templates', site.template, data.template), data);
+        content = jade.renderFile(path.join(site.templateDir, data.template), data);
     } catch(e) {
         // We'll send back the error instead of content
         // This seems weird, but the way errors are thrown down in here they 

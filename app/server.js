@@ -1,88 +1,67 @@
 
 var express = require('express'),
-    vhost = require('vhost'),
     serveStatic = require('serve-static'),
     path = require('path'),
     _ = require('lodash'),
     router = require('./helpers/router.js'),
     config = require('./config.json'),
-    options = {},
-    sites = {};
+
+    // Site/server options
+    options = {
+        slug: 'jordankasper',
+        port: 8686,
+        title: 'Jordan Kasper',
+        host: 'jordankasper.com',
+        contentDir: 'content',
+        publicDir: 'public',
+        templateDir: 'templates',
+        defaultTemplate: 'post.jade',
+        pageData: {
+            home: {
+                template: 'home.jade',
+                title: 'Jordan Kasper',
+                isStatic: true
+            },
+            speaking: {
+                template: 'base.jade',
+                title: 'Speaking Schedule',
+                isStatic: true
+            },
+            profile: {
+                template: 'base.jade',
+                title: 'All About Me',
+                isStatic: true
+            }
+        },
+        pageSearchLimit: 5,
+        briefWordCount: 100,
+        urlRedirects: [
+            { match: '^/blog$', redirect: '/' },
+            { match: '^/blog/(?:[\\d]{4}/[\\d]{2}/)?([^\\/\\?]+)', redirect: '/$1' }
+        ],
+        tagTemplate: '<p class="post-tags">Tagged with <span class="tag-list">$1</span></p>'
+    };
 
 
-// ---------------- Primary vhost Server Config --------------- //
+// ---------------- Primary Server Config --------------- //
 
-// This is the primary server, the one that delegates to the vhost app handlers
 var server = express();
+server.set('port', options.port || process.env.PORT || 3000);
+
+require('marked').setOptions(require('./helpers/markdownOptions.js')({
+    'tags': options.tagTemplate
+}));
 
 
-// ----------------- Server Options and Audits ---------------- //
+server.use(serveStatic(options.publicDir));
+router(server, options);
 
-_.extend(options, config);
-if (server.get('env') === 'development') {
-    _.extend(options, config.devOptions || {});
-}
+server.use(require('./helpers/httpErrors.js')(options));
 
-if (!Array.isArray(options.sites) || !options.sites.length) {
-    throw new Error('Please provide an array of sites to host!');
-}
-
-server.set('port', options.port || 8686);
-
-console.log('Starting vhost server with config: ', JSON.stringify(options));
-
-require('marked').setOptions(require('./helpers/markdownOptions.js')(options));
-
-
-// ------------------ Individual vhost Config ----------------- //
-
-var usedHosts = [];
-options.sites.forEach(function(site) {
-    // Audit site minimimum options
-    if (!site.slug || !site.host || !site.contentDir) {
-        throw new Error('Each site must contain a slug, host, and contentDir!');
-    }
-
-    if (server.get('env') === 'development') {
-        _.extend(site, site.devOptions || {});
-    }
-
-    if (sites[site.slug]) {
-        throw new Error('Duplicate site slug detected: ' + site.slug);
-    }
-    if (usedHosts.indexOf(site.host) > -1) {
-        throw new Error('Duplicate host detected: ' + site.host);
-    }
-    site.template = site.template || 'sample';
-    site.publicDir = site.publicDir || 'public';
-    site.pageData = site.pageData || {};
-
-    // Create vhost's express app and set up routes
-    sites[site.slug] = express();
-    
-    sites[site.slug].use(serveStatic(path.join('templates', site.template, site.publicDir)));
-    sites[site.slug].use(serveStatic(path.join('content', site.template, site.publicDir)));
-    router(sites[site.slug], site);
-    
-    server.use(vhost(site.host, sites[site.slug]));
-    usedHosts.push(site.host);
-
-    sites[site.slug].use(require('./helpers/httpErrors.js')(site));
-
-    console.log('Added vhost for "' + site.slug + '" at "' + site.host + '"');
-});
-
-
-// ----------------- Error Handling for vhost ---------------- //
-
-server.use(function(err, req, res, next){
-    console.error(err.stack);
-    res.status(500).send('Sorry, but there was a nasty error. Please try again later.');
-});
 
 
 // ------------------- Main Server Startup ------------------ //
 
 server.listen(server.get('port'), function() {
-    console.info('vhost server started successfully on port ' + server.get('port'));
+    console.info('Server started successfully on port ' + server.get('port'));
 });

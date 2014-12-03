@@ -15,10 +15,10 @@ module.exports = function(site) {
         console.error('Error on site "' + site.slug + '":', err.stack);
         
         if (err.status) {
-            fs.exists(path.join('templates', site.template, err.status + '.jade'), function(exists) {
+            fs.exists(path.join(site.templateDir, err.status + '.jade'), function(exists) {
                 var content = ERROR_MSG['' + err.status] || 'Server Error';
                 if (exists) {
-                    content = jade.renderFile(path.join('templates', site.template, err.status + '.jade'));
+                    content = jade.renderFile(path.join(site.templateDir, err.status + '.jade'));
                 }
                 res.status(err.status).send(content);
             });
