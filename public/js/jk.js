@@ -2,18 +2,45 @@ window.jk = (function ($) {
 
     console.log('JK client startup...');
 
-    var PAGE_LIMIT = 5;
+    var PAGE_LIMIT = 5,
+        DEFAULT_TEMPLATE = '<article><h3><a href="/{{slug}}">{{title}}</a></h3><p>{{brief}}</p></article>',
+        TEMPLATE_DATA = [
+            {
+                key: 'slug',
+                property: 'slug'
+            },
+            {
+                key: 'title',
+                property: 'title'
+            },
+            {
+                key: 'brief',
+                property: 'brief'
+            },
+            {
+                key: 'modified',
+                property: 'modtime',
+                process: function(data) {
+                    var d = new Date(data);
+                    return (d && ((d.getMonth() + 1) + '/' + d.getDate() + '/' + d.getFullYear())) || data;
+                }
+            }
+        ];
 
-    function init() {
+
+    function init(options) {
         var skip = getQueryParam('skip');
 
-        loadRecentPosts({
-            skip: skip || 0
-        });
+        options = options || {};
+        options.skip = options.skip || 0;
+        options.node = options.node || '.recent-posts';
+        options.template = options.template || DEFAULT_TEMPLATE;
+
+        loadRecentPosts(options);
     }
 
     function toMixedCase(text) {
-        return text.replace(/\-/g, ' ').replace(/\w*/g, function(t){ return t.charAt(0).toUpperCase()+t.substr(1).toLowerCase(); });
+        return text.replace(/\w*/g, function(t){ return t.charAt(0).toUpperCase()+t.substr(1).toLowerCase(); });
     }
 
     function getQueryParam(name) {
@@ -24,10 +51,13 @@ window.jk = (function ($) {
     }
 
     function loadRecentPosts(options) {
-        var recent = $('.recent-posts'),
+        var recent,
             prevPage = $('a.prev-page'),
             nextPage = $('a.next-page');
         
+        options = options || {};
+
+        recent = $(options.node);
         if (recent.length) {
             getPosts({ skip: options.skip || 0 }, function(err, data) {
                 if (err) {
@@ -35,7 +65,7 @@ window.jk = (function ($) {
                     return;
                 }
 
-                recent.append(getPostHtml(data.files).join(''));
+                recent.append(getPostHtml(data.files, options.template).join(''));
 
                 if (data.hasPrevPage) {
                     prevPage.show().attr('href', '?skip=' + data.prevSkip);
@@ -68,27 +98,34 @@ window.jk = (function ($) {
         });
     }
 
-    function getPostHtml(files) {
+    function getPostHtml(files, template) {
         var posts = [];
 
         for (var i=0, l=files.length; i<l; ++i) {
-            posts.push(
-                '<article>' +
-                '<h3><a href="' + files[i].slug + '">' + 
-                toMixedCase(files[i].slug) + 
-                '</a></h3>' +
-                '<p>' + files[i].brief + '</p>' +
-                '</article>'
-            );
+            files[i].title = toMixedCase(files[i].slug.replace(/\-/g, ' '));
+            posts.push(renderPostTemplate(files[i], template));
         }
 
         return posts;
     }
 
+    function renderPostTemplate(data, template) {
+        var i, l, content,
+            html = template || "";
+
+        for (i=0, l=TEMPLATE_DATA.length; i<l; ++i) {
+            content = (TEMPLATE_DATA[i].process && TEMPLATE_DATA[i].process(data[TEMPLATE_DATA[i].property])) || data[TEMPLATE_DATA[i].property] || '';
+            html = html.replace(new RegExp('\\{\\{' + TEMPLATE_DATA[i].key + '\\}\\}', 'g'), content);
+        }
+
+        return html;
+    }
+
     return {
         init: init,
         toMixedCase: toMixedCase,
-        getQueryParam: getQueryParam
+        getQueryParam: getQueryParam,
+        sidebarPostsTemplate: '<article><h3><a href="/{{slug}}">{{title}}</a></h3><p class="time">{{modified}}</p></article>',
     };
 
 })(window.jQuery);

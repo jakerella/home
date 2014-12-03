@@ -4,7 +4,6 @@ var express = require('express'),
     path = require('path'),
     _ = require('lodash'),
     router = require('./helpers/router.js'),
-    config = require('./config.json'),
 
     // Site/server options
     options = {
@@ -24,13 +23,13 @@ var express = require('express'),
                 isStatic: true
             },
             speaking: {
-                template: 'base.jade',
+                template: 'page.jade',
                 title: 'Speaking Schedule',
                 isStatic: true
             },
             profile: {
-                template: 'base.jade',
-                title: 'All About Me',
+                template: 'page.jade',
+                title: 'Links and such...',
                 isStatic: true
             }
         },

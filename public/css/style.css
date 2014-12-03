@@ -56,11 +56,11 @@ nav a {
     background-color: #eee;
 }
 
-.blog-post {
+.main-content {
     background-color: #fff;
     padding: 1em;
 }
-.blog-post img {
+.main-content img {
     padding: 1em;
 }
 
@@ -74,7 +74,7 @@ nav a {
     font-size: 0.8em;
     padding-left: 1em;
 }
-.sidebar h2:after {
+.sidebar.speaking h2:after {
     content: " Talks";
 }
 .sidebar h2 {
@@ -83,7 +83,6 @@ nav a {
 .sidebar h1, #past, #past + ul {
     display: none;
 }
-
 
 
 /* ---------------- Utility -------------- */

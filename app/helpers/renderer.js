@@ -14,7 +14,7 @@ module.exports = function (slug, site) {
         data = site.pageData[slug] || {};
 
     data.slug = slug;
-    data.template = data.template || site.defaultTemplate || 'base.jade';
+    data.template = data.template || site.defaultTemplate || 'page.jade';
     data.title = data.title || site.title || 'My Site - %slug%';
 
     _.extend(data, {

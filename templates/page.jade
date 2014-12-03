@@ -11,12 +11,14 @@ html
             article.main-content.sm-12.md-9.left
                 != renderContent()
 
-            aside.sidebar.speaking.sm-12.md-3.right
-                include:markdown ../content/speaking.md
+            aside.sidebar.recent-posts.sm-12.md-3.right
+                h2 Recent Posts
 
         include footer.jade
 
         include scripts.jade
 
         script.
-            jk.init();
+            jk.init({
+                template: jk.sidebarPostsTemplate
+            });
