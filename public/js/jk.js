@@ -24,7 +24,22 @@ window.jk = (function ($) {
                     var d = new Date(data);
                     return (d && ((d.getMonth() + 1) + '/' + d.getDate() + '/' + d.getFullYear())) || data;
                 }
-            }
+            },
+            {
+                key: 'published',
+                property: 'publishTime',
+                process: function(data) {
+                    var d = new Date(data);
+                    return (d && ((d.getMonth() + 1) + '/' + d.getDate() + '/' + d.getFullYear())) || data;
+                }
+            },
+            {
+                key: 'tags',
+                property: 'tags',
+                process: function(data) {
+                    return (data && data.join && data.join(', ')) || data;
+                }
+            },
         ];
 
 
@@ -125,7 +140,7 @@ window.jk = (function ($) {
         init: init,
         toMixedCase: toMixedCase,
         getQueryParam: getQueryParam,
-        sidebarPostsTemplate: '<article><h3><a href="/{{slug}}">{{title}}</a></h3><p class="time">{{modified}}</p></article>',
+        sidebarPostsTemplate: '<article><h3><a href="/{{slug}}">{{title}}</a></h3><p class="published-on">{{published}}</p></article>',
     };
 
 })(window.jQuery);
