@@ -266,7 +266,7 @@ module.exports = function(site) {
     function getContentPublishTime(content) {
         var d,
             publishTime = null,
-            m = /\{{2}\s*([^\}]+)\s*\}{2}/g.exec(content);
+            m = /^\{{2}\s*([^\}]+)\s*\}{2}$/mg.exec(content);
 
         if (m) {
             d = (new Date(m[1]));
