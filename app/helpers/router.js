@@ -106,8 +106,12 @@ function getRedirectUrl(url, site) {
     rules.forEach(function(rule) {
         var re = new RegExp(rule.match);
         if (re && re.test(url)) {
-            console.log('found match, replacing with ' + url.replace(re, rule.redirect));
-            redirect = url.replace(re, rule.redirect);
+            console.log('found redirect match:', rule.redirect);
+            if (/\$/.test(rule.redirect)) {
+                redirect = url.replace(re, rule.redirect);
+            } else {
+                redirect = rule.redirect;
+            }
         }
     });
 
