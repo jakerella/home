@@ -33,7 +33,8 @@
         { "match": "/bro(sw|ws)er\\-eyeballing\\-javascript\\-testing\\-slidesvideo", "redirect": "https://vimeo.com/72753350" },
         { "match": "/object\\-oriented\\-javascript\\-yes\\-it\\-really\\-exists", "redirect": "https://vimeo.com/62353516" },
         { "match": "/introduction\\-to\\-propelorm", "redirect": "https://vimeo.com/60687270" },
-        { "match": "/everything\\-you\\-always\\-wanted\\-to\\-know\\-about\\-the\\-internet", "redirect": "/internet" }
+        { "match": "/everything\\-you\\-always\\-wanted\\-to\\-know\\-about\\-the\\-internet", "redirect": "/internet" },
+        { "match": "/kill\\-the\\-save\\-button", "redirect": "https://vimeo.com/21165393" }
     ],
     "tagTemplate": "<p class='post-tags'>Tagged with <span class='tag-list'>$1</span></p>"
 }

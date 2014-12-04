@@ -123,6 +123,10 @@ nav a {
     width: 100%;
 }
 
+.data-pad td {
+    padding: 0.1em 0.4em;
+}
+
 
 /* ------------- Page-specific ----------- */
 
