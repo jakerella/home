@@ -29,7 +29,8 @@
     "urlRedirects": [
         { "match": "^/blog/?$", "redirect": "/" },
         { "match": "^/blog/(?:[\\d]{4}/[\\d]{2}/)?([^\\/\\?]+)", "redirect": "/$1" },
-        { "match": "/bro(sw|ws)er\\-eyeballing\\-javascript\\-testing\\-slidesvideo", "redirect": "https://vimeo.com/72753350" }
+        { "match": "/bro(sw|ws)er\\-eyeballing\\-javascript\\-testing\\-slidesvideo", "redirect": "https://vimeo.com/72753350" },
+        { "match": "/object\\-oriented\\-javascript\\-yes\\-it\\-really\\-exists", "redirect": "https://vimeo.com/62353516" }
     ],
     "tagTemplate": "<p class='post-tags'>Tagged with <span class='tag-list'>$1</span></p>"
 }
