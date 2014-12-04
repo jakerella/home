@@ -1,0 +1,12 @@
+/****************************************************************
+* Resets margin, padding, borders, etc. for certain html tags
+* @author Jordan Kasper
+* @version 1.1
+*****************************************************************/
+body{font-size:100%;background-color:#fff;color:#000;}
+html,body,div,ul,ol,form,li{margin:0;padding:0;}
+h1,h2,h3,h4,h5{margin:0;padding:0;}
+table{border-collapse:collapse;border-spacing:0;}
+img{border:0;}
+p,ul,ol{margin:0.5em 0;}
+ul,ol{padding-left:1em;}
