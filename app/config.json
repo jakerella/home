@@ -1,0 +1,34 @@
+{
+    "slug": "jordankasper",
+    "port": 8686,
+    "title": "Jordan Kasper",
+    "host": "jordankasper.com",
+    "contentDir": "content",
+    "publicDir": "public",
+    "templateDir": "templates",
+    "defaultTemplate": "post.jade",
+    "pageData": {
+        "home": {
+            "template": "home.jade",
+            "title": "Jordan Kasper",
+            "isStatic": true
+        },
+        "speaking": {
+            "template": "page.jade",
+            "title": "Speaking Schedule",
+            "isStatic": true
+        },
+        "profile": {
+            "template": "page.jade",
+            "title": "Links and such...",
+            "isStatic": true
+        }
+    },
+    "pageSearchLimit": 5,
+    "briefWordCount": 100,
+    "urlRedirects": [
+        { "match": "^/blog$", "redirect": "/" },
+        { "match": "^/blog/(?:[\\d]{4}/[\\d]{2}/)?([^\\/\\?]+)", "redirect": "/$1" }
+    ],
+    "tagTemplate": "<p class='post-tags'>Tagged with <span class='tag-list'>$1</span></p>"
+}
