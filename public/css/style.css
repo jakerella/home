@@ -130,6 +130,7 @@ nav a {
 
 /* ------------- Page-specific ----------- */
 
-[data-slug=profile] img {
+[data-slug=profile] li img {
     width: 1em;
+    padding: 0;
 }
