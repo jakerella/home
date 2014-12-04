@@ -47,7 +47,7 @@ window.jk = (function ($) {
         var skip = getQueryParam('skip');
 
         options = options || {};
-        options.skip = options.skip || 0;
+        options.skip = options.skip || skip || 0;
         options.node = options.node || '.recent-posts';
         options.template = options.template || DEFAULT_TEMPLATE;
 
