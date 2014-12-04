@@ -15,7 +15,7 @@ module.exports = function (slug, site) {
 
     data.slug = slug;
     data.template = data.template || site.defaultTemplate || 'page.jade';
-    data.title = data.title || site.title || 'My Site - %slug%';
+    data.title = data.title || (!site.pageData[slug] && site.postTitle) || site.title || '%slug%';
 
     _.extend(data, {
         renderContent: function() {
