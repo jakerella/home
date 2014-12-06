@@ -18,6 +18,6 @@ As the leader of a tribe - whether it be a primitive village, a company, a plann
 
 So people, please, step up and control your tasks. And leaders, control your tribes.
 
-{{September, 13, 2010}}
+{{September 13, 2010}}
 
 @@ team, leadership
