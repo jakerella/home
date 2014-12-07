@@ -1,0 +1,173 @@
+extends ../examples.jade
+
+block styles
+    link(rel='stylesheet', href='https://rawgit.com/jakerella/jquerySimpleFilter/master/simpleFilter.css')
+
+block title
+    h1 jQuery simpleFilter Examples
+
+block content
+    p.
+        Note that for most examples we are using a simple array of the 50 U.S. states (plus D.C.):
+
+    pre(class='block-code').
+        var states = ['Alabama',
+          'Alaska',
+          'Arizona',
+          ...
+          'Wisconsin',
+          'Wyoming'
+        ];
+
+    p.
+        And the HTML for the input is about as basic as it gets:
+
+    pre(class='block-code').
+        &lt;p&gt;US State: &lt;input type='text' id='state' /&gt;&lt;/p&gt;
+
+
+    fieldset
+        h3 Example One
+        p.
+            The most basic usage possible, only providing data source...
+        <p>US State: <input type='text' id='state' /></p>
+            
+        pre(class='block-code').
+            $('#state').simpleFilter({
+              data: states
+            });
+
+    
+    fieldset
+        h3 Example Two
+        p.
+            A more extensive example using various options...
+        <p>US State: <input type='text' id='state2' /></p>
+    
+        pre(class='block-code').
+            $('#state2').simpleFilter({
+              data: states,
+              useQuicksilver: false,
+              maxListEntries: 10,
+              position: $.simpleFilterData.POSITION_ABOVE,
+              waitTime: 1000
+            })
+            .bind('input.simpleFilter',
+              function(jQEvent, text) {
+                if (typeof text != 'undefined') {
+                  // do something
+                }
+              }
+            );
+
+
+    fieldset
+        h3 Example Three
+        p.
+            Making the search case sensitive and using sorting along with a preFilter hook
+        <p>US State: <input type='text' id='state3' /></p>
+    
+        pre(class='block-code').
+            $('#state3').simpleFilter({
+              data: states,
+              caseSensitive: true,
+              maxListEntries: 25,
+              sortBy: $.simpleFilterData.SORT_ALPHA,
+              postFilter: function(input, scores) {
+                if (console &amp;&amp; console.debug) {
+                  console.debug(input, scores);
+                }
+              }
+            });
+
+
+    script(src='https://rawgit.com/jakerella/jquerySimpleFilter/master/jquery.quicksilver.js')
+    script(src='https://rawgit.com/jakerella/jquerySimpleFilter/master/jquery.simpleFilter.js')
+    script.
+        $(document).ready(function() {
+            $('#state').simpleFilter({
+                data: states
+            });
+
+            $('#state2').simpleFilter({
+                data: states,
+                useQuicksilver: false,
+                maxListEntries: 10,
+                position: $.simpleFilterData.POSITION_ABOVE,
+                waitTime: 1000
+            })
+            .bind('input.simpleFilter', function(jQEvent, text) {
+                if (typeof(text) != 'undefined') {
+                    if (console && console.debug) {
+                        console.debug('selection:', text);
+                    }
+                }
+            });
+
+            $('#state3').simpleFilter({
+                data: states,
+                caseSensitive: true,
+                maxListEntries: 25,
+                sortBy: $.simpleFilterData.SORT_ALPHA,
+                postFilter: function(input, scores) {
+                    if (console && console.debug) {
+                        console.debug(input, scores);
+                    }
+                }
+            });
+        });
+
+        var states = [
+            'Alabama',
+            'Alaska',
+            'Arizona',
+            'Arkansas',
+            'California',
+            'Colorado',
+            'Connecticut',
+            'Delaware',
+            'District Of Columbia',
+            'Florida',
+            'Georgia',
+            'Hawaii',
+            'Idaho',
+            'Illinois',
+            'Indiana',
+            'Iowa',
+            'Kansas',
+            'Kentucky',
+            'Louisiana',
+            'Maine',
+            'Maryland',
+            'Massachusetts',
+            'Michigan',
+            'Minnesota',
+            'Mississippi',
+            'Missouri',
+            'Montana',
+            'Nebraska',
+            'Nevada',
+            'New Hampshire',
+            'New Jersey',
+            'New Mexico',
+            'New York',
+            'North Carolina',
+            'North Dakota',
+            'Ohio',
+            'Oklahoma',
+            'Oregon',
+            'Pennsylvania',
+            'Rhode Island',
+            'South Carolina',
+            'South Dakota',
+            'Tennessee',
+            'Texas',
+            'Utah',
+            'Vermont',
+            'Virginia',
+            'Washington',
+            'West Virginia',
+            'Wisconsin',
+            'Wyoming'
+        ];
+
