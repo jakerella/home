@@ -1,0 +1,141 @@
+extends ../examples.jade
+
+block title
+    h1 jQuery SimpleImageCheck Examples
+
+block content
+    p
+        a(href='/jquery/imagecheck/examples_radio' title='View examples using radio buttons') Radio button examples
+
+    h3 Check Box Examples
+
+    fieldset
+        h4 Basic usage
+        div
+            <label for='user'>Check user?</label>
+            <input type='checkbox' id='user' name='user' />
+
+        pre(class='block-code').
+            &lt;label for='user'&gt;Check user?&lt;/label&gt;
+            &lt;input type='checkbox' id='user' name='user' /&gt;
+
+            $('#user').simpleImageCheck({
+              image: 'user_unchecked.png',
+              imageChecked: 'user.png',
+              afterCheck: function(isChecked) {
+                if (isChecked) {
+                  // do something
+                }
+              }
+            });
+
+    fieldset
+        h4 Already checked input
+        div
+            <label for='sunny'>Is it sunny?</label>
+            <input type='checkbox' id='sunny' name='sunny' checked='checked' />
+
+        pre(class='block-code').
+            &lt;label for='sunny'&gt;Is it sunny?&lt;/label&gt;
+            &lt;input type='checkbox' id='sunny' name='sunny' checked='checked' /&gt;
+
+            $('#sunny').simpleImageCheck({
+              image: 'sun_unchecked.png',
+              imageChecked: 'sun.png',
+              afterCheck: function(isChecked) {
+                if (isChecked) {
+                  alert('Yes it is!');
+                }
+              }
+            });
+
+    fieldset
+        h4 Multiple checkboxes sharing images
+        div#multiCheck
+            <p>Contact me by:</p>
+            <label for='phone'>Phone</label>
+            <input type='checkbox' id='phone' name='phone' />
+            <label for='email'>Email</label>
+            <input type='checkbox' id='email' name='email' />
+            <label for='fax'>Fax</label>
+            <input type='checkbox' id='fax' name='fax' />
+
+        pre(class='block-code').
+            &lt;label for='phone'&gt;Phone&lt;/label&gt;
+            &lt;input type='checkbox' id='phone' name='phone' /&gt;
+            &lt;label for='email'&gt;Email&lt;/label&gt;
+            &lt;input type='checkbox' id='email' name='email' /&gt;
+            &lt;label for='fax'&gt;Fax&lt;/label&gt;
+            &lt;input type='checkbox' id='fax' name='fax' /&gt;
+
+            $('#multiCheck :checkbox').simpleImageCheck({
+              image: 'unchecked.png',
+              imageChecked: 'check.png'
+            });
+
+    fieldset
+        h4 Attaching a `change` handler
+        div
+            <label for='change'>Change user?</label>
+            <input type='checkbox' id='change' name='change' />
+
+        pre(class='block-code').
+            &lt;label for='user'&gt;Change user?&lt;/label&gt;
+            &lt;input type='checkbox' id='user' name='user' /&gt;
+
+            $('#change')
+              .simpleImageCheck({
+                image: 'user_unchecked.png',
+                imageChecked: 'user.png'
+              })
+              .change(function() {
+                var c = 'checked';
+                if (!$('#change').is(':checked')) {
+                  c = 'not ' + c;
+                }
+                alert('changed! ('+c+')');
+              });
+
+
+    script(src='https://rawgit.com/jakerella/jquerySimpleImageCheck/master/jquery.simpleImageCheck.js')
+    script.
+        $(document).ready(function() {
+          $('#user').simpleImageCheck({
+            image: 'user_unchecked.png',
+            imageChecked: 'user.png',
+            afterCheck: function(isChecked) {
+              if (isChecked) {
+                console.debug('user checked');
+              }
+            }
+          });
+          
+          $('#sunny').simpleImageCheck({
+            image: 'sun_unchecked.png',
+            imageChecked: 'sun.png',
+            afterCheck: function(isChecked) {
+              if (isChecked) {
+                alert('Yes it is!');
+              }
+            }
+          });
+          
+          $('#multiCheck :checkbox').simpleImageCheck({
+            image: 'unchecked.png',
+            imageChecked: 'check.png'
+          });
+          
+          $('#change')
+            .simpleImageCheck({
+              image: 'user_unchecked.png',
+              imageChecked: 'user.png'
+            })
+            .change(function() {
+              var c = 'checked';
+              if (!$('#change').is(':checked')) {
+                c = 'not ' + c;
+              }
+              alert('changed! ('+c+')');
+            });
+          
+        });

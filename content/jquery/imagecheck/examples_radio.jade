@@ -1,0 +1,49 @@
+extends ../examples.jade
+
+block title
+    h1 jQuery SimpleImageCheck Examples
+
+block content
+    p
+        a(href='/jquery/imagecheck/examples' title='View examples using checkboxes') Checkbox examples
+
+    h3 Radio Button Examples
+
+    fieldset
+        div#radioCheck
+            <p>Contact me by...</p>
+            <label for='phone'>Phone</label>
+            <input type='radio' id='phone' name='contact' />
+            <label for='email'>Email</label>
+            <input type='radio' id='email' name='contact' />
+            <label for='fax'>Fax</label>
+            <input type='radio' id='fax' name='contact' />
+
+        pre(class='block-code').
+            &lt;label for='phone'&gt;Phone&lt;/label&gt;
+            &lt;input type='radio' id='phone' name='contact' /&gt;
+            &lt;label for='email'&gt;Email&lt;/label&gt;
+            &lt;input type='radio' id='email' name='contact' /&gt;
+            &lt;label for='fax'&gt;Fax&lt;/label&gt;
+            &lt;input type='radio' id='fax' name='contact' /&gt;
+
+            $(':radio').simpleImageCheck({
+              image: 'unchecked.png',
+              imageChecked: 'check.png',
+              afterCheck: function(checked) {
+                // do something with "this"
+              }
+            });
+  
+
+    script(src='https://rawgit.com/jakerella/jquerySimpleImageCheck/master/jquery.simpleImageCheck.js')
+    script.
+        $(document).ready(function() {
+            $('#radioCheck :radio').simpleImageCheck({
+              image: 'unchecked.png',
+              imageChecked: 'check.png',
+              afterCheck: function(checked) {
+                console.debug(this[0].id, checked);
+              }
+            });
+          });
