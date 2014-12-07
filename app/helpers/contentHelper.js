@@ -154,7 +154,7 @@ module.exports = function(site) {
 
         fileList.forEach(function(file) {
             if (cache[file.slug] && cache[file.slug].expires > now) {
-                file.brief = cache[file.slug].brief || "";
+                file.brief = cache[file.slug].brief || '';
                 file.tags = cache[file.slug].tags || [];
                 file.publishTime = cache[file.slug].publishTime || null;
                 data.push(file);
@@ -165,7 +165,7 @@ module.exports = function(site) {
 
         q.allSettled(fileReads)
             .then(function(results) {
-                results.forEach(function(result, i) {
+                results.forEach(function(result) {
                     if (result.state === 'fulfilled') {
                         data.push(result.value);
                         setCacheForFile(cache, result.value);
@@ -190,7 +190,7 @@ module.exports = function(site) {
     function setCacheForFile(cache, file) {
         cache[file.slug] = {
             slug: file.slug,
-            brief: file.brief || "",
+            brief: file.brief || '',
             tags: file.tags || [],
             publishTime: file.publishTime || null,
             expires: (new Date()).getTime() + EXPIRE_TIME

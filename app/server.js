@@ -1,8 +1,6 @@
 
 var express = require('express'),
     serveStatic = require('serve-static'),
-    path = require('path'),
-    _ = require('lodash'),
     router = require('./helpers/router.js'),
     options = require('./config.json');
 

@@ -5,52 +5,11 @@ var fs = require('fs'),
     q = require('q'),
     render = require('./renderer.js');
 
-module.exports = function(app, site) {
-    var api = require('./api.js')(site);
-
-    // Homepage (index) router
-    app.get('/', function(req, res, next) {
-        var content = render('home', site);
-        
-        if (content instanceof Error) {
-            content.status = 500;
-            next(content);
-        } else {
-            res.send(content);
-        }
-    });
-
-    // API endpoints
-    app.get('/api/content', api.getAllContent);
-    app.get('/api/content/posts', api.getAllPosts);
-    app.get('/api/content/posts/recent', api.getRecentPosts);
-
-    // Router for all other pages/posts
-    app.get('*', function(req, res, next) {
-        // Site redirects
-        var redirect = getRedirectUrl(req.url, site);
-        if (redirect) {
-            res.redirect(redirect);
-            return;
-        }
-
-        // All other content
-        getContentForRoute(req.url, site)
-            .then(function(content) {
-                res.send(content);
-            })
-            .fail(function(err) {
-                next(err);
-            });
-    });
-
-};
-
 function getContentForRoute(url, site) {
     var def = q.defer();
 
     fs.exists(path.join(site.contentDir, url + '.md'), function(exists) {
-        var err, content;
+        var content;
 
         if (exists) {
             
@@ -67,8 +26,6 @@ function getContentForRoute(url, site) {
         } else {
 
             fs.exists(path.join(site.contentDir, url + '.jade'), function(exists) {
-                var err, content;
-
                 if (exists) {
 
                     def.resolve(jade.renderFile(path.join(site.contentDir, url + '.jade'), {
@@ -77,7 +34,7 @@ function getContentForRoute(url, site) {
 
                 } else {
                     fs.exists(path.join(site.contentDir, url, 'index.jade'), function(exists) {
-                        var err, content;
+                        var err;
 
                         if (exists) {
 
@@ -118,3 +75,43 @@ function getRedirectUrl(url, site) {
     return redirect;
 }
 
+module.exports = function(app, site) {
+    var api = require('./api.js')(site);
+
+    // Homepage (index) router
+    app.get('/', function(req, res, next) {
+        var content = render('home', site);
+        
+        if (content instanceof Error) {
+            content.status = 500;
+            next(content);
+        } else {
+            res.send(content);
+        }
+    });
+
+    // API endpoints
+    app.get('/api/content', api.getAllContent);
+    app.get('/api/content/posts', api.getAllPosts);
+    app.get('/api/content/posts/recent', api.getRecentPosts);
+
+    // Router for all other pages/posts
+    app.get('*', function(req, res, next) {
+        // Site redirects
+        var redirect = getRedirectUrl(req.url, site);
+        if (redirect) {
+            res.redirect(redirect);
+            return;
+        }
+
+        // All other content
+        getContentForRoute(req.url, site)
+            .then(function(content) {
+                res.send(content);
+            })
+            .fail(function(err) {
+                next(err);
+            });
+    });
+
+};

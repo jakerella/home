@@ -26,7 +26,12 @@ module.exports = function (slug, site) {
         }
     });
 
-    data.title = data.title.replace(/%slug%/g, slug.replace(/\-/g, ' ').replace(/\w*/g, function(t){ return t.charAt(0).toUpperCase()+t.substr(1).toLowerCase(); }));
+    data.title = data.title.replace(
+        /%slug%/g,
+        slug.replace(/\-/g, ' ').replace(/\w*/g, function(t) {
+            return t.charAt(0).toUpperCase()+t.substr(1).toLowerCase();
+        })
+    );
 
     try {
         content = jade.renderFile(path.join(site.templateDir, data.template), data);

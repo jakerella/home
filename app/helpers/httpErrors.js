@@ -11,6 +11,7 @@ module.exports = function(site) {
         '500': 'Server Error'
     };
 
+    /*jshint unused:false*/
     return function(err, req, res, next) {
         console.error('Error on site "' + site.slug + '":', err.stack);
         
@@ -26,5 +27,6 @@ module.exports = function(site) {
             res.status(500).send('Sorry, but there was a nasty error. Please try again later.');
         }
     };
+    /*jshint unused:true*/
 
 };
