@@ -2,8 +2,7 @@ window.jk = (function ($) {
 
     console.log('JK client startup...');
 
-    var PAGE_LIMIT = 5,
-        DEFAULT_TEMPLATE = '<article><h3><a href="/{{slug}}">{{title}}</a></h3><p>{{brief}}</p></article>',
+    var DEFAULT_TEMPLATE = '<article><h3><a href="/{{slug}}">{{title}}</a></h3><p>{{brief}}</p></article>',
         TEMPLATE_DATA = [
             {
                 key: 'slug',
@@ -59,10 +58,10 @@ window.jk = (function ($) {
     }
 
     function getQueryParam(name) {
-        name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
-        var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+        name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+        var regex = new RegExp('[\\?&]' + name + '=([^&#]*)'),
             results = regex.exec(document.location.search);
-        return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+        return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
     }
 
     function loadRecentPosts(options) {
@@ -108,7 +107,7 @@ window.jk = (function ($) {
             },
             error: function(xhr) {
                 console.warn(xhr.status, xhr.responseText);
-                cb("Sorry, but there was a problem retrieving blog posts.");
+                cb('Sorry, but there was a problem retrieving blog posts.');
             }
         });
     }
@@ -126,10 +125,12 @@ window.jk = (function ($) {
 
     function renderPostTemplate(data, template) {
         var i, l, content,
-            html = template || "";
+            html = template || '';
 
         for (i=0, l=TEMPLATE_DATA.length; i<l; ++i) {
+            /*jshint maxlen:200*/
             content = (TEMPLATE_DATA[i].process && TEMPLATE_DATA[i].process(data[TEMPLATE_DATA[i].property])) || data[TEMPLATE_DATA[i].property] || '';
+            /*jshint maxlen:140*/
             html = html.replace(new RegExp('\\{\\{' + TEMPLATE_DATA[i].key + '\\}\\}', 'g'), content);
         }
 
