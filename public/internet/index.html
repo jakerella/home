@@ -1,0 +1,1070 @@
+<!DOCTYPE html  PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Everything You Always Wanted To Know About The Internet But Were Afraid To Ask</title>
+    
+    <!--
+      This file and all included resources are
+      copyright Jordan Kasper 2012 unless noted otherwise.
+     -->
+     
+    <meta name="description" content="Everything You Always Wanted To Know About The Internet But Were Afraid To Ask - a Barcamp Nashville 2012 presentation" />
+    <meta name="keywords" content="barcamp nashville 2012 presentation internet everything question" />
+    
+    <link rel='stylesheet' type='text/css' href='style.css' />
+    
+    <script type='text/javascript' src='jquery-1.8.2.min.js'></script>
+    <script type='text/javascript' src='jquery.simpleSlideShow-0.1.js'></script>
+    <script type='text/javascript'>
+      $(function() {
+        $('#wrapper').simpleSlideShow({
+          slideFooter: "<p id='hashtag'><a href='http://twitter.com/#!/search?q=%23bcn12Internet'>#bcn12Internet</a></p>"+
+                       "<p id='copyright'>&copy; Jordan Kasper - <a href='mailt&#111;:j&#111;rda&#110;&#064;j&#111;rda&#110;kasper.c&#111;m'>j&#111;rda&#110;&#064;j&#111;rda&#110;kasper.c&#111;m</a></p>",
+          timer: 20
+        });
+        
+        $('.source').click(function(e) {
+          e.preventDefault();
+          window.open('view-source:'+window.location.href);
+        });
+
+        $('acronym.expand').each(function() {
+          var ac = " - <span class='acronym'>";
+          var w = $(this).attr('title').split(' ');
+          for (var i=0,l=w.length; i<l; ++i) {
+            ac += "<span class='firstLetter'>"+w[i].substr(0,1)+"</span>"+w[i].substr(1)+' ';
+          }
+          ac += "</span>";
+          $(this).after(ac);
+        });
+      });
+    </script>
+  </head>
+  <body>
+    <div id='wrapper'>
+      <div id='header'>
+        <h1>Everything you always wanted to know about the Internet, but were afraid to ask.</h1>
+      </div>
+      
+      <div id='cover' class='slide'>
+        <img src='internet_cloud.jpg' style='margin-top: 2em; height: 50%;' />
+        <h3 style='margin-top: 1em; font-size: 1.1em;'>Everything you always wanted to know about the Internet, but were afraid to ask.</h3>
+        <h3 style='margin-top:2em;'>Jordan Kasper</h3>
+        <h4>
+          <a href='mailt&#111;:j&#111;rda&#110;&#064;j&#111;rda&#110;kasper.c&#111;m'>j&#111;rda&#110;&#064;j&#111;rda&#110;kasper.c&#111;m</a>
+          | <a href='http://twitter.com/jakerella'>@jakerella</a>
+        </h4>
+        
+        <p>You can see these slides at <a href='http://jordankasper.com/internet'>jordankasper.com/internet</a></p>
+        
+        <div class='notes'>
+          <p>
+            I've been working in web development for over 15 years, and I've been 
+            online since 1994. I'm currently the head of application development 
+            at Ten Fast Feet, a Nashville-based interactive agency.
+          </p>
+          
+          <p><cite class='image'>Image reference: http://www.psdgraphics.com/psd-icons/cloud-computing-icon/</cite></p>
+        </div>
+      </div>
+      
+      <div id='web-addresses' class='slide'>
+        <h2>Where you wanna go?</h2>
+        
+        <p>
+          <img src='url_bar.png' /><br />
+          <acronym class='expand' title='Uniform Resource Locator'>URL</acronym><br />
+          <span class='fine'>(Human readable addressing)</span>
+        </p>
+        
+        <p class='simpleSlide_wait'>
+          <img src='maps.png' /><br />
+          But we really want to go here: <strong>36.16085, -86.773903</strong><br />
+          (more on that shortly)
+        </p>
+        
+        <div class='notes'>
+          
+        </div>
+      </div>
+      
+      <div id='protocols' class='slide'>
+        <h2>This is how we do it</h2>
+        
+        <p>
+          <img src='url_bar_protocol.png' /><br />
+          <acronym class='expand' title='Hyper Text Transfer Protocol'>HTTP</acronym>
+        </p>
+        
+        <p class='simpleSlide_wait'>
+          But what is a <em>protocol</em>?<br />
+          <img src='japanese_toilet.jpg' style='height:45%;' /><br />
+          <cite class='image'>http://tweattwaddle.blogspot.com/2012/01/kitty-and-vicky-visit-japan.html</cite>
+        </p>
+        
+        <p class='simpleSlide_wait'>
+          Other protocols you probably know of...
+          <acronym title='File Transfer Protocol'>FTP</acronym>,
+          <acronym title='Post Office Protocol'>POP</acronym>,
+          <acronym title='Simple Mail Transfer Protocol'>SMTP</acronym>,
+          <acronym title='Secure Socket Layers'>SSL</acronym>, 
+          <acronym title='Dynamic Host Configuration Protocol'>DHCP</acronym>, 
+          <acronym title='Transmission Control Protocol'>TCP</acronym>, 
+          <acronym title='User Datagram Protocol'>SSH</acronym>, ... 
+        </p>
+        
+        <div class='notes'>
+          
+        </div>
+      </div>
+      
+      <div id='domains' class='slide noTransition'>
+        <h2>Catchy Title</h2>
+        
+        <p>
+          <img src='url_bar_domain.png' /><br />
+        </p>
+        
+        <div class='notes'>
+          
+        </div>
+      </div>
+      
+      <div id='domain-pieces' class='slide'>
+        <h2>Catchy Title</h2>
+        
+        <p>
+          <img src='url_bar_domain_parts.png' /><br />
+          subdomain.<acronym title='Second Level Domain'>SLD</acronym>.<acronym title='Top Level Domain'>TLD</acronym>
+        </p>
+        
+        <p class='simpleSlide_wait' style='margin-top:1em;'>
+          <span class='fine'>Common <acronym title='Top Level Domain'>TLD</acronym>'s:</span> <strong>.com, .net, .org, .biz</strong><br />
+          <span class='fine'>Examples of <acronym title='Second Level Domain'>SLD</acronym>'s:</span> <strong>google, yahoo, barcampnashville</strong><br />
+          <span class='fine'>Typical subdomains:</span> <strong>www, mail, blog</strong>
+        </p>
+        
+        <div class='notes'>
+          
+        </div>
+      </div>
+      
+      <div id='url-path' class='slide'>
+        <h2>Follow the Path</h2>
+        
+        <p>
+          <img src='url_bar_path.png' /><br />
+        </p>
+        
+        <p class='simpleSlide_wait' style='margin-top:1em;'>
+          <img src='paths.jpg' style='height: 50%;' /><br />
+          <cite class='image'>http://manypathsonecommunity.co.uk/lifepathreadings.html</cite>
+        </p>
+        
+        <div class='notes'>
+          
+        </div>
+      </div>
+      
+      <div id='ports' class='slide'>
+        <h2>Any port in a storm...</h2>
+        
+        <p>
+          <img src='url_bar_port.png' />
+        </p>
+        
+        <p class='simpleSlide_wait' style='margin-top:1em;'>
+          <img src='plumbing.jpg' style='height: 50%;' /><br />
+          <cite class='image'>http://www.beggsandpartners.com/plumbing-heating/overview/</cite>
+        </p>
+        
+        <div class='notes'>
+          
+        </div>
+      </div>
+      
+      <div id='the-simple-cloud' class='slide'>
+        <h2>Into the cloud</h2>
+        
+        <p>
+          <img src='internet_basic.png' />
+        </p>
+        
+        <div class='notes'>
+          
+        </div>
+      </div>
+      
+      <div id='expanding-cloud-1' class='slide noTransition'>
+        <h2>Into the cloud</h2>
+        
+        <p>
+          <img src='internet_pieces_1.png' />
+        </p>
+        
+        <div class='notes'>
+          
+        </div>
+      </div>
+      
+      <div id='expanding-cloud-2' class='slide noTransition'>
+        <h2>Into the cloud</h2>
+        
+        <p>
+          <img src='internet_pieces_2.png' />
+        </p>
+        
+        <div class='notes'>
+          
+        </div>
+      </div>
+      
+      <div id='expanding-cloud-3' class='slide noTransition'>
+        <h2>Into the cloud</h2>
+        
+        <p>
+          <img src='internet_pieces_3.png' />
+        </p>
+        
+        <div class='notes'>
+          
+        </div>
+      </div>
+      
+      <div id='expanding-cloud-4' class='slide noTransition'>
+        <h2>Into the cloud</h2>
+        
+        <p>
+          <img src='internet_pieces_4.png' />
+        </p>
+        
+        <div class='notes'>
+          
+        </div>
+      </div>
+      
+      <div id='internet-cloud' class='slide'>
+        <h2>Into the cloud</h2>
+        
+        <p>
+          <img src='internet_full.png' />
+        </p>
+        
+        <div class='notes'>
+          
+        </div>
+      </div>
+      
+      <div id='translating-urls' class='slide'>
+        <h2 title='This is a translation'>這是一個翻譯</h2>
+        
+        <p>
+          We just typed in "http://www.google.com/reader/view/" ...<br />
+          <img src='url_translate.png' />
+        </p>
+        
+        <p>We need a translator!</p>
+        
+        <div class='notes'>
+          <p>Remember our street address to GPS coordinate example? Same deal!</p>
+        </div>
+      </div>
+      
+      <div id='telephone-exchange' class='slide'>
+        <h2 title='This is a translation'>這是一個翻譯</h2>
+        
+        <p>
+          Translating domains into Internet Protocol (IP) addresses<br />
+          <img src='telephone_exchange.jpg' style='height: 70%;' /><br />
+          <cite class='image'>http://www.witnessthis.co.za/2009/10/05/incentive-to-work/telephone-exchange/</cite>
+        </p>
+        
+        <div class='notes'>
+          
+        </div>
+      </div>
+      
+      <div id='dns-cache' class='slide noTransition'>
+        <h2>Down the line...</h2>
+        
+        <p>
+          The first machine to know the answer wins!<br />
+          <img src='dns_diagram_1.png' />
+        </p>
+        
+        <div class='notes'>
+          <p>
+            How would your computer already know the Ip address for "google.com"?
+            Through it's DNS cache. It holds onto a number of addresses just in 
+            case you use them again soon.
+          </p>
+        </div>
+      </div>
+      
+      <div id='dns-router' class='slide noTransition'>
+        <h2>Down the line...</h2>
+        
+        <p>
+          The first machine to know the answer wins!<br />
+          <img src='dns_diagram_2.png' />
+        </p>
+        
+        <div class='notes'>
+          
+        </div>
+      </div>
+      
+      <div id='dns-isp' class='slide noTransition'>
+        <h2>Down the line...</h2>
+        
+        <p>
+          The first machine to know the answer wins!<br />
+          <img src='dns_diagram_3.png' />
+        </p>
+        
+        <div class='notes'>
+          
+        </div>
+      </div>
+      
+      <div id='dns-entry' class='slide noTransition'>
+        <h2>Down the line...</h2>
+        
+        <p>
+          The first machine to know the answer wins!<br />
+          <img src='dns_diagram_4.png' />
+        </p>
+        
+        <div class='notes'>
+          
+        </div>
+      </div>
+      
+      <div id='dns-cluster' class='slide noTransition'>
+        <h2>Down the line...</h2>
+        
+        <p>
+          The first machine to know the answer wins!<br />
+          <img src='dns_diagram_5.png' />
+        </p>
+        
+        <div class='notes'>
+          
+        </div>
+      </div>
+      
+      <div id='dns-answer' class='slide noTransition'>
+        <h2>Down the line...</h2>
+        
+        <p>
+          The first machine to know the answer wins!<br />
+          <img src='dns_diagram_6.png' />
+        </p>
+        
+        <div class='notes'>
+          <p>
+            So what if none of those machines knows the answer? Then you get an 
+            error page. Trying going to 
+            <a href='http://hfirnhocuwgkfhgt.com'>http://hfirnhocuwgkfhgt.com</a>
+          </p>
+        </div>
+      </div>
+      
+      <div id='ip-addresses' class='slide'>
+        <h2>So many numbers</h2>
+        
+        <p>
+          Now we know where to go to get content from Google: <strong>74.125.227.36</strong><br />
+          But what is that number?
+        </p>
+        
+        <p class='simpleSlide_wait'>
+          It's an <acronym class='expand' title='Internet Protocol'>IP</acronym> - address.<br />
+          A machine-readable identifier for a network interface (not for the whole machine!)
+        </p>
+        
+        <div class='simpleSlide_wait'>
+          <h3>IPv4</h3>
+          <p>Set of four numbers between <strong>0 and 255</strong> (that's 8 bits each, making a 32-bit address):
+          <table style='width:100%; margin-top:1em;'>
+            <tr>
+              <td style='text-align:right; padding:0 0.5em; width:50%;'>74.</td>
+              <td style='text-align:left; padding:0 0.5em;'>125.227.26</td>
+            </tr>
+            <tr>
+              <td style='text-align:right; padding:0 0.5em;'>Network Identification (0-127, Class A)</td>
+              <td style='text-align:left; padding:0 0.5em;'>Host (interface) Identification</td>
+            </tr>
+          </table>
+        </div>
+        
+        <p class='simpleSlide_wait' style='margin-top:1em;'>
+          <img src='public_restroom.png' />
+          <strong>VS.</strong>
+          <img src='privacy_sweater.jpg' style='height:30%;' /><br />
+          <cite class='image'>http://www.justbathroomsigns.com/Restroom/No-Public-Restroom-Signs.aspx</cite><br />
+          <cite class='image'>http://thesocietypages.org/cyborgology/2012/08/06/a-new-privacy-full-essay-parts-i-ii-and-iii-2/digital-privacy/</cite>
+        </p>
+        
+        <div class='notes'>
+          
+        </div>
+      </div>
+      
+      <div id='home-net' class='slide noTransition'>
+        <h2>Home + network = Homework</h2>
+        
+        <p>Your machine has an IP address, too! But how did you get it?</p>
+        
+        <div class='home-net-initial'>
+          <img src='home_network.png' />
+        </div>
+        
+        <div class='notes'>
+          
+        </div>
+      </div>
+      
+      <div id='dhcp-or-static' class='slide noTransition'>
+        <h2>Home + network = Homework</h2>
+        
+        <p>Your machine has an IP address, too! But how did you get it?</p>
+        
+        <div class='home-net-other'>
+          <img src='home_network_ip1.png' />
+        </div>
+        
+        <div class='notes'>
+          
+        </div>
+      </div>
+      
+      <div id='static-ip' class='slide noTransition'>
+        <h2>Home + network = Homework</h2>
+        
+        <p>Your machine has an IP address, too! But how did you get it?</p>
+        
+        <div class='home-net-other'>
+          <img src='home_network_ip2.png' />
+        </div>
+        
+        <div class='notes'>
+          
+        </div>
+      </div>
+      
+      <div id='dhcp-request' class='slide noTransition'>
+        <h2>Home + network = Homework</h2>
+        
+        <p>Your machine has an IP address, too! But how did you get it?</p>
+        
+        <div class='home-net-other'>
+          <img src='home_network_ip3.png' />
+        </div>
+        
+        <div class='notes'>
+          
+        </div>
+      </div>
+      
+      <div id='dhcp-response' class='slide'>
+        <h2>Home + network = Homework</h2>
+        
+        <p>Your machine has an IP address, too! But how did you get it?</p>
+        
+        <div class='home-net-other'>
+          <img src='home_network_ip4.png' />
+        </div>
+        
+        <div class='notes'>
+          
+        </div>
+      </div>
+      
+      <div id='ipv4-vs-ipv6' class='slide'>
+        <h2>I can haz IP?</h2>
+        
+        <h3>IPv4 vs. IPv6</h3>
+        
+        <p>
+          Why the need for a new version of IP addressing?<br />
+          Seems to work just fine...
+        </p>
+        
+        <div class='simpleSlide_wait'>
+          <div style='width:48%; float: left;'>
+            <h4>IPv4</h4>
+            <ul style='list-style: none;'>
+              <li>format: 192.168.1.67</li>
+              <li>32-bit addressing (4 places, 8 bits each)</li>
+              <li>2^32 possible IPs = 4,294,967,296 (~4.3 billion)</li>
+              <li>Started running out April 15, 2011</li>
+            </ul>
+          </div>
+          
+          <div style='width:48%; float: left;'>
+            <h4>IPv6</h4>
+            <ul style='list-style: none;'>
+              <li>format: 2001:db8:85a3:42:0:8a2e:370:7334</li>
+              <li>128-bit addressing (8 places, 16 bits each)</li>
+              <li>2^128 possible IPs = 340,282,366,920,938,463,463,374,607,431,768,211,456</li>
+            </ul> 
+          </div>
+        </div>
+        
+        <div class='simpleSlide_wait' style='clear:both; width:650px; margin:0 auto;'>
+          <p style='padding-top:1em;'>
+            <strong>One pixel per address...</strong><br />
+            <img src='united_states_ips.png' style='margin-right:40px;' />
+            <img src='solar_system_ips.png' class='simpleSlide_wait' />
+            <cite class='image'>http://pthree.org/2009/03/08/the-sheer-size-of-ipv6/</cite>
+          </p>
+        </div>
+        
+        <div class='notes'>
+          <p>
+            When we say we started "running out" of addresses, what we mean is 
+            that large blocks of addresses had been allocated to specific 
+            companies, governments, educational institutions, etc, and while 
+            they may still have unassigned addresses, no more large blocks 
+            are available.
+          </p>
+        </div>
+      </div>
+      
+      <div id='cloud-recap' class='slide noTransition'>
+        <h2>Let's see that again...</h2>
+        
+        <p>
+          <img src='internet_full_request1.png' />
+        </p>
+        
+        <div class='notes'>
+          
+        </div>
+      </div>
+      
+      <div id='http-request-path' class='slide'>
+        <h2>Let's see that again...</h2>
+        
+        <p>
+          <img src='internet_full_request2.png' />
+        </p>
+        
+        <div class='notes'>
+          
+        </div>
+      </div>
+      
+      <div id='request-anatomy' class='slide noTransition'>
+        <h2>Anatomy 101</h2>
+        
+        <h3>The HTTP REQUEST data</h3>
+        
+        <p>http://www.google.com/reader/view/</p>
+        
+        <pre>GET /reader/view/ HTTP/1.1
+Host: www.google.com
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
+Connection: keep-alive
+Cookie: [a bunch of stuff, not for you to see]
+User-Agent: Mozilla/5.0 (X11; Linux i686) AppleWebKit/537.4 (KHTML, like Gecko) Chrome/22.0.1229.79 Safari/537.4</pre>
+        
+        <div class='notes'>
+          <p>
+            There is usually a LOT more in a REQUEST, this is just a sample of 
+            some potential data.
+          </p>
+        </div>
+      </div>
+      
+      <div id='request-familair' class='slide noTransition'>
+        <h2>Anatomy 101</h2>
+        
+        <h3>The HTTP REQUEST data</h3>
+        
+        <p>http://www.google.com/reader/view/</p>
+        
+        <pre>GET <strong>/reader/view/</strong> <strong>HTTP</strong>/1.1
+Host: <strong>www.google.com</strong>
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
+Connection: keep-alive
+Cookie: [a bunch of stuff, not for you to see]
+User-Agent: Mozilla/5.0 (X11; Linux i686) AppleWebKit/537.4 (KHTML, like Gecko) Chrome/22.0.1229.79 Safari/537.4</pre>
+        
+        <div class='notes'>
+          
+        </div>
+      </div>
+      
+      <div id='request-cookies' class='slide'>
+        <h2>Anatomy 101</h2>
+        
+        <h3>The HTTP REQUEST data</h3>
+        
+        <p>http://www.google.com/reader/view/</p>
+        
+        <pre><strong>GET</strong> /reader/view/ HTTP/1.1
+Host: www.google.com
+<strong>Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8</strong>
+Connection: keep-alive
+<strong>Cookie: 1%2FcA8CoqFFr9udmhMd2NpbtBcfH9Rzdd9fE5ISkdmB%2F2012-10-09+22%3A21%3A59</strong>
+<strong>User-Agent: Mozilla/5.0 (X11; Linux i686) AppleWebKit/537.4 (KHTML, like Gecko) Chrome/22.0.1229.79 Safari/537.4</strong></pre>
+        
+        <p class='simpleSlide_wait'>
+          <img src='cookie_monster.jpg' /><br />
+          <cite class='image'>http://www.quickmeme.com/meme/3qehyt/</cite>
+        </p>
+        
+        <p class='simpleSlide_wait'>
+          Sample Cookie Data:<br />
+          1%2FcA8CoqFFr9udmhMd2NpbtBcfH9Rzdd9fE5ISkdmB%2F<strong style='font-size:1.2em;'>2012-10-09</strong>+22%3A21%3A59
+        </p>
+        
+        <div class='notes'>
+          
+        </div>
+      </div>
+      
+      <div id='server-architecture' class='slide'>
+        <h2>Not what I.M. Pei would do...</h2>
+        
+        <h3>Typical Web Server Architecture</h3>
+        <div>
+          <img src='web_server_arch.png' />
+        </div>
+        
+        <p><acronym class='expand' title='Linux Apache MySQL PHP'>LAMP</acronym></p>
+        
+        <div class='notes'>
+          
+        </div>
+      </div>
+      
+      <div id='response-anatomy' class='slide noTransition'>
+        <h2>Anatomy 102</h2>
+        
+        <h3>The HTTP RESPONSE data</h3>
+        
+        <p>http://www.google.com/reader/view/</p>
+        
+        <pre>HTTP/1.1 200 OK
+Date: Sat, 20 Oct 2012 14:15:00 GMT
+Server: Apache/1.3.3.7 (Unix) (Red-Hat/Linux)
+Last-Modified: Mon, 08 Jan 2012 23:11:55 GMT
+Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+Content-Encoding: gzip
+Content-Type: text/html; charset=UTF-8
+Content-Length: 220
+Expires: Fri, 01 Jan 1990 00:00:00 GMT
+Pragma: no-cache
+X-Reader-Google-Version: 553-000
+
+&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" ...</pre>
+        
+        <div class='notes'>
+          <p>
+            As with the REQUEST data, there can - and usually is - much more 
+            data in the RESPONSE, this is just a brief sampling.
+          </p>
+        </div>
+      </div>
+      
+      <div id='response-familiar' class='slide noTransition'>
+        <h2>Anatomy 102</h2>
+        
+        <h3>The HTTP RESPONSE data</h3>
+        
+        <p>http://www.google.com/reader/view/</p>
+        
+        <pre><strong>HTTP</strong>/1.1 <strong>200</strong> OK
+<strong>Date: Sat, 20 Oct 2012 14:15:00 GMT</strong>
+<strong>Server: Apache/1.3.3.7 (Unix) (Red-Hat/Linux)</strong>
+Last-Modified: Mon, 08 Jan 2012 23:11:55 GMT
+Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+Content-Encoding: gzip
+<strong>Content-Type: text/html; charset=UTF-8</strong>
+Content-Length: 220
+Expires: Fri, 01 Jan 1990 00:00:00 GMT
+Pragma: no-cache
+X-Reader-Google-Version: 553-000
+
+&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" ...</pre>
+        
+        <p class='simpleSlide_wait' style='text-align:left;'>
+          Status Codes:<br />
+          2XX - Everything's good, just some notes.<br />
+          3XX - I can help you, but I can't give you what you want (redirects).<br />
+          4XX - You did something wrong.<br />
+          5XX - I failed.
+        </p>
+        
+        <div class='notes'>
+          
+        </div>
+      </div>
+      
+      <div id='response-other' class='slide'>
+        <h2>Anatomy 102</h2>
+        
+        <h3>The HTTP RESPONSE data</h3>
+        
+        <p>http://www.google.com/reader/view/</p>
+        
+        <pre>HTTP/1.1 200 OK
+Date: Sat, 20 Oct 2012 14:15:00 GMT
+Server: Apache/1.3.3.7 (Unix) (Red-Hat/Linux)
+Last-Modified: Mon, 08 Jan 2012 23:11:55 GMT
+<strong>Cache-Control: no-cache, no-store, max-age=0, must-revalidate</strong>
+<strong>Content-Encoding: gzip</strong>
+Content-Type: text/html; charset=UTF-8
+Content-Length: 220
+Expires: Fri, 01 Jan 1990 00:00:00 GMT
+Pragma: no-cache
+<strong>X-Reader-Google-Version: 553-000</strong>
+
+&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" ...</pre>
+        
+        <div class='notes'>
+          
+        </div>
+      </div>
+      
+      <div id='browser-rendering' class='slide'>
+        <h2>It renders you helpless...</h2>
+        
+        <p>And now the html and CSS are rendered by the browser</p>
+        
+        <div style='position:relative;'>
+          <img src='cat_render.png' />
+          <img src='cat_tail.gif' style='position:absolute; top:100px; left:520px; height:254px;' />
+        </div>
+        
+        <p class='fine'>(This is not part of my presentation.)</p>
+        
+        <div class='notes'>
+          
+        </div>
+      </div>
+      
+      <div id='javascript' class='slide'>
+        <h2>Scriptalicious</h2>
+        
+        <p>What about JavaScript? Where does that code run?</p>
+        
+        <div class='simpleSlide_wait'>
+          <img src='dev_tools.png' />
+          <div class='simpleSlide_wait'>
+            <p>
+              Now that the browser <strong>has</strong> the code, it runs it against 
+              the <strong>rendered</strong> html and css<br />
+              (at least, the html and css that has already been processed)
+            </p>
+            <p><em>Same thing for Flash!</em></p>
+          </div>
+        </div>
+        
+        <div class='notes'>
+          <p>
+            Note that ANY file not directly in the original html file will 
+            be requested separately (via an HTTP request) and thus having 
+            numerous, separate JS, CSS, Flash, and image files can really 
+            drag down page load times! 
+          </p>
+        </div>
+      </div>
+      
+      <div id='get-v-post' class='slide'>
+        <h2>I'll GET you my pretty, and your little POST, too</h2>
+        
+        <p>
+          You've heard of <strong>GET</strong> and <strong>POST</strong>...<br />
+          but are you using them correctly?
+        </p>
+        
+        <div>
+          <div style='width:48%; float:left;' class='simpleSlide_wait'>
+            <h3>GET</h3>
+            <p>
+              Data Retrieval<br />
+              <img src='show-me-the-money.jpg' />
+            </p>
+          </div>
+          
+          <div style='width:48%; float:left;' class='simpleSlide_wait'>
+            <h3>POST</h3>
+            <p>
+              Data Updating<br />
+              <img src='kitty_money.jpg' height='270px' /><br />
+              <cite class='image'>http://cheezburger.com/6339194624</cite>
+            </p>
+          </div>
+          
+        </div>
+        <div style='clear:both;'></div>
+        
+        <div class='notes'>
+          
+        </div>
+      </div>
+      
+      <div id='other-http-methods' class='slide'>
+        <h2>Grumpy, Sneezy, Dopey, Happy, Doc, ...</h2>
+        
+        <p>
+          There are more than two methods!<br />
+          Generally these are used by more complex systems and <acronym title='Application Programming Interface'>API</acronym>s
+        </p>
+        
+        <div class='simpleSlide_wait' style='margin-top:2em; text-align:left;'>
+          <ul>
+            <li><strong>PUT</strong> - Update a record with the given data (in APIs, a POST is used for <em>creating</em> records, while PUT is used for <em>updating</em>)</li>
+            <li><strong>DELETE</strong> - Delete the given record</li>
+          </ul>
+          <div class='simpleSlide_wait'>
+            <h3 style='margin-top:2em;'>Less used...</h3>
+            <ul style='margin-top:1em;'>
+              <li><strong>OPTIONS</strong> - Tells the client what methods are supported (and sometimes how to use them)</li>
+              <li><strong>PATCH</strong> - Update part of a record with the given data (if implemented, then PUT usually replaces the <em>entire record</em>)</li>
+              <li><strong>HEAD</strong> - basically a GET, but only retrieves http headers, not the full response</li>
+            </ul>
+          </div>
+        </div>
+        
+        <div class='notes'>
+          
+        </div>
+      </div>
+      
+      <div id='ajax' class='slide'>
+        <h2>AJAX: It's synchronicity!</h2>
+        
+        <p>
+          <acronym class='expand' title='Asynchronous JavaScript And XML'>AJAX</acronym><br />
+          <img src='synchronicity_whales.jpg' /><br />
+          <cite class='image'>http://livingwithcertainty.com/2011/04/07/more-synchronicity-in-my-life/</cite>
+        </p>
+        
+        <div class='notes'>
+          
+        </div>
+      </div>
+      
+      <div id='client-server-traditional' class='slide'>
+        <h2>One foot in front of the other</h2>
+        
+        <p>
+          <img src='client-server_traditional.png' /><br />
+          <cite class='image'>http://www.adaptivepath.com/ideas/ajax-new-approach-web-applications</cite>
+        </p>
+        
+        <div class='notes'>
+          
+        </div>
+      </div>
+      
+      <div id='client-server-ajax' class='slide'>
+        <h2>One foot in front of the other</h2>
+        
+        <p>
+          <img src='client-server_ajax.png' /><br />
+          <cite class='image'>http://www.adaptivepath.com/ideas/ajax-new-approach-web-applications</cite>
+        </p>
+        
+        <div class='notes'>
+          
+        </div>
+      </div>
+      
+      <div id='ssl-handshake' class='slide'>
+        <h2>Come with me if you want to live...</h2>
+        
+        <p>
+          <acronym class='expand' title='Secure Socket Layers'>SSL</acronym> -
+          allows a client (your browser)<br />to encrypt data sent to (and coming 
+          back from) a server (in our case a web server).
+        </p>
+        
+        <p class='simpleSlide_wait'>
+          <img src='ssl_handshake.png' />
+        </p>
+        
+        <div class='notes'>
+          
+        </div>
+      </div>
+      
+      <div id='ssl-cert-authority' class='slide'>
+        <h2>Come with me if you want to live...</h2>
+        
+        <p>
+          But how do you know you can trust that server's certificate?
+        </p>
+        
+        <div class='simpleSlide_wait'>
+          <p>
+            A <acronym class='expand' title='Certificate Authority'>CA</acronym> -
+            guarantees that the holder of the certificate is who they say they are. <br />
+            <span class='simpleSlide_wait' style='display: inline-block; padding-top:1em;'>
+              <strong>They are the gatekeepers.</strong><br />
+              <img src='gatekeeper.jpg' style='height:60%;' /><br/ >
+              (Examples of ROOT CA's: Verisign, Thawte, GeoTrust, etc)
+            </span>
+          </p>
+        </div>
+        
+        <div class='notes'>
+          
+        </div>
+      </div>
+      
+      <div id='ssl-chain-start' class='slide noTransition'>
+        <h2>Unchained Heat</h2>
+        
+        <p>
+          But what if the web site didn't want to pay up to $3,000<br />
+          for a certificate from a <strong>root</strong> authority like <strong>Verisign</strong>?<br />
+          I hear you can get one for $8 some places...
+        </p>
+        
+        <div class='simpleSlide_wait'>
+          <h3>Chained Certificates</h3>
+          <p class='simpleSlide_wait'>
+            <img src='ssl_sttng_1.png' style='height:60%;' /><br />
+            <cite class='image'>http://datacenteroverlords.com/2011/09/25/ssl-who-do-you-trust/</cite>
+          </p>
+        </div>
+        
+        <div class='notes'>
+          
+        </div>
+      </div>
+      
+      <div id='ssl-chain-root' class='slide noTransition'>
+        <h2>Unchained Heat</h2>
+        
+        <p>
+          But what if the web site didn't want to pay up to $3,000<br />
+          for a certificate from a <strong>root</strong> authority like <strong>Verisign</strong>?<br />
+          I hear you can get one for $8 some places...
+        </p>
+        
+        <div>
+          <h3>Chained Certificates</h3>
+          <p>
+            <img src='ssl_sttng_2.png' style='height:60%;' /><br />
+            <cite class='image'>http://datacenteroverlords.com/2011/09/25/ssl-who-do-you-trust/</cite>
+          </p>
+        </div>
+        
+        <div class='notes'>
+          
+        </div>
+      </div>
+      
+      <div id='ssl-chain-complete' class='slide'>
+        <h2>Unchained Heat</h2>
+        
+        <p>
+          But what if the web site didn't want to pay up to $3,000<br />
+          for a certificate from a <strong>root</strong> authority like <strong>Verisign</strong>?<br />
+          I hear you can get one for $8 some places...
+        </p>
+        
+        <div>
+          <h3>Chained Certificates</h3>
+          <p>
+            <img src='ssl_sttng_trust.png' style='height:60%;' /><br />
+            <cite class='image'>http://datacenteroverlords.com/2011/09/25/ssl-who-do-you-trust/</cite>
+          </p>
+        </div>
+        
+        <div class='notes'>
+          
+        </div>
+      </div>
+      
+      
+      <div id='thanks' class='slide'>
+        <h2>I've told you a lot... What did I miss?</h2>
+        
+        <h3 style='font-size:3em;margin:2em;'>Q &amp; A Time!</h3>
+        
+        <p class='simpleSlide_wait separate' style='padding-top: 1em;'>
+          Thanks!<br />
+          Jordan Kasper<br />
+          <a href='mailt&#111;:j&#111;rda&#110;&#064;j&#111;rda&#110;kasper.c&#111;m'>j&#111;rda&#110;&#064;j&#111;rda&#110;kasper.c&#111;m</a><br />
+          <a href='http://jordankasper.com/internet'>jordankasper.com/internet</a>
+        </p>
+      </div>
+      
+      
+      <div id='acronyms' class='slide'>
+        <h2>Acronymity</h2>
+        
+        <ul class='columns'>
+          <li><acronym class='expand' title='Asynchronous Javascript And XML'>AJAX</acronym></li>
+          <li><acronym class='expand' title='Common Gateway Interface'>CGI</acronym></li>
+          <li><acronym class='expand' title='Command Line Interface'>CLI</acronym></li>
+          <li><acronym class='expand' title='Command Run ON'>CRON</acronym></li>
+          <li><acronym class='expand' title='Cascading Style Sheet'>CSS</acronym></li>
+          <li><acronym class='expand' title='DataBase Management System'>DBMS</acronym></li>
+          <li><acronym class='expand' title='Dynamic Host Configuration Protocol'>DHCP</acronym></li>
+          <li><acronym class='expand' title='Domain Name System'>DNS</acronym></li>
+          <li><acronym class='expand' title='Document Object Model'>DOM</acronym></li>
+          <li><acronym class='expand' title='File Transfer Protocol'>FTP</acronym></li>
+          <li><acronym class='expand' title='Hyper Text Transfer Protocol Secure'>HTTPS</acronym></li>
+          <li><acronym class='expand' title='Internet Message Access Protocol'>IMAP</acronym></li>
+          <li><acronym class='expand' title='Internet Protocol'>IP</acronym></li>
+          <li><acronym class='expand' title='Internet Service Provider'>ISP</acronym></li>
+          <li><acronym class='expand' title='Linux Apache MySQL PHP'>LAMP</acronym> (or Perl, or Python)</li>
+          <li><acronym class='expand' title='Local Area Network'>LAN</acronym></li>
+          <li><acronym class='expand' title='Media Access Control'>MAC</acronym></li>
+          <li><acronym class='expand' title='Network Interface Controller'>NIC</acronym></li>
+          <li>Perl - Fooled you, it's not!</li>
+          <li><acronym class='expand' title='PHP: Hypertext Preprocessor'>PHP</acronym> (yes, it's recursive)</li>
+          <li><acronym class='expand' title='Post Office Protocol'>POP</acronym></li>
+          <li><acronym class='expand' title='Really Simple Syndication'>RSS</acronym></li>
+          <li><acronym class='expand' title='Simple Mail Transfer Protocol'>SMTP</acronym></li>
+          <li><acronym class='expand' title='Secure Shell'>SSH</acronym></li>
+          <li><acronym class='expand' title='Service Set Identifier'>SSID</acronym></li>
+          <li><acronym class='expand' title='Secure Socket Layers'>SSL</acronym></li>
+          <li><acronym class='expand' title='Structured Query Language'>SQL</acronym></li>
+          <li><acronym class='expand' title='Transmission Control Protocol'>TCP</acronym></li>
+          <li><acronym class='expand' title='User Datagram Protocol'>UDP</acronym></li>
+          <li><acronym class='expand' title='Uniform Resource Indicator'>URI</acronym></li>
+          <li><acronym class='expand' title='Uniform Resource Locator'>URL</acronym></li>
+          <li><acronym class='expand' title='Virtual Private Server'>VPS</acronym></li>
+          <li><acronym class='expand' title='Windows Apache MySQL PHP'>WAMP</acronym></li>
+          <li><acronym class='expand' title='Wide Area Network'>WAN</acronym></li>
+          <li><acronym class='expand' title='Wired Equivalent Privacy'>WEP</acronym></li>
+          <li>WIFI - No, it does not mean "Wireless Fidelity", it's just a name.</li>
+          <li><acronym class='expand' title='Wifi Protected Access'>WPA</acronym></li>
+          <li><acronym class='expand' title='World Wide Web'>WWW</acronym></li>
+          <li><acronym class='expand' title='eXstensible HyperText Markup Language'>XHTML</acronym></li>
+          <li><acronym class='expand' title='eXstensible Markup Language'>XML</acronym></li>
+        </ul>
+        
+        <div class='notes'>
+          
+        </div>
+      </div>
+      
+    </div>
+    
+    <div id='slideCount'></div>
+    
+    <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-18307662-1']);
+    _gaq.push(['_trackPageview']);
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+    </script>
+    
+  </body>
+</html>
