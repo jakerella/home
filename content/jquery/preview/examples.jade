@@ -1,0 +1,71 @@
+extends ../examples.jade
+
+block styles
+    link(rel='stylesheet', href='https://rawgit.com/jakerella/jquerySimpleFilePreview/master/simpleFilePreview.css')
+
+block title
+    h1 jQuery simplePassMeter Examples
+
+block content
+    fieldset
+        h3 Basic Usage
+        div.
+            <form action='#ex1' method='POST' enctype="multipart/form-data">
+                <input type='file' id='ex1' name='ex1' />
+                <input type='button' value='Submit form' /> <em>(Note: there is no server script to submit to!)</em>
+            </form>
+
+        pre.block-code.
+            &lt;input type='file' id='ex1' name='ex1' /&gt;
+            
+            $('input[type=file]').simpleFilePreview();
+
+
+    fieldset
+        h3 Multiple Upload Example
+        div.
+            <form action='#ex2' method='POST' enctype="multipart/form-data">
+                <input type='file' id='ex2' name='ex2[]' multiple='multiple' />
+                <input type='button' value='Submit form' /> <em>(Note: there is no server script to submit to!)</em>
+            </form>
+
+        pre.block-code.
+            &lt;input type='file' id='ex2' name='ex2[]' multiple='multiple' /&gt;
+            
+            $('input[type=file]').simpleFilePreview();
+  
+
+    fieldset
+        h3 Multiple Upload with Existing Files Example
+        div.
+            <form action='#ex3' method='POST' enctype="multipart/form-data">
+                <input type='file' id='ex3' name='ex3[]' multiple='multiple' />
+                <input type='button' value='Submit form' /> <em>(Note: there is no server script to submit to!)</em>
+            </form>
+
+        pre.block-code.
+            &lt;input type='file' id='ex3' name='ex3[]' multiple='multiple' /&gt;
+            $('input[type=file]').simpleFilePreview({
+              existingFiles: {
+                "123": "linux-1.jpg",
+                "456": "linux-2.png"
+              }
+            });
+
+
+    script(src='https://rawgit.com/jakerella/jquerySimpleFilePreview/master/jquery.simpleFilePreview.js')
+    script.
+        $(document).ready(function() {
+  
+          $('#ex1').simpleFilePreview();
+          
+          $('#ex2').simpleFilePreview();
+
+          $('#ex3').simpleFilePreview({
+            existingFiles: {
+              "123": "linux-1.jpg",
+              "456": "linux-2.png"
+            }
+          });
+          
+        });
