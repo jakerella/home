@@ -1,16 +1,3 @@
-
-/* ---------------- Modules -------------- */
-
-/* Header and Nav */
-body > header {
-    background-color: #444;
-    min-height: 3.5em;
-    color: #eee;
-}
-header h1 {
-    font-size: 1.25em;
-    padding: 0.25em 0 0 1em;
-}
 nav ul {
     margin: 0;
 }
@@ -49,49 +36,6 @@ nav a {
     width: 1.875em;
 }
 
-
-/* Main Content */
-.main-body {
-    padding-top: 4em;
-    background-color: #eee;
-}
-
-.main-content {
-    background-color: #fff;
-    padding: 1em;
-}
-.main-content img {
-    padding: 1em;
-}
-
-.blog-post h1, .blog-post h2, .blog-post h3, .blog-post h4 {
-    clear: both;
-}
-
-
-/* Sidebar */
-.sidebar {
-    font-size: 0.8em;
-    padding-left: 1em;
-}
-.sidebar.speaking h2:after {
-    content: " Talks";
-}
-.sidebar h2 {
-    font-size: 1.1em;
-}
-.sidebar h1, #past, #past + ul {
-    display: none;
-}
-
-
-/* ---------------- Utility -------------- */
-
-.top-sticky {
-    position: fixed;
-    top: 0;
-}
-
 .hamburger-icon:before {
     top: -0.5em;
 }
@@ -121,16 +65,4 @@ nav a {
     position: relative;
     top: 1em;
     width: 100%;
-}
-
-.data-pad td {
-    padding: 0.1em 0.4em;
-}
-
-
-/* ------------- Page-specific ----------- */
-
-[data-slug=profile] li img {
-    width: 1em;
-    padding: 0;
 }

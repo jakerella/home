@@ -19,6 +19,17 @@ module.exports = function (grunt) {
                     src: ['app/**/*.js']
                 }
             }
+        },
+
+        sass: {
+            options: {
+                includePaths: ['./app/client/sass']
+            },
+            main: {
+                files: {
+                    './public/css/style.css': './app/client/sass/main.scss'
+                }
+            }
         }
 
     });
@@ -26,5 +37,5 @@ module.exports = function (grunt) {
     // Load NPM Tasks
     require('matchdep').filterDev('grunt-*', grunt.config.get('pkg')).forEach(grunt.loadNpmTasks);
 
-    grunt.registerTask('default', ['jshint']);
+    grunt.registerTask('default', ['jshint', 'sass']);
 };

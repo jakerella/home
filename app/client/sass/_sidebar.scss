@@ -1,0 +1,12 @@
+
+
+.sidebar {
+    font-size: 0.8em;
+    padding-left: 1em;
+}
+.sidebar h2 {
+    font-size: 1.1em;
+}
+.sidebar h1, #past, #past + ul {
+    display: none;
+}
