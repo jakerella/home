@@ -1,0 +1,392 @@
+extends ../examples.jade
+
+block styles
+    link(rel='stylesheet', href='https://rawgit.com/jakerella/jquerySimplePassMeter/master/simplePassMeter.css')
+
+block title
+    h1 jQuery simplePassMeter Examples
+
+block content
+    fieldset
+        h3 Basic Usage
+        div.
+            <input type='password' id='ex1' name='myPassword' />
+
+        pre.block-code.
+            &lt;input type='password' id='myPassword' name='myPassword' /&gt;
+
+            $('#myPassword').simplePassMeter();
+
+
+    fieldset
+        h3 Changing Location &amp; Offset
+        div(style='margin: 0 auto 3em auto; width: 12em;').
+            <input type='password' id='ex2l' name='myPassword' /><br><br>
+            <input type='password' id='ex2b' name='myPassword' />
+
+        pre(class='block-code').
+            &lt;input type='password' id='myPassword' name='myPassword' /&gt;&lt;br&gt;&lt;br&gt;
+            &lt;input type='password' id='myPassword2' name='myPassword2' /&gt;
+            
+            $('#myPassword').simplePassMeter({
+              'location': 'l'
+            });
+
+            $('#myPassword2').simplePassMeter({
+              'location': 'b',
+              'offset': 10
+            });
+
+
+    fieldset
+        h3 Username &amp; Password (No Duplicates)
+        div.
+            Username: <input type='text' id='ex3u' name='myUsername' /><br /><br />
+            Password: <input type='password' id='ex3p' name='myPassword' />
+
+        pre(class='block-code').
+            &lt;input type='text' id='myUsername' name='myUsername' /&gt;
+            &lt;input type='password' id='myPassword' name='myPassword' /&gt;
+
+            $('#myPassword').simplePassMeter({
+              'requirements': {
+                'noMatchField': {
+                  'value': '#myUsername'
+                }
+              }
+            });
+
+
+    fieldset
+        h3 Checking Against Another Field (Matching)
+        div.
+            Enter Password: <input type='password' id='ex4p' name='myPassword' /><br /><br />
+            Verify Password: <input type='password' id='ex4v' name='vPassword' />
+
+        pre(class='block-code').
+            &lt;input type='password' id='myPassword' name='myPassword' /&gt;
+            &lt;input type='password' id='verifyPassword' name='verifyPassword' /&gt;
+
+            $('#myPassword').simplePassMeter({
+              'requirements': {
+                'matchField': {
+                  'value': '#verifyPassword'
+                }
+              }
+            });
+  
+
+    fieldset
+        h3 Changing Password Requirements
+        div.
+            <input type='password' id='ex5' name='myPassword' />
+
+        pre(class='block-code').
+            &lt;input type='password' id='myPassword' name='myPassword' /&gt;
+
+            $('#myPassword').simplePassMeter({
+              'requirements': {
+                'minLength': {'value': 10},  // at least 10 characters
+                'lower': {'value': true},    // at least 1 lower-case letter
+                'upper': {'value': true},    // at least 1 upper-case letter
+                'special': {'value': true}   // at least 1 special character
+              }
+            });
+
+
+    fieldset
+        h3 Custom Requirement (Callback)
+        div.
+            Email: <input type='text' id='ex6e' name='myEmail' /><br /><br />
+            Password: <input type='password' id='ex6p' name='myPassword' />
+
+        pre(class='block-code').
+            &lt;input type='text' id='myEmail' name='myEmail' /&gt;
+            &lt;input type='password' id='myPassword' name='myPassword' /&gt;
+
+            $('#myPassword').simplePassMeter({
+              'requirements': {
+                'noMatchEmailField': {
+                  'value': '#myEmail',
+                  'message': 'You can\'t use any part of your email',
+                  'callback': function(password, value) {
+                    value = $(value);
+                    var email = value.val();
+                    email = email.match(/(.+)@(.+)\.(.{2,3})/);
+                    if (email.length != 4) { return true; } // invalid email, so son't worry about it
+                    
+                    // If the password doesn't match the first or last part of the email address we're okay
+                    if (password.indexOf(email[0]) &lt; 0 &amp;&amp; password.indexOf(email[1]) &lt; 0) {
+                      return true;
+                    }
+                    return false;
+                  }
+                }
+              }
+            });
+
+
+    fieldset
+        h3 Custom Requirement (Regex)
+        div.
+            <input type='password' id='ex7' name='myPassword' />
+
+        pre(class='block-code').
+            &lt;input type='password' id='myPassword' name='myPassword' /&gt;
+
+            $('#myPassword').simplePassMeter({
+              'requirements': {
+                'noSpecialChars': {
+                  'value': true,
+                  'message': 'Only letters and numbers in passwords',
+                  'regex': '^[a-zA-Z0-9]*$'
+                }
+              }
+            });
+
+
+    fieldset
+        h3 Custom Rating Levels
+        div.
+            <input type='password' id='ex8' name='myPassword' />
+
+        pre(class='block-code').
+            &lt;input type='password' id='myPassword' name='myPassword' /&gt;
+
+            $('#myPassword').simplePassMeter({
+              // Kill all requirements to show ratings better in the example
+              // DO NOT DO THIS as it means you have no requirements!
+              'requirements': {},
+              
+              'ratings': [
+                {'minScore': 0,
+                 'className': 'meterFail',
+                 'text': 'You need a stronger password'
+                },
+                {'minScore': 10,
+                 'className': 'meterWarn',
+                 'text': 'You can do better than that...'
+                },
+                {'minScore': 25,
+                 'className': 'meterWarn',
+                 'text': 'Your password is a bit weak'
+                },
+                {'minScore': 40,
+                 'className': 'meterGood',
+                 'text': 'Good password, could be better'
+                },
+                {'minScore': 60,
+                 'className': 'meterGood',
+                 'text': 'Good password!'
+                },
+                {'minScore': 80,
+                 'className': 'meterExcel',
+                 'text': 'Awesome password!'
+                }
+              ]
+            });
+
+
+    fieldset
+        h3 Capturing Password Score
+        div.
+            <input type='password' id='ex9' name='myPassword' />
+            <p>Score: <span id='ex9s'></span></p>
+
+        pre(class='block-code').
+            &lt;input type='password' id='myPassword' name='myPassword' /&gt;
+            &lt;p&gt;Score: &lt;span id='theScore'&gt;&lt;/span&gt;&lt;/p&gt;
+
+            $('#myPassword').simplePassMeter();
+            $('#myPassword').bind('score.simplePassMeter', function(jQEvent, score) {
+              $('#theScore').text(score);
+            });
+
+
+    fieldset
+        h3 Only show on focus
+        div(style='width:12em;').
+            <input type='password' id='ex10' name='myPassword' />
+
+        pre(class='block-code').
+            &lt;input type='password' id='myPassword' name='myPassword' /&gt;
+
+            $('#myPassword').simplePassMeter({
+              'showOnFocus': true
+            });
+
+
+    fieldset
+        h3 Only show when field has value
+        div(style='width:12em;').
+            <input type='password' id='ex11' name='myPassword' />
+
+        pre(class='block-code').
+            &lt;input type='password' id='myPassword' name='myPassword' /&gt;
+
+            $('#myPassword').simplePassMeter({
+              'showOnValue': true
+            });
+
+
+    fieldset
+        h3 Placing meter UI in your own container
+        div.
+            <div id='ex12m' style='float:right;'></div>
+            <input type='password' id='ex12p' name='myPassword' />
+
+        pre(class='block-code').
+            &lt;div id='myMeter' style='float:right;'&gt;&lt;/div&gt;
+            &lt;input type='password' id='myPassword' name='myPassword' /&gt;
+
+            $('#myPassword').simplePassMeter({
+              'container': '#myMeter'
+            });
+
+
+    fieldset
+        h3 Changing Default Text
+        div.
+            <input type='password' id='ex13' name='myPassword' />
+
+        pre(class='block-code').
+            &lt;input type='password' id='myPassword' name='myPassword' /&gt;
+
+            $('#myPassword').simplePassMeter({
+              'defaultText': 'How good is your password?'
+            });
+
+
+    script(src='https://rawgit.com/jakerella/jquerySimplePassMeter/master/jquery.simplePassMeter.js')
+    script.
+        $(document).ready(function() {
+          
+          $('#ex1').simplePassMeter()
+          .bind('keyup.simplePassMeter', function() {
+            console.debug('keyup occurred');
+          });
+          
+          $('#ex2t').simplePassMeter({
+            'location': 't'
+          });
+          
+          $('#ex2l').simplePassMeter({
+            'location': 'l'
+          });
+          
+          $('#ex2b').simplePassMeter({
+            'location': 'b',
+            'offset': 10
+          });
+          
+          $('#ex3p').simplePassMeter({
+            'requirements': {
+              'noMatchField': {
+                'value': '#ex3u'
+              }
+            }
+          });
+          
+          $('#ex4p').simplePassMeter({
+            'requirements': {
+              'matchField': {
+                'value': '#ex4v'
+              }
+            }
+          });
+          
+          $('#ex5').simplePassMeter({
+            'requirements': {
+              'minLength': {'value': 10},
+              'lower': {'value': true},
+              'upper': {'value': true},
+              'special': {'value': true}
+            }
+          });
+          
+          $('#ex6p').simplePassMeter({
+            'requirements': {
+              'noMatchEmailField': {
+                'value': '#ex6e',
+                'message': 'You can\'t use any part of your email',
+                'callback': function(password, value) {
+                  value = $(value);
+                  var email = value.val();
+                  email = email.match(/(.+)@(.+)\.(.{2,3})/);
+                  if (email.length != 4) { return true; } // invalid email, so son't worry about it
+                  
+                  // If the password doesn't match the first or last part of the email address we're okay
+                  if (password.indexOf(email[1]) < 0 && password.indexOf(email[2]) < 0) {
+                    return true;
+                  }
+                  return false;
+                }
+              }
+            }
+          });
+          
+          $('#ex7').simplePassMeter({
+            'requirements': {
+              'noSpecials': {
+                'value': true,
+                'message': 'Only letters and numbers in passwords',
+                'regex': '^[a-zA-Z0-9]*$'
+              }
+            }
+          });
+          
+          $('#ex8').simplePassMeter({
+            // Kill all requirements to show ratings better in the example
+            // DO NOT DO THIS as it means you have no requirements!
+            'requirements': {},
+            
+            'ratings': [
+              {'minScore': 0, 
+               'className': 'meterFail',
+               'text': 'You need a stronger password'
+              },
+              {'minScore': 10, 
+               'className': 'meterWarn',
+               'text': 'You can do better than that...'
+              },
+              {'minScore': 25, 
+               'className': 'meterWarn',
+               'text': 'Your password is a bit weak'
+              },
+              {'minScore': 40, 
+               'className': 'meterGood',
+               'text': 'Good password, could be better'
+              },
+              {'minScore': 60, 
+               'className': 'meterGood',
+               'text': 'Good password!'
+              },
+              {'minScore': 80,
+               'className': 'meterExcel',
+               'text': 'Awesome password!'
+              }
+            ]
+          });
+          
+          $('#ex9').simplePassMeter();
+          $('#ex9').bind('score.simplePassMeter', function(jQEvent, score) {
+            $('#ex9s').text(score);
+          });
+          
+          $('#ex10').simplePassMeter({
+            'showOnFocus': true
+          });
+          
+          $('#ex11').simplePassMeter({
+            'showOnValue': true
+          });
+          
+          $('#ex12p').simplePassMeter({
+            'container': '#ex12m'
+          });
+          
+          $('#ex13').simplePassMeter({
+            'defaultText': 'How good is your password?'
+          });
+          
+        });
