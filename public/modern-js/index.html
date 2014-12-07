@@ -1,0 +1,888 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset='UTF-8' />
+    <meta http-equiv='content-type' content='text/html; charset=utf-8' />
+    <title>Modern JavaScript</title>
+    
+    <!--
+      This file and all included resources are
+      copyright Jordan Kasper 2013 unless noted otherwise.
+     -->
+    
+    <meta name="description" content="A presentation highlighting some of the newest features entering the JavaScript arena." />
+    <meta name="keywords" content="presentation slides javascript modern ecmascript5 ecmascript6" />
+    
+    <link rel='stylesheet' type='text/css' href='style.css' />
+    <link rel='stylesheet' type='text/css' href='prettify.css' />
+
+    <script type='text/javascript' src='jquery-1.9.1.min.js'></script>
+    <script type='text/javascript' src='jquery.simpleSlideShow-0.1.js'></script>
+    <script type="text/javascript" src="prettify.js"></script>
+    
+    <script type='text/javascript'>
+      // start the slideshow
+      $(function() {
+        $('#wrapper').simpleSlideShow({
+          slideFooter: "<p id='copyright'>&copy; Jordan Kasper 2013 - <a href='mailt&#111;:j&#111;rda&#110;&#064;j&#111;rda&#110;kasper.c&#111;m'>j&#111;rda&#110;&#064;j&#111;rda&#110;kasper.c&#111;m</a></p>"
+        });
+
+        $('acronym.expand').each(function() {
+          var ac = " - <span class='acronym'>";
+          var w = $(this).attr('title').split(' ');
+          for (var i=0,l=w.length; i<l; ++i) {
+            ac += "<span class='firstLetter'>"+w[i].substr(0,1)+"</span>"+w[i].substr(1)+' ';
+          }
+          ac += "</span>";
+          $(this).after(ac);
+        });
+
+        var codes = $('pre').addClass('prettyprint');
+        prettyPrint();
+
+        codes
+          .find('.pun:contains(.) + .pln')
+            .each(function() {
+              if ($(this).next().text().substr(0,1) == '(') {
+                // function calls
+                $(this).removeClass('pln').addClass('fun');
+              } else {
+                // other... most likely a property
+                $(this).removeClass('pln').addClass('prp');
+              }
+            })
+            .end()
+          .find('.subdue span, .subdue strong')
+            .removeClass('kwd com prp fun typ lit pln pun str')
+            .end()
+          .find('span.kwd:contains(die)')
+            .removeClass('kwd')
+            .each(function() {
+              if ($(this).next().text().substr(0,1) == '(') {
+                // function calls
+                $(this).removeClass('pln').addClass('fun');
+              } else {
+                // other... most likely a property
+                $(this).removeClass('pln').addClass('prp');
+              }
+            });
+
+        // handle column layout clearing
+        $('.columns').append("<div class='column_clear' />");
+      });
+    </script>
+  </head>
+  <body>
+    <div id='wrapper'>
+      <div id='header'>
+        <h1>Modern JavaScript</h1>
+      </div>
+
+
+      <!-- COVER SLIDES -->
+      
+      <div id='cover' class='slide' style='text-align: center;font-size:1.2em'>
+        <h3 style='color:#000;font-size:1.3em;text-shadow:2px 2px #ccc;'>Modern JavaScript</h3>
+        <h3 style='color:#000;margin-top:4em;'>Jordan Kasper</h3>
+        <h4 style='margin-top:1em;'>
+          <a href='mailt&#111;:j&#111;rda&#110;&#064;j&#111;rda&#110;kasper.c&#111;m'>j&#111;rda&#110;&#064;j&#111;rda&#110;kasper.c&#111;m</a>
+          | <a href='http://twitter.com/jakerella'>@jakerella</a>
+        </h4>
+        
+        <p style='margin-top:2em;'>You can view these slides at <a href='http://jordankasper.com/modern-js'>http://jordankasper.com/modern-js</a></p>
+
+        <div class='notes'>
+
+        </div>
+      </div>
+      
+
+      <div id='versus' class='slide'>
+        <div style="margin-top:-15%;">
+          <p style="text-align:center; font-weight:bold; font-size:1.5em;">
+            ECMAScript
+            <span style="margin:0 0.5em; color:#666; font-weight:normal;">vs</span>
+            JavaScript
+            <span style="margin:0 0.5em; color:#666; font-weight:normal;">vs</span>
+            W3C recommendations
+          </p>
+
+          <div style="margin-top:2em; text-align:center;" class="simpleSlide_wait">
+            <img src="images/kirk_orig.jpg" style="width:25%; margin-right:8%;" />
+            <img src="images/kirk_new.jpg" style="width:25%; margin-right:8%;" />
+            <img src="images/picard.jpg" style="width:25%;" />
+          </div>
+        </div>
+      </div>
+
+      <div id='versus-data' class='slide'>
+        <div style="margin-top:-15%;">
+          <p style="text-align:center; font-weight:bold; font-size:1.5em;">
+            ECMAScript
+            <span style="margin:0 0.5em; color:#666; font-weight:normal;">vs</span>
+            JavaScript
+            <span style="margin:0 0.5em; color:#666; font-weight:normal;">vs</span>
+            W3C recommendations
+          </p>
+
+          <div style="margin-top:2em; text-align:center;">
+            <img src="images/kirk_orig.jpg" style="width:25%; margin-right:8%;" />
+            <img src="images/kirk_new.jpg" style="width:25%; margin-right:8%;" />
+            <img src="images/data.jpg" style="width:25%;" />
+          </div>
+        </div>
+      </div>
+
+      <div id='versus-enterprise' class='slide'>
+        <div style="margin-top:-15%;">
+          <p style="text-align:center; font-weight:bold; font-size:1.5em;">
+            ECMAScript
+            <span style="margin:0 0.5em; color:#666; font-weight:normal;">vs</span>
+            JavaScript
+            <span style="margin:0 0.5em; color:#666; font-weight:normal;">vs</span>
+            W3C recommendations
+          </p>
+
+          <div style="margin-top:2em; text-align:center;">
+            <img src="images/kirk_orig.jpg" style="width:25%; margin-right:8%;" />
+            <img src="images/kirk_new.jpg" style="width:25%; margin-right:8%;" />
+            <img src="images/enterprise.jpg" style="width:25%;" />
+          </div>
+        </div>
+      </div>
+
+      <div id='es5-strict' class='slide'>
+        <div style="text-align:center; font-weight:bold; font-size:1.5em;">
+          <p>Strict Mode!</p>
+          <pre style="margin-top:1em; text-align:center;">"use strict";</pre>
+        </div>
+
+        <div class="simpleSlide_wait" style="margin-top:2em; font-size:1.5em;">
+          <p style="font-weight:bold; text-align:center; margin-bottom:1em;">Use it inside a function block:</p>
+          <pre class="simpleSlide_centerBlock">// non-strict code
+function() {
+  "use strict";
+  // strict code only!
+}
+// more non-strict code</pre>
+        </div>
+      </div>
+
+      <div id='es5-objects' class='slide'>
+        <div style="font-size:1.1em;">
+          <h3 style="text-align:center;margin-bottom:1em;">Better Object support:</h3>
+
+          <pre class="simpleSlide_centerBlock"><span style="text-decoration:line-through;">var newInstance = new SomeObject();</span>
+
+var newInstance = Object.create(SomeObject.prototype);
+newInstance.constructor();
+</pre>
+
+        </div>
+      </div>
+
+      <div id='es5-more-objects' class='slide'>
+        <div style="font-size:1.1em;">
+          <h3 style="text-align:center;margin-bottom:1em;">Better Object support:</h3>
+
+          <pre class="simpleSlide_centerBlock">var dog = {
+  name: "Vincent",
+  age: 9,
+  get humanYears() { return this.age * 7; },
+  set humanYears(y) { this.age = y / 7; }
+};
+dog.humanYears; // 63
+dog.humanYears = 70; // dog.age is now 10
+
+Object.keys(dog); // ["name", "age", "humanYears"]
+</pre>
+
+        </div>
+      </div>
+
+      <div id='es5-arrays' class='slide'>
+        <div style="font-size:1.1em;">
+          <h3 style="text-align:center;margin-bottom:1em;">Better Arrays:</h3>
+
+          <pre class="simpleSlide_centerBlock">Array.isArray(someVar); // true/false
+["a", "b", "c"].indexOf("b"); // 1
+["a", "b", "c"].forEach(function(value, i, arr) {
+  // ...
+});
+["a", "b", "c"].map(function(value, i, arr) { return "new value"; });
+["a", "b", "c"].filter(function(value, i, arr) { return true; });
+</pre>
+
+        </div>
+      </div>
+
+      <div id='es5-JSON' class='slide'>
+        <div style="font-size:1.1em;">
+          <h3 style="text-align:center;margin-bottom:1em;">Integrated JSON Support:</h3>
+
+          <p class="simpleSlide_wait" style="font-weight:bold;text-align:center;font-size:1.4em">FINALLY.</p>
+
+          <pre class="simpleSlide_centerBlock simpleSlide_wait">JSON.stringify({ one: "1", "two": 2 });
+// "{"one":"1","two":2}"
+
+JSON.parse("{ \"one\": \"1\", \"two\": 2 }");
+// { one: "1", "two": 2 }
+</pre>
+
+        </div>
+      </div>
+
+      <div id='es5-bind' class='slide'>
+        <div style="font-size:1.1em;">
+          <h3 style="text-align:center;margin-bottom:1em;">Integrated Function binding:</h3>
+
+          <p class="simpleSlide_wait" style="font-weight:bold;text-align:center;font-size:1.4em">FINALLY.</p>
+
+          <pre class="simpleSlide_centerBlock simpleSlide_wait">var o = { one: "1", two: 2};
+function whatIsOne() {
+  return this.one;
+}
+whatIsOne(); // undefined, "this" is the window
+
+whatIsOne.bind(o)(); // "1", "this" is o
+whatIsOne(); // undefined again, binding is not persistent
+</pre>
+
+        </div>
+      </div>
+
+      <div id='w3c' class='slide imgOnly'>
+        <p style="text-align:center; font-size:1.5em; font-weight:bold; padding-top:10%;">
+          (W3C)<br />
+          <img src="images/w3c.jpg" style="width:60%;" />
+        </p>
+      </div>
+
+      <div id='w3c-recs' class='slide'>
+        <style type="text/css">#w3c-recs .fine { float: right; margin-right:1em; }</style>
+        <p style='font-size: 1.3em; text-align: center; margin-bottom:1em;'>
+          Some of the current working recommendations...
+        </p>
+        <div class='columns' style='font-size: 1.3em'>
+          <div class='one-half column'>
+            <ul>
+              <li>embedded audio <span class="fine">(draft)</span></li>
+              <li>embedded video <span class="fine">(draft)</span></li>
+              <li>cross-domain AJAX <span class="fine">(draft)</span></li>
+              <li>drag / drop events <span class="fine">(draft)</span></li>
+              <li>File API <span class="fine">(draft)</span></li>
+              <li>geolocation <span class="fine">(candidate)</span></li>
+              <li>multimedia access <span class="fine">(draft)</span></li>
+            </ul>
+          </div>
+          <div class='one-half column'>
+            <ul>
+              <li>history management <span class="fine">(candidate)</span></li>
+              <li>data storage <span class="fine">(draft)</span></li>
+              <li>mutation observers <span class="fine">(draft)</span></li>
+              <li>query selectors <span class="fine">(recommendation)</span></li>
+              <li>web sockets <span class="fine">(draft)</span></li>
+              <li>web workers <span class="fine">(draft)</span></li>
+              <li>XMLHttpRequest2 <span class="fine">(draft)</span></li>
+            </ul>
+          </div>
+        </div> 
+      </div>
+
+      <div id='flash' class='slide imgOnly'>
+        <div style="text-align:center;">
+          <img src="images/flash.jpg" style="width:50%; margin-top:15%;" />
+        </div>
+      </div>
+
+      <div id='audio-video' class='slide'>
+        <div style="font-size:1.1em;">
+          <h3 style="text-align:center;margin-bottom:1em;">Audio &amp; Video</h3>
+
+          <pre class="simpleSlide_centerBlock">&lt;video id="myVid" src="myVideoFile.mp4" controls>&lt;/video>
+&lt;audio id="mySong" src="myAudioFile.mp3" controls>&lt;/audio>
+
+&lt;script>
+document.getElementById("myVid").play();
+document.getElementById("myVid").pause();
+document.getElementById("myVid").addEventListener("pause", function() {
+  // do stuff ...
+});
+
+&lt;/script>
+</pre>
+
+        </div>
+      </div>
+
+      <div id='cors' class='slide'>
+        <div style="font-size:1.1em;">
+          <h3 style="text-align:center;margin-bottom:1em;">Cross-Domain Requests</h3>
+
+          <p style="text-align:center;margin-bottom:1em;">Uses the new "Cross Origin Resource Sharing" (<acronym title="Cross Origin Resource Sharing">CORS</acronym>) specification.</p>
+
+          <div class="simpleSlide_centerBlock">
+<pre class="simpleSlide_wait">$.ajax({
+  url: "http://otherdomain.com/resource",
+  ...
+});</pre>
+
+<pre class="nocode simpleSlide_wait">
+
+Request:
+  GET http://otherdomain.com/resource/ HTTP/1.1
+  Referer: http://mydomain.com/
+  Origin: http://mydomain.com
+  ...</pre>
+
+<pre class="nocode simpleSlide_wait">
+
+Response:
+  Access-Control-Allow-Origin: http://mydomain.com
+  Content-Type: application/json
+  ...</pre>
+          </div>
+
+        </div>
+      </div>
+
+      <div id='draggable' class='slide'>
+        <div style="font-size:1.1em;" class="simpleSlide_centerBlock">
+          <h3 style="text-align:center;margin-bottom:1em;">Drag 'n Drop</h3>
+
+          <pre draggable="true" style="font-weight:bold;">&lt;p draggable="true">Some Text&lt;/p></pre>
+
+        </div>
+      </div>
+
+      <div id='drag-n-drop-easy' class='slide imgOnly'>
+        <div style="text-align:center;">
+          <p style="padding-top:15%;">Not impressed yet?</p>
+          <img src="images/dragging.jpg" style="width:60%;" />
+        </div>
+      </div>
+
+      <div id='droppable' class='slide'>
+        <div style="font-size:1.1em;" class="simpleSlide_centerBlock">
+          <h3 style="text-align:center;margin-bottom:1em;">Drag 'n Drop</h3>
+
+<div class="dropZone" style="width:100%;height:20px;"></div>
+
+<pre draggable="true" style="font-weight:bold;">&lt;p id="dragger" draggable="true">Some Text&lt;/p></pre>
+<pre>
+
+document.getElementById("dropZone")
+  .addEventListener("dragover", function(e) {
+    // keep browser from being stupid...
+    e.preventDefault();
+  })
+
+document.getElementById("dropZone")
+  .addEventListener("drop", function(e) {
+    e.target.innerHTML = document.getElementById("dragger").outerHTML;
+  });
+
+&lt;div id="dropZone">&lt;/div>
+</pre>
+
+          <div class="dropZone" style="width:100%;height:50px;"></div>
+
+<script>
+$(".dropZone")
+  .on("dragover", function(e) {
+    e.preventDefault();
+  })
+  .on("drop", function(e) {
+    $(this).append($("pre[draggable]:last"));
+  });
+</script>
+        </div>
+      </div>
+
+      <div id='files' class='slide'>
+        <div style="font-size:1.1em;">
+          <h3 style="text-align:center;margin-bottom:1em;">File API</h3>
+
+          <p style="text-align:center;">Choose a picture: <input type="file" name="file" /></p>
+<pre class="simpleSlide_centerBlock" style="font-size:0.8em">
+
+&lt;input type="file" id="pic" />
+
+&lt;script>
+document.getElementById("pic")
+  .addEventListener("change", function(e) {
+    var reader = new FileReader();
+
+    reader.onload = function(readEvent) {
+      $("#pic").before(
+        "&lt;img src='"+readEvent.target.result+"' width='50' />"
+      );
+    };
+
+    reader.readAsDataURL(e.target.files[0]);
+  });
+&lt;/script>
+</pre>
+
+<script>
+$(":file")
+  .on("change", function(e) {
+    console.log(e);
+
+    var reader = new FileReader();
+
+    reader.onload = function(readEvent) {
+      $(":file").before("<img src='"+readEvent.target.result+"' width='50' />");
+    };
+
+    reader.readAsDataURL(e.target.files[0]);
+  });
+</script>
+
+        </div>
+      </div>
+
+      <div id='dragons' class='slide imgOnly'>
+        <div style="text-align:center;">
+          <img src="images/dragons.jpg" style="width:60%; margin-top:15%;" />
+        </div>
+      </div>
+
+      <div id='geolocation' class='slide'>
+        <div style="font-size:1.1em;">
+          <h3 style="text-align:center;margin-bottom:1em;">Geolocation</h3>
+
+<pre class="simpleSlide_centerBlock">
+navigator.geolocation.getCurrentPosition(
+  function(position) {
+    position.coords.latitude;
+    position.coords.longitude;
+  },
+  function() {
+    // error handler
+    // (or the user didn't allow it)
+  }
+);
+</pre>
+
+        </div>
+      </div>
+
+      <div id='user-media' class='slide'>
+        <div style="font-size:1.1em;">
+          <h3 style="text-align:center;margin-bottom:1em;">User Media</h3>
+
+<pre class="simpleSlide_centerBlock">
+&lt;video id="me">&lt;/video>
+
+&lt;script>
+navigator.webkitGetUserMedia(
+  {video: true, audio: false},
+  function(stream) {
+  
+    document.getElementById("me").src = window.URL.createObjectURL(stream);
+
+  },
+  function(e) {
+    // uh oh... failed
+  }
+);
+
+// on button click
+document.getElementById("me").play(); // or .pause()
+&lt;/script>
+
+</pre>
+
+          <div style="display:block;width:350px;position:absolute;bottom:-220px;right:0;text-align:right;">
+            <input type="button" value="Capture" onclick="$('video').get(0).play()" />
+            <input type="button" value="Stop" onclick="$('video').get(0).pause()" />
+            <br />
+            <video style="width:100%;"></video>
+          </div>
+<script>
+  navigator.webkitGetUserMedia({video: true, audio: false}, function(stream) {
+    
+    $("video").prop("src", window.URL.createObjectURL(stream));
+
+  }, function(e) {
+    console.error("Video no worky...", e);
+  });
+</script>
+
+        </div>
+      </div>
+
+      <div id='history' class='slide'>
+        <div style="font-size:1.1em;">
+          <h3 style="text-align:center;margin-bottom:1em;">History Management</h3>
+
+          <p style="font-weight:bold;text-align:center;margin-bottom:1em;">No more URL hashes!</p>
+
+<pre class="simpleSlide_centerBlock">
+document.getElementById("someLink")
+  .addEventListener("click", function(e) {
+    history.pushState(
+      "Some link clicked",
+      "The New Page Title",
+      "/new-url"
+    );
+  });
+
+window.addEventListener("popstate", function(e) {
+  // do something when the user hits the back button
+  e.state; // "Some previous state"
+});
+</pre>
+
+        </div>
+      </div>
+
+      <div id='simple-storage' class='slide imgOnly'>
+        <div style="text-align:center;">
+          <img src="images/localstore.jpg" style="width:70%; margin-top:15%;" />
+        </div>
+      </div>
+
+      <div id='data-storage' class='slide'>
+        <div style="font-size:1.1em; text-align:center;">
+          <h3 style="margin-bottom:1em;">Data Storage</h3>
+
+          <p style="margin-bottom:1em;">Two types: <strong>sessionStorage</strong> and <strong>localStorage</strong></p>
+
+          <p class="simpleSlide_wait" style="margin-bottom:1em;">
+            <strong>sessionStorage</strong>: only lasts while the session is active<br />
+            (usually meaning the browser window is open)
+          </p>
+
+          <p class="simpleSlide_wait">
+            <strong>localStorage</strong>: lasts indefinitely<br />
+            (until the user clears browser data)
+          </p>
+
+        </div>
+      </div>
+
+      <div id='storage-examples' class='slide'>
+        <div style="font-size:1.1em;">
+          <h3 style="text-align:center;margin-bottom:1em;">Data Storage</h3>
+
+          <p style="text-align:center;margin-bottom:1em;">Both types of storage <strong>only store strings!!</strong></p>
+
+<pre class="simpleSlide_centerBlock">
+sessionStorage.foo = "bar";
+localStorage.foo = "bar";
+
+console.log(localStorage.foo); // "bar"
+
+// Want to store bigger objects?
+var options = {
+  "username": "jakerella",
+  "password": "correcthorsebatterystaple",
+  "lastLoginTime": (new Date()).getTime()
+};
+localStorage.userOptions = JSON.stringify(options);
+
+// later on...
+var oldOptions = JSON.parse(localStorage.userOptions);
+</pre>
+
+        </div>
+      </div>
+
+      <div id='mutations' class='slide'>
+        <div style="font-size:1.1em;">
+          <h3 style="text-align:center;margin-bottom:1em;">Mutation Observers</h3>
+
+<pre class="simpleSlide_centerBlock">
+var observer = new WebKitMutationObserver(function(mutations) {
+  mutations.forEach(function(mutation) {
+    // handle mutation (or do nothing and move on to the next)
+  })
+});
+observer.observe(document, { childList: true });
+</pre>
+
+        </div>
+      </div>
+
+      <div id='query-selector' class='slide'>
+        <div style="font-size:1.1em;">
+          <h3 style="text-align:center;margin-bottom:1em;">Query Selector</h3>
+
+<pre style="text-align: center;">
+var nodes = document.querySelectorAll(".slide p strong, .dropZone");
+</pre>
+
+<pre style="text-align: center;" class="simpleSlide_wait">
+
+var nodes = $(".slide p strong, .dropZone");
+</pre>
+
+        </div>
+      </div>
+
+      <div id='query-selector-really' class='slide'>
+        <div style="text-align:center;font-size:1.1em;margin-top:-20%">
+          <h3 style="margin-bottom:1em;">Query Selector</h3>
+
+          <img src="images/jquery.jpg" />
+
+        </div>
+      </div>
+
+      <div id='web-sockets-diagram' class='slide'>
+        <div style="text-align:center;font-size:1.1em;margin-top:-30%;">
+          <h3 style="margin-bottom:1em;">Web Sockets</h3>
+
+          <p class="fine" style="font-size:0.7em;">
+            <img src="images/websockets.png" style="width:90%" />
+            http://takashi-matsuo.blogspot.com/2009/12/integrating-websockets-with-appengine.html
+          </p>
+
+        </div>
+      </div>
+
+      <div id='web-sockets-code' class='slide'>
+        <div style="font-size:1.1em;">
+          <h3 style="text-align:center;margin-bottom:1em;">Web Sockets</h3>
+
+<pre class="simpleSlide_centerBlock">
+var connection = new WebSocket(
+  "ws://api.mydomain.com/chat", 
+  ["xmpp"]
+);
+
+connection.onmessage = function(e) {
+  e.data; // our new message!
+}
+connection.onerror = function(e) {
+  // handle errors
+}
+
+...
+
+connection.send("Hello World!");
+</pre>
+
+        </div>
+      </div>
+
+      <div id='web-sockets-server' class='slide'>
+        <div style="font-size:1.1em;">
+          <h3 style="text-align:center;margin-bottom:1em;">Web Sockets</h3>
+
+          <p style="text-align:center;font-weight:bold; margin-bottom:2em;">Don't forget the server!</p>
+
+          <ul class="simpleSlide_centerBlock">
+            <li><a href="http://socket.io">Socket.IO</a> (Node)</li>
+            <li><a href="https://github.com/TooTallNate/Java-WebSocket">Java WebSocket</a></li>
+            <li><a href="https://github.com/igrigorik/em-websocket">Event Machine</a> (Ruby)</li>
+            <li><a href="http://www.tornadoweb.org/en/stable">Tornado</a> (Python)</li>
+            <li><a href="https://github.com/cboden/Ratchet">Ratchet</a> (PHP)</li>
+          </ul>
+
+        </div>
+      </div>
+
+      <div id='web-workers' class='slide'>
+        <div style="text-align:center;font-size:1.1em;">
+          <h3 style="margin-bottom:1em;">Web Workers</h3>
+
+          <p style="margin-bottom:1em;">For asynchronous actions that can happen in the background.</p>
+
+          <p style="margin-bottom:1em;">No access to the window or DOM (document).</p>
+
+        </div>
+      </div>
+
+      <div id='web-workers-code' class='slide'>
+        <div style="font-size:1.1em;padding-top:10%">
+          <h3 style="text-align:center;margin-bottom:1em;">Web Workers</h3>
+
+<pre class="simpleSlide_centerBlock">
+// IN OUR MAIN SCRIPT
+var worker = new Worker("some-code.js");
+worker.addEventListener("message", function(e) {
+  
+  // handle the result of the work (e.data)
+
+}, false);
+worker.postMessage("Start!");
+
+
+// IN THE WORKER
+this.addEventListener("message", function(e) {
+  
+  // do some work, maybe use e.data passed in
+  
+  this.postMessage("I'm done!");
+  
+  this.close();
+  // or you could leave it open to receive
+  // more messages and do more work
+}, false);
+
+</pre>
+
+        </div>
+      </div>
+
+
+      <div id='xhr-2' class='slide'>
+        <div style="text-align:center;font-size:1.1em; margin-top:-20%;">
+          <h3 style="margin-bottom:1em;">XMLHttpRequest - II (Revenge of the Ajax)</h3>
+
+          <img src="images/awesome.jpg" style="width: 60%" />
+
+        </div>
+      </div>
+
+      <div id='xhr-blobs' class='slide'>
+        <div style="font-size:1.1em;">
+          <h3 style="text-align:center;margin-bottom:1em;">XMLHttpRequest - II</h3>
+
+          <p style="text-align:center;margin-bottom:1em;">Getting binary data as a blob without workarounds...</p>
+
+<pre class="simpleSlide_centerBlock">
+var xhr = new XMLHttpRequest();
+xhr.open("GET", "images/picard.jpg", true);
+xhr.responseType = "blob";
+
+xhr.onload = function(e) {
+  if (this.status == 200) {
+    var blob = new Blob([this.response], {type: "image/jpg"});
+  }
+};
+
+xhr.send();
+</pre>
+
+        </div>
+      </div>
+
+      <div id='xhr-files' class='slide'>
+        <div style="font-size:1.1em;">
+          <h3 style="text-align:center;margin-bottom:1em;">XMLHttpRequest - II</h3>
+
+          <p style="text-align:center;margin-bottom:1em;">Sending files!! FINALLY.</p>
+
+<pre class="simpleSlide_centerBlock">
+document.getElementById("someFile")
+
+  .addEventListener("change", function(e) {
+
+    var formData = new FormData();
+    // the magic:
+    formData.append(this.files[0].name, this.files[0]);
+
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", "/some-script", true);
+    xhr.onload = function(e) { ... };
+
+    xhr.send(formData);
+    // will switch to "multipart/form-data" automatically!
+
+  });
+</pre>
+
+        </div>
+      </div>
+
+      <div id='xhr-progress' class='slide'>
+        <div style="font-size:1.1em;">
+          <h3 style="text-align:center;margin-bottom:1em;">XMLHttpRequest - II</h3>
+
+          <p style="text-align:center;margin-bottom:1em;">Combine file uploads with better progress notification!</p>
+
+          <progress min="0" max="100" value="35" style="display:block;width:30%;margin:0 auto;margin-bottom:1em;"></progress>
+
+<pre class="simpleSlide_centerBlock">
+&lt;progress min="0" max="100" value="0" id="upload">&lt;/progress>
+</pre>
+<pre class="simpleSlide_centerBlock">
+
+document.getElementById("someFile")
+  .addEventListener("change", function(e) {
+    ...
+
+    xhr.upload.onprogress = function(e) {
+      if (e.lengthComputable) {
+        document.getElementById("upload").value = 
+                                (e.loaded / e.total) * 100);
+      }
+    };
+
+    xhr.send(formData);
+  });
+</pre>
+
+        </div>
+      </div>
+
+      <div id='es6' class='slide'>
+        <div style="font-size:1.1em;">
+          <h3 style="text-align:center;margin-bottom:1em;">ECMAScript 6</h3>
+
+          <ul class="simpleSlide_centerBlock">
+            <li>Some syntactic sugar for "classes"</li>
+            <li>Proper external modules and importing (see Node)</li>
+            <li>Constants</li>
+            <li>Default function arguments</li>
+            <li>Spread (...) operator</li>
+            <li>Proper iterators</li>
+            <li>Maps and Sets</li>
+            <li>yield (sort of)</li>
+            <li>Various other accoutrements</li>
+          </ul>
+
+        </div>
+      </div>
+
+      <div id='so-many-memes' class='slide imgOnly'>
+        <div style="text-align:center;">
+          <img src="images/memes.jpg" style="width:60%; margin-top:10%;" />
+        </div>
+      </div>
+
+      
+      <!-- THANK YOU SLIDES -->
+
+      <div id='thank-you' class='slide' style='text-align: center;font-size:1.2em'>
+        
+        <h3 style='color:#000;font-size:1.1em;text-shadow:2px 2px #ccc;'>Modern JavaScript</h3>
+        
+        <p style='margin-top:2em;font-size:1.3em;'>Thank you!</p>
+
+        <h3 style='color:#000;margin-top:2em;'>Jordan Kasper</h3>
+        <h4>
+          <a href='mailt&#111;:j&#111;rda&#110;&#064;j&#111;rda&#110;kasper.c&#111;m'>j&#111;rda&#110;&#064;j&#111;rda&#110;kasper.c&#111;m</a>
+          | <a href='http://twitter.com/jakerella'>@jakerella</a>
+        </h4>
+        
+        <p style='margin-top:3em;'>You can view these slides at <a href='http://jordankasper.com/modern-js'>http://jordankasper.com/modern-js</a></p>
+
+        <div style='margin-top:4em;'>
+          <h4>Some references</h4>
+          <ul class='inline' style='font-size:0.8em;'>
+            <li><a href='http://kangax.github.io/es5-compat-table/'>ES5/6 Compatability</a> | </li>
+            <li><a href="http://caniuse.com/">Can I use?</a> | </li>
+            <li><a href="http://google-caja.googlecode.com/svn/trunk/doc/html/es5-talk/es5-talk.html">Good (if old) presentation on ES5</a> | </li>
+            <li><a href='http://www.w3schools.com/tags/default.asp'>W3 schools HTML5 DOM ref</a> | </li>
+            <li><a href='http://modernizr.com'>Library for feature detection</a> | </li>
+            <li><a href='http://www.html5rocks.com/en/'>Great HTML5 tutorials</a></li>
+          </ul>
+        </div>
+
+        <div class='notes'>
+          
+        </div>
+      </div>
+
+
+    </div> <!-- #wrapper -->
+    
+    <div id='slideCount'></div>
+    
+  </body>
+</html>

@@ -1,0 +1,1596 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+
+    <title>Browser Eyeballing != JavaScript Testing</title>
+
+    <meta name="description" content="An introduction to writing testable JavaScript, writing JS tests, and automation.">
+    <meta name="author" content="Jordan Kasper">
+
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <link rel="stylesheet" href="css/reveal.css">
+    <link rel="stylesheet" href="css/theme/sky-jordan.css" id="theme">
+
+    <!-- For syntax highlighting -->
+    <link rel="stylesheet" href="lib/css/tomorrow.css">
+
+    <!-- If the query includes 'print-pdf', use the PDF print sheet -->
+    <script>
+        document.write( '<link rel="stylesheet" href="css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
+    </script>
+
+    <!--[if lt IE 9]>
+    <script src="lib/js/html5shiv.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+
+    <div class="reveal">
+        <div class="slides">
+            
+            <!-- ________________ Intro Slides ________________ -->
+
+            <section>
+                <section id="title">
+                    <h1 style="font-size:1.6em;">Browser Eyeballing != JavaScript Testing</h1>
+                    <p style="margin-top: 3em">
+                        <cite>Jordan Kasper</cite>
+                    </p>
+                    <p class="fine">
+                        <a href="http://twitter.com/jakerella">@jakerella</a> |
+                        <a href="http://JordanKasper.com/js-testing">JordanKasper.com/js-testing</a>
+                    </p>
+
+                </section>
+
+                <section id="apendto">
+                    <h3 style="text-transform:none;">
+                        <a href="http://appendto.com">
+                            <img src="images/appendTo-logo.png" alt="appendTo" />
+                        </a>
+                    </h3>
+                </section>
+
+                <section id="lessons">
+                    <p>
+                        What are we talking about?
+                    </p>
+                    <ol>
+                        <li>Writing testable JavaScript code</li>
+                        <li class="fragment">Using a testing framework</li>
+                        <li class="fragment">Cross-browser testing</li>
+                        <li class="fragment">Automation</li>
+                    </ol>
+
+                    <aside class="notes">
+                        Mention various frameworks, automation options, browser testing tools.
+                    </aside>
+                </section>
+
+            </section>
+
+
+            <!-- ________________ Old Ways ________________ -->
+
+            <section>
+                <section id="old-way">
+                    <h3>Is this your testing process?</h3>
+
+                    <ol>
+                        <li>Write some JavaScript code</li>
+                        <li class="fragment">Check it in Chrome (looks great)</li>
+                        <li class="fragment">Change something, breaking it in Chrome</li>
+                        <li class="fragment">Spend 2 hours trying to figure out what you did</li>
+                        <li class="fragment">Rinse, repeat</li>
+                        <li class="fragment">Test in Internet Explorer..... crap.</li>
+                    </ol>
+                </section>
+
+                <section id="broken-in-ie">
+                    <img src="images/ie.jpg" alt="Meme: Can't tell if it's my code or Internet Explorer..." />
+               </section>
+
+                <section id="better-way">
+                    <h3>There's a better way...</h3>
+
+                    <aside class="notes">
+                        Discuss test-driven development trends, the sanity it brings, etc
+                    </aside>
+                </section>
+
+            </section>
+
+
+            <!-- ________________ Non-Testable Code ________________ -->
+
+            <section>
+
+                <section id="testable-code">
+                    <h3>Writing Testable Code</h3>
+
+                    <aside class="notes">
+                        Talk about the fact that we want a more unit-testable approach, but that 
+                        integration testing can be very helpful as well.
+                    </aside>
+                </section>
+
+                <section id="non-testable-example">
+                    <h4>Search Example</h4>
+
+                    <pre><code data-trim class="javascript" data-noescape>
+$(document).ready(function() {
+    $("#search-form").on("submit", function(e) {
+        e.preventDefault();
+
+        var query = $("#search-query").val();
+
+        // maybe some audits, too
+
+        $.ajax({
+            url: "/search",
+            data: { "query": query },
+            success: function(results) {
+                results.forEach(function(item, index) {
+                    $("#search-results")
+                        .append("&lt;li> " + item + " &lt;/li>");
+                });
+            },
+            error: function() {
+                $("#messages")
+                    .append("&lt;p class='error'> ... &lt;/p>");
+            }
+        });
+    });
+});
+                    </code></pre>
+
+                </section>
+
+                <section id="not-so-bad">
+                    <h3>What's so bad about that?</h3>
+                </section>
+
+                <section id="too-many-anon">
+                    <h4>Anonymous Functions</h4>
+
+                    <pre><code data-trim class="javascript" data-noescape>
+<span class="dim">$(document).ready(</span><strong>function() {</strong><span class="dim">
+    $("#search-form").on("submit", </span><strong>function(e) {</strong><span class="dim">
+        e.preventDefault();
+
+        var query = $("#search-query").val();
+
+        // maybe some audits, too
+
+        $.ajax({
+            url: "/search",
+            data: { "query": query },
+            success: </span><strong>function(results) {</strong><span class="dim">
+                results.forEach(</span><strong>function(item, index) {</strong><span class="dim">
+                    $("#search-results")
+                        .append("&lt;li> " + item + " &lt;/li>");
+                });
+            },
+            error: </span><strong>function() {</strong><span class="dim">
+                $("#messages")
+                    .append("&lt;p class='error'> ... &lt;/p>");
+            }
+        });
+    });
+});</span>
+                    </code></pre>
+
+                </section>
+
+                <section id="meme-anon-functions">
+                    <img src="images/meme-functions.jpg" alt="Meme: I've got functions inside functions... inside functions." />
+                </section>
+
+                <section id="stacktrace-anon">
+
+                    <h4>Does this look familiar?</h4>
+
+                    <pre><code data-trim class="no-highlight" data-noescape>
+<strong>Call Stack</strong>
+(anonymous)         some_file.min.js 3
+(anonymous)         some_file.min.js 3
+(anonymous)         some_file.min.js 3
+(anonymous)         some_file.min.js 3
+                    </pre></code>
+
+                    <aside class="notes">
+                        In production we may have minified code, and be unable to see what's
+                        really going on. Even if it isn't minified, this can make for much 
+                        easier diagnosis of a problem.
+                    </aside>
+
+                </section>
+
+                <section id="dom-coupling">
+                    <h4>DOM Coupling</h4>
+
+                    <pre><code data-trim class="javascript" data-noescape>
+<span class="dim">$(document).ready(function() {</span>
+    <strong>$("#search-form")</strong><span class="dim">.on("submit", function(e) {
+        e.preventDefault();
+
+        var query = </span><strong>$("#search-query")</strong><span class="dim">.val();
+
+        // maybe some audits, too
+
+        $.ajax({
+            url: "/search",
+            data: { "query": query },
+            success: function(results) {
+                results.forEach(function(item, index) {
+                    </span><strong>$("#search-results")</strong><span class="dim">
+                        .append("&lt;li> " + item + " &lt;/li>");
+                });
+            },
+            error: function() {
+                </span><strong>$("#messages")</strong><span class="dim">
+                    .append("&lt;p class='error'> ... &lt;/p>");
+            }
+        });
+    });
+});
+                    </code></pre>
+
+                    <aside class="notes">
+                        Tight coupling with the HTML makes testing outside of the context
+                        of an entire page difficult.
+                    </aside>
+                </section>
+
+                <section id="non-testable-ajax">
+                    <h4>Server Coupling</h4>
+
+                    <pre><code data-trim class="javascript" data-noescape>
+<span class="dim">$(document).ready(function() {
+    $("#search-form").on("submit", function(e) {
+        e.preventDefault();
+
+        var query = $("#search-query").val();
+
+        // maybe some audits, too</span>
+
+        <strong>$.ajax({</strong>
+            url: "/search",
+            data: { "query": query },
+            <span class="dim">success: function(results) {
+                results.forEach(function(item, index) {
+                    $("#search-results")
+                        .append("&lt;li> " + item + " &lt;/li>");
+                });
+            },
+            error: function() {
+                $("#messages")
+                    .append("&lt;p class='error'> ... &lt;/p>");
+            }</span>
+        <strong>});</strong>
+        
+    <span class="dim">});
+});</span>
+                    </code></pre>
+
+                </section>
+                
+            </section>
+
+
+            <!-- ________________ Refactoring Code ________________ -->
+
+            <section>
+
+                <section id="refactor">
+                    <h3>Refactor Until It Hurts</h3>
+
+                    <p class="fine fragment">(and then refactor a little more)</p>
+
+                    <aside class="notes">
+                        Discuss refactoring in chuncks, abstract one thing at a time
+                    </aside>
+                </section>
+
+                <section id="refactor-structure">
+                    <h4>Search Example - Redux</h4>
+
+                    <pre><code data-trim class="javascript" data-noescape>
+window.jk = (window.jk || {});  // namespacing, FTW!
+
+jk.initSearch = function( form, input ) {
+    ...
+};
+
+jk.doSearch = function( value, callback ) {
+    ...
+};
+
+jk.handleResults = function( results, resultsNode ) {
+    ...
+};
+
+jk.handleAjaxError = function( xhr ) {
+    ...
+};
+                    </code></pre>
+
+                    <aside class="notes">
+                        Be sure to mention namespacing and the named, separate functions.
+                    </aside>
+
+                </section>
+
+                <section id="refactor-stacktrace-named">
+
+                    <h4>Now isn't that nice?</h4>
+
+                    <pre><code data-trim class="no-highlight" data-noescape>
+<strong>Call Stack</strong>
+jk.handleResults       some_file.min.js 3
+successHandler         some_file.min.js 3
+jk.doSearch            some_file.min.js 3
+submitHandler          some_file.min.js 3
+jk.initSearch          some_file.min.js 3
+initPage               some_file.html 376
+                    </pre></code>
+
+                </section>
+
+                <section id="refactor-init">
+                    <h4>Search Example - Initialization</h4>
+
+                    <pre><code data-trim class="javascript" data-noescape>
+jk.initSearch = function( form, input ) {
+
+    $(form).on("submit", function submitHandler(e) {
+        e.preventDefault();
+
+        jk.doSearch( $(input).val() );
+    });
+
+};
+
+<span class="dim">// somewhere else in your code, maybe in your page...
+$(document).ready( function initPage() {
+    jk.initSearch("#search-form", "#search-field");
+});</span>
+                    </code></pre>
+
+                    <aside class="notes">
+                        Note that we can test this much easier now by passing in whatever
+                        DOM nodes we want to test - loose coupling.
+                    </aside>
+
+                </section>
+
+                <section id="refactor-init-call">
+                    <h4>Search Example - Initialization</h4>
+
+                    <pre><code data-trim class="javascript" data-noescape>
+<span class="dim">jk.initSearch = function( form, input ) {
+    
+    $(form).on("submit", function submitHandler(e) {
+        e.preventDefault();
+
+        jk.doSearch( $(input).val() );
+    });
+
+};</span>
+
+// somewhere else in your code, maybe in your page...
+$(document).ready( function initPage() {
+    jk.initSearch("#search-form", "#search-field");
+});
+                    </code></pre>
+
+                    <aside class="notes">
+                        Here we see how we pass in those DOM selectors
+                    </aside>
+
+                </section>
+
+                <section id="refactor-doSearch">
+                    <h4>Search Example - Redux</h4>
+
+                    <pre><code data-trim class="javascript" data-noescape>
+jk.doSearch = function doSearch( value, callback ) {
+
+    <span class="dim">var xhr = $.ajax({
+        url: "/search",
+        data: { "query": value },</span>
+
+        success: function successHandler(data) {
+            jk.handleResults(data);
+            callback(data);
+        },
+
+        error: function errorHandler(xhr, status) {
+            var msg = jk.handleAjaxError(xhr, status);
+            callback({ "error": msg });
+        }
+
+    <span class="dim">});
+
+    return xhr;</span>
+};
+                    </code></pre>
+
+                    <aside class="notes">
+                        We have the same problems here! We need to separate this functionality
+                        in order to test it independently.
+                        <br /><br />
+                        Mention mockjax for mocking ajax requests with jQuery.
+                    </aside>
+
+                </section>
+
+                <section id="refactor-handleResults">
+                    <h4>Search Example - Redux</h4>
+
+                    <pre><code data-trim class="javascript" data-noescape>
+jk.handleResults = function handleResults( results, resultsNode ) {
+    var items = "";
+
+    resultsNode = ( resultsNode || $("#search-results") );
+
+    results.forEach( function resultLoop( item, index ) {
+        items += "&lt;li> " + item + " &lt;/li>";
+    });
+
+    return resultsNode.append(items);
+};
+                    </code></pre>
+
+                    <aside class="notes">
+                        There are LOTS of ways this could be improved, but the basic idea 
+                        is to refactor JavaScript code to be testable independent of as 
+                        much of the rest of your code as possible. This ensures that that 
+                        little bit of code works as expected.
+                    </aside>
+
+                </section>
+
+                <section id="meme-refactor">
+                    <img src="images/meme-refactor.jpg" alt="Meme: Yeah, I'm gonna need you to refactor ALL the JavaScript." />
+                </section>
+
+            </section>
+
+
+            <!-- ________________ Using a Testing Framework ________________ -->
+
+            <section>
+
+                <section id="testing-frameworks">
+                    <h3>Testing Frameworks</h3>
+
+                    <aside class="notes">
+                        Discuss what a testing framework gets you, the general idea behind a 
+                        "test", a "group" (or "module"), and a "suite"
+                    </aside>
+                </section>
+
+                <section id="framework-examples">
+                    <p>
+                        <a href="http://pivotal.github.io/jasmine/" style="margin: 0 1em;"><img src="images/jasmine_logo.png" alt="Jasmine" /></a>
+                        <a href="http://visionmedia.github.io/mocha/" style="top: -40px; margin: 0 1em;">
+                            <span style="position: relative;font-style: normal;font-weight: 100;text-transform: lowercase;background: rgb(138, 99, 67);color: rgb(255, 255, 255);display: inline-block;padding: 48px 30px;font-size: 0.7em;-webkit-border-radius: 100px;-moz-border-radius: 100px;border-radius: 100px;">mocha</span>
+                        </a>
+                        <br />
+                        <a href="http://docs.seleniumhq.org/" style="margin: 0 1em; background-color:#455372;-webkit-border-radius: 7px;-moz-border-radius: 7px;border-radius: 7px; padding: 7px;"><img src="images/selenium-logo.png" alt="Selenium" style="position:relative; top: 10px;" /></a>
+                        <a href="http://qunitjs.com/" style="background-color: #390f39; -webkit-border-radius: 7px;-moz-border-radius: 7px;border-radius: 7px; padding: 15px;">
+                            <img src="images/logo-qunit.png" alt="QUnit" style="position:relative; top: 23px;" />
+                        </a>
+                    </p>
+
+                    <aside class="notes">
+                        Mention that they general do the same things, although Selenium handles 
+                        things very differently and is much more user-experience focused.
+                        <br />
+                        Also mention that the terminology is not shared among frameworks, so be 
+                        careful (e.g. "expect" means different things).
+                    </aside>
+                </section>
+
+                <section id="qunit-intro">
+                    <p>
+                        <a href="http://pivotal.github.io/jasmine/" style="opacity:0.4; margin: 0 1em;"><img src="images/jasmine_logo.png" alt="Jasmine" /></a>
+                        <a href="http://visionmedia.github.io/mocha/" style="opacity:0.4; top: -40px; margin: 0 1em;">
+                            <span style="position: relative;font-style: normal;font-weight: 100;text-transform: lowercase;background: rgb(138, 99, 67);color: rgb(255, 255, 255);display: inline-block;padding: 48px 30px;font-size: 0.7em;-webkit-border-radius: 100px;-moz-border-radius: 100px;border-radius: 100px;">mocha</span>
+                        </a>
+                        <br />
+                        <a href="http://docs.seleniumhq.org/" style="opacity:0.4; margin: 0 1em; background-color:#455372;-webkit-border-radius: 7px;-moz-border-radius: 7px;border-radius: 7px; padding: 7px;"><img src="images/selenium-logo.png" alt="Selenium" style="position:relative; top: 10px;" /></a>
+                        <a href="http://qunitjs.com/" style="background-color: #390f39; -webkit-border-radius: 7px;-moz-border-radius: 7px;border-radius: 7px; padding: 15px;">
+                            <img src="images/logo-qunit.png" alt="QUnit" style="position:relative; top: 23px;" />
+                        </a>
+                    </p>
+
+                    <aside class="notes">
+                        Why QUnit? It's very simple, does what we need, and it was developed 
+                        by the jQuery team (of which appendTo happens to be stocked full of).
+                    </aside>
+                </section>
+
+                <section id="test-structure">
+                    <img src="images/test-structure.png" alt="Suites contain modules which contain tests which contain assertions." />
+                </section>
+
+            </section>
+
+
+            <!-- ________________ Setting Up QUnit ________________ -->
+
+            <section>
+
+                <section id="qunit-setup">
+                    <h3 style="text-transform: none;">Setting up QUnit</h3>
+
+                    <aside class="notes">
+                        Show web site, discuss that there are NO dependencies, and only two 
+                        source files (JS library and CSS).
+                    </aside>
+                </section>
+
+                <section id="qunit-test-file">
+                    <h3>A Minimal Test File</h3>
+
+                    <pre><code data-trim class="html" data-noescape>
+&lt;!doctype html>
+&lt;html>
+    &lt;head>
+        &lt;link rel="stylesheet" href="lib/qunit-1.12.0.css">
+    &lt;/head>
+    &lt;body>
+        &lt;div id="qunit">&lt;/div>      &lt;!-- required! -->
+        &lt;div id="qunit-fixture">    &lt;!-- required! -->
+            &lt;!-- HTML to be reset for each test -->
+        &lt;/div>
+
+        &lt;script src="lib/qunit-1.12.0.js">&lt;/script>
+        &lt;script> // QUnit options (via QUnit.config...) &lt;/script>
+
+        &lt;script src="path/to/source-code.js">&lt;/script>
+        &lt;!-- more source files under test -->
+
+        &lt;script src="path/to/tests.js">&lt;/script>
+    &lt;/body>
+&lt;/html>
+                    </code></pre>
+
+                    <aside class="notes">
+                        Talk about overall structure, but details are in following slides
+                    </aside>
+                </section>
+
+                <section id="qunit-test-file-head">
+                    <h3>A Minimal Test File</h3>
+
+                    <pre><code data-trim class="html" data-noescape>
+&lt;!doctype html>
+&lt;html>
+    <strong>&lt;head>
+        &lt;link rel="stylesheet" href="lib/qunit-1.12.0.css">
+    &lt;/head></strong>
+<span class="dim">    &lt;body>
+        &lt;div id="qunit">&lt;/div>      &lt;!-- required! -->
+        &lt;div id="qunit-fixture">    &lt;!-- required! -->
+            &lt;!-- HTML to be reset for each test -->
+        &lt;/div>
+
+        &lt;script src="lib/qunit-1.12.0.js">&lt;/script>
+        &lt;script> // QUnit options (via QUnit.config...) &lt;/script>
+
+        &lt;script src="path/to/source-code.js">&lt;/script>
+        &lt;!-- more source files under test -->
+
+        &lt;script src="path/to/tests.js">&lt;/script>
+    &lt;/body></span>
+&lt;/html>
+                    </code></pre>
+
+                    <aside class="notes">
+                        Just a regular HTML document, so you can put anything you need in the head.
+                    </aside>
+                </section>
+
+                <section id="qunit-test-file-divs">
+                    <h3>A Minimal Test File</h3>
+
+                    <pre><code data-trim class="html" data-noescape>
+<span class="dim">&lt;!doctype html>
+&lt;html>
+    &lt;head>
+        &lt;link rel="stylesheet" href="lib/qunit-1.12.0.css">
+    &lt;/head></span>
+    &lt;body>
+        <strong>&lt;div id="qunit">&lt;/div>      &lt;!-- required! -->
+        &lt;div id="qunit-fixture">    &lt;!-- required! -->
+            &lt;!-- HTML to be reset for each test -->
+        &lt;/div></strong>
+
+<span class="dim">        &lt;script src="lib/qunit-1.12.0.js">&lt;/script>
+        &lt;script> // QUnit options (via QUnit.config...) &lt;/script>
+
+        &lt;script src="path/to/source-code.js">&lt;/script>
+        &lt;!-- more source files under test -->
+
+        &lt;script src="path/to/tests.js">&lt;/script></span>
+    &lt;/body>
+<span class="dim">&lt;/html></span>
+                    </code></pre>
+
+                    <aside class="notes">
+                        Mention that the test results and general UI go in the "#qunit" div
+                        and that the test HTML fixtures go in the "#qunit-fixture" div.
+                    </aside>
+                </section>
+
+                <section id="qunit-test-file-scripts">
+                    <h3>A Minimal Test File</h3>
+
+                    <pre><code data-trim class="html" data-noescape>
+<span class="dim">&lt;!doctype html>
+&lt;html>
+    &lt;head>
+        &lt;link rel="stylesheet" href="lib/qunit-1.12.0.css">
+    &lt;/head></span>
+    &lt;body>
+<span class="dim">        &lt;div id="qunit">&lt;/div>      &lt;!-- required! -->
+        &lt;div id="qunit-fixture">    &lt;!-- required! -->
+            &lt;!-- HTML to be reset for each test -->
+        &lt;/div></span>
+
+        <strong>&lt;script src="lib/qunit-1.12.0.js">&lt;/script>
+        &lt;script> // QUnit options (via QUnit.config...) &lt;/script>
+
+        &lt;script src="path/to/source-code.js">&lt;/script>
+        &lt;!-- more source files under test -->
+
+        &lt;script src="path/to/tests.js">&lt;/script></strong>
+    &lt;/body>
+<span class="dim">&lt;/html></span>
+                    </code></pre>
+
+                    <aside class="notes">
+                        Mention using QUnit.config, referencing more than one source file,
+                        more than one test file, and the ordering of these script tags.
+                    </aside>
+                </section>
+
+            </section>
+
+
+            <!-- ________________ Writing Tests ________________ -->
+
+            <section>
+
+                <section id="writing-tests">
+                    <h3>Writing Tests</h3>
+
+                    <aside class="notes">
+                        Talk about unit versus functional tests, what you want to test 
+                        (every decision tree), testing for valid and invalid input to 
+                        functions, etc.
+                    </aside>
+                </section>
+
+                <section id="tests-structure">
+                    <h3>Test Structure</h3>
+
+                    <pre><code data-trim class="javascript" data-noescape>
+// in our source file...
+
+<span class="dim">window.jk = (window.jk || {});
+
+jk.initSearch = function( form ) {
+    ....
+};</span>
+                    </code></pre>
+
+                    <pre><code data-trim class="javascript" data-noescape>
+// in our test file...
+
+test("Namespace exists", function() {
+    ok(jk, "The 'jk' namespace exists");
+    ok((typeof jk.initSearch === "function"), "The initSearch method exists");
+});
+                    </code></pre>
+
+                    <aside class="notes">
+                        Discuss the simple "truthy" test and the structure of the test call.
+                        Also mention how tests are run in order... mostly.
+                    </aside>
+                </section>
+
+                <section id="qunit-ui">
+                    <h3 style="text-transform: none;">QUnit UI</h3>
+
+                    <iframe src="example/tests/show-structure.html" height="400" style="width:90%;background-color:#fff;"></iframe>
+                </section>
+
+                <section id="qunit-ui-error">
+                    <h3 style="text-transform: none;">QUnit UI - Failures</h3>
+
+                    <iframe src="example/tests/show-error.html" height="400" style="width:90%;background-color:#fff;"></iframe>
+                </section>
+
+                <section id="meme-simple">
+                    <img src="images/meme-srsly.jpg" alt="Meme: No seriously, what else do I have to do?" />
+                </section>
+
+                <section id="tests-assertions">
+                    <h3>Various Assertions</h3>
+
+                    <pre><code data-trim class="javascript" data-noescape>
+test("Assertion types", function() {
+    ok(123, "Truthy");
+
+    equal(1, "1", "uuh... sure, why not.");
+    notEqual(1, 2, "Duh.");
+    
+    strictEqual(1, "1", "nope nope nope");
+    notStrictEquAL(1, "1", "There you go...");
+
+    deepEqual(window, { ... }, "Please don't do this");
+    notDeepEqual({}, { "foo": "bar" }, "No matchy.");
+
+    throws(
+        function() {
+            // some code that you *expect* to throw an error
+        },
+        "Woohoo! It failed!"
+    );
+});
+                    </code></pre>
+                </section>
+
+                 <section id="tests-modules">
+                    <h3>Test Modules</h3>
+
+                    <pre><code data-trim class="javascript" data-noescape>
+module("These are tests for X");
+test("test X-one", function() { /* assertions */ });
+test("test X-two", function() { /* assertions */ });
+
+module("These are tests for Y");
+test("test Y-one", function() { /* assertions */ });
+test("test Y-two", function() { /* assertions */ });
+                    </code></pre>
+                </section>
+
+                <section id="qunit-ui-modules">
+                    <h3 style="text-transform: none;">QUnit UI - Modules</h3>
+
+                    <iframe src="example/tests/show-modules.html" height="370" style="width:90%;background-color:#fff;"></iframe>
+                </section>
+
+                <section id="testing-lifecycle">
+                    <h3>Testing Lifecycle</h3>
+
+                    <img class="fragment" src="images/test-lifecycle.png" alt="Testing lifecycle: suite start, module start, test start, assertions, test done, module done, suite done." />
+                </section>
+
+                <section id="lifecycle-begin-callback">
+                    <h3>Testing Lifecycle</h3>
+
+                    <pre><code data-trim class="xml" data-noescape>
+<span class="dim">&lt;!doctype html>
+&lt;html>
+    &lt;head> ... &lt;/head>
+    &lt;body>
+        ...
+        &lt;script src="lib/qunit-1.12.0.js">&lt;/script></span>
+        &lt;script>
+            // QUnit options (via QUnit.config...)
+
+            QUnit.begin(function() {
+                // code to run before the suite begins
+            });
+
+        &lt;/script>
+
+        <span class="dim">...
+    &lt;/body>
+&lt;/html></span>
+                    </code></pre>
+                </section>
+
+                <section id="lifecycle-callbacks">
+                    <h3>Testing Lifecycle</h3>
+
+                    <pre><code data-trim class="xml" data-noescape>
+<span class="dim">&lt;script src="lib/qunit-1.12.0.js">&lt;/script></span>
+&lt;script>
+    // For the entire suite
+    QUnit.begin(function() { ... });
+    QUnit.done(function(failed, passed, total, runtime) { ... });
+
+    // For each module
+    QUnit.moduleStart(function(name) { ... });
+    QUnit.moduleDone(function(name, failed, passed, total) { ... });
+
+    // For each test
+    QUnit.testStart(function(name, moduleName) { ... });
+    QUnit.testDone(function(name, moduleName, failed, passed, total, duration) { ... });
+&lt;/script>
+                    </code></pre>
+                </section>
+
+
+                <section id="test-module-lifecycle">
+                    <h3>Individual Module Lifecycle</h3>
+
+                    <pre class="fragment"><code data-trim class="javascript" data-noescape>
+<span class="dim">module("These are tests for X");</span>
+<span class="fragment">module("These are tests for X", {
+    setup: function() {
+        // executed BEFORE each test in this module
+    },
+    teardown: function() {
+        // executed AFTER each test in this module (success or failure)
+    }
+});</span>
+<span class="dim">
+test("test X-one", function() { /* assertions */ });
+test("test X-two", function() { /* assertions */ });</span>
+                    </code></pre>
+
+                    <aside class="notes">
+                        Mention that there are also callbacks you can set on the global
+                        QUnit object for handling overall suite begin and end, and for 
+                        every test in the suite (regardless of module).
+                    </aside>
+                </section>
+
+                <section id="async-tests">
+                    <h3>Asynchronous Tests</h3>
+
+                    <blockquote class="fragment" style="margin-top:2em;">
+                        "But asynchronous tasks can't be tested in isolation..."
+                    </blockquote>
+
+                    <aside class="notes">
+                        Discuss the issue, that the anonymous function that IS the test will 
+                        silently fail because the function returns before the async action
+                        is finished (and then the next test will start).
+                    </aside>
+                </section>
+
+                <section id="meme-test-all">
+                    <img src="images/meme-test-all.jpg" alt="Meme: Test all the things." />
+                </section>
+
+                <section id="async-tests-source">
+                    <h3>Asynchronous Tests</h3>
+
+                    <pre><code data-trim class="javascript" data-noescape>
+jk.doSearch = function( query, callback ) {
+    ...
+    var xhr = $.ajax({
+        ...
+        // call jk.handleResults() on success
+    });
+    ...
+};
+                    </code></pre>
+                </section>
+
+                <section id="async-tests-example">
+                    <h3>Asynchronous Tests</h3>
+
+                    <pre><code data-trim class="javascript" data-noescape>
+<span class="dim">jk.doSearch = function( query, callback ) {
+    ...
+    var xhr = $.ajax({
+        ...
+        // call jk.handleResults() on success
+    });
+    ...
+};</span>
+                    </code></pre>
+
+                    <pre><code data-trim class="javascript" data-noescape>
+<strong>asyncTest</strong>("Search test", function() {
+    jk.doSearch("foobar", function(data) {
+
+        deepEqual(data, { "results": ["result one", "result two"] }, "Data is correct");
+        // other assertions
+        ...
+        <strong>start();</strong> // tell QUnit to keep going
+
+    });
+});
+                    </code></pre>
+                </section>
+
+                <section id="async-tests-expect">
+                    <h3>Asynchronous Tests</h3>
+
+                    <pre><code data-trim class="javascript" data-noescape>
+<span class="dim">asyncTest("Search test", function() {</span>
+    <strong>expect(3);</strong> // test will fail if 3 assertions are not executed
+
+    <span class="dim">jk.doSearch("foobar", function(data) {</span>
+
+        deepEqual(data, { "results": ["result one", "result two"] }, "Data is correct");
+        // other assertions
+        ...
+        <span class="dim">start(); // tell QUnit to keep going
+
+    });
+});</span>
+                    </code></pre>
+                </section>
+
+                <section id="async-mocking">
+                    <h3>Asynchronous Tests</h3>
+
+                    <blockquote style="margin-top:1em;">
+                        "But I don't want to rely on a server for client tests..."
+                    </blockquote>
+
+                    <p class="fragment">
+                        <a href="http://sinonjs.org">Sinon</a> | 
+                        <a href="https://github.com/appendto/jquery-mockjax">Mockjax</a> | 
+                        <a href="https://github.com/pivotal/jasmine-ajax">Jasmine-ajax</a>
+                    </p>
+                </section>
+
+            </section>
+
+
+            <!-- ________________ Automation ________________ -->
+
+            <section id="automation-libraries">
+                <h3>Cross Browser Testing</h3>
+                <p class="fragment">
+                    <br />
+                    <a href="http://www.browserstack.com" style="margin: 0 1em; background-color:#4c4640;-webkit-border-radius: 7px;-moz-border-radius: 7px;border-radius: 7px; top: -35px; padding: 7px;"><img src="images/browserstack-logo.png" alt="BrowserStack" style="position:relative; top: 20px;" /></a>
+                    <a href="https://saucelabs.com" style="margin: 0 1em; position:relative; top:-30px;"><img src="images/sauce-labs-logo.png" alt="Sauce Labs" /></a>
+                    <br />
+                    <a href="https://github.com/airportyh/testem" style="margin: 0 1em;">Test 'em</a>
+                    <a href="https://github.com/jquery/testswarm/wiki" style="margin: 0 1em;">TestSwarm</a>
+                    <a href="https://code.google.com/p/selenium/wiki/RemoteWebDriverServer" style="margin: 0 1em; background-color:#455372;-webkit-border-radius: 7px;-moz-border-radius: 7px;border-radius: 7px; padding: 7px;"><img src="images/selenium-logo.png" alt="Selenium" style="position:relative; top: 10px;" /></a>
+                </p>
+
+                <aside class="notes">
+                    Browserstack (automation with Testswarm, Testem, etc); 
+                    Saucelabs (automation with Travic CI or Grunt); 
+                    Testem (automation with Browserstack-cli); 
+                    Testswarm; 
+                    Selenium (using the Remote WebDriver server)
+                </aside>
+            </section>
+
+
+            <!-- ________________ Automation with Grunt ________________ -->
+
+            <section>
+
+                <section id="automation-intro">
+                    <h3>Automating Tests</h3>
+
+                    <aside class="notes">
+                        We're talking about more than just automation. QUnit, for example, can be 
+                        run in any browser, but it is cumbersome to do so. Therefore we need 
+                        two types of automation: cross-browser testing and task running.
+                    </aside>
+                </section>
+
+                <section id="grunt-intro">
+                    <h3>Grunt</h3>
+
+                    <p style="text-align:center;">
+                        <a href="http://gruntjs.com">
+                            <img src="images/grunt-logo.png" style="width:30%;" alt="" />
+                        </a>
+                    </p>
+
+                    <aside class="notes">
+                        Remember, we're talking about automation mainly. Cross-browser testing 
+                        is obviously important, but if we can automate everything it'll be 
+                        that much easier.
+                        <br />
+                        Grunt let's us run arbitrary tasks using out favorite language: JavaScript.
+                        <br />
+                        I also use it as a build system for things like concatenation, 
+                        minification, JS linting, template assembling, etc.
+                    </aside>
+                </section>
+
+                <section id="grunt-install">
+                    <h3>Installing Grunt</h3>
+
+                    <p style="text-align:center;">
+                        <a href="http://nodejs.org" style="background-color:#46483e; -webkit-border-radius: 7px;-moz-border-radius: 7px;border-radius: 7px; padding: 12px;">
+                            <img src="images/node-logo.png" alt="NodeJS" style="position:relative; top:18px;" />
+                        </a>
+                    </p>
+
+                    <pre class="fragment"><code class="bash" data-noescape>
+~/myproject$ <strong>npm install -g grunt-cli</strong>
+                    </code></pre>
+
+                    <aside class="notes">
+                        Mention that Grunt is built in JavaScript and runs on NodeJS, so we'll 
+                        have to install Node first (>= v0.8.0).
+                        <br />
+                        We are using the Node Package Manager (npm) to install this library.
+                        <br />
+                        Note that the "-g" flag means the Grunt CLI will be installed 
+                        globally (this is what we want).
+                        <br />
+                        Also, while these examples were written in Linux, the same commands
+                        should work in the Windows command prompt.
+                    </aside>
+                </section>
+
+                <section id="project-fs">
+                    <h3>Our project directory</h3>
+
+                    <ul class="file-structure" style="font-size:0.8em;">
+                        <li class="folder-open">myproject</li>
+                        <li>
+                            <ul>
+                                <li class="folder">src</li>
+                                <li>
+                                    <ul>
+                                        <li class="file">some-code.js</li>
+                                    </ul>
+                                </li>
+                                <li class="folder">tests</li>
+                                <li>
+                                    <ul>
+                                        <li class="folder">lib</li>
+                                        <li class="file">test.html</li>
+                                        <li class="file">tests.js</li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+
+                    <aside class="notes">
+                        Talk about where "node_modules" came from, and the fact that the structure
+                        doesn't really matter, so long as you keep track of where everything is.
+                    </aside>
+                </section>
+
+                <section id="node-package-json">
+                    <h3>Node Package File</h3>
+
+                    <ul class="fragment">
+                        <li>Describe the project</li>
+                        <li>Identify dependencies</li>
+                        <li>Specify execution commands</li>
+                        <li>Identify authors &amp; licenses</li>
+                        <li>etc, etc, etc</li>
+                    </ul>
+
+                    <aside class="notes">
+
+                    </aside>
+                </section>
+
+                <section id="grunt-node-package">
+                    <h3>Setting Up Your Project</h3>
+
+                    <pre><code data-trim class="javascript" data-noescape>
+// in ~/myproject/package.json
+{
+    "name": "my-project",
+    "version": "0.0.1",
+    "devDependencies": {
+        "grunt": "~0.4.1"
+    }
+}
+                    </code></pre>
+
+                    <pre class="fragment"><code class="bash" data-noescape>
+~/myproject$ <strong>npm install</strong>
+                    </code></pre>
+
+                    <aside class="notes">
+                        Talk about "semantic versioning" briefly
+                        <br />
+                        Mention that the "scripts" section is entirely optional, and mostly 
+                        useful if you are using a Continuous Integration server of some kind.
+                    </aside>
+                </section>
+
+                <section id="node-project-fs">
+                    <h3>Our new project directory</h3>
+
+                    <ul class="file-structure" style="font-size:0.8em;">
+                        <li class="folder-open">myproject</li>
+                        <li>
+                            <ul>
+                                <li class="folder">node_modules</li>
+                                <li class="folder">src</li>
+                                <li>
+                                    <ul>
+                                        <li class="file">some-code.js</li>
+                                    </ul>
+                                </li>
+                                <li class="folder">tests</li>
+                                <li>
+                                    <ul>
+                                        <li class="folder">lib</li>
+                                        <li class="file">test.html</li>
+                                        <li class="file">tests.js</li>
+                                    </ul>
+                                </li>
+                                <li class="file">package.json</li>
+                            </ul>
+                        </li>
+                    </ul>
+
+                    <aside class="notes">
+                        Talk about where "node_modules" came from, and the fact that the structure
+                        doesn't really matter, so long as you keep track of where everything is.
+                    </aside>
+                </section>
+
+                <section id="grunt-setup">
+                    <h3>Setting Up Grunt</h3>
+
+                    <aside class="notes">
+                        Talk about the Gruntfile which defines all tasks, and that it is 
+                        just JavaScript code, but it does use some Node features.
+                    </aside>
+                </section>
+
+                <section id="gruntfile-structure">
+                    <h3>Gruntfile Structure</h3>
+
+                    <pre><code data-trim class="javascript" data-noescape>
+// in ~/myproject/Gruntfile.js
+module.exports = function(grunt) {
+
+    // Task Configuration
+    grunt.initConfig({
+        pkg: grunt.file.readJSON("package.json"),
+
+        // TODO: define some tasks
+
+    });
+
+    // Register our tasks
+    grunt.registerTask("default", [ ]);
+
+};
+                    </code></pre>
+
+                    <aside class="notes">
+                        Note that this is the general structure of a Gruntfile, but a lot will 
+                        go in here...
+                        <br />
+                        Mention that you could also write this file in coffeescript.
+                    </aside>
+                </section>
+
+                <section id="grunt-task-install">
+                    <h3>Grunt Tasks</h3>
+
+                    <pre class="fragment"><code class="bash" data-noescape>
+~/myproject$ <strong>npm install grunt-contrib-qunit --save-dev</strong>
+                    </code></pre>
+
+                    <aside class="notes">
+                        Two types: "contrib" which are approved (and many times maintained) 
+                        by the core team, and then everything else, submitted by the community.
+                        <br />
+                        Mention how the "--save-dev" option adds the package to your 
+                        package.json "devDependencies" for you (so you don't need to edit 
+                        that file manually and add it).
+                    </aside>
+                </section>
+
+                <section id="grunt-task-dependency">
+                    <h3>Modified package.json</h3>
+
+                    <pre><code data-trim class="javascript" data-noescape>
+// ~/myproject/package.json
+<span class="dim">{
+    "name": "my-project",
+    "version": "0.0.1",
+    "devDependencies": {
+        "grunt": "~0.4.1",</span>
+        "grunt-contrib-qunit": "~0.2.1"
+    <span class="dim">}
+}</span>
+                    </code></pre>
+
+                </section>
+
+                <section id="define-grunt-task">
+                    <h3>Grunt Tasks</h3>
+
+                    <pre><code data-trim class="javascript" data-noescape>
+<span class="dim">module.exports = function(grunt) {
+    grunt.initConfig({
+        pkg: grunt.file.readJSON("package.json"),</span>
+
+        <span class="fragment">qunit: {           // task name
+            basic: {       // target name
+                options: {
+                    urls: [ "tests/core.html" ]
+                }
+            }
+        }</span>
+
+    <span class="dim">});</span>
+
+    <span class="fragment">// Load the npm module
+    grunt.loadNpmTasks("grunt-contrib-qunit");</span>
+
+    grunt.registerTask("default", [ <span class="fragment">"qunit"</span> ]);
+<span class="dim">};</span>
+                    </code></pre>
+
+                    <aside class="notes">
+                        
+                    </aside>
+                </section>
+
+                <section id="short-grunt-task">
+                    <h3>Grunt Tasks</h3>
+
+                    <pre><code data-trim class="javascript" data-noescape>
+<span class="dim">module.exports = function(grunt) {
+    grunt.initConfig({
+        pkg: grunt.file.readJSON("package.json"),</span>
+
+        qunit: { // task name
+            // target name &amp; single option
+            basic: [ "tests/core.html" ]
+        }
+
+    <span class="dim">});
+
+    // Load the npm module
+    grunt.loadNpmTasks("grunt-contrib-qunit");
+
+    grunt.registerTask("default", [ "qunit" ]);
+};</span>
+                    </code></pre>
+
+                    <aside class="notes">
+                        
+                    </aside>
+                </section>
+
+                <section id="qunit-browser">
+                    <h3>But QUnit Tests run in a browser...</h3>
+                </section>
+
+                <section id="qunit-no-browser">
+                    <img src="images/meme-no-browser.jpg" alt="Meme: You say there is no browser?" style="width: 30%;" />
+                </section>
+
+                <section id="qunit-phantom">
+                    <p style="text-align:center; line-height:2.5em;">
+                        <a href="http://qunitjs.com/" style="background-color: #390f39; -webkit-border-radius: 7px;-moz-border-radius: 7px;border-radius: 7px; padding: 23px;">
+                            <img src="images/logo-qunit.png" alt="QUnit" style="position:relative; top: 23px;" />
+                        </a>
+                        <br />
+                        and
+                        <br />
+                        <a href="http://phantomjs.org" style="background-color:#43413e;-webkit-border-radius: 7px;-moz-border-radius: 7px;border-radius: 7px; padding: 23px;">
+                            <img src="images/phantomjs-logo.png" alt="PhantomJS" style="position:relative; top:22px;" />
+                        </a>
+                    </p>
+
+                    <aside class="notes">
+                        Talk about Phantom briefly (headless, Webkit, JavaScriptCore (not V8))
+                    </aside>
+                </section>
+
+                <section id="run-grunt-qunit">
+                    <h3>Running QUnit with Grunt</h3>
+
+                    <pre><code data-trim class="no-highlight" data-noescape>
+~/myproject$ <strong>grunt qunit:basic</strong>
+<span class="fragment dim">~/myproject$ <strong>grunt qunit</strong></span>
+<span class="fragment"><span style="text-decoration:underline;">Running "qunit:basic" (qunit) task</span>
+Testing tests/core.html .....<span style="color:green;">OK</span>
+<span style="color:green;">>></span> 12 assertions passed (21ms)
+
+<span style="color:green;">Done, without errors.</span></span>
+                    </code></pre>
+
+                    <aside class="notes">
+                        Talk about how we have to run this from the project root (and why).
+                        Discuss the "dots" which signify each test (different from the assertions).
+                    </aside>
+                </section>
+
+                <section id="run-grunt-qunit-error">
+                    <h3>QUnit Errors</h3>
+
+                    <pre><code class="no-highlight" data-noescape>
+~/myproject$ grunt qunit:basic
+<span style="text-decoration:underline;">Running "qunit:basic" (qunit) task</span>
+<strong>Testing tests/core.html ...<span style="color:red;">F</span>.</strong>
+<span style="color:red;">>></span> Some Module Name - Your Test Name
+<strong><span style="color:red;">>></span> Message: <span style="color:purple;">The message you entered for this assertion</span>
+<span style="color:red;">>></span> Actual: <span style="color:purple;">0</span>
+<span style="color:red;">>></span> Expected: <span style="color:purple;">1</span></strong>
+<span style="color:red;">>></span> at file:///myproject/tests/lib/qunit-1.12.0.js:556
+<span style="color:red;">>></span> at file:///myproject/tests/tests.js:38   
+   ...
+
+<span style="color:orange;">Warning: 1/12 assertions failed (21ms) Use --force to continue.</span>
+
+<span style="color:red;">Aborted due to warnings.</span>
+                    </code></pre>
+                </section>
+
+                <section id="grunt-qunit-multiple">
+                    <h3>Multiple Test Suites</h3>
+
+                    <pre class="fragment"><code data-trim class="javascript" data-noescape>
+<span class="dim">module.exports = function(grunt) {
+    grunt.initConfig({
+        pkg: grunt.file.readJSON("package.json"),</span>
+
+        qunit: {
+            basic:  [ "tests/core.html" ],   // first target
+            search: [ "tests/search.html" ]  // second target
+        }
+
+    <span class="dim">});
+
+    // Load the npm module
+    grunt.loadNpmTasks("grunt-contrib-qunit");
+
+    grunt.registerTask("default", [ "qunit" ]);
+};</span>
+                    </code></pre>
+
+                    <aside class="notes">
+                        Talk about how you would run each target separately, or all of them
+                        with "grunt qunit"
+                    </aside>
+                </section>
+
+                <section id="qunit-multi-files">
+                    <h3>Multiple Test Files</h3>
+
+                    <pre><code data-trim class="javascript" data-noescape>
+<span class="dim">module.exports = function(grunt) {
+    grunt.initConfig({
+        pkg: grunt.file.readJSON("package.json"),</span>
+
+        qunit: {
+            basic:  [ "tests/core.html" ],
+            search: [ "tests/search.html", "tests/search-results.html" ]
+        }
+
+    <span class="dim">});
+
+    // Load the npm module
+    grunt.loadNpmTasks("grunt-contrib-qunit");
+
+    grunt.registerTask("default", [ "qunit" ]);
+};</span>
+                    </code></pre>
+
+                </section>
+
+                <section id="qunit-wild-cards">
+                    <h3>Wild Cards</h3>
+
+                    <pre><code data-trim class="javascript" data-noescape>
+<span class="dim">module.exports = function(grunt) {
+    grunt.initConfig({
+        pkg: grunt.file.readJSON("package.json"),</span>
+
+        qunit: {
+            basic:  [ "tests/core.html" ],
+            search: [ "tests/search/*.html" ]
+        }
+
+    <span class="dim">});
+
+    // Load the npm module
+    grunt.loadNpmTasks("grunt-contrib-qunit");
+
+    grunt.registerTask("default", [ "qunit" ]);
+};</span>
+                    </code></pre>
+
+                    <aside class="notes">
+                        Talk about organizing tests into directories and how this allows for
+                        additional test files without changing the Gruntfile.
+                    </aside>
+                </section>
+
+                <section id="qunit-globbing-files">
+                    <h3>Globbing Test Files</h3>
+
+                    <pre><code data-trim class="javascript" data-noescape>
+<span class="dim">module.exports = function(grunt) {
+    grunt.initConfig({
+        pkg: grunt.file.readJSON("package.json"),</span>
+
+        qunit: {
+            basic:  [ "tests/core.html" ],
+            search: [ "tests/search/**/*-tests.html" ]
+        }
+
+    <span class="dim">});
+
+    // Load the npm module
+    grunt.loadNpmTasks("grunt-contrib-qunit");
+
+    grunt.registerTask("default", [ "qunit" ]);
+};</span>
+                    </code></pre>
+
+                    <aside class="notes">
+                        Note that this will only match "something-tests.html" inside of the 
+                        "tests/search" directory or any subdirectory therein.
+                        <br />
+                        Also mention that this file globbing is common to all Grunt tasks
+                    </aside>
+                </section>
+
+                <section id="run-task-targets">
+                    <h3>Running Task Targets</h3>
+
+                    <pre><code data-trim class="no-highlight" data-noescape>
+~/myproject$ grunt qunit:basic
+~/myproject$ grunt qunit:search
+                    </code></pre>
+
+                </section>
+
+            </section>
+
+
+            <!-- ________________ Watching Files ________________ -->
+
+            <section>
+
+                <section id="not-impressed">
+                    <h3>Can't you make it easier?</h3>
+
+                    <img src="images/meme-not-impressed.jpg" alt="" />
+                </section>
+
+                <section id="watch-install">
+                    <h3>The Watch plugin</h3>
+
+                    <pre class="fragment"><code class="bash" data-noescape>
+~/myproject$ <strong>npm install grunt-contrib-watch --save-dev</strong>
+                    </code></pre>
+
+                    <aside class="notes">
+                        Discuss what watch task does
+                        <br />
+                        Remind them what the "--save-dev" option does.
+                    </aside>
+                </section>
+
+                <section id="watch-task-setup">
+                    <h3>Watch Task Setup</h3>
+
+                    <pre><code data-trim class="javascript" data-noescape>
+<span class="dim">module.exports = function(grunt) {
+    grunt.initConfig({
+        pkg: grunt.file.readJSON("package.json"),
+        ...</span>
+
+        watch: {
+            js: {
+                files: [ "src/**/*.js" ],
+                tasks: [ "qunit" ]
+            }
+        }
+
+    <span class="dim">});
+
+    // Load the npm modules
+    grunt.loadNpmTasks("grunt-contrib-qunit");</span>
+    grunt.loadNpmTasks("grunt-contrib-watch");
+
+    <span class="dim">grunt.registerTask("default", [ "qunit" ]);
+};</span>
+                    </code></pre>
+
+                    <aside class="notes">
+                        Note that this will only match "something-tests.html" inside of the 
+                        "tests/search" directory or any subdirectory therein.
+                        <br />
+                        Also mention that this file globbing is common to all Grunt tasks
+                    </aside>
+                </section>
+
+                <section id="grunt-watch">
+                    <h3>Starting the watch</h3>
+
+                    <pre><code data-trim class="no-highlight" data-noescape>
+~/myproject$ <strong>grunt watch</strong>
+<span class="fragment">Running "watch" task
+Waiting...</span>
+<span class="fragment"><span style="color:green;">OK</span>
+<span style="color:green;">>></span> File "src/app.js" changed.
+
+<span style="text-decoration:underline">Running "qunit:core" (qunit) task</span>
+.....
+<span style="color:green;">Done, without errors.</span>
+<span style="color:cyan;">Completed in 2.028s at Sun Aug 17 2013 09:23:51 GMT-0500 (CDT)</span> - Waiting...
+</span>
+                    </code></pre>
+
+                    <aside class="notes">
+                        Talk about what happens when you run the command, and the fact 
+                        that you don't have to watch a specific target (although you can).
+                    </aside>
+                </section>
+
+            </section>
+
+
+            <!-- ________________ Thank You Slide(s) ________________ -->
+
+            <section id="thank-you">
+                <h2>Thank You!</h2>
+                <h3 style="font-size:1.4em; margin-top:2em;">Browser Eyeballing != JavaScript Testing</h3>
+                <p style="margin-top: 3em">
+                    <cite>Jordan Kasper</cite>
+                </p>
+                <p class="fine">
+                    <a href="http://twitter.com/jakerella">@jakerella</a> |
+                    <a href="http://JordanKasper.com/js-testing">JordanKasper.com/js-testing</a>
+                </p>
+            </section>
+
+
+        </div> <!-- .slides -->
+    </div> <!-- .reveal -->
+
+
+    <script src="lib/js/jquery-1.10.2.min.js"></script>
+    <script src="lib/js/head.min.js"></script>
+    <script src="js/reveal.min.js"></script>
+
+    <script>
+    Reveal.initialize({
+        controls: true,
+        progress: false,
+        history: true,
+        center: true,
+        rollingLinks: false,
+
+        width: "95%",
+        height: "95%",
+        margin: 0.05,
+
+        theme: "sky-jordan",
+        transition: "linear",
+
+        // Optional libraries used to extend on reveal.js
+        dependencies: [
+            { src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+            { src: 'plugin/highlight/highlight.js', async: true, callback: function() {
+                $('pre code').each(function(i, e) {hljs.highlightBlock(e)});
+                // remove colorization on "dimmed" code in a block
+                $('pre code .dim span').prop("class", "");
+            }},
+            { src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+        ]
+    });
+    </script>
+
+</body>
+</html>
