@@ -30,6 +30,13 @@ module.exports = function (grunt) {
                     './public/css/style.css': './app/client/sass/main.scss'
                 }
             }
+        },
+
+        watch: {
+            sass: {
+                files: ['app/client/sass/**/*.scss'],
+                tasks: ['sass']
+            }
         }
 
     });
