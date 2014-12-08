@@ -57,11 +57,11 @@ a {
 /* Main body */
 
 .main-body {
-    padding-top: 4em;
-    background-color: #eee;
+    padding-top: 3.7em;
+    background-color: $sidebarBackground;
 }
 .main-content {
-    background-color: #fff;
+    background: $contentBackground url('/images/floral.png') right top no-repeat;
     padding: 1em;
 }
 .main-content img {

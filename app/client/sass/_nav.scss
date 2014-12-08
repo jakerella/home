@@ -1,20 +1,28 @@
 nav ul {
     margin: 0;
-}
-nav li {
-    display: inline-block;
-    background-color: #444;
-    padding: 1.25em 0;
-    transition: background 0.3s linear;
-}
-nav li:hover {
-    background-color: #99a;
-}
-nav a {
-    color: #ddd;
-    font-size: 1.1em;
-    text-decoration: none;
-    padding: 1em 3em;
+    font-size: 0.8em;
+
+    li {
+        display: inline-block;
+        background-color: #444;
+        padding: 1.55em 0;
+        transition: background 0.3s linear;
+
+        &:hover {
+            background-color: #99a;
+        }
+    }
+
+    a {
+        color: #ddd;
+        font-size: 1.1em;
+        text-decoration: none;
+        padding: 1em 2em;
+
+        &:hover {
+            border-bottom: none;
+        }
+    }
 }
 
 .off-canvas-right {
