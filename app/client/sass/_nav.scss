@@ -37,11 +37,15 @@ nav ul {
     border-bottom: 1px solid #eee;
 }
 .off-canvas-trigger-right {
-    height: 2em;
+    color: #ddd;
+    font-size: 7vw;
     position: absolute;
-    right: 1em;
-    top: 0.5em;
-    width: 1.875em;
+    right: 0;
+    top: 1vw;
+
+    &:hover {
+        border: none;
+    }
 }
 
 .hamburger-icon:before {
