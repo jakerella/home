@@ -15,6 +15,9 @@ Feb 2015 - [ConFoo](http://confoo.ca) - Montreal, Canada
 Mar 2015 - [jQuery UK](http://jqueryuk.com/2015/) - Oxford, England
 > Web Developer's Workflow
 
+Apr 2015 - [Fluent](http://fluentconf.com) - San Francisco, CA
+> Advanced Git
+
 ## Past
 
 * Nov 2014 - [JavaScript Summit](http://jssummit.com) - Virtual
