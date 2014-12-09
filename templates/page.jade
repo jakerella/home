@@ -20,5 +20,7 @@ html
 
         script.
             jk.init({
-                template: jk.sidebarPostsTemplate
+                posts: {
+                    template: '<article><h3><a href="/{{slug}}">{{title}}</a></h3><p class="published-on">{{published}}</p></article>'
+                }
             });

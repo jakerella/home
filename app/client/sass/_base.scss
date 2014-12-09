@@ -63,6 +63,7 @@ a {
 .main-content {
     background: $contentBackground url('/images/floral.png') right top no-repeat;
     padding: 1em;
+    min-height: 80vh;
 }
 .main-content img {
     padding: 1em;

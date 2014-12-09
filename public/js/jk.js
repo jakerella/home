@@ -1,60 +1,60 @@
-window.jk = (function ($) {
+window.jk = (function (jk, $) {
 
-    console.log('JK client startup...');
-
-    var DEFAULT_TEMPLATE = '<article><h3><a href="/{{slug}}">{{title}}</a></h3><p>{{brief}}</p></article>',
-        TEMPLATE_DATA = [
-            {
-                key: 'slug',
-                property: 'slug'
-            },
-            {
-                key: 'title',
-                property: 'title'
-            },
-            {
-                key: 'brief',
-                property: 'brief'
-            },
-            {
-                key: 'modified',
-                property: 'modtime',
-                process: function(data) {
-                    var d = new Date(data);
-                    return (d && ((d.getMonth() + 1) + '/' + d.getDate() + '/' + d.getFullYear())) || data;
-                }
-            },
-            {
-                key: 'published',
-                property: 'publishTime',
-                process: function(data) {
-                    var d = new Date(data);
-                    return (d && ((d.getMonth() + 1) + '/' + d.getDate() + '/' + d.getFullYear())) || data;
-                }
-            },
-            {
-                key: 'tags',
-                property: 'tags',
-                process: function(data) {
-                    return (data && data.join && data.join(', ')) || data;
-                }
-            },
-        ];
-
+    jk._modules = {};
 
     function init(options) {
-        var skip = getQueryParam('skip');
+        jk.options = $.extend({}, options, {
+            // defaults
+        });
 
-        options = options || {};
-        options.skip = options.skip || skip || 0;
-        options.node = options.node || '.recent-posts';
-        options.template = options.template || DEFAULT_TEMPLATE;
+        console.info('JK client startup...', jk.options);
 
-        loadRecentPosts(options);
+        $.each(jk._modules, function() {
+            if (this.init && this.init.apply) {
+                this.init(jk.options[this.name] || null);
+            }
+        });
+
+        // set up document.ready laoding of modules
+        $(doLoad);
+    }
+
+    function doLoad() {
+        $.each(jk._modules, function() {
+            if (this.load && this.load.apply) {
+                this.load(jk.options[this.name] || null);
+            }
+        });
+    }
+
+    function addModule(module) {
+        if (module && module.name) {
+            jk._modules[module.name] = module;
+        }
+    }
+
+    function getModule(name) {
+        return jk._modules[name] || null;
     }
 
     function toMixedCase(text) {
         return text.replace(/\w*/g, function(t){ return t.charAt(0).toUpperCase()+t.substr(1).toLowerCase(); });
+    }
+
+    function renderTemplate(data, template, keys) {
+        var i, l, content,
+            html = template || '';
+
+        keys = keys || [];
+
+        for (i=0, l=keys.length; i<l; ++i) {
+            /*jshint maxlen:200*/
+            content = (keys[i].process && keys[i].process(data[keys[i].property], data)) || data[keys[i].property] || '';
+            /*jshint maxlen:140*/
+            html = html.replace(new RegExp('\\{\\{' + keys[i].key + '\\}\\}', 'g'), content);
+        }
+
+        return html;
     }
 
     function getQueryParam(name) {
@@ -64,84 +64,14 @@ window.jk = (function ($) {
         return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
     }
 
-    function loadRecentPosts(options) {
-        var recent,
-            prevPage = $('a.prev-page'),
-            nextPage = $('a.next-page');
-        
-        options = options || {};
-
-        recent = $(options.node);
-        if (recent.length) {
-            getPosts({ skip: options.skip || 0 }, function(err, data) {
-                if (err) {
-                    recent.append('<p class="error">' + err + '</p>');
-                    return;
-                }
-
-                recent.append(getPostHtml(data.files, options.template).join(''));
-
-                if (data.hasPrevPage) {
-                    prevPage.show().attr('href', '?skip=' + data.prevSkip);
-                } else {
-                    prevPage.hide();
-                }
-
-                if (data.hasNextPage) {
-                    nextPage.show().attr('href', '?skip=' + data.nextSkip);
-                } else {
-                    nextPage.hide();
-                }
-            });
-        }
-    }
-
-    function getPosts(options, cb) {
-        cb = cb || $.noop;
-
-        $.ajax({
-            url: '/api/content/posts/recent?skip=' + (options.skip || 0),
-            dataType: 'json',
-            success: function(data) {
-                cb(null, data);
-            },
-            error: function(xhr) {
-                console.warn(xhr.status, xhr.responseText);
-                cb('Sorry, but there was a problem retrieving blog posts.');
-            }
-        });
-    }
-
-    function getPostHtml(files, template) {
-        var posts = [];
-
-        for (var i=0, l=files.length; i<l; ++i) {
-            files[i].title = toMixedCase(files[i].slug.replace(/\-/g, ' '));
-            posts.push(renderPostTemplate(files[i], template));
-        }
-
-        return posts;
-    }
-
-    function renderPostTemplate(data, template) {
-        var i, l, content,
-            html = template || '';
-
-        for (i=0, l=TEMPLATE_DATA.length; i<l; ++i) {
-            /*jshint maxlen:200*/
-            content = (TEMPLATE_DATA[i].process && TEMPLATE_DATA[i].process(data[TEMPLATE_DATA[i].property])) || data[TEMPLATE_DATA[i].property] || '';
-            /*jshint maxlen:140*/
-            html = html.replace(new RegExp('\\{\\{' + TEMPLATE_DATA[i].key + '\\}\\}', 'g'), content);
-        }
-
-        return html;
-    }
 
     return {
         init: init,
+        addModule: addModule,
+        getModule: getModule,
         toMixedCase: toMixedCase,
-        getQueryParam: getQueryParam,
-        sidebarPostsTemplate: '<article><h3><a href="/{{slug}}">{{title}}</a></h3><p class="published-on">{{published}}</p></article>',
+        renderTemplate: renderTemplate,
+        getQueryParam: getQueryParam
     };
 
-})(window.jQuery);
+})(window.jk || {}, window.jQuery);

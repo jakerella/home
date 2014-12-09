@@ -1,0 +1,244 @@
+{
+    "events": [
+        {
+            "name": "DCJS",
+            "url": "http://www.meetup.com/DC-JavaScript/events/218040632/",
+            "location": "Washington, DC",
+            "date": "Dec 11 2014",
+            "topics": [
+                "Mocking Ajax Requests"
+            ]
+        },
+        {
+            "name": "CodeMash",
+            "url": "http://www.codemash.org",
+            "location": "Sandusky, OH",
+            "date": "Jan 8 2015",
+            "topics": [
+                "Object Oriented JavaScript",
+                "Advanced Git"
+            ]
+        },
+        {
+            "name": "ConFoo",
+            "url": "http://confoo.ca",
+            "location": "Montreal, Canada",
+            "date": "Feb 18 2015",
+            "topics": [
+                "Remote Working",
+                "Grunt"
+            ]
+        },
+        {
+            "name": "jQuery UK",
+            "url": "http://jqueryuk.com/2015/",
+            "location": "Oxford, England",
+            "date": "Mar 5 2015",
+            "topics": [
+                "Web Developer's Workflow"
+            ]
+        },
+        {
+            "name": "Fluent",
+            "url": "http://fluentconf.com",
+            "location": "San Francisco, CA",
+            "date": "Apr 20 2015",
+            "topics": [
+                "Advanced Git"
+            ]
+        },
+        {
+            "name": "JavaScript Summit",
+            "url": "http://jssummit.com",
+            "location": "(Virtual)",
+            "date": "Nov 19 2014",
+            "topics": [
+                "Mocking Ajax Requests"
+            ]
+        },
+        {
+            "name": "True North PHP",
+            "url": "http://truenorthphp.ca",
+            "location": "Toronto, Canada",
+            "date": "Nov 6 2014",
+            "topics": [
+                "JavaScript Testing (Tutorial)",
+                "Object Oriented JavaScript"
+            ]
+        },
+        {
+            "name": "DevLink",
+            "url": "http://devlink.net",
+            "location": "Chattanooga, TN",
+            "date": "Aug 26 2014",
+            "topics": [
+                "Web Developer's Workflow",
+                "Remote Working",
+                "Native Windows 8 Apps with WinJS"
+            ]
+        },
+        {
+            "name": "Codestock",
+            "url": "http://codestock.org",
+            "location": "Knoxville, TN",
+            "date": "Jul 12 2014",
+            "topics": [
+                "Object Oriented JavaScript",
+                "Advanced Git"
+            ]
+        },
+        {
+            "name": "DrupalCon",
+            "url": "https://austin2014.drupal.org",
+            "location": "Austin, TX",
+            "date": "Jun 3 2014",
+            "topics": [
+                "JavaScript Testing"
+            ]
+        },
+        {
+            "name": "Dutch PHP",
+            "url": "http://www.phpconference.nl",
+            "location": "Amsterdam, Netherlands",
+            "date": "Jun 28 2014",
+            "topics": [
+                "JavaScript Testing Tutorial"
+            ]
+        },
+        {
+            "name": "jQuery UK",
+            "url": "http://jqueryuk.com/2014",
+            "location": "Oxford, England",
+            "date": "May 15 2014",
+            "topics": [
+                "Web Developer's Workflow"
+            ]
+        },
+        {
+            "name": "NashJS",
+            "url": "http://nashjs.org",
+            "location": "Nashville, TN",
+            "date": "Apr 9 2014",
+            "topics": [
+                "Native Windows 8 Apps with WinJS"
+            ]
+        },
+        {
+            "name": "Confoo",
+            "url": "http://confoo.ca/en/2014/sessions",
+            "location": "Monteral, Canada",
+            "date": "Feb 27 2014",
+            "topics": [
+                "JavaScript Testing",
+                "Object Oriented JavaScript"
+            ]
+        },
+        {
+            "name": "SunshinePHP",
+            "url": "http://2014.sunshinephp.com",
+            "location": "Miami, FL",
+            "date": "Feb 7 2014",
+            "topics": [
+                "JavaScript Testing"
+            ]
+        },
+        {
+            "name": "ZendCon",
+            "url": "http://zendcon.com",
+            "location": "San Jose, CA",
+            "date": "Oct 8 2013",
+            "topics": [
+                "Object Oriented JavaScript"
+            ]
+        },
+        {
+            "name": "NashJS",
+            "url": "http://nashjs.org",
+            "location": "Nashville, TN",
+            "date": "Sep 11 2013",
+            "topics": [
+                "JavaScript Testing"
+            ]
+        },
+        {
+            "name": "HackMemphis",
+            "url": "http://hackmemphis.com",
+            "location": "Memphis, TN",
+            "date": "Sep 14 2013",
+            "topics": []
+        },
+        {
+            "name": "DevLink",
+            "url": "http://devlink.net",
+            "location": "Chattanooga, TN",
+            "date": "Aug 28 2013",
+            "topics": [
+                "Object Oriented JavaScript",
+                "Propel ORM"
+            ]
+        },
+        {
+            "name": "CoderFaire",
+            "url": "http://coderfaire.com",
+            "location": "Nashville, TN",
+            "date": "Aug 17 2013",
+            "topics": [
+                "JavaScript Testing"
+            ]
+        },
+        {
+            "name": "STL.JS",
+            "url": "http://www.meetup.com/STL-JS-meetup",
+            "location": "St. Louis, O",
+            "date": "Jul 18 2013",
+            "topics": [
+                "Object Oriented JavaScript"
+            ]
+        },
+        {
+            "name": "Ruby Usergroup",
+            "url": null,
+            "location": "Memphis, TN",
+            "date": "May 23 2013",
+            "topics": [
+                "JavaScript Testing"
+            ]
+        },
+        {
+            "name": "PHP Usergroup",
+            "url": null,
+            "location": "Nashville, TN",
+            "date": "Apr 9 2013",
+            "topics": [
+                "Propel ORM"
+            ]
+        },
+        {
+            "name": "Java Usergroup",
+            "url": null,
+            "location": "Memphis, TN",
+            "date": "Apr 18 2013",
+            "topics": [
+                "JavaScript Testing"
+            ]
+        },
+        {
+            "name": "Interactive Developers",
+            "url": null,
+            "location": "Nashville, TN",
+            "date": "Mar 19 2013",
+            "topics": [
+                "Object Oriented JavaScript"
+            ]
+        },
+        {
+            "name": "PHP Usergroup",
+            "url": null,
+            "location": "Memphis, TN",
+            "date": "Feb 26 2013",
+            "topics": [
+                "Propel ORM"
+            ]
+        }
+    ]
+}
