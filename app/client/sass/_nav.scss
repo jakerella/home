@@ -22,11 +22,16 @@ nav ul {
         &:hover {
             border-bottom: none;
         }
+
+        i {
+            margin-right: 0.3em;
+        }
     }
 }
 
 .off-canvas-right {
     background-color: #222;
+    z-index: $offcanvasNavZIndex;
 }
 .off-canvas-right ul {
     padding: 0;
@@ -46,35 +51,4 @@ nav ul {
     &:hover {
         border: none;
     }
-}
-
-.hamburger-icon:before {
-    top: -0.5em;
-}
-.hamburger-icon:before, .hamburger-icon:after {
-    background: none repeat scroll 0 0 #fff;
-    content: "";
-    height: 0.0625em;
-    left: 0;
-    position: absolute;
-    width: 1.875em;
-}
-.hamburger-icon:after {
-    bottom: -0.5em;
-}
-.hamburger-icon:before, .hamburger-icon:after {
-    background: none repeat scroll 0 0 #fff;
-    content: "";
-    height: 0.0625em;
-    left: 0;
-    position: absolute;
-    width: 1.875em;
-}
-.hamburger-icon {
-    background: none repeat scroll 0 0 #fff;
-    display: block;
-    height: 0.0625em;
-    position: relative;
-    top: 1em;
-    width: 100%;
 }
