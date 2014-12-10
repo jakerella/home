@@ -36,5 +36,5 @@
         { "match": "/everything\\-you\\-always\\-wanted\\-to\\-know\\-about\\-the\\-internet", "redirect": "/internet" },
         { "match": "/kill\\-the\\-save\\-button", "redirect": "https://vimeo.com/21165393" }
     ],
-    "tagTemplate": "<p class='post-tags'>Tagged with <span class='tag-list'>$1</span></p>"
+    "tagsTemplate": "<p class='post-tags'>Tagged with <span class='tag-list'>$1</span></p>"
 }
