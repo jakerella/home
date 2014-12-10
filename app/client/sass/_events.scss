@@ -1,0 +1,35 @@
+
+.upcoming-events, .past-events {
+    li {
+        margin-bottom: 0.5em;
+    }
+
+    span {
+        display: inline-block;
+        margin-right: 1em;
+    }
+
+    .event-date {
+        font-size: 0.9em;
+        color: #444;
+
+        &:before {
+            content: '('
+        }
+        &:after {
+            content: ')'
+        }
+    }
+
+    .event-location {
+        font-style: italic;
+    }
+}
+
+.past-events {
+    font-size: 0.9em;
+
+    .event-date {
+        float: left;
+    }
+}

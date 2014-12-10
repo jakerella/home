@@ -1,0 +1,33 @@
+
+[data-slug=home] .main-content {
+    padding-top: 2em;
+    background-position: right 1em;
+
+    @media (min-width: 50em) {
+        padding-top: 0;
+        background-position: right top;
+    }
+}
+
+[data-slug=home] .paging {
+    position: fixed;
+    top: 3.5em;
+    padding: 0.3em 1em;
+    background-color: #fff;
+    width: 100%;
+    clear: left;
+
+    @media (min-width: 50em) {
+        position: inherit;
+        top: auto;
+        width: 75%;
+    }
+
+    a:hover {
+        border: none;
+    }
+}
+
+[data-slug=home] .prev-page {
+    float: right;
+}

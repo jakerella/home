@@ -3,8 +3,8 @@
     var DEFAULT_TEMPLATE = [
             '<li>',
             '<span class="event-name">{{name}}</span>',
-            '<span class="event-name">{{date}}</span>',
             '<span class="event-location">{{location}}</span>',
+            '<span class="event-date">{{date}}</span>',
             '<span class="event-topics">{{topics}}</span>',
             '</li>'
         ].join(''),
