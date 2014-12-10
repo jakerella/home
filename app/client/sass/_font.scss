@@ -1,10 +1,10 @@
 @font-face {
   font-family: 'jk';
-  src: url('../fonts/jk.eot?74843917');
-  src: url('../fonts/jk.eot?74843917#iefix') format('embedded-opentype'),
-       url('../fonts/jk.woff?74843917') format('woff'),
-       url('../fonts/jk.ttf?74843917') format('truetype'),
-       url('../fonts/jk.svg?74843917#jk') format('svg');
+  src: url('../font/jk.eot?99157140');
+  src: url('../font/jk.eot?99157140#iefix') format('embedded-opentype'),
+       url('../font/jk.woff?99157140') format('woff'),
+       url('../font/jk.ttf?99157140') format('truetype'),
+       url('../font/jk.svg?99157140#jk') format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -14,11 +14,10 @@
 @media screen and (-webkit-min-device-pixel-ratio:0) {
   @font-face {
     font-family: 'jk';
-    src: url('../font/jk.svg?74843917#jk') format('svg');
+    src: url('../font/jk.svg?99157140#jk') format('svg');
   }
 }
 */
- 
  
  [class^="icon-"]:before, [class*=" icon-"]:before {
   font-family: "jk";
@@ -63,11 +62,25 @@
 .icon-users:before { content: '\e809'; } /* '' */
 .icon-calendar:before { content: '\e80a'; } /* '' */
 .icon-chat-empty:before { content: '\e80b'; } /* '' */
+.icon-stackoverflow:before { content: '\e80c'; } /* '' */
+.icon-lanyrd:before { content: '\e80d'; } /* '' */
+.icon-gplus:before { content: '\e80e'; } /* '' */
+.icon-meetup:before { content: '\e80f'; } /* '' */
+
+/* -------------- END FONTELLO CODE --------------- */
 
 .hobbes {
     display: inline-block;
     width: 1em;
     height: 1em;
     background: transparent url('../images/hobbes_icon_light.png') center bottom no-repeat;
+    background-size: 1em;
+}
+
+.joindin {
+    display: inline-block;
+    width: 1em;
+    height: 1em;
+    background: transparent url('../images/joindin.png') center bottom no-repeat;
     background-size: 1em;
 }

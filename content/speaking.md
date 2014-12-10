@@ -1,5 +1,5 @@
 
-# Event Schedule
+## Event Schedule
 
 ## Upcoming
 

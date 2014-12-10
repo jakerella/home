@@ -1,0 +1,14 @@
+
+.icon-links {
+    margin-top: 0.5em;
+    font-size: 1.5em;
+    display: block;
+
+    @media (min-width: 50em) {
+        display: inline;
+    }
+
+    a, a:visited {
+        color: #444;
+    }
+}
