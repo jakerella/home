@@ -54,8 +54,8 @@
             now.setHours(0);
 
             if (!err) {
-                sortEvents(events);
-
+                
+                sortEvents(events, 1);
                 addEventsToPage(events, {
                     node: '.upcoming-events',
                     include: function(event) {
@@ -63,6 +63,7 @@
                     }
                 });
 
+                sortEvents(events, -1);
                 addEventsToPage(events, {
                     node: '.past-events',
                     include: function(event) {
@@ -89,12 +90,14 @@
         });
     }
 
-    function sortEvents(events) {
+    function sortEvents(events, dir) {
+        dir = Number(dir) || -1;
+
         events.sort(function(a, b) {
             a.timestamp = a.timestamp || (new Date(a.date)).getTime();
             b.timestamp = b.timestamp || (new Date(b.date)).getTime();
 
-            return b.timestamp - a.timestamp;
+            return (a.timestamp - b.timestamp) * dir;
         });
     }
 
