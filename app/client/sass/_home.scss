@@ -7,6 +7,11 @@
         padding-top: 0;
         background-position: right top;
     }
+
+    article {
+        margin: 1em 0;
+        border-bottom: 1px dashed #999;
+    }
 }
 
 [data-slug=home] .paging {
