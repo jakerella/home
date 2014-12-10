@@ -3,6 +3,7 @@
     var DEFAULT_TEMPLATE = [
             '<li>',
             '<span class="event-name">{{name}}</span>',
+            '<span class="event-name">{{date}}</span>',
             '<span class="event-location">{{location}}</span>',
             '<span class="event-topics">{{topics}}</span>',
             '</li>'
@@ -24,6 +25,20 @@
                 property: 'name',
                 process: function(data, fullItem) {
                     return fullItem.url ? '<a href="' + fullItem.url + '" title="Visit this event website">' + data + '</a>' : data;
+                }
+            },
+            {
+                key: 'date',
+                property: 'date',
+                process: function(data, fullItem) {
+                    var formatted = data,
+                        d = new Date(fullItem.timestamp || data);
+                    if (d.getTime()) {
+                        formatted = d.toString().substr(4,11).split(/\s/);
+                        formatted.splice(1,1);
+                        formatted = formatted.join(' ');
+                    }
+                    return formatted;
                 }
             }
         ];
