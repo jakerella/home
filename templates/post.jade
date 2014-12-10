@@ -11,6 +11,10 @@ html
             article.main-content.blog-post.sm-12.md-9
                 != renderContent()
 
+                div#disqus_thread
+                noscript.
+                    Please enable JavaScript to view and post comments.
+
             aside.sidebar.speaking.sm-12.md-3
                 h2 Upcoming Events
                 ul.upcoming-events
@@ -21,3 +25,12 @@ html
 
         script.
             jk.init();
+
+            // Disqus config
+            var disqus_shortname = 'jordankasper';
+            // Start up Disqus
+            (function() {
+                var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+                dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+                (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+            })();
