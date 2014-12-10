@@ -100,7 +100,7 @@ module.exports = function(app, site) {
         // Site redirects
         var redirect = getRedirectUrl(req.url, site);
         if (redirect) {
-            res.redirect(redirect);
+            res.redirect(301, redirect);
             return;
         }
 
