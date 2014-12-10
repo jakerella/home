@@ -64,6 +64,10 @@ a {
     background: $contentBackground url('/images/floral.png') right top no-repeat;
     padding: 1em;
     min-height: 80vh;
+
+    @media (min-width: $largeBreakpoint) {
+        float: left;
+    }
 }
 .main-content img {
     padding: 1em;

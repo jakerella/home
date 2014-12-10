@@ -8,11 +8,12 @@ html
 
         section.main-body.row
 
-            article.main-content.sm-12.md-9.left
+            article.main-content.sm-12.md-9
                 != renderContent()
 
-            aside.sidebar.speaking.sm-12.md-3.right
-                include:markdown ../content/speaking.md
+            aside.sidebar.speaking.sm-12.md-3
+                h2 Upcoming Events
+                ul.upcoming-events
 
         include footer.jade
 

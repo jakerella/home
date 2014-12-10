@@ -4,7 +4,7 @@
     font-size: 1.5em;
     display: block;
 
-    @media (min-width: 50em) {
+    @media (min-width: $largeBreakpoint) {
         display: inline;
     }
 

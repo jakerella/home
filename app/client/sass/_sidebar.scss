@@ -3,6 +3,10 @@
 .sidebar {
     font-size: 0.8em;
     padding-left: 1em;
+
+    @media (min-width: $largeBreakpoint) {
+        float: right;
+    }
 }
 .sidebar h2 {
     font-size: 1.1em;
