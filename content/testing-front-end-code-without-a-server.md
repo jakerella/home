@@ -7,8 +7,7 @@ That is the basis, a thesis almost, for the rest of this post. The fact is that 
 
 This may not sit well with any of you, but my guess is that if you're reading this post, then you are interested in making your front end testing better. So, let me repeat that point just to be clear: with few exceptions, using any pre-defined, pre-populated, pre-initialized server is not the best way to properly test your front end code.
 
-![You keep using that server](http://jordankasper.com/blog/wp-content/uploads/montoya-300x258.jpg)
-
+<img src='/uploads/montoya.jpg' title='You keep using that server' style='float:left;'>
 Now that you are sufficiently upset that I just doused the burning intensity that was your front end testing strategy, let me explain. Your front end code does not care what your server is doing. It _does_ care what data - and in what format that data - is returned to the various callback functions, but the data given to the handlers has very little to do with the actual HTTP call your JavaScript code makes. Your server is simply another dependency that needs to be mocked out by your test suite. There is a time and place for the front end and back end to work together, but unit tests on your JavaScript code is not it. Okay, I've harped at you enough, let's look at some of the reasons why you want to mock out your server for front end testing.
 
 ### Why would I want to mock out my server?
@@ -27,7 +26,7 @@ In order to understand how we mock out your server, we need to understand what a
 
 That might look something like this:
 
-[![Async-mock](http://jordankasper.com/blog/wp-content/uploads/Async-mock-.png)](http://jordankasper.com/blog/wp-content/uploads/Async-mock-.png)
+![Async-mock diagram](/uploads/async-mock.png)
 
 Notice that we sidestep the entire XMLHttpRequest implementation as well as the library abstraction with our mock implementation.
 
