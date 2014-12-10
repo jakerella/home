@@ -1,4 +1,20 @@
 
-.blog-post h1, .blog-post h2, .blog-post h3, .blog-post h4 {
-    clear: both;
+.blog-post {
+    p {
+        line-height: 1.4em;
+    }
+
+    h2, h3, h4 {
+        clear: both;
+    }
+
+    pre {
+        margin: 0.5em;
+        padding: 0.5em;
+        background-color: #f9f9f9;
+        border: 1px solid #ddd;
+        border-right-color: #bbb;
+        border-bottom-color: #bbb;
+    }
 }
+
