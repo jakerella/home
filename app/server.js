@@ -11,7 +11,8 @@ var server = express();
 server.set('port', options.port || process.env.PORT || 3000);
 
 require('marked').setOptions(require('./helpers/markdownOptions.js')({
-    'tags': options.tagTemplate
+    publishTime: options.publishTimeTemplate || null,
+    tags: options.tagsTemplate || null
 }));
 
 

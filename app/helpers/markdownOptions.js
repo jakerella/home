@@ -5,7 +5,7 @@ var marked = require('marked'),
         {
             'name': 'publishTime',
             'regex': /\{{2}\s*([^\}]+)\s*\}{2}/g,
-            'template': '<p class="publish-time">Published on <time>$1</time></p>\n'
+            'template': '<p class="publish-time">Published on <date>$1</date></p>\n'
         },
         {
             'name': 'tags',
@@ -20,7 +20,7 @@ module.exports = function(options) {
         var content = '<p>' + text + '</p>\n';
 
         metaBlocks.forEach(function(meta) {
-            var tmpl = (options.metaBlocks && options.metaBlocks[meta.name]) || meta.template;
+            var tmpl = (options && options[meta.name]) || meta.template;
             if (meta.regex.test(text)) {
                 content = text.replace(meta.regex, tmpl);
             }
