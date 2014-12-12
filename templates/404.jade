@@ -7,7 +7,16 @@ html
         include header.jade
 
         section.main-body.row
-            h2.
-                Oops! Looks like that page doesn't exist
+
+            p
+                img.error-dog(src='/images/404.jpg', alt='404 Not Found')
+
+            p.text-center.
+                Oh no! It looks like this hole is empty. Maybe you can try one of the navigation 
+                menu links? Or the back button? Sorry about this, I'm sure your bone... err, page 
+                will show up soon.
+
+            p.fine.
+                Thanks to <a href='http://httpstatusdogs.com/404-not-found'>HTTP Status Dogs</a> for the image!
 
         include footer.jade

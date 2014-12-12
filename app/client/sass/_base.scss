@@ -36,12 +36,14 @@ a {
     cursor: wait;
 }
 
-.align-right {
-    float: right;
+.fine {
+    color: #666;
+    font-size: 0.8em;
 }
 
-.align-center {
-    text-align: center !important;
+.center {
+    display: block;
+    margin: 0 auto;
 }
 
 .top-sticky {
