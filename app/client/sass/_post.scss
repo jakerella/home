@@ -38,5 +38,19 @@
     .tag-list {
         font-weight: bold;
     }
+
+    .sharing {
+        color: #333;
+        clear: left;
+        text-align: center;
+
+        a, a:visited {
+            color: #333;
+        }
+        a:hover {
+            border: none;
+            color: #557
+        }
+    }
 }
 

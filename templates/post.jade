@@ -11,6 +11,17 @@ html
             article.main-content.blog-post.sm-12.md-9
                 != renderContent()
 
+                div.sharing
+                    ='Share the love:'
+                    a(href='https://twitter.com/home?status=Check%20out%20this%20post%20by%20@jakerella:%20' + title + '%20http://jordankasper.com/' + slug, target='_blank')
+                        i.icon-twitter
+                    a(href='https://plus.google.com/share?url=http://jordankasper.com/' + slug, target='_blank')
+                        i.icon-gplus
+                    a(href='https://www.linkedin.com/shareArticle?mini=true&title=Blog%20post%20by%20Jordan%20Kasper:%20' + title + '&summary=&source=&url=http://jordankasper.com/' + slug, target='_blank')
+                        i.icon-linkedin
+                    a(href='https://www.facebook.com/sharer/sharer.php?u=http://jordankasper.com/' + slug, target='_blank')
+                        i.icon-facebook-squared
+
                 div#disqus_thread
                 noscript.
                     Please enable JavaScript to view and post comments.
