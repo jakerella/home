@@ -45,7 +45,12 @@
         text-align: center;
 
         a, a:visited {
+            font-size: 2em;
             color: #333;
+
+            @media (min-width: $largeBreakpoint) {
+                font-size: 1.3em;
+            }
         }
         a:hover {
             border: none;
