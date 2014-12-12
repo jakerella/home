@@ -61,6 +61,7 @@ a {
     background-color: $sidebarBackground;
 }
 .main-content {
+    position: relative;
     background: $contentBackground url('/images/floral.png') right top no-repeat;
     padding: 1em;
     min-height: 80vh;

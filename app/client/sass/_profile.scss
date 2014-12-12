@@ -12,3 +12,12 @@
         color: #444;
     }
 }
+
+
+.hobbes-hover {
+    @media (min-width: $largeBreakpoint) {
+        position: absolute;
+        top: 0;
+        right: 0;
+    }
+}

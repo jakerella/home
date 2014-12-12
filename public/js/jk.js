@@ -25,6 +25,8 @@ window.jk = (function (jk, $) {
                 this.load(jk.options[this.name] || null);
             }
         });
+
+        setupHobbesHover();
     }
 
     function addModule(module) {
@@ -62,6 +64,21 @@ window.jk = (function (jk, $) {
         var regex = new RegExp('[\\?&]' + name + '=([^&#]*)'),
             results = regex.exec(document.location.search);
         return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+    }
+
+    function setupHobbesHover() {
+        $('.hobbes-hover')
+            .mouseover(function() {
+                var img = $(this);
+                img
+                    .attr('data-oldsrc',  img.attr('src'))
+                    .attr('src',  '/images/hobbes_small.png');
+            })
+            .mouseout(function() {
+                var img = $(this);
+                img
+                    .attr('src',  img.attr('data-oldsrc'));
+            });
     }
 
 

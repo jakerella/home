@@ -1,6 +1,8 @@
 
 ## `~$ jordan --verbose`
 
+<img src='/images/hobbes_icon.png' alt='Hobbes' class='right hobbes-hover'>
+
 I'm a mild-mannered developer and evangelist by day... and, well, by night too, I suppose.
 
 Shortly after it arrived at my home in 1993, I began disassembling our first computer - my 

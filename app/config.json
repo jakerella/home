@@ -16,12 +16,12 @@
         },
         "speaking": {
             "template": "page.jade",
-            "title": "Speaking Schedule",
+            "title": "Event Schedule",
             "isStatic": true
         },
         "profile": {
             "template": "page.jade",
-            "title": "Links and such...",
+            "title": "jordan --verbose",
             "isStatic": true
         }
     },

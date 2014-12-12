@@ -5,6 +5,7 @@ body > header {
     min-height: 3.5em;
     color: #eee;
     width: 100%;
+    z-index: $headerZIndex;
 }
 header h1 {
     font-size: 3.8vw;
