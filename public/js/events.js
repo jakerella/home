@@ -70,6 +70,8 @@
                         return (event.timestamp < now.getTime());
                     }
                 });
+
+                jk.adjustContentHeight();
             }
         });
     }

@@ -77,6 +77,8 @@
         } else {
             nextPage.hide();
         }
+
+        jk.adjustContentHeight();
     }
 
     function getRecentPosts(options, cb) {

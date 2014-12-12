@@ -27,6 +27,7 @@ window.jk = (function (jk, $) {
         });
 
         setupHobbesHover();
+        adjustContentHeight();
     }
 
     function addModule(module) {
@@ -81,6 +82,17 @@ window.jk = (function (jk, $) {
             });
     }
 
+    function adjustContentHeight() {
+        var content = $('.main-content'),
+            sh = $('.sidebar').height(),
+            ch = content.height();
+
+        console.log(sh, ch);
+        if (sh > ch) {
+            content.css('min-height', sh + 'px');
+        }
+    }
+
 
     return {
         init: init,
@@ -88,7 +100,8 @@ window.jk = (function (jk, $) {
         getModule: getModule,
         toMixedCase: toMixedCase,
         renderTemplate: renderTemplate,
-        getQueryParam: getQueryParam
+        getQueryParam: getQueryParam,
+        adjustContentHeight: adjustContentHeight
     };
 
 })(window.jk || {}, window.jQuery);
