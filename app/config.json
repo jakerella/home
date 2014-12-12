@@ -14,7 +14,7 @@
             "title": "Jordan Kasper",
             "isStatic": true
         },
-        "speaking": {
+        "events": {
             "template": "page.jade",
             "title": "Event Schedule",
             "isStatic": true

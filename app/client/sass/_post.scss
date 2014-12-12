@@ -5,7 +5,12 @@
     }
 
     h2, h3, h4 {
+        color: #333;
         clear: both;
+    }
+
+    h2 {
+        color: #446;
     }
 
     pre {
@@ -15,6 +20,23 @@
         border: 1px solid #ddd;
         border-right-color: #bbb;
         border-bottom-color: #bbb;
+    }
+
+    .publish-time {
+        font-size: 0.9em;
+        color: #333;
+        float: left;
+    }
+
+    .post-tags {
+        font-size: 0.85em;
+        color: #333;
+        text-align: right;
+        margin-top: 2em;
+    }
+
+    .tag-list {
+        font-weight: bold;
     }
 }
 

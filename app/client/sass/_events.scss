@@ -1,5 +1,11 @@
 
+[data-slug="events"] .sidebar .events {
+    display: none;
+}
+
 .upcoming-events, .past-events {
+    padding-left: 1.5em;
+
     li {
         margin-bottom: 0.5em;
     }

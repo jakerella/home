@@ -11,8 +11,12 @@ html
             article.main-content.sm-12.md-9
                 != renderContent()
 
-            aside.sidebar.recent-posts.sm-12.md-3
-                h2 Recent Posts
+            aside.sidebar.sm-12.md-3
+                div.events
+                    h2 Upcoming Events
+                    ul.upcoming-events
+                div.recent-posts
+                    h2 Recent Posts
 
         include footer.jade
 

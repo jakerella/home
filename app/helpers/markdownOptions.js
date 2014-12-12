@@ -5,7 +5,7 @@ var marked = require('marked'),
         {
             'name': 'publishTime',
             'regex': /\{{2}\s*([^\}]+)\s*\}{2}/g,
-            'template': '<p class="publish-time">Published on <date>$1</date></p>\n'
+            'template': '<p class="publish-time"><i class="icon-calendar"></i>Published on <date>$1</date></p>\n'
         },
         {
             'name': 'tags',
