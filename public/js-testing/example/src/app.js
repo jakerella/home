@@ -1,91 +1,91 @@
 
 var jk = (window.jk || {});
 
-jk.searchCount = 0;
-jk.lastSearch = null;
-jk.searchEndpoint = "/search";
 
-jk.initSearch = function initSearch( form ) {
-    form = $(form);
+// We would put this somewhere else...
+$(document).ready( function initPage() {
+    
+    jk.initSearch("#search-form", "#search-field");
 
-    if (!form.length) { return null; }
+});
 
-    form.on("submit", function(e) {
+
+jk.initSearch = function initSearch( form, input ) {
+    var $form = $(form),
+        $input = $(input);
+
+    if ( !$form.length || !$input.length ) {
+        return null;
+    }
+    // Audits
+
+    $form.on("submit", function submitHandler(e) {
         e.preventDefault();
 
-        jk.doSearch( form.find("input").val() );
+        jk.doSearch( $input.val() );
     });
 
-    return form;
+    return $form;
 };
 
+
 jk.doSearch = function doSearch( query, callback ) {
-    if (!query || !query.length) {
+    if ( !query || !query.length ) {
         jk.showError("Please enter a search query!");
     }
+
+    // Data audits, etc
 
     callback = (callback || function(){});
 
     var xhr = $.ajax({
-        url: jk.searchEndpoint,
+        
+        url: "/api/search",
         data: { "query": query },
         dataType: "json",
-        success: function(data) {
+
+        success: function successHandler(data) {
             jk.handleResults(data);
             callback(data);
         },
-        error: function(xhr) {
-            callback("error", jk.handleAjaxError(xhr));
+        // ...
+        
+        error: function errorHandler(xhr) {
+            callback({ error: xhr.responseText, status: xhr.status });
         }
     });
-
-    jk.searchCount++;
-    jk.lastSearch = query;
 
     return xhr;
 };
 
-jk.handleResults = function handleResults( data, resultsNode ) {
-    var i, countAdded = 0;
 
-    if (!data || !data.results) { return null; }
+jk.handleResults = function( results, resultsNode ) {
+    var items = [];
 
-    resultsNode = ( resultsNode || "#search-results" );
-    resultsNode = $(resultsNode);
+    resultsNode = $( resultsNode || "#search-results" );
 
-    if (!resultsNode.length) { return null; }
+    results.forEach( function resultLoop( item ) {
+        items.push( "<li> " + item + " </li>" );
+    });
 
-    for (i=0, l=data.results.length; i<l; ++i) {
-        resultsNode.append("<li>" + data.results[i] + "</li>");
-        countAdded++;
-    }
-
-    return countAdded;
+    return resultsNode.append( items.join("") );
 };
 
-jk.handleAjaxError = function handleAjaxError(xhr) {
-    var msg;
 
-    if (xhr.status === 404) {
-        msg = "Sorry, but I couldn't find that resource!";
-    } else {
-        msg = xhr.responseText;
-    }
 
-    return jk.showError(msg);
-};
-
-jk.showError = function showError(msg, msgNode) {
-    var error;
+jk.showError = function showError( msg, msgNode ) {
+    var $error;
 
     if (!msg || !msg.length) { return null; }
 
-    msgNode = ( msgNode || "#messages" );
-    msgNode = $(msgNode);
+    msgNode = $( msgNode || "#messages" );
 
-    if (!msgNode.length) { return null; }
+    if ( !msgNode.length ) { return null; }
 
-    error = $("<p class='error'>" + msg + "</p>");
-    msgNode.append(error);
-    return error;
+    console && console.error(msg);
+    
+    $error = $("<p class='error'>" + msg + "</p>");
+    msgNode.append( $error );
+    return $error;
 };
+
