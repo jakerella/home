@@ -12,19 +12,19 @@
  * GLOBAL STYLES
  *********************************************/
 body {
-  background: #add9e4;
-  background: -moz-radial-gradient(center, circle cover, #f7fbfc 0%, #add9e4 100%);
-  background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%, #f7fbfc), color-stop(100%, #add9e4));
-  background: -webkit-radial-gradient(center, circle cover, #f7fbfc 0%, #add9e4 100%);
-  background: -o-radial-gradient(center, circle cover, #f7fbfc 0%, #add9e4 100%);
-  background: -ms-radial-gradient(center, circle cover, #f7fbfc 0%, #add9e4 100%);
-  background: radial-gradient(center, circle cover, #f7fbfc 0%, #add9e4 100%);
-  background-color: #f7fbfc; }
+  background: -moz-radial-gradient(bottom right, circle cover, #f7fbfc 0%, #bfe1e3 50%);
+  background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%, #f7fbfc), color-stop(50%, #bfe1e3));
+  background: -webkit-radial-gradient(center, circle cover, #f7fbfc 0%, #bfe1e3 50%);
+  background: -o-radial-gradient(center, circle cover, #f7fbfc 0%, #bfe1e3 50%);
+  background: -ms-radial-gradient(center, circle cover, #f7fbfc 0%, #bfe1e3 50%);
+  background: radial-gradient(bottom left, circle cover, #f7fbfc 0%, #bfe1e3 50%);
+
+  background-color: #bfe1e3; }
 
 .reveal {
   font-family: "Open Sans", sans-serif;
   font-size: 36px;
-  font-weight: 200;
+  font-weight: normal;
   letter-spacing: -0.02em;
   color: #333333; }
 
@@ -32,7 +32,6 @@ body {
   color: white;
   background: #134674;
   text-shadow: none; }
-
 
 /*********************************************
  * HEADERS
@@ -80,9 +79,9 @@ body {
  *********************************************/
 .reveal section img {
   margin: 15px 0px;
-  background: rgba(255, 255, 255, 0.12);
+  /*background: rgba(255, 255, 255, 0.12);
   border: 4px solid #333333;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);*/
   -webkit-transition: all .2s linear;
   -moz-transition: all .2s linear;
   -ms-transition: all .2s linear;
@@ -90,9 +89,9 @@ body {
   transition: all .2s linear; }
 
 .reveal a:hover img {
-  background: rgba(255, 255, 255, 0.2);
+  /*background: rgba(255, 255, 255, 0.2);
   border-color: #3b759e;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.55); }
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.55);*/ }
 
 /*********************************************
  * NAVIGATION CONTROLS
@@ -139,45 +138,8 @@ body {
   -o-transition: width 800ms cubic-bezier(0.26, 0.86, 0.44, 0.985);
   transition: width 800ms cubic-bezier(0.26, 0.86, 0.44, 0.985); }
 
-
-/* Added by JSK */
-.reveal .fine {
-  font-size: 0.8em;
-  color: #777;
-}
-.reveal .fine a:link {
-  color: #74a7cb;
-}
-.reveal .fine a:not(.image):hover {
-  color: #94c7fb;
-}
-.reveal p {
-    margin: 1em 0;
-}
-.reveal li {
-    margin: 0.5em 0;
-}
-.reveal pre code .dim {
-    color: #8e908c;
-}
-.reveal section img { border: none; margin: 0; background: none; box-shadow: none; }
-
-ul.file-structure ul { margin-left: 0.7em; }
-ul.file-structure li { list-style: none; margin: 0.25em 0; }
-ul.file-structure .folder {
-    list-style-image: url('../../images/folder.png');
-}
-ul.file-structure .folder-open {
-    list-style-image: url('../../images/folder-open.png');
-}
-ul.file-structure .file {
-    list-style-image: url('../../images/file.png');
-}
-.reveal pre .xml .javascript { opacity: 1; }
-.reveal blockquote {
-    border: none;
-    color: #555;
-    box-shadow: none;
-}
-
-/* End of additions by JSK */
+/*********************************************
+ * SLIDE NUMBER
+ *********************************************/
+.reveal .slide-number {
+  color: #3b759e; }

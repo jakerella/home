@@ -1,5 +1,6 @@
 npm-debug.log
 node_modules/
+public/js/vendor/
 public/css/style.css
 .well-known/
 
