@@ -1,22 +1,23 @@
+/*global QUnit*/
 
 // ---------------- Test Modules --------------- //
 
-module("Initialize & Options", {
+QUnit.module("Initialize & Options", {
     setup: function() {
+        
         // whatever you need to do before THIS MODULE runs
+        
     },
     teardown: function() {
+        
         // whatever you need to do after THIS MODULE runs
+        
     }
 });
 
-test("App namespace exists", function() {
-    ok(jk, "The 'jk' namespace exists");
-    equal(jk.searchCount, 0, "Search count starts at 1");
+QUnit.test("Namespace exists", function(assert) {
+    assert.ok(window.jk, "'jk' namespace exists");
+    assert.equal(typeof window.jk.initSearch, "function", "initialization function exists");
 });
 
-test("Default Settings", function() {
-    equal(jk.searchCount, 0, "Search count starts at zero");
-    strictEqual(jk.lastSearch, null, "Last search starts as null");
-});
 

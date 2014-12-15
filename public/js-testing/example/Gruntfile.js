@@ -2,7 +2,6 @@ module.exports = function(grunt) {
 
     // Project configuration.
     grunt.initConfig({
-        pkg: grunt.file.readJSON("package.json"),
 
         qunit: {
             core: {
@@ -10,11 +9,12 @@ module.exports = function(grunt) {
                     urls: [ "tests/core.html" ]
                 }
             },
-            search: {
-                options: {
-                    urls: [ "tests/search.html" ]
-                }
-            }
+            
+            basic: [ "tests/core.html" ],
+
+            search: [ "tests/search.html" ],
+            search: [ "tests/search.html", "tests/search-results.html" ],
+            search: [ "tests/search/*.html" ]
         },
 
         watch: {
@@ -22,11 +22,13 @@ module.exports = function(grunt) {
                 files: [ "src/**/*.js" ],
                 tasks: [ "qunit" ]
             },
+
             tests: {
                 files: [ "tests/*.html", "tests/*.js" ],
                 tasks: [ "qunit" ]
             }
         }
+
     });
 
     // Load the plugins

@@ -45,8 +45,8 @@ jk.doSearch = function doSearch( query, callback ) {
         dataType: "json",
 
         success: function successHandler(data) {
-            jk.handleResults(data);
-            callback(data);
+            jk.handleResults( data.results );
+            callback( data );
         },
         // ...
         

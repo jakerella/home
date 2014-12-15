@@ -1,75 +1,141 @@
-
-// Mockjax settings for ajax faking
-
-var reqGoodSearch = {
-  url: '/search',
-  type: 'get',
-  status: 200,
-  dataType: 'json',
-  response: function(req) {
-    var resp = { "results": ["result one", "result two"] };
-    this.responseText = JSON.stringify(resp);
-  }
-};
-var reqBadSearch = {
-  url: '/search',
-  type: 'get',
-  status: 400,
-  dataType: 'json',
-  response: function(req) {
-    this.responseText = "400 Bad request";
-  }
-};
+/*global QUnit*/
 
 
 // ---------------- Test Modules --------------- //
 
-module("Searching");
+var jk = window.jk;
 
-test("Search module exists", function() {
-    ok((typeof jk.initSearch === "function"), "The initSearch method exists");
+QUnit.module("Searching", {
+
+    setup: function() {
+
+        // Stuff to do before each test in THIS module
+
+        $.mockjax({
+            url: "/api/search",
+            query: { query: "foobar" },
+            dataType: "json",
+            response: function() {
+                var resp = { "results": ["result one", "result two"] };
+                this.responseText = JSON.stringify(resp);
+            }
+        });
+
+        $.mockjax({
+            url: "/api/search",
+            query: { query: "http-error" },
+            status: 400,
+            dataType: "json",
+            response: function() {
+                this.responseText = "400 Bad request";
+            }
+        });
+
+    },
+
+    teardown: function() {
+
+        // Stuff to do after each test in THIS module
+
+        $.mockjax.clear();
+
+    }
+
 });
 
-test("Initialize Search", function() {
-    strictEqual(jk.initSearch("#foobar"), null, "Bad input to init results in null");
-    equal(jk.initSearch("#the-form").length, 1, "Good input returns jQuery wrapped node");
+QUnit.test("Search module exists", function(assert) {
+    assert.equal( typeof jk.initSearch, "function", "The initSearch method exists" );
 });
 
-test("Handling results", function() {
-    var data = {
-        results: ["one", "two"]
-    };
 
-    expect((2 + data.results.length));
+QUnit.test("Initialize Search - bad input", function(assert) {
+    
+    assert.strictEqual( jk.initSearch(), null, "No input to init results in null" );
+    assert.strictEqual( jk.initSearch("#foobar"), null, "Bad form to init results in null" );
+    assert.strictEqual( jk.initSearch("#the-form", "#foobar"), null, "Bad input to init results in null" );
+    assert.strictEqual( jk.initSearch("#the-form", null), null, "Null input to init results in null" );
+    assert.strictEqual( jk.initSearch(null, "#query"), null, "Null form to init results in null" );
 
-    equal(jk.handleResults(data, "#results"), data.results.length, "Correct return value from handleResults");
-    equal($("#results li").length, 2, "Correct number of result elements");
-    $("#results li").each(function(i) {
-        equal($(this).text(), data.results[i], "Correct text in result element " + i);
+});
+
+
+QUnit.test("Initialize Search - good input", function(assert) {
+    
+    var result = jk.initSearch("#the-form", "#query");
+
+    assert.ok( result && result.jquery, "A jQuery object was returned" );
+    assert.equal( result.length, 1, "There is only 1 result in the set" );
+
+    var events = $._data($("#the-form")[0], "events");
+
+    assert.equal( events.submit[0].handler.name, "submitHandler", "Correct submit handler attached" );
+
+});
+
+QUnit.test("Handling results - zero", function(assert) {
+    
+    var result = jk.handleResults( [], "#results" );
+
+    assert.ok( result && result.jquery, "A jQuery object was returned" );
+    assert.equal( result.find("li").length, 0, "Correct number of result elements" );
+    
+});
+
+QUnit.test("Handling results - two", function(assert) {
+    
+    var results = ["result one", "result two"];
+
+    assert.expect( 2 + results.length );
+
+    var node = jk.handleResults( results, "#results" );
+
+    assert.ok( node && node.jquery, "A jQuery object was returned" );
+    assert.equal( node.find("li").length, results.length, "Correct number of result elements" );
+
+    node.find("li").each(function(i) {
+        
+        assert.equal($(this).text(), results[i], "Correct text in result element " + i);
+
     });
+
 });
 
-asyncTest("Successful search", function() {
-    $.mockjaxClear();
-    $.mockjax(reqGoodSearch);
 
-    var searchTerm = "foobar";
-    jk.doSearch(searchTerm, function(data) {
-        deepEqual(data, { "results": ["result one", "result two"] }, "The data in the callback is correct");
-        equal(jk.searchCount, 1, "Search count is incremented");
-        equal(jk.lastSearch, searchTerm, "Last search is correct");
-        start();
-    });
-});
+QUnit.test("Successful search", function(assert) {
+    
+    var done = assert.async();
 
-asyncTest("Bad search", function() {
-    $.mockjaxClear();
-    $.mockjax(reqBadSearch);
+    QUnit.expect(3);
 
-    jk.doSearch("foobar", function(data, msg) {
-        equal(data, "error", "There was an expected error");
-        ok((msg && msg.length), "There was an error message provided");
-        start();
+    jk.doSearch("foobar", function(data) {
+        
+        assert.deepEqual(data, { "results": ["result one", "result two"] }, "data is correct");
+        
+        // Other assertions...
+        // For example, assert that the jk.handleResults() method was called!
+
+        // Tell QUnit we're done with async actions
+        done();
     });
 
 });
+
+
+QUnit.test("Bad search", function(assert) {
+    
+    var done = assert.async();
+
+    jk.doSearch("http-error", function(data) {
+        
+        assert.deepEqual(data.error, { error: { /* ... */ } }, "There was an expected error");
+
+        // Other assertions...
+        // For example, assert that the jk.handleResults() method was NOT called
+        // and that jk.showError() WAS called!
+        
+        // Tell QUnit we're done with async actions
+        done();
+    });
+
+});
+
