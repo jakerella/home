@@ -10,7 +10,7 @@ $(document).ready( function initPage() {
 });
 
 
-jk.initSearch = function( form, input ) {
+jk.initSearch = function initSearch( form, input ) {
     var $form = $(form),
         $input = $(input);
 
@@ -19,7 +19,7 @@ jk.initSearch = function( form, input ) {
     }
     // Audits
 
-    $form.on("submit", function submitHandler(e) {
+    $form.on("submit", function searchSubmitHandler(e) {
         e.preventDefault();
         // ...
         jk.doSearch( $input.val() );
@@ -29,7 +29,7 @@ jk.initSearch = function( form, input ) {
 };
 
 
-jk.doSearch = function( query, callback ) {
+jk.doSearch = function doSearch( query, callback ) {
     if ( !query || !query.length ) {
         jk.showError("Please enter a search query!");
     }
@@ -44,13 +44,13 @@ jk.doSearch = function( query, callback ) {
         data: { "query": query },
         dataType: "json",
         // ...
-        success: function successHandler(data) {
+        success: function searchSuccessHandler(data) {
             jk.handleResults( data.results );
             callback( data );
         },
         // ...
         
-        error: function errorHandler(xhr) {
+        error: function searchErrorHandler(xhr) {
             callback({ error: xhr.responseText, status: xhr.status });
         }
     });
@@ -59,12 +59,12 @@ jk.doSearch = function( query, callback ) {
 };
 
 
-jk.handleResults = function( results, resultsNode ) {
+jk.handleResults = function handleResults( results, resultsNode ) {
     var items = [];
 
     resultsNode = $( resultsNode || "#search-results" );
 
-    results.forEach( function resultLoop( item ) {
+    results.forEach( function searchResultLoop( item ) {
         items.push( "<li> " + item + " </li>" );
     });
 
@@ -73,7 +73,7 @@ jk.handleResults = function( results, resultsNode ) {
 
 
 
-jk.showError = function( msg, msgNode ) {
+jk.showError = function showError( msg, msgNode ) {
     var $error;
 
     if (!msg || !msg.length) { return null; }

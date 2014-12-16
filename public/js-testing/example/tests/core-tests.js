@@ -16,8 +16,11 @@ QUnit.module("Searching", {
 });
 
 QUnit.test("Namespace exists", function(assert) {
+    
     assert.ok(window.jk, "'jk' namespace exists");
+    
     assert.equal(typeof window.jk.initSearch, "function", "initialization function exists");
+    
 });
 
 

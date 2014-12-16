@@ -144,10 +144,10 @@
 
                         <pre><code data-trim class="lang-bash" data-noescape>
 <strong>Call Stack</strong>
-    (anonymous)         some_file.min.js 3
-    (anonymous)         some_file.min.js 3
-    (anonymous)         some_file.min.js 3
-    (anonymous)         some_file.min.js 3
+    (anonymous)         app.min.js 3
+    (anonymous)         app.min.js 3
+    (anonymous)         app.min.js 3
+    (anonymous)         app.min.js 3
                         </pre></code>
 
                         <aside class="notes">
@@ -161,7 +161,17 @@
                     <section>
                         <h4>DOM Coupling</h4>
 
-                        <pre><code class='lang-javascript' data-srcbyline='example/src/bad.js?3-5;8-12;15;18-22;24;27;32-34'></code></pre>
+                        <pre><code class='lang-javascript' data-srcbyline='example/src/bad.js?2;4-6;34'></code></pre>
+
+                        <aside class="notes">
+                            Associating initialization with document onload means we can't test the initialization!
+                        </aside>
+                    </section>
+
+                    <section>
+                        <h4>DOM Coupling</h4>
+
+                        <pre><code class='lang-javascript' data-srcbyline='example/src/bad.js?3-5;8-12;15;18-22;24;27;32-33'></code></pre>
 
                         <aside class="notes">
                             Tight coupling with the HTML makes testing outside of the context
@@ -171,6 +181,7 @@
 
                     <section>
                         <h4>Server Coupling</h4>
+                        <h5>(and asynchronous activity)</h5>
 
                         <pre><code class='lang-javascript' data-srcbyline='example/src/bad.js?11;13-15;18;24-25;27;31-32'></code></pre>
                     </section>
@@ -197,7 +208,8 @@
                         <pre><code class='lang-javascript' data-srcbyline='example/src/app.js?2-3;13;31-32;61-62;75-76'></code></pre>
 
                         <aside class="notes">
-                            Be sure to mention namespacing and the named, separate functions.
+                            Be sure to mention namespacing and the named, separate functions.<br>
+                            Mention callback on doSearch()
                         </aside>
 
                     </section>
@@ -208,12 +220,12 @@
 
                         <pre><code data-trim class="no-bash" data-noescape>
 <strong>Call Stack</strong>
-    jk.handleResults       some_file.min.js 3
-    successHandler         some_file.min.js 3
-    jk.doSearch            some_file.min.js 3
-    submitHandler          some_file.min.js 3
-    jk.initSearch          some_file.min.js 3
-    initPage               some_file.html 376
+    jk.handleResults       app.min.js 3
+    successHandler         app.min.js 3
+    jk.doSearch            app.min.js 3
+    submitHandler          app.min.js 3
+    jk.initSearch          app.min.js 3
+    initPage               index.html 376
                         </pre></code>
 
                     </section>
@@ -371,7 +383,7 @@
                     <section>
                         <h3>A Minimal Test File</h3>
 
-                        <pre><code class='lang-html' data-srcbyline='example/tests/example.html?3;5-7;11-13;50-54'></code></pre>
+                        <pre><code class='lang-html' data-srcbyline='example/tests/example.html?3;5-7;11-13;50-53'></code></pre>
 
                         <aside class="notes">
                             Just a regular HTML document, so you can put anything you need in the head.
@@ -425,7 +437,7 @@
 
                         <div class='fragment'>
                             <p><em>In our <code>tests.js</code> file...</em></p>
-                            <pre><code class='lang-javascript' data-srcbyline='example/tests/core-tests.js?18-21'></code></pre>
+                            <pre><code class='lang-javascript' data-srcbyline='example/tests/core-tests.js?18-24'></code></pre>
                         </div>
 
                         <aside class="notes">
@@ -455,7 +467,9 @@
 
                         <pre><code class='lang-javascript' data-srcbyline='example/tests/assertions.js?3-6;67-68'></code></pre>
 
-                        <pre class='fragment'><code class='lang-javascript' data-srcbyline='example/tests/assertions.js?8-11'></code></pre>
+                        <pre class='fragment'><code class='lang-javascript' data-srcbyline='example/tests/assertions.js?8-9'></code></pre>
+                        
+                        <pre class='fragment'><code class='lang-javascript' data-srcbyline='example/tests/assertions.js?10-11'></code></pre>
                     </section>
 
                     <section>
@@ -471,13 +485,13 @@
                     <section data-transition="fade">
                         <h3>Various Assertions - properties</h3>
 
-                        <pre><code class='lang-javascript' data-srcbyline='example/tests/assertions.js?23-31'></code></pre>
+                        <pre><code class='lang-javascript' data-srcbyline='example/tests/assertions.js?23-24;26-31'></code></pre>
                     </section>
 
                     <section data-transition="fade">
                         <h3>Various Assertions - properties</h3>
 
-                        <pre><code class='lang-javascript' data-srcbyline='example/tests/assertions.js?23-30;33-34'></code></pre>
+                        <pre><code class='lang-javascript' data-srcbyline='example/tests/assertions.js?23-24;26-30;33-34'></code></pre>
                     </section>
 
                     <section>
@@ -510,6 +524,10 @@
                         <h3>MOAR TESTS</h3>
 
                         <pre><code class='lang-html' data-srcbyline='example/tests/search.html?11-21;36'></code></pre>
+                        
+                        <aside class="notes">
+                            Remind about how #qunit-fixture works
+                        </aside>
                     </section>
 
                     <section>
@@ -530,6 +548,12 @@
                         <pre><code class='lang-javascript' data-srcbyline='example/tests/search-tests.js?51-59'></code></pre>
                     </section>
 
+                    <section>
+                        <h3>MOAR TESTS - <span style='text-transform:none;'>initSearch()</h3>
+
+                        <pre><code class='lang-javascript' data-srcbyline='example/tests/search-tests.js?62-67;72-73'></code></pre>
+                    </section>
+                    
                     <section>
                         <h3>MOAR TESTS - <span style='text-transform:none;'>initSearch()</h3>
 
@@ -590,8 +614,10 @@
                         </p>
                     </section>
 
-                    <section>
-                        <h3>Asynchronous Tests <br> Mocking Ajax</h3>
+                    <section data-background='images/mockingjay.jpg'>
+                        <h3 style="text-transform:none; color: #fff; text-shadow: 3px 3px 4px #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;">
+                            The Hunger Tests:<br>Mockingjax
+                        </h3>
 
                         <pre><code class='lang-javascript' data-srcbyline='example/tests/search-tests.js?14-19'></code></pre>
 

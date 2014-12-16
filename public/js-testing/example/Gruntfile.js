@@ -6,7 +6,7 @@ module.exports = function(grunt) {
         
         /* Task configuration... */
         
-        qunit: {      /* task name */
+        qunit: {       /* task name */
             basic: {   /* target name */
                 
                 options: {

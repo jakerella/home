@@ -3,11 +3,11 @@ $(document).ready(function() {
     $("#search-form").on("submit", function(e) {
         
         // ...
-
+        
         e.preventDefault();
-
+        
         var query = $("#search-query").val();
-
+        
         $.ajax({
             // ...
             url: "/api/search",
@@ -19,7 +19,7 @@ $(document).ready(function() {
                     
                     $("#search-results")
                         .append("<li> " + item + " </li>");
-
+                        
                 });
             },
             error: function() {
