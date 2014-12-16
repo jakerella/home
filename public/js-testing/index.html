@@ -121,33 +121,7 @@
                     <section>
                         <h4>Search Example</h4>
 
-                        <pre><code data-trim class="javascript" data-noescape>
-    $(document).ready(function() {
-        $("#search-form").on("submit", function(e) {
-            e.preventDefault();
-
-            var query = $("#search-query").val();
-
-            // maybe some audits, too
-
-            $.ajax({
-                url: "/search",
-                data: { "query": query },
-                success: function(results) {
-                    results.forEach(function(item, index) {
-                        $("#search-results")
-                            .append("&lt;li> " + item + " &lt;/li>");
-                    });
-                },
-                error: function() {
-                    $("#messages")
-                        .append("&lt;p class='error'> ... &lt;/p>");
-                }
-            });
-        });
-    });
-                        </code></pre>
-
+                        <pre><code class='lang-javascript' data-srcbyline='example/src/bad.js?2-3;7-11;13-16;20-21;23-25;29-34'></code></pre>
                     </section>
 
                     <section>
@@ -157,33 +131,7 @@
                     <section>
                         <h4>Anonymous Functions</h4>
 
-                        <pre><code data-trim class="javascript" data-noescape>
-    <span class="dim">$(document).ready(</span><strong>function() {</strong><span class="dim">
-        $("#search-form").on("submit", </span><strong>function(e) {</strong><span class="dim">
-            e.preventDefault();
-
-            var query = $("#search-query").val();
-
-            // maybe some audits, too
-
-            $.ajax({
-                url: "/search",
-                data: { "query": query },
-                success: </span><strong>function(results) {</strong><span class="dim">
-                    results.forEach(</span><strong>function(item, index) {</strong><span class="dim">
-                        $("#search-results")
-                            .append("&lt;li> " + item + " &lt;/li>");
-                    });
-                },
-                error: </span><strong>function() {</strong><span class="dim">
-                    $("#messages")
-                        .append("&lt;p class='error'> ... &lt;/p>");
-                }
-            });
-        });
-    });</span>
-                        </code></pre>
-
+                        <pre><code class='lang-javascript' data-srcbyline='example/src/bad.js?2-3;5;11-12;15-19;23-27;31-34'></code></pre>
                     </section>
 
                     <section>
@@ -194,8 +142,8 @@
 
                         <h4>Does this look familiar?</h4>
 
-                        <pre><code data-trim class="no-highlight" data-noescape>
-    <strong>Call Stack</strong>
+                        <pre><code data-trim class="lang-bash" data-noescape>
+<strong>Call Stack</strong>
     (anonymous)         some_file.min.js 3
     (anonymous)         some_file.min.js 3
     (anonymous)         some_file.min.js 3
@@ -213,32 +161,7 @@
                     <section>
                         <h4>DOM Coupling</h4>
 
-                        <pre><code data-trim class="javascript" data-noescape>
-    <span class="dim">$(document).ready(function() {</span>
-        <strong>$("#search-form")</strong><span class="dim">.on("submit", function(e) {
-            e.preventDefault();
-
-            var query = </span><strong>$("#search-query")</strong><span class="dim">.val();
-
-            // maybe some audits, too
-
-            $.ajax({
-                url: "/search",
-                data: { "query": query },
-                success: function(results) {
-                    results.forEach(function(item, index) {
-                        </span><strong>$("#search-results")</strong><span class="dim">
-                            .append("&lt;li> " + item + " &lt;/li>");
-                    });
-                },
-                error: function() {
-                    </span><strong>$("#messages")</strong><span class="dim">
-                        .append("&lt;p class='error'> ... &lt;/p>");
-                }
-            });
-        });
-    });
-                        </code></pre>
+                        <pre><code class='lang-javascript' data-srcbyline='example/src/bad.js?3-5;8-12;15;18-22;24;27;32-34'></code></pre>
 
                         <aside class="notes">
                             Tight coupling with the HTML makes testing outside of the context
@@ -249,34 +172,7 @@
                     <section>
                         <h4>Server Coupling</h4>
 
-                        <pre><code data-trim class="javascript" data-noescape>
-    <span class="dim">$(document).ready(function() {
-        $("#search-form").on("submit", function(e) {
-            e.preventDefault();
-
-            var query = $("#search-query").val();
-
-            // maybe some audits, too</span>
-
-            <strong>$.ajax({</strong>
-                url: "/search",
-                data: { "query": query },
-                <span class="dim">success: function(results) {
-                    results.forEach(function(item, index) {
-                        $("#search-results")
-                            .append("&lt;li> " + item + " &lt;/li>");
-                    });
-                },
-                error: function() {
-                    $("#messages")
-                        .append("&lt;p class='error'> ... &lt;/p>");
-                }</span>
-            <strong>});</strong>
-            
-        <span class="dim">});
-    });</span>
-                        </code></pre>
-
+                        <pre><code class='lang-javascript' data-srcbyline='example/src/bad.js?11;13-15;18;24-25;27;31-32'></code></pre>
                     </section>
                     
                 </section>
@@ -298,25 +194,7 @@
                     <section>
                         <h4>Search Example - Redux</h4>
 
-                        <pre><code data-trim class="javascript" data-noescape>
-    window.jk = (window.jk || {});  // namespacing, FTW!
-
-    jk.initSearch = function( form, input ) {
-        ...
-    };
-
-    jk.doSearch = function( value, callback ) {
-        ...
-    };
-
-    jk.handleResults = function( results, resultsNode ) {
-        ...
-    };
-
-    jk.handleAjaxError = function( xhr ) {
-        ...
-    };
-                        </code></pre>
+                        <pre><code class='lang-javascript' data-srcbyline='example/src/app.js?2-3;13;31-32;61-62;75-76'></code></pre>
 
                         <aside class="notes">
                             Be sure to mention namespacing and the named, separate functions.
@@ -328,8 +206,8 @@
 
                         <h4>Now isn't that nice?</h4>
 
-                        <pre><code data-trim class="no-highlight" data-noescape>
-    <strong>Call Stack</strong>
+                        <pre><code data-trim class="no-bash" data-noescape>
+<strong>Call Stack</strong>
     jk.handleResults       some_file.min.js 3
     successHandler         some_file.min.js 3
     jk.doSearch            some_file.min.js 3
@@ -343,52 +221,32 @@
                     <section>
                         <h4>Search Example - Initialization</h4>
 
-                        <pre><code data-trim class="javascript" data-noescape>
-    jk.initSearch = function( form, input ) {
+                        <pre><code class='lang-javascript' data-srcbyline='example/src/app.js?13-16;20-23;25-29'></code></pre>
 
-        $(form).on("submit", function submitHandler(e) {
-            e.preventDefault();
-
-            jk.doSearch( $(input).val() );
-        });
-
-    };
-
-    <span class="dim">// somewhere else in your code, maybe in your page...
-    $(document).ready( function initPage() {
-        jk.initSearch("#search-form", "#search-field");
-    });</span>
-                        </code></pre>
+                        <pre class='fragment'><code class='lang-javascript' data-srcbyline='example/src/app.js?5-10'></code></pre>
 
                         <aside class="notes">
                             Note that we can test this much easier now by passing in whatever
                             DOM nodes we want to test - loose coupling.
+
+                            Also point out naming of inline functions.
                         </aside>
 
                     </section>
 
                     <section>
-                        <h4>Search Example - Initialization</h4>
+                        <h4>Inline != Anonymous</h4>
 
-                        <pre><code data-trim class="javascript" data-noescape>
-    <span class="dim">jk.initSearch = function( form, input ) {
-        
-        $(form).on("submit", function submitHandler(e) {
-            e.preventDefault();
+                        <pre><code class='lang-javascript' data-srcbyline='example/src/app.js?22;24;26'></code></pre>
+                    </section>
 
-            jk.doSearch( $(input).val() );
-        });
+                    <section>
+                        <h4>Search Example - Redux</h4>
 
-    };</span>
-
-    // somewhere else in your code, maybe in your page...
-    $(document).ready( function initPage() {
-        jk.initSearch("#search-form", "#search-field");
-    });
-                        </code></pre>
+                        <pre><code class='lang-javascript' data-srcbyline='example/src/app.js?32;36-38;41;43-45;47-50;53-59'></code></pre>
 
                         <aside class="notes">
-                            Here we see how we pass in those DOM selectors
+                            Mention mocking ajax requests (will be mentioned later as well).
                         </aside>
 
                     </section>
@@ -396,54 +254,13 @@
                     <section>
                         <h4>Search Example - Redux</h4>
 
-                        <pre><code data-trim class="javascript" data-noescape>
-    jk.doSearch = function doSearch( value, callback ) {
-
-        <span class="dim">var xhr = $.ajax({
-            url: "/search",
-            data: { "query": value },</span>
-
-            success: function successHandler(data) {
-                jk.handleResults(data);
-                callback(data);
-            },
-
-            error: function errorHandler(xhr, status) {
-                var msg = jk.handleAjaxError(xhr, status);
-                callback({ "error": msg });
-            }
-
-        <span class="dim">});
-
-        return xhr;</span>
-    };
-                        </code></pre>
-
-                        <aside class="notes">
-                            We have the same problems here! We need to separate this functionality
-                            in order to test it independently.
-                            <br /><br />
-                            Mention mockjax for mocking ajax requests with jQuery.
-                        </aside>
-
+                        <pre><code class='lang-javascript' data-srcbyline='example/src/app.js?47-50;52-55'></code></pre>
                     </section>
 
                     <section>
                         <h4>Search Example - Redux</h4>
 
-                        <pre><code data-trim class="javascript" data-noescape>
-    jk.handleResults = function handleResults( results, resultsNode ) {
-        var items = "";
-
-        resultsNode = ( resultsNode || $("#search-results") );
-
-        results.forEach( function resultLoop( item, index ) {
-            items += "&lt;li> " + item + " &lt;/li>";
-        });
-
-        return resultsNode.append(items);
-    };
-                        </code></pre>
+                        <pre><code class='lang-javascript' data-srcbyline='example/src/app.js?62-72'></code></pre>
 
                         <aside class="notes">
                             There are LOTS of ways this could be improved, but the basic idea 
@@ -473,16 +290,20 @@
                         </aside>
                     </section>
 
-                    <section>
+                    <section data-transition='none'>
                         <p>
-                            <a href="http://pivotal.github.io/jasmine/" style="margin: 0 1em;"><img src="images/jasmine_logo.png" alt="Jasmine" /></a>
-                            <a href="http://visionmedia.github.io/mocha/" style="top: -40px; margin: 0 1em;">
-                                <span style="position: relative;font-style: normal;font-weight: 100;text-transform: lowercase;background: rgb(138, 99, 67);color: rgb(255, 255, 255);display: inline-block;padding: 48px 30px;font-size: 0.7em;-webkit-border-radius: 100px;-moz-border-radius: 100px;border-radius: 100px;">mocha</span>
+                            <a href="http://pivotal.github.io/jasmine/" style="margin-right: 3em;">
+                                <img src="images/jasmine_logo.png" alt="Jasmine" />
                             </a>
-                            <br />
-                            <a href="http://docs.seleniumhq.org/" style="margin: 0 1em; background-color:#455372;-webkit-border-radius: 7px;-moz-border-radius: 7px;border-radius: 7px; padding: 7px;"><img src="images/selenium-logo.png" alt="Selenium" style="position:relative; top: 10px;" /></a>
-                            <a href="http://qunitjs.com/" style="background-color: #390f39; -webkit-border-radius: 7px;-moz-border-radius: 7px;border-radius: 7px; padding: 15px;">
-                                <img src="images/logo-qunit.png" alt="QUnit" style="position:relative; top: 23px;" />
+                            <a href="http://visionmedia.github.io/mocha/" style="">
+                                <img src="images/mocha.png" alt="Mocha" />
+                            </a>
+                            <br>
+                            <a href="http://docs.seleniumhq.org/" style="">
+                                <img src="images/selenium.png" alt="Selenium" />
+                            </a>
+                            <a href="http://qunitjs.com/" style="left: 1.5em;">
+                                <img src="images/qunit.png" alt="QUnit" />
                             </a>
                         </p>
 
@@ -495,16 +316,20 @@
                         </aside>
                     </section>
 
-                    <section>
+                    <section data-transition='none'>
                         <p>
-                            <a href="http://pivotal.github.io/jasmine/" style="opacity:0.4; margin: 0 1em;"><img src="images/jasmine_logo.png" alt="Jasmine" /></a>
-                            <a href="http://visionmedia.github.io/mocha/" style="opacity:0.4; top: -40px; margin: 0 1em;">
-                                <span style="position: relative;font-style: normal;font-weight: 100;text-transform: lowercase;background: rgb(138, 99, 67);color: rgb(255, 255, 255);display: inline-block;padding: 48px 30px;font-size: 0.7em;-webkit-border-radius: 100px;-moz-border-radius: 100px;border-radius: 100px;">mocha</span>
+                            <a href="http://pivotal.github.io/jasmine/" style="margin-right: 3em;">
+                                <img src="images/jasmine_logo.png" alt="Jasmine" style="opacity:0.5">
                             </a>
-                            <br />
-                            <a href="http://docs.seleniumhq.org/" style="opacity:0.4; margin: 0 1em; background-color:#455372;-webkit-border-radius: 7px;-moz-border-radius: 7px;border-radius: 7px; padding: 7px;"><img src="images/selenium-logo.png" alt="Selenium" style="position:relative; top: 10px;" /></a>
-                            <a href="http://qunitjs.com/" style="background-color: #390f39; -webkit-border-radius: 7px;-moz-border-radius: 7px;border-radius: 7px; padding: 15px;">
-                                <img src="images/logo-qunit.png" alt="QUnit" style="position:relative; top: 23px;" />
+                            <a href="http://visionmedia.github.io/mocha/">
+                                <img src="images/mocha.png" alt="Mocha" style="opacity:0.5">
+                            </a>
+                            <br>
+                            <a href="http://docs.seleniumhq.org/">
+                                <img src="images/selenium.png" alt="Selenium" style="opacity:0.5">
+                            </a>
+                            <a href="http://qunitjs.com/" style="left: 1.5em;">
+                                <img src="images/qunit.png" alt="QUnit" />
                             </a>
                         </p>
 
@@ -525,7 +350,7 @@
                 <section>
 
                     <section>
-                        <h3 style="text-transform: none;">Setting up QUnit</h3>
+                        <h3>Setting up QUnit</h3>
 
                         <aside class="notes">
                             Show web site, discuss that there are NO dependencies, and only two 
@@ -536,28 +361,7 @@
                     <section>
                         <h3>A Minimal Test File</h3>
 
-                        <pre><code data-trim class="html" data-noescape>
-    &lt;!doctype html>
-    &lt;html>
-        &lt;head>
-            &lt;link rel="stylesheet" href="lib/qunit-1.12.0.css">
-        &lt;/head>
-        &lt;body>
-            &lt;div id="qunit">&lt;/div>      &lt;!-- required! -->
-            &lt;div id="qunit-fixture">    &lt;!-- required! -->
-                &lt;!-- HTML to be reset for each test -->
-            &lt;/div>
-
-            &lt;script src="lib/qunit-1.12.0.js">&lt;/script>
-            &lt;script> // QUnit options (via QUnit.config...) &lt;/script>
-
-            &lt;script src="path/to/source-code.js">&lt;/script>
-            &lt;!-- more source files under test -->
-
-            &lt;script src="path/to/tests.js">&lt;/script>
-        &lt;/body>
-    &lt;/html>
-                        </code></pre>
+                        <pre><code class='lang-html' data-srcbyline='example/tests/example.html?1-3;5-10;13;46-49;53-54'></code></pre>
 
                         <aside class="notes">
                             Talk about overall structure, but details are in following slides
@@ -567,59 +371,18 @@
                     <section>
                         <h3>A Minimal Test File</h3>
 
-                        <pre><code data-trim class="html" data-noescape>
-    &lt;!doctype html>
-    &lt;html>
-        <strong>&lt;head>
-            &lt;link rel="stylesheet" href="lib/qunit-1.12.0.css">
-        &lt;/head></strong>
-    <span class="dim">    &lt;body>
-            &lt;div id="qunit">&lt;/div>      &lt;!-- required! -->
-            &lt;div id="qunit-fixture">    &lt;!-- required! -->
-                &lt;!-- HTML to be reset for each test -->
-            &lt;/div>
-
-            &lt;script src="lib/qunit-1.12.0.js">&lt;/script>
-            &lt;script> // QUnit options (via QUnit.config...) &lt;/script>
-
-            &lt;script src="path/to/source-code.js">&lt;/script>
-            &lt;!-- more source files under test -->
-
-            &lt;script src="path/to/tests.js">&lt;/script>
-        &lt;/body></span>
-    &lt;/html>
-                        </code></pre>
+                        <pre><code class='lang-html' data-srcbyline='example/tests/example.html?3;5-7;11-13;50-54'></code></pre>
 
                         <aside class="notes">
                             Just a regular HTML document, so you can put anything you need in the head.
+                            Here we see how to include the QUnit library files
                         </aside>
                     </section>
 
                     <section>
                         <h3>A Minimal Test File</h3>
 
-                        <pre><code data-trim class="html" data-noescape>
-    <span class="dim">&lt;!doctype html>
-    &lt;html>
-        &lt;head>
-            &lt;link rel="stylesheet" href="lib/qunit-1.12.0.css">
-        &lt;/head></span>
-        &lt;body>
-            <strong>&lt;div id="qunit">&lt;/div>      &lt;!-- required! -->
-            &lt;div id="qunit-fixture">    &lt;!-- required! -->
-                &lt;!-- HTML to be reset for each test -->
-            &lt;/div></strong>
-
-    <span class="dim">        &lt;script src="lib/qunit-1.12.0.js">&lt;/script>
-            &lt;script> // QUnit options (via QUnit.config...) &lt;/script>
-
-            &lt;script src="path/to/source-code.js">&lt;/script>
-            &lt;!-- more source files under test -->
-
-            &lt;script src="path/to/tests.js">&lt;/script></span>
-        &lt;/body>
-    <span class="dim">&lt;/html></span>
-                        </code></pre>
+                        <pre><code class='lang-html' data-srcbyline='example/tests/example.html?7-12;53'></code></pre>
 
                         <aside class="notes">
                             Mention that the test results and general UI go in the "#qunit" div
@@ -630,28 +393,7 @@
                     <section>
                         <h3>A Minimal Test File</h3>
 
-                        <pre><code data-trim class="html" data-noescape>
-    <span class="dim">&lt;!doctype html>
-    &lt;html>
-        &lt;head>
-            &lt;link rel="stylesheet" href="lib/qunit-1.12.0.css">
-        &lt;/head></span>
-        &lt;body>
-    <span class="dim">        &lt;div id="qunit">&lt;/div>      &lt;!-- required! -->
-            &lt;div id="qunit-fixture">    &lt;!-- required! -->
-                &lt;!-- HTML to be reset for each test -->
-            &lt;/div></span>
-
-            <strong>&lt;script src="lib/qunit-1.12.0.js">&lt;/script>
-            &lt;script> // QUnit options (via QUnit.config...) &lt;/script>
-
-            &lt;script src="path/to/source-code.js">&lt;/script>
-            &lt;!-- more source files under test -->
-
-            &lt;script src="path/to/tests.js">&lt;/script></strong>
-        &lt;/body>
-    <span class="dim">&lt;/html></span>
-                        </code></pre>
+                        <pre><code class='lang-html' data-srcbyline='example/tests/example.html?7;10-12;47-50;53'></code></pre>
 
                         <aside class="notes">
                             Mention using QUnit.config, referencing more than one source file,
@@ -678,24 +420,13 @@
                     <section>
                         <h3>Test Structure</h3>
 
-                        <pre><code data-trim class="javascript" data-noescape>
-    // in our source file...
+                        <p><em>In our <code>app.js</code> file...</em></p>
+                        <pre><code class='lang-javascript' data-srcbyline='example/src/app.js?2-3;13;24;29'></code></pre>
 
-    <span class="dim">window.jk = (window.jk || {});
-
-    jk.initSearch = function( form ) {
-        ....
-    };</span>
-                        </code></pre>
-
-                        <pre><code data-trim class="javascript" data-noescape>
-    // in our test file...
-
-    test("Namespace exists", function() {
-        ok(jk, "The 'jk' namespace exists");
-        ok((typeof jk.initSearch === "function"), "The initSearch method exists");
-    });
-                        </code></pre>
+                        <div class='fragment'>
+                            <p><em>In our <code>tests.js</code> file...</em></p>
+                            <pre><code class='lang-javascript' data-srcbyline='example/tests/core-tests.js?18-21'></code></pre>
+                        </div>
 
                         <aside class="notes">
                             Discuss the simple "truthy" test and the structure of the test call.
@@ -706,7 +437,7 @@
                     <section>
                         <h3 style="text-transform: none;">QUnit UI</h3>
 
-                        <iframe src="example/tests/show-structure.html" height="400" style="width:90%;background-color:#fff;"></iframe>
+                        <iframe src="example/tests/core.html" height="400" style="width:90%;background-color:#fff;"></iframe>
                     </section>
 
                     <section>
@@ -720,43 +451,49 @@
                     </section>
 
                     <section>
-                        <h3>Various Assertions</h3>
+                        <h3>Various Assertions - OK</h3>
 
-                        <pre><code data-trim class="javascript" data-noescape>
-    test("Assertion types", function() {
-        ok(123, "Truthy");
+                        <pre><code class='lang-javascript' data-srcbyline='example/tests/assertions.js?3-6;67-68'></code></pre>
 
-        equal(1, "1", "uuh... sure, why not.");
-        notEqual(1, 2, "Duh.");
-        
-        strictEqual(1, "1", "nope nope nope");
-        notStrictEquAL(1, "1", "There you go...");
-
-        deepEqual(window, { ... }, "Please don't do this");
-        notDeepEqual({}, { "foo": "bar" }, "No matchy.");
-
-        throws(
-            function() {
-                // some code that you *expect* to throw an error
-            },
-            "Woohoo! It failed!"
-        );
-    });
-                        </code></pre>
+                        <pre class='fragment'><code class='lang-javascript' data-srcbyline='example/tests/assertions.js?8-11'></code></pre>
                     </section>
 
-                     <section>
+                    <section>
+                        <h3>Various Assertions - (in)equality</h3>
+
+                        <pre><code class='lang-javascript' data-srcbyline='example/tests/assertions.js?13-14'></code></pre>
+
+                        <pre class='fragment'><code class='lang-javascript' data-srcbyline='example/tests/assertions.js?16-17'></code></pre>
+
+                        <pre class='fragment'><code class='lang-javascript' data-srcbyline='example/tests/assertions.js?19-21'></code></pre>
+                    </section>
+
+                    <section data-transition="fade">
+                        <h3>Various Assertions - properties</h3>
+
+                        <pre><code class='lang-javascript' data-srcbyline='example/tests/assertions.js?23-31'></code></pre>
+                    </section>
+
+                    <section data-transition="fade">
+                        <h3>Various Assertions - properties</h3>
+
+                        <pre><code class='lang-javascript' data-srcbyline='example/tests/assertions.js?23-30;33-34'></code></pre>
+                    </section>
+
+                    <section>
+                        <h3>Various Assertions - errors</h3>
+
+                        <pre><code class='lang-javascript' data-srcbyline='example/tests/assertions.js?37-44'></code></pre>
+
+                        <pre class='fragment'><code class='lang-javascript' data-srcbyline='example/tests/assertions.js?47-48;51-55'></code></pre>
+
+                        <pre class='fragment'><code class='lang-javascript' data-srcbyline='example/tests/assertions.js?58-59;62-66'></code></pre>
+                    </section>
+
+                    <section>
                         <h3>Test Modules</h3>
 
-                        <pre><code data-trim class="javascript" data-noescape>
-    module("These are tests for X");
-    test("test X-one", function() { /* assertions */ });
-    test("test X-two", function() { /* assertions */ });
-
-    module("These are tests for Y");
-    test("test Y-one", function() { /* assertions */ });
-    test("test Y-two", function() { /* assertions */ });
-                        </code></pre>
+                        <pre><code class='lang-javascript' data-srcbyline='example/tests/show-modules.html?18-24'></code></pre>
                     </section>
 
                     <section>
@@ -764,6 +501,24 @@
 
                         <iframe src="example/tests/show-modules.html" height="370" style="width:90%;background-color:#fff;"></iframe>
                     </section>
+
+                    <section>
+                        <h2>WRITE MOAR TESTS</h2>
+                    </section>
+
+                    <section>
+                        <h3>MOAR TESTS</h3>
+
+
+                        <!-- START HERE -->
+
+
+                        <pre><code class='lang-javascript' data-srcbyline='example/tests/assertions.js?'></code></pre>
+                    </section>
+
+
+
+
 
                     <section>
                         <h3>Testing Lifecycle</h3>

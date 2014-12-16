@@ -13,7 +13,7 @@ QUnit.module("Searching", {
 
         $.mockjax({
             url: "/api/search",
-            query: { query: "foobar" },
+            data: { query: "foobar" },
             dataType: "json",
             response: function() {
                 var resp = { "results": ["result one", "result two"] };
@@ -23,7 +23,7 @@ QUnit.module("Searching", {
 
         $.mockjax({
             url: "/api/search",
-            query: { query: "http-error" },
+            data: { query: "http-error" },
             status: 400,
             dataType: "json",
             response: function() {
@@ -94,7 +94,7 @@ QUnit.test("Handling results - two", function(assert) {
 
     node.find("li").each(function(i) {
         
-        assert.equal($(this).text(), results[i], "Correct text in result element " + i);
+        assert.equal($(this).text().trim(), results[i], "Correct text in result element " + i);
 
     });
 
@@ -105,7 +105,7 @@ QUnit.test("Successful search", function(assert) {
     
     var done = assert.async();
 
-    QUnit.expect(3);
+    QUnit.expect(1);
 
     jk.doSearch("foobar", function(data) {
         
@@ -123,11 +123,14 @@ QUnit.test("Successful search", function(assert) {
 
 QUnit.test("Bad search", function(assert) {
     
-    var done = assert.async();
+    var done = assert.async(),
+        expected = { error: "400 Bad request", status: 400 };
 
     jk.doSearch("http-error", function(data) {
-        
-        assert.deepEqual(data.error, { error: { /* ... */ } }, "There was an expected error");
+
+        assert.equal(data.error, expected.error, "There was an expected error message");
+        assert.deepEqual(data, expected, "There was an expected error object");
+        assert.propEqual(data, expected, "There were expected error properties");
 
         // Other assertions...
         // For example, assert that the jk.handleResults() method was NOT called

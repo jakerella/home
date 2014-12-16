@@ -10,7 +10,7 @@ $(document).ready( function initPage() {
 });
 
 
-jk.initSearch = function initSearch( form, input ) {
+jk.initSearch = function( form, input ) {
     var $form = $(form),
         $input = $(input);
 
@@ -21,7 +21,7 @@ jk.initSearch = function initSearch( form, input ) {
 
     $form.on("submit", function submitHandler(e) {
         e.preventDefault();
-
+        // ...
         jk.doSearch( $input.val() );
     });
 
@@ -29,7 +29,7 @@ jk.initSearch = function initSearch( form, input ) {
 };
 
 
-jk.doSearch = function doSearch( query, callback ) {
+jk.doSearch = function( query, callback ) {
     if ( !query || !query.length ) {
         jk.showError("Please enter a search query!");
     }
@@ -73,7 +73,7 @@ jk.handleResults = function( results, resultsNode ) {
 
 
 
-jk.showError = function showError( msg, msgNode ) {
+jk.showError = function( msg, msgNode ) {
     var $error;
 
     if (!msg || !msg.length) { return null; }
