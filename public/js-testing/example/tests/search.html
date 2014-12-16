@@ -15,21 +15,23 @@
             <div id="messages"></div>
             <form id="the-form"><input type="text" id="query" /></form>
             <ul id="results"></ul>
-
+            
         </div> <!-- qunit-fixture -->
-
+        
+        <!--  ...  -->
+        
         <script src='lib/jquery.min.js'></script>
         <script src='lib/jquery-mockjax.js'></script>
         <script src='lib/qunit.js'></script>
-
+        
         <script>
             // this option helps tests not overlap each other, run in the wrong order, etc
             // (even though our tests *should* be able to run in isolation)
             QUnit.config.reorder = false;
         </script>
-
+        
         <script src='../src/app.js'></script>
-
+        
         <script src='search-tests.js'></script>
     </body>
 </html>

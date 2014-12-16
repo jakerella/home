@@ -59,3 +59,25 @@ aside.title-text h3 {
 .reveal pre code {
     max-height: 600px;
 }
+
+.reveal .xml .javascript {
+    opacity: 1;
+}
+
+ul.file-structure ul { margin-left: 0.7em; }
+ul.file-structure li { list-style: none; margin: 0.25em 0; }
+ul.file-structure .folder {
+    list-style-image: url('/images/folder.png');
+}
+ul.file-structure .folder-open {
+    list-style-image: url('/images/folder-open.png');
+}
+ul.file-structure .file {
+    list-style-image: url('/images/file.png');
+}
+.reveal pre .xml .javascript { opacity: 1; }
+.reveal blockquote {
+    border: none;
+    color: #555;
+    box-shadow: none;
+}

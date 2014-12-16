@@ -509,16 +509,104 @@
                     <section>
                         <h3>MOAR TESTS</h3>
 
-
-                        <!-- START HERE -->
-
-
-                        <pre><code class='lang-javascript' data-srcbyline='example/tests/assertions.js?'></code></pre>
+                        <pre><code class='lang-html' data-srcbyline='example/tests/search.html?11-21;36'></code></pre>
                     </section>
 
+                    <section>
+                        <h3>MOAR TESTS - THE SETUP</h3>
+
+                        <pre><code class='lang-html' data-srcbyline='example/tests/search.html?11;20-26;33-36'></code></pre>
+                    </section>
+
+                    <section>
+                        <h3>MOAR TESTS - <span style='text-transform:none;'>initSearch()</h3>
+
+                        <pre><code class='lang-javascript' data-srcbyline='example/tests/search-tests.js?51-53;58-59'></code></pre>
+                    </section>
+
+                    <section>
+                        <h3>MOAR TESTS - <span style='text-transform:none;'>initSearch()</h3>
+
+                        <pre><code class='lang-javascript' data-srcbyline='example/tests/search-tests.js?51-59'></code></pre>
+                    </section>
+
+                    <section>
+                        <h3>MOAR TESTS - <span style='text-transform:none;'>initSearch()</h3>
+
+                        <pre><code class='lang-javascript' data-srcbyline='example/tests/search-tests.js?62-73'></code></pre>
+                    </section>
+
+                    <section>
+                        <h3>MOAR TESTS - <span style='text-transform:none;'>handleResults()</h3>
+
+                        <pre><code class='lang-javascript' data-srcbyline='example/tests/search-tests.js?75-82'></code></pre>
+                    </section>
+
+                    <section>
+                        <h3>Asynchronous Tests</h3>
+
+                        <p class="fragment" style="margin-top:2em;"><em>
+                            "But asynchronous testing is difficult..."
+                        </em></p>
+
+                        <aside class="notes">
+                            Discuss the issue, that the anonymous function that IS the test will 
+                            silently fail because the function returns before the async action
+                            is finished (and then the next test will start).
+                        </aside>
+                    </section>
+
+                    <section data-background="#fff">
+                        <img src="images/meme-test-all.jpg" alt="Meme: Test all the things." />
+                    </section>
+
+                    <section>
+                        <h3>Asynchronous Tests</h3>
+
+                        <pre><code class='lang-javascript' data-srcbyline='example/src/app.js?41;43;46;47;50-51;56'></code></pre>
+
+                        <pre class='fragment'><code class='lang-javascript' data-srcbyline='example/tests/search-tests.js?104;109-114;119-119;121'></code></pre>
+                    </section>
+
+                    <section>
+                        <h3>Asynchronous Tests</h3>
+
+                        <pre><code class='lang-javascript' data-srcbyline='example/tests/search-tests.js?104-106;109-114;116-119;121'></code></pre>
+                    </section>
+
+                    <section>
+                        <h3>Asynchronous Tests</h3>
+
+                        <p style="margin-top:1em;"><em>
+                            "But you said not to rely on external services!"
+                        </em></p>
+
+                        <p class="fragment" style="margin-top:1em;">
+                            <a href="http://sinonjs.org">Sinon</a> |
+                            <a href="https://github.com/appendto/jquery-mockjax">jQuery Mockjax</a> |
+                            <br>
+                            <a href="https://github.com/pivotal/jasmine-ajax">Jasmine-ajax</a> |
+                            <a href="https://docs.angularjs.org/api/ngMock/service/$httpBackend">angular ng-mocks</a>
+                        </p>
+                    </section>
+
+                    <section>
+                        <h3>Asynchronous Tests <br> Mocking Ajax</h3>
+
+                        <pre><code class='lang-javascript' data-srcbyline='example/tests/search-tests.js?14-19'></code></pre>
+
+                        <pre class='fragment'><code class='lang-javascript' data-srcbyline='example/tests/search-tests.js?21-27'></code></pre>
+
+                        <aside class='notes'>
+                            Discuss where these calls should be located, it will be covered in the next section
+                        </aside>
+                    </section>
+
+                </section>
 
 
 
+                <section>
 
                     <section>
                         <h3>Testing Lifecycle</h3>
@@ -529,183 +617,57 @@
                     <section>
                         <h3>Testing Lifecycle</h3>
 
-                        <pre><code data-trim class="xml" data-noescape>
-    <span class="dim">&lt;!doctype html>
-    &lt;html>
-        &lt;head> ... &lt;/head>
-        &lt;body>
-            ...
-            &lt;script src="lib/qunit-1.12.0.js">&lt;/script></span>
-            &lt;script>
-                // QUnit options (via QUnit.config...)
-
-                QUnit.begin(function() {
-                    // code to run before the suite begins
-                });
-
-            &lt;/script>
-
-            <span class="dim">...
-        &lt;/body>
-    &lt;/html></span>
-                        </code></pre>
+                        <pre><code class='lang-html' data-srcbyline='example/tests/example.html?7;11-13;16-22;25;45;50-53'></code></pre>
                     </section>
 
                     <section>
                         <h3>Testing Lifecycle</h3>
 
-                        <pre><code data-trim class="xml" data-noescape>
-    <span class="dim">&lt;script src="lib/qunit-1.12.0.js">&lt;/script></span>
-    &lt;script>
-        // For the entire suite
-        QUnit.begin(function() { ... });
-        QUnit.done(function(failed, passed, total, runtime) { ... });
-
-        // For each module
-        QUnit.moduleStart(function(name) { ... });
-        QUnit.moduleDone(function(name, failed, passed, total) { ... });
-
-        // For each test
-        QUnit.testStart(function(name, moduleName) { ... });
-        QUnit.testDone(function(name, moduleName, failed, passed, total, duration) { ... });
-    &lt;/script>
-                        </code></pre>
+                        <pre><code class='lang-html' data-srcbyline='example/tests/example.html?27-33'></code></pre>
                     </section>
-
-
+                    
                     <section>
-                        <h3>Individual Module Lifecycle</h3>
+                        <h3>Testing Lifecycle</h3>
 
-                        <pre class="fragment"><code data-trim class="javascript" data-noescape>
-    <span class="dim">module("These are tests for X");</span>
-    <span class="fragment">module("These are tests for X", {
-        setup: function() {
-            // executed BEFORE each test in this module
-        },
-        teardown: function() {
-            // executed AFTER each test in this module (success or failure)
-        }
-    });</span>
-    <span class="dim">
-    test("test X-one", function() { /* assertions */ });
-    test("test X-two", function() { /* assertions */ });</span>
-                        </code></pre>
-
-                        <aside class="notes">
-                            Mention that there are also callbacks you can set on the global
-                            QUnit object for handling overall suite begin and end, and for 
-                            every test in the suite (regardless of module).
-                        </aside>
+                        <pre><code class='lang-html' data-srcbyline='example/tests/example.html?35-41'></code></pre>
                     </section>
-
+                    
                     <section>
-                        <h3>Asynchronous Tests</h3>
-
-                        <blockquote class="fragment" style="margin-top:2em;">
-                            "But asynchronous tasks can't be tested in isolation..."
-                        </blockquote>
-
-                        <aside class="notes">
-                            Discuss the issue, that the anonymous function that IS the test will 
-                            silently fail because the function returns before the async action
-                            is finished (and then the next test will start).
-                        </aside>
+                        <h2>Idempotency</h2>
                     </section>
-
+                    
                     <section>
-                        <img src="images/meme-test-all.jpg" alt="Meme: Test all the things." />
+                        <h3>Module Lifecycle</h3>
+
+                        <pre><code class='lang-html' data-srcbyline='example/tests/show-modules.html?18;21-22'></code></pre>
+                        
+                        <pre class='fragment'><code class='lang-javascript' data-srcbyline='example/tests/search-tests.js?8-10;12;29-30;33;35;39;41-42'></code></pre>
                     </section>
-
+                    
                     <section>
-                        <h3>Asynchronous Tests</h3>
-
-                        <pre><code data-trim class="javascript" data-noescape>
-    jk.doSearch = function( query, callback ) {
-        ...
-        var xhr = $.ajax({
-            ...
-            // call jk.handleResults() on success
-        });
-        ...
-    };
-                        </code></pre>
-                    </section>
-
-                    <section>
-                        <h3>Asynchronous Tests</h3>
-
-                        <pre><code data-trim class="javascript" data-noescape>
-    <span class="dim">jk.doSearch = function( query, callback ) {
-        ...
-        var xhr = $.ajax({
-            ...
-            // call jk.handleResults() on success
-        });
-        ...
-    };</span>
-                        </code></pre>
-
-                        <pre><code data-trim class="javascript" data-noescape>
-    <strong>asyncTest</strong>("Search test", function() {
-        jk.doSearch("foobar", function(data) {
-
-            deepEqual(data, { "results": ["result one", "result two"] }, "Data is correct");
-            // other assertions
-            ...
-            <strong>start();</strong> // tell QUnit to keep going
-
-        });
-    });
-                        </code></pre>
-                    </section>
-
-                    <section>
-                        <h3>Asynchronous Tests</h3>
-
-                        <pre><code data-trim class="javascript" data-noescape>
-    <span class="dim">asyncTest("Search test", function() {</span>
-        <strong>expect(3);</strong> // test will fail if 3 assertions are not executed
-
-        <span class="dim">jk.doSearch("foobar", function(data) {</span>
-
-            deepEqual(data, { "results": ["result one", "result two"] }, "Data is correct");
-            // other assertions
-            ...
-            <span class="dim">start(); // tell QUnit to keep going
-
-        });
-    });</span>
-                        </code></pre>
-                    </section>
-
-                    <section>
-                        <h3>Asynchronous Tests</h3>
-
-                        <blockquote style="margin-top:1em;">
-                            "But I don't want to rely on a server for client tests..."
-                        </blockquote>
-
-                        <p class="fragment">
-                            <a href="http://sinonjs.org">Sinon</a> | 
-                            <a href="https://github.com/appendto/jquery-mockjax">Mockjax</a> | 
-                            <a href="https://github.com/pivotal/jasmine-ajax">Jasmine-ajax</a>
-                        </p>
+                        <h3>Module Lifecycle</h3>
+                        
+                        <pre><code class='lang-javascript' data-srcbyline='example/tests/search-tests.js?8-10;14-19;29-30;33;37;39;41-42'></code></pre>
                     </section>
 
                 </section>
 
 
-
-                <section>
+                <section data-background=''>
                     <h3>Cross Browser Testing</h3>
                     <p class="fragment">
-                        <br />
-                        <a href="http://www.browserstack.com" style="margin: 0 1em; background-color:#4c4640;-webkit-border-radius: 7px;-moz-border-radius: 7px;border-radius: 7px; top: -35px; padding: 7px;"><img src="images/browserstack-logo.png" alt="BrowserStack" style="position:relative; top: 20px;" /></a>
-                        <a href="https://saucelabs.com" style="margin: 0 1em; position:relative; top:-30px;"><img src="images/sauce-labs-logo.png" alt="Sauce Labs" /></a>
-                        <br />
-                        <a href="https://github.com/airportyh/testem" style="margin: 0 1em;">Test 'em</a>
-                        <a href="https://github.com/jquery/testswarm/wiki" style="margin: 0 1em;">TestSwarm</a>
-                        <a href="https://code.google.com/p/selenium/wiki/RemoteWebDriverServer" style="margin: 0 1em; background-color:#455372;-webkit-border-radius: 7px;-moz-border-radius: 7px;border-radius: 7px; padding: 7px;"><img src="images/selenium-logo.png" alt="Selenium" style="position:relative; top: 10px;" /></a>
+                        <br>
+                        <a href="http://www.browserstack.com" style="margin-right:2em;">
+                            <img src="images/browserstack.png" alt="BrowserStack">
+                        </a>
+                        <a href="https://saucelabs.com" style="top:-20px;">
+                            <img src="images/sauce-labs-logo.png" alt="Sauce Labs">
+                        </a>
+                        <br>
+                        <a href="https://code.google.com/p/selenium/wiki/RemoteWebDriverServer" style="margin-right:2em;left:-40px;">
+                            <img src="images/selenium.png" alt="Selenium">
+                        </a>
+                        <a href="https://github.com/airportyh/testem" style="top:-40px;">Test 'em</a>
                     </p>
 
                     <aside class="notes">
@@ -757,12 +719,12 @@
 
                         <p style="text-align:center;">
                             <a href="http://nodejs.org" style="background-color:#46483e; -webkit-border-radius: 7px;-moz-border-radius: 7px;border-radius: 7px; padding: 12px;">
-                                <img src="images/node-logo.png" alt="NodeJS" style="position:relative; top:18px;" />
+                                <img src="images/node-logo.png" alt="NodeJS" style="position:relative; top:34px;" />
                             </a>
                         </p>
 
-                        <pre class="fragment"><code class="bash" data-noescape>
-    ~/myproject$ <strong>npm install -g grunt-cli</strong>
+                        <pre class="fragment" style="margin-top: 2em;"><code class="bash" data-noescape>
+~/myproject$ <strong>npm install -g grunt-cli</strong>
                         </code></pre>
 
                         <aside class="notes">
@@ -813,12 +775,13 @@
                     <section>
                         <h3>Node Package File</h3>
 
-                        <ul class="fragment">
+                        <ul>
                             <li>Describe the project</li>
-                            <li>Identify dependencies</li>
-                            <li>Specify execution commands</li>
-                            <li>Identify authors &amp; licenses</li>
-                            <li>etc, etc, etc</li>
+                            <li><strong>Identify dependencies</strong></li>
+                            <li style="font-size:0.9em">Specify execution commands</li>
+                            <li style="font-size:0.8em">Identify authors &amp; licenses</li>
+                            <li style="font-size:0.7em">Specify important links</li>
+                            <li style="font-size:0.6em">etc, etc, etc</li>
                         </ul>
 
                         <aside class="notes">
@@ -829,19 +792,11 @@
                     <section>
                         <h3>Setting Up Your Project</h3>
 
-                        <pre><code data-trim class="javascript" data-noescape>
-    // in ~/myproject/package.json
-    {
-        "name": "my-project",
-        "version": "0.0.1",
-        "devDependencies": {
-            "grunt": "~0.4.1"
-        }
-    }
-                        </code></pre>
+                        <p class='fine'>in ~/myproject/package.json</p>
+                        <pre><code class='lang-javascript' data-srcbyline='example/package.json?1-5;8-9'></code></pre>
 
                         <pre class="fragment"><code class="bash" data-noescape>
-    ~/myproject$ <strong>npm install</strong>
+~/myproject$ <strong>npm install</strong>
                         </code></pre>
 
                         <aside class="notes">
@@ -897,23 +852,8 @@
                     <section>
                         <h3>Gruntfile Structure</h3>
 
-                        <pre><code data-trim class="javascript" data-noescape>
-    // in ~/myproject/Gruntfile.js
-    module.exports = function(grunt) {
-
-        // Task Configuration
-        grunt.initConfig({
-            pkg: grunt.file.readJSON("package.json"),
-
-            // TODO: define some tasks
-
-        });
-
-        // Register our tasks
-        grunt.registerTask("default", [ ]);
-
-    };
-                        </code></pre>
+                        <p class='fine'>in ~/myproject/Gruntfile.js</p>
+                        <pre><code class='lang-javascript' data-srcbyline='example/Gruntfile.js?3-8;41-44;46-47;54;56;58'></code></pre>
 
                         <aside class="notes">
                             Note that this is the general structure of a Gruntfile, but a lot will 
@@ -943,75 +883,21 @@
                     <section>
                         <h3>Modified package.json</h3>
 
-                        <pre><code data-trim class="javascript" data-noescape>
-    // ~/myproject/package.json
-    <span class="dim">{
-        "name": "my-project",
-        "version": "0.0.1",
-        "devDependencies": {
-            "grunt": "~0.4.1",</span>
-            "grunt-contrib-qunit": "~0.2.1"
-        <span class="dim">}
-    }</span>
-                        </code></pre>
+                        <p class='fine'>in ~/myproject/package.json</p>
+                        <pre><code class='lang-javascript' data-srcbyline='example/package.json?1-6;8-9'></code></pre>
 
                     </section>
 
                     <section>
                         <h3>Grunt Tasks</h3>
 
-                        <pre><code data-trim class="javascript" data-noescape>
-    <span class="dim">module.exports = function(grunt) {
-        grunt.initConfig({
-            pkg: grunt.file.readJSON("package.json"),</span>
-
-            <span class="fragment">qunit: {           // task name
-                basic: {       // target name
-                    options: {
-                        urls: [ "tests/core.html" ]
-                    }
-                }
-            }</span>
-
-        <span class="dim">});</span>
-
-        <span class="fragment">// Load the npm module
-        grunt.loadNpmTasks("grunt-contrib-qunit");</span>
-
-        grunt.registerTask("default", [ <span class="fragment">"qunit"</span> ]);
-    <span class="dim">};</span>
-                        </code></pre>
-
-                        <aside class="notes">
-                            
-                        </aside>
+                        <pre><code class='lang-javascript' data-srcbyline='example/Gruntfile.js?5-6;9-16;26;42-43;45-46;48'></code></pre>
                     </section>
 
                     <section>
                         <h3>Grunt Tasks</h3>
 
-                        <pre><code data-trim class="javascript" data-noescape>
-    <span class="dim">module.exports = function(grunt) {
-        grunt.initConfig({
-            pkg: grunt.file.readJSON("package.json"),</span>
-
-            qunit: { // task name
-                // target name &amp; single option
-                basic: [ "tests/core.html" ]
-            }
-
-        <span class="dim">});
-
-        // Load the npm module
-        grunt.loadNpmTasks("grunt-contrib-qunit");
-
-        grunt.registerTask("default", [ "qunit" ]);
-    };</span>
-                        </code></pre>
-
-                        <aside class="notes">
-                            
-                        </aside>
+                        <pre><code class='lang-javascript' data-srcbyline='example/Gruntfile.js?5-6;9;17-19;24;26;42-43;'></code></pre>
                     </section>
 
                     <section>
@@ -1024,14 +910,14 @@
 
                     <section>
                         <p style="text-align:center; line-height:2.5em;">
-                            <a href="http://qunitjs.com/" style="background-color: #390f39; -webkit-border-radius: 7px;-moz-border-radius: 7px;border-radius: 7px; padding: 23px;">
-                                <img src="images/logo-qunit.png" alt="QUnit" style="position:relative; top: 23px;" />
+                            <a href="http://qunitjs.com/">
+                                <img src="images/qunit.png" alt="QUnit">
                             </a>
-                            <br />
-                            and
-                            <br />
-                            <a href="http://phantomjs.org" style="background-color:#43413e;-webkit-border-radius: 7px;-moz-border-radius: 7px;border-radius: 7px; padding: 23px;">
-                                <img src="images/phantomjs-logo.png" alt="PhantomJS" style="position:relative; top:22px;" />
+                            <br>
+                            <strong>and</strong>
+                            <br>
+                            <a href="http://phantomjs.org">
+                                <img src="images/phantomjs.png" alt="PhantomJS">
                             </a>
                         </p>
 
@@ -1043,14 +929,14 @@
                     <section>
                         <h3>Running QUnit with Grunt</h3>
 
-                        <pre><code data-trim class="no-highlight" data-noescape>
-    ~/myproject$ <strong>grunt qunit:basic</strong>
-    <span class="fragment dim">~/myproject$ <strong>grunt qunit</strong></span>
-    <span class="fragment"><span style="text-decoration:underline;">Running "qunit:basic" (qunit) task</span>
-    Testing tests/core.html .....<span style="color:green;">OK</span>
-    <span style="color:green;">>></span> 12 assertions passed (21ms)
+                        <pre style="background-color:#fff;"><code data-trim class="no-highlight" data-noescape>
+~/myproject$ <strong>grunt qunit:basic</strong>
+<span class="fragment dim">~/myproject$ <strong>grunt qunit</strong></span>
+<span class="fragment"><span style="text-decoration:underline;">Running "qunit:basic" (qunit) task</span>
+Testing tests/core.html .....<span style="color:green;">OK</span>
+<span style="color:green;">>></span> 12 assertions passed (21ms)
 
-    <span style="color:green;">Done, without errors.</span></span>
+<span style="color:green;">Done, without errors.</span></span>
                         </code></pre>
 
                         <aside class="notes">
@@ -1062,7 +948,7 @@
                     <section>
                         <h3>QUnit Errors</h3>
 
-                        <pre><code class="no-highlight" data-noescape>
+                        <pre style="background-color:#fff;"><code class="no-highlight" data-noescape>
     ~/myproject$ grunt qunit:basic
     <span style="text-decoration:underline;">Running "qunit:basic" (qunit) task</span>
     <strong>Testing tests/core.html ...<span style="color:red;">F</span>.</strong>
@@ -1083,24 +969,7 @@
                     <section>
                         <h3>Multiple Test Suites</h3>
 
-                        <pre class="fragment"><code data-trim class="javascript" data-noescape>
-    <span class="dim">module.exports = function(grunt) {
-        grunt.initConfig({
-            pkg: grunt.file.readJSON("package.json"),</span>
-
-            qunit: {
-                basic:  [ "tests/core.html" ],   // first target
-                search: [ "tests/search.html" ]  // second target
-            }
-
-        <span class="dim">});
-
-        // Load the npm module
-        grunt.loadNpmTasks("grunt-contrib-qunit");
-
-        grunt.registerTask("default", [ "qunit" ]);
-    };</span>
-                        </code></pre>
+                        <pre><code class='lang-javascript' data-srcbyline='example/Gruntfile.js?5-6;9;17;19-21;25-26;42-43;'></code></pre>
 
                         <aside class="notes">
                             Talk about how you would run each target separately, or all of them
@@ -1111,91 +980,22 @@
                     <section>
                         <h3>Multiple Test Files</h3>
 
-                        <pre><code data-trim class="javascript" data-noescape>
-    <span class="dim">module.exports = function(grunt) {
-        grunt.initConfig({
-            pkg: grunt.file.readJSON("package.json"),</span>
-
-            qunit: {
-                basic:  [ "tests/core.html" ],
-                search: [ "tests/search.html", "tests/search-results.html" ]
-            }
-
-        <span class="dim">});
-
-        // Load the npm module
-        grunt.loadNpmTasks("grunt-contrib-qunit");
-
-        grunt.registerTask("default", [ "qunit" ]);
-    };</span>
-                        </code></pre>
-
+                        <pre><code class='lang-javascript' data-srcbyline='example/Gruntfile.js?5-6;9;17;19-20;22;25-26;42-43;'></code></pre>
                     </section>
-
+                    
                     <section>
-                        <h3>Wild Cards</h3>
+                        <h3>Multiple Test Files</h3>
 
-                        <pre><code data-trim class="javascript" data-noescape>
-    <span class="dim">module.exports = function(grunt) {
-        grunt.initConfig({
-            pkg: grunt.file.readJSON("package.json"),</span>
-
-            qunit: {
-                basic:  [ "tests/core.html" ],
-                search: [ "tests/search/*.html" ]
-            }
-
-        <span class="dim">});
-
-        // Load the npm module
-        grunt.loadNpmTasks("grunt-contrib-qunit");
-
-        grunt.registerTask("default", [ "qunit" ]);
-    };</span>
-                        </code></pre>
-
-                        <aside class="notes">
-                            Talk about organizing tests into directories and how this allows for
-                            additional test files without changing the Gruntfile.
-                        </aside>
-                    </section>
-
-                    <section>
-                        <h3>Globbing Test Files</h3>
-
-                        <pre><code data-trim class="javascript" data-noescape>
-    <span class="dim">module.exports = function(grunt) {
-        grunt.initConfig({
-            pkg: grunt.file.readJSON("package.json"),</span>
-
-            qunit: {
-                basic:  [ "tests/core.html" ],
-                search: [ "tests/search/**/*-tests.html" ]
-            }
-
-        <span class="dim">});
-
-        // Load the npm module
-        grunt.loadNpmTasks("grunt-contrib-qunit");
-
-        grunt.registerTask("default", [ "qunit" ]);
-    };</span>
-                        </code></pre>
-
-                        <aside class="notes">
-                            Note that this will only match "something-tests.html" inside of the 
-                            "tests/search" directory or any subdirectory therein.
-                            <br />
-                            Also mention that this file globbing is common to all Grunt tasks
-                        </aside>
+                        <pre><code class='lang-javascript' data-srcbyline='example/Gruntfile.js?5-6;9;17;19-20;23;25-26;42-43;'></code></pre>
                     </section>
 
                     <section>
                         <h3>Running Task Targets</h3>
 
-                        <pre><code data-trim class="no-highlight" data-noescape>
-    ~/myproject$ grunt qunit:basic
-    ~/myproject$ grunt qunit:search
+                        <pre style="background-color:#fff;"><code data-trim class="no-highlight" data-noescape>
+~/myproject$ <strong>grunt qunit:basic</strong>
+<span class='fragment'>~/myproject$ <strong>grunt qunit:search</strong></span>
+<span class='fragment'>~/myproject$ <strong>grunt qunit</strong></span>
                         </code></pre>
 
                     </section>
@@ -1203,7 +1003,18 @@
                 </section>
 
 
-
+                <section>
+                    <h2>Thank You!</h2>
+                    <h3 style="margin-top:2em;">Browser Eyeballing !=<br>JavaScript Testing</h3>
+                    <p style="margin-top: 3em">Jordan Kasper</p>
+                    <p class="fine">
+                        <a href="http://twitter.com/jakerella">@jakerella</a> |
+                        <a href="http://JordanKasper.com/js-testing">jordankasper.com/js-testing</a>
+                    </p>
+                </section>
+                
+                
+                
                 <section>
 
                     <section>
@@ -1216,7 +1027,7 @@
                         <h3>The Watch plugin</h3>
 
                         <pre class="fragment"><code class="bash" data-noescape>
-    ~/myproject$ <strong>npm install grunt-contrib-watch --save-dev</strong>
+~/myproject$ <strong>npm install grunt-contrib-watch --save-dev</strong>
                         </code></pre>
 
                         <aside class="notes">
@@ -1229,28 +1040,7 @@
                     <section>
                         <h3>Watch Task Setup</h3>
 
-                        <pre><code data-trim class="javascript" data-noescape>
-    <span class="dim">module.exports = function(grunt) {
-        grunt.initConfig({
-            pkg: grunt.file.readJSON("package.json"),
-            ...</span>
-
-            watch: {
-                js: {
-                    files: [ "src/**/*.js" ],
-                    tasks: [ "qunit" ]
-                }
-            }
-
-        <span class="dim">});
-
-        // Load the npm modules
-        grunt.loadNpmTasks("grunt-contrib-qunit");</span>
-        grunt.loadNpmTasks("grunt-contrib-watch");
-
-        <span class="dim">grunt.registerTask("default", [ "qunit" ]);
-    };</span>
-                        </code></pre>
+                        <pre><code class='lang-javascript' data-srcbyline='example/Gruntfile.js?5-6;29-33;39-40;43;45-46;48-49'></code></pre>
 
                         <aside class="notes">
                             Note that this will only match "something-tests.html" inside of the 
@@ -1263,18 +1053,18 @@
                     <section>
                         <h3>Starting the watch</h3>
 
-                        <pre><code data-trim class="no-highlight" data-noescape>
-    ~/myproject$ <strong>grunt watch</strong>
-    <span class="fragment">Running "watch" task
-    Waiting...</span>
-    <span class="fragment"><span style="color:green;">OK</span>
-    <span style="color:green;">>></span> File "src/app.js" changed.
+                        <pre style="background-color:#fff;"><code data-trim class="no-highlight" data-noescape>
+~/myproject$ <strong>grunt watch</strong>
+<span class="fragment">Running "watch" task
+Waiting...</span>
+<span class="fragment"><span style="color:green;">OK</span>
+<span style="color:green;">>></span> File "src/app.js" changed.
 
-    <span style="text-decoration:underline">Running "qunit:core" (qunit) task</span>
-    .....
-    <span style="color:green;">Done, without errors.</span>
-    <span style="color:cyan;">Completed in 2.028s at Sun Aug 17 2013 09:23:51 GMT-0500 (CDT)</span> - Waiting...
-    </span>
+<span style="text-decoration:underline">Running "qunit:core" (qunit) task</span>
+.....
+<span style="color:green;">Done, without errors.</span>
+<span style="color:cyan;">Completed in 2.028s at Sun Aug 17 2013 09:23:51 GMT-0500 (CDT)</span> - Waiting...
+</span>
                         </code></pre>
 
                         <aside class="notes">
@@ -1284,19 +1074,6 @@
                     </section>
 
                 </section>
-
-
-
-                <section>
-                    <h2>Thank You!</h2>
-                    <h3 style="margin-top:2em;">Browser Eyeballing !=<br>JavaScript Testing</h3>
-                    <p style="margin-top: 3em">Jordan Kasper</p>
-                    <p class="fine">
-                        <a href="http://twitter.com/jakerella">@jakerella</a> |
-                        <a href="http://JordanKasper.com/js-testing">jordankasper.com/js-testing</a>
-                    </p>
-                </section>
-
 
             </div> <!-- .slides -->
         </div> <!-- .reveal -->

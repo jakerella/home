@@ -5,43 +5,43 @@
 
 var jk = window.jk;
 
-QUnit.module("Searching", {
+QUnit.module('Searching', {
 
     setup: function() {
-
-        // Stuff to do before each test in THIS module
-
+        
+        /* Stuff to do before each test in THIS module */
+        
         $.mockjax({
-            url: "/api/search",
-            data: { query: "foobar" },
-            dataType: "json",
-            response: function() {
-                var resp = { "results": ["result one", "result two"] };
-                this.responseText = JSON.stringify(resp);
-            }
+            url: '/api/search',
+            data: { query: 'foobar' },
+            dataType: 'json',
+            responseText: { 'results': ['result one', 'result two'] }
         });
-
+        
         $.mockjax({
-            url: "/api/search",
-            data: { query: "http-error" },
+            url: '/api/search',
+            data: { query: 'http-error' },
+            dataType: 'json',
             status: 400,
-            dataType: "json",
-            response: function() {
-                this.responseText = "400 Bad request";
-            }
+            responseText: '400 Bad request'
         });
-
+        
     },
-
+    
+    
+    
     teardown: function() {
-
-        // Stuff to do after each test in THIS module
-
-        $.mockjax.clear();
-
+        
+        /* Stuff to do after each test in THIS module */
+        
+        $.mockjax.clear();  // remove all mocks after each test
+        
     }
-
+    
+    
 });
+
+
 
 QUnit.test("Search module exists", function(assert) {
     assert.equal( typeof jk.initSearch, "function", "The initSearch method exists" );
@@ -51,10 +51,10 @@ QUnit.test("Search module exists", function(assert) {
 QUnit.test("Initialize Search - bad input", function(assert) {
     
     assert.strictEqual( jk.initSearch(), null, "No input to init results in null" );
-    assert.strictEqual( jk.initSearch("#foobar"), null, "Bad form to init results in null" );
-    assert.strictEqual( jk.initSearch("#the-form", "#foobar"), null, "Bad input to init results in null" );
-    assert.strictEqual( jk.initSearch("#the-form", null), null, "Null input to init results in null" );
-    assert.strictEqual( jk.initSearch(null, "#query"), null, "Null form to init results in null" );
+    assert.strictEqual( jk.initSearch("#foobar"),           null, "Bad form to init results in null" );
+    assert.strictEqual( jk.initSearch("#the-form", "#foo"), null, "Bad input to init results in null" );
+    assert.strictEqual( jk.initSearch("#the-form", null),   null, "Null input to init results in null" );
+    assert.strictEqual( jk.initSearch(null, "#query"),      null, "Null form to init results in null" );
 
 });
 

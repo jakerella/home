@@ -43,7 +43,7 @@ jk.doSearch = function( query, callback ) {
         url: "/api/search",
         data: { "query": query },
         dataType: "json",
-
+        // ...
         success: function successHandler(data) {
             jk.handleResults( data.results );
             callback( data );

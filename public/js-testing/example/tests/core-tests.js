@@ -2,7 +2,7 @@
 
 // ---------------- Test Modules --------------- //
 
-QUnit.module("Initialize & Options", {
+QUnit.module("Searching", {
     setup: function() {
         
         // whatever you need to do before THIS MODULE runs
