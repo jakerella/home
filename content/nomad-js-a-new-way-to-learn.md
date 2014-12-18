@@ -1,12 +1,12 @@
 
 ## NomadJS: A new way to learn
 
-Almost two years ago a friend and fellow conference speaker, [Cal Evans](LINK), began an interesting experiment: 
-a [virtual PHP usergroup](http://nomadphp.com) he called NomadPHP. The event started small, just a dozen or so 
-attendees, which isn't out of the ordinary for a usergroup generally. But the meetings had fantastic speakers 
-focusing on deep technical content. That idea has blossomed into two new endeavors: a sort-of-monthly one-day 
-conference called [Day Camp 4 Developers](LINK) and my new group: [NomadJS](http://nomadjavascript.com). I want 
-to take a few minutes to introduce to this group, ask for your help, and invite you to join us.
+Almost two years ago a friend and fellow conference speaker, [Cal Evans](http://blog.calevans.com/), began an 
+interesting experiment: a [virtual PHP usergroup](http://nomadphp.com) he called NomadPHP. The event started 
+small, just a dozen or so attendees, which isn't out of the ordinary for a usergroup generally. But the meetings 
+had fantastic speakers focusing on deep technical content. That idea has blossomed into another endeavor: our new 
+group called [NomadJS](http://nomadjavascript.com). I want to take a few minutes to introduce to this group, ask 
+for your help, and invite you to join us.
 
 ### Top Shelf
 
@@ -23,8 +23,8 @@ these meetings are _live_, meaning you get to ask all of the questions that are 
 And we want to foster a community. We want NomadJS to be a true usergroup, where the attendees participate by 
 suggesting topics, asking questions, sharing knowledge, and generally making everyone feel welcome. This brings 
 me to my first request for help: **we need you to participate**! Hit us up on [Twitter](http://twitter.com/nomadjs), 
-join us in IRC (#nomadjs on freenode), and contribute to the conversation! You can help shape this community and 
-ensure that our content is relevant and exciting.
+join us in IRC ([#nomadjs on freenode](irc://irc.freenode.net/nomadjs)), and contribute to the conversation! You 
+can help shape this community and ensure that our content is relevant and exciting.
 
 ### What about my local group?
 
@@ -36,7 +36,7 @@ folks, and learn smething new!
 One of the reasons we started the Nomad* groups is for those folks that don't have a usergroup in their area. For 
 you folks we say this: _start one_! We have resources to help you, [reach out to us](mailto:jordan@nomadjavascript.com)! 
 In addition to guidance and connections, we'd love to offer your local group (old or new) a free ticket to give 
-away at your next meeting. (Also, usergroup leaders are always welcome to [join our meetings for free](LINK)!)
+away at your next meeting. (Also, usergroup leaders are always welcome to [join our meetings for free](http://nomadjavascript.com/nomad-js-ticket-request/)!)
 
 ### What's next?
 
@@ -46,12 +46,12 @@ experiences with the group (if you've joined us for one of our meetings). And if
 just let us know!
 
 We're three meetings into NomadJS and we're growing well. We want to see **you** at the next meeting in January. 
-We're going to have [Jafar Husain](SOCIAL LINK) from Netflix in our seesion talking about 
-["The End of the Loop"](LINK) and writing elegant asynchronous code. Then in February we have 
-[Margaret Leibovic](SOCIAL LINK) from Mozilla talking about 
-[how Firefox uses generators](LINK) in their own code.
+We're going to have [Jafar Husain](https://twitter.com/jhusain) from Netflix in our seesion talking about 
+["The End of the Loop"](http://nomadjavascript.com/2014/10/january-2015/) and writing elegant asynchronous code. 
+Then in February we have [Margaret Leibovic](https://twitter.com/mleibovic) from Mozilla talking about 
+[how Firefox uses generators](http://nomadjavascript.com/2014/12/february-2015/) in their own code.
 
-Lastly, I want to say thank you to Cal and Kathy Evans and [EICC](LINK) for starting NomadPHP, contacting 
+Lastly, I want to say thank you to Cal and Kathy Evans ([EICC](http://www.eicc.com)) for starting NomadPHP, contacting 
 me about [NomadJS](http://nomadjavascript.com), and for all of their wonderful support in administering NomadJS. 
 (They take a lot of the load off of me for most of the back end work that needs to be done.)
 
