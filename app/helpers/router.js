@@ -105,6 +105,11 @@ module.exports = function(app, site) {
             res.redirect(301, redirect);
             return;
         }
+        
+        if (/^\/[^\/]+$/.test(req.url)) {
+            res.redirect(301, req.url + '/');
+            return;
+        }
 
         // All other content
         getContentForRoute(req.url, site)
