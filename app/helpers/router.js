@@ -8,6 +8,8 @@ var fs = require('fs'),
 function getContentForRoute(url, site) {
     var def = q.defer();
 
+    url = url.replace(/\/$/, ''); // we don't want this trailing slash
+    
     fs.exists(path.join(site.contentDir, url + '.md'), function(exists) {
         var content;
 
