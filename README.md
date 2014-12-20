@@ -1,7 +1,7 @@
 Jordan Kasper's Homepage
 ----
 
-This is the repository for my personal homepage and blog. All files are open for all to see, including all blog content and pages.
+This is the repository for my personal homepage and blog. All files are open for all to see, including all blog content and pages. I'll probably add instructions for reusing this at some point, but I wouldn't try it any time soon...
 
 
 ## LICENSE
