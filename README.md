@@ -14,4 +14,4 @@ Please see the [LICENSE](LICENSE) file for more information.
 
 ## Contributing
 
-I'd be hpappy to entertain any intersting features through a Pull Request.
+I'd be happy to accept corrections (spelling, technical, etc) or interesting features via PRs.
