@@ -66,6 +66,198 @@
                     
                 </section>
 
+                <section>
+                    
+                    <section>
+                        <h3>What is Object Oriented Programming (OOP)?</h3>
+                    </section>
+                    
+                    <section>
+                        <h3>What is Object Oriented Programming (OOP)?</h3>
+                        <img src='images/vincent.jpg' alt='My dog, Vincent' style='display:block; float:right;'>
+                        <p style='padding-top:10%; font-size:1.2em;'>
+                            A way of representing things as collections of code with data and 
+                            actions, including mechanisms for reusing code among related 
+                            collections.
+                        </p>
+                    </section>
+                    
+                    <section data-background='#d7ecee' data-transition='none'>
+                        <h3>OOP Core Concepts</h3>
+                        
+                        <ul>
+                            <li>
+                                Abstraction
+                                <p class='illuminate'>"Abstraction is the stripping away of details so that you can see the essence." (Douglas Hofstatder)</p>
+                            </li>
+                        </ul>
+                    </section>
+                    
+                    <section data-background='#d7ecee' data-transition='none'>
+                        <h3>OOP Core Concepts</h3>
+                        
+                        <ul>
+                            <li>Abstraction</li>
+                            <li>
+                                Encapsulation
+                                <p class='illuminate'>Creating an interface for your object model and abstracting the implementation of the actions of that model.</p>
+                            </li>
+                        </ul>
+                    </section>
+                    
+                    <section data-background='#d7ecee' data-transition='none'>
+                        <h3>OOP Core Concepts</h3>
+                        
+                        <ul>
+                            <li>Abstraction</li>
+                            <li>Encapsulation</li>
+                            <li>
+                                Inheritance
+                                <p class='illuminate'>Can you explain the relationship between two objects "A" and "B" by: "A is a B" within the code structure provided in the language?</p>
+                            </li>
+                        </ul>
+                    </section>
+                    
+                    <section data-background='#d7ecee' data-transition='none'>
+                        <h3>OOP Core Concepts</h3>
+                        
+                        <ul>
+                            <li>Abstraction</li>
+                            <li>Encapsulation</li>
+                            <li>Inheritance</li>
+                            <li>
+                                Polymorphism
+                                <p class='illuminate'>Literally: "many forms". The ability for a member of a collection to have different forms within the inheritance chain without changing the interface exposed outside the object.</p>
+                            </li>
+                        </ul>
+                    </section>
+                    
+                    <section>
+                        <h3>OOP Secondary Concepts</h3>
+                        
+                        <ul class='illuminate'>
+                            <li class='fragment'>Public, private, &amp; protected</li>
+                            <li class='fragment'>Static members</li>
+                            <li class='fragment'>Interfaces</li>
+                            <li class='fragment'>Abstracts</li>
+                        </ul>
+                    </section>
+                    
+                    <section>
+                        <h3>OOP Secondary Concepts</h3>
+                        
+                        <ul class='illuminate'>
+                            <li>Public, private, &amp; <del>protected</del> privileged</li>
+                            <li>Static members</li>
+                            <li><del>Interfaces</del> Mixins</li>
+                            <li><del>Abstracts</del></li>
+                        </ul>
+                    </section>
+                    
+                </section>
+
+
+                <section>
+                    <section>
+                        <h3>"I thought JavaScript was a functional language?"</h3>
+                    </section>
+                    
+                    <section>
+                        <h3>"I thought JavaScript was a functional language?"</h3>
+                        <p>The Functional paradigm (strictly speaking) states that any domain problem can be solved by combining a series of mathematical functions.</p>
+                        <p>Any function should return the same value for the same input every single time (in other words, there is no application “state”).</p>
+                    </section>
+                    
+                    <section>
+                        <h3><span class='fine'>(dis)</span> Functional</h3>
+                        
+                        <pre><code class='lang-javascript' data-srcbyline='example/functional.js?2-5'></code></pre>
+                        
+                        <pre class='fragment'><code class='lang-javascript' data-srcbyline='example/functional.js?7-11'></code></pre>
+                    </section>
+                    
+                    <section>
+                        <h3>So is it functional<br>or object oriented?</h3>
+                        
+                        <p class='fragment'>
+                            <em>JavaScript is a multi-paradigm language.</em>
+                        </p>
+                    </section>
+                </section>
+                
+                
+                <section>
+                
+                    <section>
+                        <img src='images/orly.jpg' alt='O Rly?' class='fragment' style='width:25%; display:block; float:right; position:relative; top:-3em;'>
+                        
+                        <h4>But JavaScript isn't <em>really</em><br>object oriented...</h4>
+                        
+                        <pre class='fragment' style='margin-top:4em; width:50%;'><code class='lang-javascript' data-srcbyline='example/basic-objects.js?2-8'></code></pre>
+                    </section>
+                    
+                    <section>
+                        <h3>Even our functions are objects!</h3>
+                        
+                        <pre><code class='lang-javascript' data-srcbyline='example/basic-objects.js?16-24'></code></pre>
+                        
+                        <p class='fine' style='margin-top:2em;'>
+                            FYI, the only thing that isn't an object is <code>undefined</code>.<br>
+                            (Oddly enough, <code>null</code> is an "object", an empty one.)
+                        </p>
+                    </section>
+                    
+                    <section>
+                        <h3>Simple Objects</h3>
+                        
+                        <div class='fragment'>
+                            <p>Using the "curly brace" syntax (object literals)...</p>
+                            
+                            <pre><code class='lang-javascript' data-srcbyline='example/basic-objects.js?28-33'></code></pre>
+                        </div>
+                        
+                        <div class='fragment'>
+                            <p>which is equivalent to...</p>
+                            <pre><code class='lang-javascript' data-srcbyline='example/basic-objects.js?36-40'></code></pre>
+                        </div>
+                    </section>
+                    
+                    <section>
+                        <h3>Calling object methods</h3>
+                        
+                        <pre><code class='lang-javascript' data-srcbyline='example/basic-objects.js?28-33;42-43'></code></pre>
+                        
+                        <p class='fragment illuminate'><code>this</code> inside an object method refers to the current context.</p>
+
+                        <p class='fragment fine' style='margin-top:2em;'>
+                            Context is typically the variable before the "." when called:<br>
+                            <code>this === literalDog</code> inside <code>speak()</code>
+                        </p>
+                    </section>
+                    
+                    <section>
+                        <h3>Why not use object literals?</h3>
+                        
+                        <ul>
+                            <li class='fragment'>Limited reusability</li>
+                            <li class='fragment'>More difficult for inheritance</li>
+                            <li class='fragment'>Verbose</li>
+                            <li class='fragment'>Poor abstraction</li>
+                        </ul>
+                    </section>
+                </section>
+                
+                <section>
+                
+                    <section>
+                        
+                        <h3>Constructors</h3>
+                    
+                    </section>
+                    
+                    
+                
+                </section>
 
 
 
