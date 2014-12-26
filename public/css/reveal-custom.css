@@ -51,9 +51,29 @@ aside.title-text h3 {
         1px 1px 0 #000;
 }
 
+.slides p {
+    color: #446;
+}
+
+.slides p code {
+    background-color: #ddeff0;
+    color: #2f85aa;
+    font-size: 0.8em;
+    padding: 0.05em 0.2em;
+    
+    -webkit-border-radius: 0.4em;
+    -moz-border-radius: 0.4em;
+    border-radius: 0.4em;
+}
+
 .slides .fine {
     color: #999;
     font-size: 0.9em;
+}
+
+.slides .illuminate {
+    color: #2f85aa;
+    font-style: italic;
 }
 
 .reveal pre code {
