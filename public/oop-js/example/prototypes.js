@@ -1,13 +1,18 @@
 
+function Dog(name) { /* ... */ }
+
+var v = new Dog("Vincent");
+
 console.log(Dog.prototype);
  
 {
-    constructor: Dog(name) {
-        this.name = name;
+    constructor: function Dog(name) { /* ... */ },
+    constructor: function Dog(name) {
         if (name) { this.name = name; }
+        
         this.speak = function() {
             return this.name + " says woof";
-        }
+        };
     },
     name: "Bubbles",
     speak: function() {
@@ -15,9 +20,6 @@ console.log(Dog.prototype);
     },
     __proto__: Object { /* ... */ }
 }
-
-
-var v = new Dog("Vincent");
 
 console.log(v);
 

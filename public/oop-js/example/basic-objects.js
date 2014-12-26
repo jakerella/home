@@ -1,14 +1,14 @@
 
 var name = "Jordan";
 
-name.length;            // 6
+name.length;            /* 6 */
 
-name.length.toFixed(1); // 6.0
+name.length.toFixed(1); /* 6.0 */
 
-name.toUpperCase();     // "JORDAN"
+name.toUpperCase();     /* "JORDAN" */
 
 
-// what your write        // what gets executed
+/* what your write        what gets executed */
 name.length          ===  (new String (name)).length;
 
 
@@ -17,11 +17,11 @@ function foo() {
     return "bar";
 }
 
-// Get the name and content of our function
+/* Get the name and content of our function */
 
-console.log(foo.name);       // "foo"
+console.log(foo.name);       /*  "foo"  */
 
-console.log(foo.toString()); // "function foo() { return \"bar\" }"
+console.log(foo.toString()); /*  "function foo() { return \"bar\" }"  */
 
 
 
@@ -40,5 +40,5 @@ literalDog.speak = function() {
 };
 
 
-literalDog.speak();  // "Vincent says woof"
+literalDog.speak();  /* "Vincent says woof" */
 

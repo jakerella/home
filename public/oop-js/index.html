@@ -165,7 +165,7 @@
                     <section>
                         <h3>"I thought JavaScript was a functional language?"</h3>
                         <p>The Functional paradigm (strictly speaking) states that any domain problem can be solved by combining a series of mathematical functions.</p>
-                        <p>Any function should return the same value for the same input every single time (in other words, there is no application “state”).</p>
+                        <p>Any function should return the same value for the same input every single time (in other words, there is no application "state").</p>
                     </section>
                     
                     <section>
@@ -255,9 +255,189 @@
                     
                     </section>
                     
+                    <section>
+                        <h4>A Dog by any other name...</h4>
+                        
+                        <pre><code class='lang-javascript' data-srcbyline='example/animal-dog.js?23-28;31'></code></pre>
+                        
+                        <pre class='fragment'><code class='lang-javascript' data-srcbyline='example/animal-dog.js?96;106-107;130;132'></code></pre>
+                    </section>
                     
+                    <section>
+                        <h4>What have we created?</h4>
+                        
+                        <pre class='fragment'><code class='lang-javascript' data-srcbyline='example/prototypes.js?2;5-6'></code></pre>
+                        
+                        <div class='fragment'>
+                            <pre><code class='lang-javascript' data-srcbyline='example/prototypes.js?8;10-16;21-22'></code></pre>
+                            
+                            <p class='fine'>Notice how our <code>name</code> and <code>speak</code> members are NOT in our prototype!</p>
+                        </div>
+                    </section>
+                    
+                    <section>
+                        <h4>The "new" keyword</h4>
+                        
+                        <pre><code class='lang-javascript' data-srcbyline='example/animal-dog.js?96'></code></pre>
+                        
+                        <div class='fragment'>
+                            <p>JavaScript is actually taking 3 distinct actions:</p>
+                            <ul>
+                                <li class='fragment'>Create an empty object;</li>
+                                <li class='fragment'>set the new object's <code>__proto__</code> property to point to <code>Dog.prototype</code>;</li>
+                                <li class='fragment'>and call the <code>constructor</code> method on the new object.</li>
+                            </ul>
+                        </div>
+                    </section>
+                    
+                    <section>
+                        <h4>The "new" keyword</h4>
+                        
+                        <p>In fact, we can do these actions on our own:</p>
+                        
+                        <pre style='margin:2em 0;'><code class='lang-javascript' data-srcbyline='example/animal-dog.js?99-100;102;105-106'></code></pre>
+                    
+                        <p class='fragment fine'>Note that <code>Object.create()</code> does not exist in IE &lt; 9, but you can use a shim.</p>
+                    </section>
+                    
+                    <section>
+                        <h4>A better Dog</h4>
+
+                        <p>
+                            What about <code>name</code> and <code>speak</code>not being on the prototype?<br>
+                            We probably want them to be...
+                        </p>
+                        
+                        <pre class='fragment'><code class='lang-javascript' data-srcbyline='example/animal-dog.js?23-24;31-32;61-64'></code></pre>
+                        
+                        <pre class='fragment'><code class='lang-javascript' data-srcbyline='example/animal-dog.js?134;138-139'></code></pre>
+                    </section>
+                    
+                    <section>
+                        <h4>A prototypical Dog</h4>
+                        
+                        <pre><code class='lang-javascript' data-srcbyline='example/prototypes.js?6-8;10-11;16-22'></code></pre>
+                    </section>
+                    
+                    <section>
+                        <h4>Dun dun dun...</h4>
+                        
+                        <p class='fine' style='font-size:0.7em;'>(That's pronounced "dunder proto", as in: "double underscore proto")</p>
+                        
+                        <pre style='margin:3em 0;'><code class='lang-javascript' data-srcbyline='example/animal-dog.js?96-97;142-144'></code></pre>
+                        
+                        <ul class='fragment illuminate'>
+                            <li>Reference to prototype that created current object</li>
+                            <li>Deprecated in previous versions of ECMAScript</li>
+                            <li>Back in ES6 as optional (supported by major browsers)</li>
+                            <li>Should NOT be used to change prototype reference!</li>
+                        </ul>
+                        
+                    </section>
                 
                 </section>
+
+                
+                <section>
+                    
+                    <section>
+                        <h3>Member Access Types</h3>
+                        
+                        <p>public, private, privileged</p>
+                    </section>
+                    
+                    <section>
+                        <h4>Public Members</h4>
+                        
+                        <p>Anything attached to the <code>prototype</code>:</p>
+                        
+                        <pre style='margin-top:2em;'><code class='lang-javascript' data-srcbyline='example/animal-dog.js?68-69'></code></pre>
+                    </section>
+                    
+                    <section>
+                        <h4>Public Members</h4>
+                        
+                        <p>Anything on <code>this</code> or a reference to the object instance:</p>
+                        
+                        <pre style='margin-top:2em;'><code class='lang-javascript' data-srcbyline='example/animal-dog.js?34;41-43;53-54;96-97;109'></code></pre>
+                    </section>
+                    
+                    <section>
+                        <h3>Private Variables</h3>
+                        
+                        <p>And privileged methods</p>
+                    </section>
+                    
+                    <section>
+                        <h4>Private Variables</h4>
+                        
+                        <p>Variables declared inside a <code>function</code> block only exist while that function's execution context exists.</p>
+                        
+                        <pre style='margin-top:2em;'><code class='lang-javascript' data-srcbyline='example/animal-dog.js?34;41-42;46-47;53'></code></pre>
+                        
+                        <pre class='fragment'><code class='lang-javascript' data-srcbyline='example/animal-dog.js?96-97;117'></code></pre>
+                    </section>
+                    
+                    <section>
+                        <h4>Priveleged Methods</h4>
+                        
+                        <p>If we want access to a private variable we have to create a "privileged" method...</p>
+                        
+                        <pre style='margin-top:2em;'><code class='lang-javascript' data-srcbyline='example/animal-dog.js?34;41-42;46-50;53'></code></pre>
+                        
+                        <p class='fragment'>
+                            Access to the <code>alive</code> variable from <code>isAlive()</code> and <code>die()</code> is possible 
+                            because functions in JavaScript are <strong>closures</strong>.
+                        </p>
+                    </section>
+                    
+                    <section data-transition='none'>
+                        <h4>Closures</h4>
+                        <img src='images/closures_global_var.png' alt='Closure diagram (1/7)'>
+                    </section>
+                    
+                    <section data-transition='none'>
+                        <h4>Closures</h4>
+                        <img src='images/closures_local_var.png' alt='Closure diagram (2/7)'>
+                    </section>
+                    
+                    <section data-transition='none'>
+                        <h4>Closures</h4>
+                        <img src='images/closures_inner_funct.png' alt='Closure diagram (3/7)'>
+                    </section>
+                    
+                    <section data-transition='none'>
+                        <h4>Closures</h4>
+                        <img src='images/closures_private_access.png' alt='Closure diagram (4/7)'>
+                    </section>
+                    
+                    <section data-transition='none'>
+                        <h4>Closures</h4>
+                        <img src='images/closures_funct_2.png' alt='Closure diagram (5/7)'>
+                    </section>
+                    
+                    <section data-transition='none'>
+                        <h4>Closures</h4>
+                        <img src='images/closures_no_access.png' alt='Closure diagram (6/7)'>
+                    </section>
+                    
+                    <section data-transition='none'>
+                        <h4>Closures</h4>
+                        <img src='images/closures_final.png' alt='Closure diagram (7/7)'>
+                    </section>
+                    
+                    <section>
+                        <h4>Priveleged Methods</h4>
+                        
+                        <p>If we want access to a private variable we have to create a "privileged" method...</p>
+                        
+                        <pre style='margin-top:2em;'><code class='lang-javascript' data-srcbyline='example/animal-dog.js?34;41-42;46-50;53'></code></pre>
+                        
+                        <pre class='fragment'><code class='lang-javascript' data-srcbyline='example/animal-dog.js?96-97;113-117'></code></pre>
+                    </section>
+                    
+                </section>
+
 
 
 
