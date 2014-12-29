@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang='en'>
+
+    <head>
+        <meta charset='utf-8'>
+
+        <title>Gitting More Out of Git</title>
+
+        <meta name='description' content='A deep dive into the Git version control system'>
+        <meta name='author' content='Jordan Kasper'>
+
+        <meta name='apple-mobile-web-app-capable' content='yes' />
+        <meta name='apple-mobile-web-app-status-bar-style' content='black-translucent' />
+
+        <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no'>
+
+        <!-- Base styles and theme -->
+        <link rel='stylesheet' href='/js/vendor/reveal.js/css/reveal.min.css'>
+        <link rel='stylesheet' href='/css/sky-jordan.css' id='theme'>
+        <!-- Syntax highlighting -->
+        <link rel='stylesheet' href='//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.3/styles/tomorrow.min.css'>
+        <!-- My own stuff... -->
+        <link rel='stylesheet' href='/css/reveal-custom.css'>
+
+        <!-- If the query includes 'print-pdf', use the PDF print sheet -->
+        <script>
+        if( window.location.search.match( /print-pdf/gi ) ) {
+            var link = document.createElement( 'link' );
+            link.rel = 'stylesheet';
+            link.type = 'text/css';
+            link.href = '/js/vendor/reveal.js/css/print/pdf.css';
+            document.getElementsByTagName( 'head' )[0].appendChild( link );
+        }
+        </script>
+
+        <!--[if lt IE 9]>
+        <script src='/js/vendor/reveal.js/lib/js/html5shiv.js'></script>
+        <![endif]-->
+    </head>
+
+    <body>
+
+        <div class='reveal'>
+            <div class='slides'>
+                
+                <section>
+                    
+                    <section>
+                        <h2>Gitting More Out of Git</h2>
+                        <p style='margin-top: 3em'>Jordan Kasper</p>
+                        <p class='fine'>
+                            <a href='http://twitter.com/jakerella'>@jakerella</a>
+                        </p>
+                    </section>
+
+                    <section>
+                        <img src='/images/hobbes_large_trans.png' alt='Hobbes'>
+                    </section>
+
+                    <section>
+                        <a href='http://nomadjavascript.com'>
+                            <img src='/images/nomad-js.png' alt='NomadJS' style='width:25%' />
+                        </a>
+                    </section>
+                    
+                </section>
+
+                <section>
+                    
+                    
+                    
+                </section>
+
+
+                <section>
+                    <h2>Thank You!</h2>
+                    <h3 style='margin-top:1.5em;'>Gitting More Out of Git</h3>
+                    <p style='margin-top: 2em'>Jordan Kasper</p>
+                    <p style='font-size:0.8em;'>
+                        <a href='http://twitter.com/jakerella'>@jakerella</a> |
+                        <a href='http://jordankasper.com/oop-js'>jordankasper.com/oop-js</a>
+                    </p>
+                </section>
+
+            </div> <!-- .slides -->
+        </div> <!-- .reveal -->
+
+
+        <script src='/js/vendor/reveal.js/lib/js/head.min.js'></script>
+        <script src='/js/vendor/reveal.js/js/reveal.min.js'></script>
+        <script src='//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.3/highlight.min.js'></script>
+
+        <script>
+        // Full list of configuration options available here:
+        // https://github.com/hakimel/reveal.js#configuration
+        Reveal.initialize({
+            controls: false,
+            progress: false,
+            history: true,
+            center: true,
+            transition: 'linear',
+            backgroundTransition: 'slide',
+
+            // Optional libraries used to extend on reveal.js
+            dependencies: [
+                { src: '/js/vendor/reveal.js/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+                { src: '/js/vendor/reveal.js/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+                { src: '/js/vendor/reveal.js/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+                { src: '/js/vendor/reveal.js/plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } },
+                { src: '/js/vendor/source-by-line/srcByLine.js', async: true, callback: function() { window.srcbyline.init(); } }
+            ]
+        });
+
+        (function highlightCode() {
+            if( typeof window.addEventListener === 'function' ) {
+                var code = document.querySelectorAll( 'pre code' );
+
+                for( var i = 0, len = code.length; i < len; i++ ) {
+                    var element = code[i];
+
+                    // trim whitespace if data-trim attribute is present
+                    if( element.hasAttribute( 'data-trim' ) && typeof element.innerHTML.trim === 'function' ) {
+                        element.innerHTML = element.innerHTML.trim();
+                    }
+
+                    // Now escape html unless prevented by author
+                    if( ! element.hasAttribute( 'data-noescape' )) {
+                        element.innerHTML = element.innerHTML.replace(/</g,"&lt;").replace(/>/g,"&gt;");
+                    }
+
+                    // re-highlight when focus is lost (for edited code)
+                    element.addEventListener( 'focusout', function( event ) {
+                        hljs.highlightBlock( event.currentTarget );
+                    }, false );
+                }
+            }
+
+            hljs.initHighlighting();
+
+        })();
+        </script>
+
+    </body>
+</html>
