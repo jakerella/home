@@ -55,6 +55,24 @@ aside.title-text h3 {
     color: #446;
 }
 
+.slides pre {
+    background-color: #fff;
+}
+.reveal pre code {
+    max-height: 600px;
+    padding: 0.3em;
+    display: block;
+}
+.reveal .xml .javascript {
+    opacity: 1;
+}
+.slides code.no-highlight, .slides code.no-highlight span {
+    color: #4d4d4c !important;
+}
+.slides code.dim, .slides code.dim span {
+    color: #888 !important;
+}
+
 .slides p code {
     background-color: #ddeff0;
     color: #2f85aa;
@@ -74,14 +92,6 @@ aside.title-text h3 {
 .slides .illuminate {
     color: #2f85aa;
     font-style: italic;
-}
-
-.reveal pre code {
-    max-height: 600px;
-}
-
-.reveal .xml .javascript {
-    opacity: 1;
 }
 
 ul.file-structure ul { margin-left: 0.7em; }
