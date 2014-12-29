@@ -80,10 +80,10 @@ Dog.prototype.kill = function() { this.alive = false; };  /* NOT privileged */
 
 
 Dog.GENUS = "Canis";               /* static property */
+
 Dog.mergeBreeds = function(a, b) { /* static method */
     return ("Breeding " + a + " and " + b);
 };
-
 
 Dog.getName = function() {
     return this.name;  /* what is "this" pointing to? */
@@ -100,8 +100,8 @@ var v = Object.create(Dog.prototype);
 
 /* call the constructor function ("Dog" in our case) */
 v.constructor("Vincent");
-v.constructor("Vincent", 9);
-
+v.constructor("Vincent", 10);
+var v = new Dog("Vincent", 10);
 
 v.speak();   /* "Vincent says woof" */
 
@@ -124,7 +124,7 @@ v.alive;  /* undefined */
 Dog.prototype.isPrototypeOf( v ); /* true */
 
 
-v.getAge(); /* 63 */
+v.getAge(); /* 70 */
 
 
 var b = new Dog("Brian");
@@ -147,5 +147,7 @@ console.log(Dog.GENUS); /* Canis */
 
 Dog.mergeBreeds(v.breed, b.breed);
 
-Dog.getName();       /* what does the method return? */
+Dog.getName();         /* what does the method return? */
+
+v.getName();  // will throw an Error!
 
