@@ -215,6 +215,79 @@ jquery-source  https://github.com/jquery/jquery.git (push)
                     </section>
                     
                 </section>
+                
+                
+                <section>
+                
+                    <section>
+                        <h3>MOAR Branches</h3>
+                    </section>
+                    
+                    <section>
+                        <h4>Listing Branches</h4>
+                        
+                        <pre><code class='no-highlight' data-trim>
+~$ git branch
+  hot-fix
+* master
+  new-feature
+  stuff
+                        </code></pre>
+                        
+                        <pre class='fragment'><code class='no-highlight' data-trim>
+~$ git branch --no-merged
+  stuff
+                        </code></pre>
+                    </section>
+                    
+                    <section>
+                        <h4>Branch Differences</h4>
+                        
+                        <pre><code class='no-highlight' data-trim>
+~$ git diff master stuff
+                        </code></pre>
+                        
+                        <pre class='fragment'><code class='no-highlight' data-trim data-noescape>
+diff --git a/README.md b/README.md
+index a1e4bac..e69de29 100644
+<strong>--- a/README.md
++++ b/README.md</strong>
+@@ -1 +0,0 @@
+-This is the readme
+diff --git a/STUFF.md b/STUFF.md
+<strong>new file mode 100644</strong>
+index 0000000..e69de29
+                        </code></pre>
+                        
+                        <p class='fragment'>
+                            This is ALL changes between <code>master</code> and <code>stuff</code><br>
+                            (regardless of what branch those came from).
+                        </p>
+                    </section>
+                    
+                    <section>
+                        <h4>Branch Differences</h4>
+                        
+                        <pre><code class='no-highlight' data-trim data-noescape>
+~$ git diff <strong>master...stuff</strong>
+diff --git a/STUFF.md b/STUFF.md
+new file mode 100644
+index 0000000..e69de29
+                        </code></pre>
+                    </section>
+
+                    <section>
+                        <h4>Branch Differences</h4>
+                        
+                        <pre><code class='no-highlight' data-trim data-noescape>
+~$ git diff <strong>b9bdb02 b86e65d</strong>
+diff --git a/STUFF.md b/STUFF.md
+new file mode 100644
+index 0000000..e69de29
+                        </code></pre>
+                    </section>
+                    
+                </section>
 
                 
                 <section>
@@ -274,11 +347,153 @@ Date:   Fri Jul 11 17:27:14 2014 -0500
                 <section>
                 
                     <section>
-                        
+                        <h3>When things go wrong...</h3>
                     </section>
+                    
+                    <section data-transition='none'>
+                        <h4>Fixing commit messages</h4>
+                        
+                        <pre><code class='no-highlight' data-trim data-noescape>
+~$ git commit -m "This is <strong>teh</strong> best."
+[feature-branch fd0091e] This is teh best.
+ 1 file changed, 1 insertion(+)
+                        </code></pre>
+                        
+                        <pre class='fragment'><code class='no-highlight' data-trim data-noescape>
+~$ git commit <strong>--amend</strong> -m "This is <strong>the</strong> best."
+[feature-branch 0486a7d] This is the best.
+ 1 file changed, 1 insertion(+)
+                        </code></pre>
+                    </section>
+                    
+                    <section data-transition='none'>
+                        <h4>Fixing commit messages</h4>
+                        
+                        <pre><code class='no-highlight' data-trim data-noescape>
+~$ git commit -m "This is teh best."
+[feature-branch <strong>fd0091e</strong>] This is teh best.
+ 1 file changed, 1 insertion(+)
+                        </code></pre>
+                        
+                        <pre><code class='no-highlight' data-trim data-noescape>
+~$ git commit --amend -m "This is the best."
+[feature-branch <strong>0486a7d</strong>] This is the best.
+ 1 file changed, 1 insertion(+)
+                        </code></pre>
+                    </section>
+                    
+                    <section>
+                        <h4>What about the log?</h4>
+                        
+                        <pre><code class='no-highlight' data-trim data-noescape>
+~$ git log
+commit <strong>0486a7d61ee9bcaa31d7eb062c0bcafee3e530f0</strong>
+Author: jdoe &lt;john@doe.com&gt;
+Date:   Fri Jul 11 17:27:14 2014 -0500
+
+    This is the best.
+
+commit 72267fc26d88fa977d24760252da63b46ca3b81a
+Author: fbar &lt;foo@bar.com&gt;
+Date:   Fri Jul 10 14:31:36 2014 -0500
+
+    I did a thing!
+                        </code></pre>
+                    </section>
+                    
+                    <section>
+                        <h4>Never really gone...</h4>
+                        
+                        <pre><code class='no-highlight' data-trim data-noescape>
+~$ git reflog
+<strong>0486a7d</strong> HEAD@{0}: commit (amend): This is the best.
+<strong>fd0091e</strong> HEAD@{1}: commit: This is teh best.
+72267fc HEAD@{2}: commit: I did a thing!
+...
+                        </code></pre>
+                    </section>
+                    
+                    <section>
+                        <h4>What if I forgot a file?</h4>
+                        
+                        <pre class='fragment'><code class='no-highlight' data-trim data-noescape>
+~$ git add forgotten.js
+~$ git commit --amend
+                        </code></pre>
+                    </section>
+                    
+                    <section>
+                        <h3>Undoing Changes</h3>
+                    </section>
+                    
+                    <section>
+                        <h4>Unstaged Changes</h4>
+                        
+                        <pre><code class='no-highlight' data-trim data-noescape>
+~$ echo "foobar" &gt;&gt; README.md
+                        </code></pre>
+                        
+                        <pre class='fragment'><code class='no-highlight' data-trim data-noescape>
+~$ git status
+# On branch master
+# Changes not staged for commit:
+#   (use "git add &lt;file&gt;..." to update what will be committed)
+#   <strong>(use "git checkout -- &lt;file&gt;..." to discard changes in working directory)</strong>
+#
+#    modified:   README.md
+                        </code></pre>
+                    </section>
+                    
+                    <section>
+                        <h4>Unstaged Changes</h4>
+                        
+                        <pre><code class='no-highlight' data-trim data-noescape>
+~$ git checkout README.md
+
+~$ git status
+# On branch master
+nothing to commit (working directory clean)
+                        </code></pre>
+                        
+                        <pre class='fragment'><code class='no-highlight' data-trim data-noescape>
+~$ git checkout src/js/
+                        </code></pre>
+                    </section>
+                    
+                    <section>
+                        <h4>Unstaged Changes</h4>
+                        
+                        <p class='illuminate'>
+                            Be careful! <strong>NEW</strong> files will not be removed!
+                        </p>
+                        
+                        <pre><code class='no-highlight' data-trim data-noescape>
+~$ rm NewFile.md
+                        </code></pre>
+                    </section>
+                    
+                    <section>
+                        <h4></h4>
+                        
+                        <pre><code class='no-highlight' data-trim data-noescape>
+
+                        </code></pre>
+                    </section>
+
                 
                 </section>
+                
+                
 
+
+
+<section>
+                        <h4></h4>
+                        
+                        <pre><code class='no-highlight' data-trim data-noescape>
+
+                        </code></pre>
+                    </section>
 
 
                 <section>
