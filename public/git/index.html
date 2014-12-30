@@ -65,11 +65,220 @@
                     
                 </section>
 
+
+                <section data-background='#fff'>
+                    <h3>
+                        <img src='images/robot.png' alt='Danger!'><br>
+                        Danger!
+                    </h3>
+                </section>
+
+                
                 <section>
                     
+                    <section>
+                        <h3>Git is Distributed</h3>
+                    </section>
                     
+                    <section>
+                        <h4>A centralized VCS</h4>
+                        
+                        <img src='images/CentralizedVCS.png' alt='centralized vcs'>
+                        
+                        <cite>https://docs.joomla.org/Dvcs</cite>
+                    </section>
+                    
+                    <section>
+                        <h4>A distributued VCS</h4>
+                        
+                        <img src='images/DistributedVCS_Complex.png' alt='dsitributed vcs (complex)'>
+                        
+                        <cite>https://docs.joomla.org/Dvcs</cite>
+                    </section>
+                    
+                    <section>
+                        <h4>A distributued VCS <span class='fine'>(in practice)</span></h4>
+                        
+                        <img src='images/DistributedVCS.png' alt='dsitributed vcs'>
+                        
+                        <cite>https://docs.joomla.org/Dvcs</cite>
+                    </section>
+                    
+                    <section>
+                        <h3>Remotes</h3>
+                        
+                        <p class='fragment'>Just like it sounds, a "remote" is a repo outside your environment.</p>
+                    </section>
+                    
+                    <section>
+                        <h4>Cloning</h4>
+                        
+                        <pre><code class='no-highlight'>~$ git clone http://some.repo.com someDirectory</code></pre>
+                        
+                        <div class='fragment'>
+                            <pre><code class='no-highlight' data-trim>
+~$ git branch -a
+* master
+  remotes/origin/master
+                            </code></pre>
+                            
+                            <p>Cloning creates a remote called "origin"</p>
+                        </div>
+                    </section>
+                    
+                    <section>
+                        <h4>Tracking</h4>
+                        
+                        <p>A local branch may "track" a remote URL...</p>
+                        
+                        <pre><code class='no-highlight' data-trim>
+~$ git branch -vv
+* master            b956c45 [origin/master] Initial commit
+  some-local-branch a74b295 Implemented that cool feature
+                        </code></pre>
+                    </section>
+                    
+                    <section>
+                        <h4>Tracking</h4>
+                        
+                        <p>
+                            If "origin" is set up on master,<br>
+                            how do I make a new branch "track" that remote repo?
+                        </p>
+                        
+                        <div class='fragment'>
+                            <pre><code class='no-highlight' data-trim>
+~$ git checkout -b new-feature
+...
+~$ git branch -u origin/new-feature
+                            </code></pre>
+                            
+                            <p>The <code>-u</code> option sets the "upstream" remote repo to track.</p>
+                            
+                            <pre class='fragment'><code class='no-highlight' data-trim>
+~$ git branch -vv
+  master            b956c45 [origin/master] Initial commit
+* new-feature       b956c45 [origin/new-feature] Initial commit
+  some-local-branch a74b295 Implemented that cool feature
+                            </code></pre>
+                        </div>
+                    </section>
+                    
+                    <section>
+                        <h4>Tracking</h4>
+                        
+                        <p>
+                            Or if you've already committed some code to that branch<br>
+                            you can push and set the remote at the same time:
+                        </p>
+                        
+                        <pre class='fragment'><code class='no-highlight' data-trim>
+~$ git commit -m "new stuff!"
+...
+~$ git push -u origin new-feature
+                        </code></pre>
+                    </section>
+                    
+                    <section>
+                        <h4>Wherezitat?</h4>
+                        
+                        <pre><code class='no-highlight' data-trim>
+~$ git remote -v
+origin  https://github.com/jakerella/repo-name.git (fetch)
+origin  https://github.com/jakerella/repo-name.git (push)
+                        </code></pre>
+                    </section>
+                    
+                    <section>
+                        <h4>Other remotes</h4>
+                        <p>
+                            What about other repos? How is this distributed?
+                        </p>
+                        
+                        <pre class='fragment'><code class='no-highlight' data-trim>
+~$ git remote add jquery-source https://github.com/jquery/jquery.git
+                        </code></pre>
+                        
+                        <pre class='fragment'><code class='no-highlight' data-trim>
+~$ git remote -v
+origin         https://github.com/jakerella/jquery.git (fetch)
+origin         https://github.com/jakerella/jquery.git (push)
+jquery-source  https://github.com/jquery/jquery.git (fetch)
+jquery-source  https://github.com/jquery/jquery.git (push)
+                        </code></pre>
+                        
+                        <pre class='fragment'><code class='no-highlight' data-trim>
+~$ git fetch jquery-source
+...
+~$ git pull
+                        </code></pre>
+                    </section>
                     
                 </section>
+
+                
+                <section>
+                    
+                    <section>
+                        <h3>Git and Data Integrity</h3>
+                        
+                        <div class='fragment'>
+                            <p class='illuminate'>Git uses snapshots</p>
+                            <p class='fine'>(versus file diffs)</p>
+                        </div>
+                    </section>
+                    
+                    <section>
+                        <h4>File Diffs</h4>
+                        
+                        <img src='images/file-diffs.png' alt='file diff diagram'>
+                        
+                        <cite>http://git-scm.com/book/en/Getting-Started-Git-Basics</cite>
+                    </section>
+                    
+                    <section>
+                        <h4>Snapshots</h4>
+                        
+                        <img src='images/snapshots.png' alt='snapshots diagram'>
+                        
+                        <cite>http://git-scm.com/book/en/Getting-Started-Git-Basics</cite>
+                    </section>
+                    
+                    <section>
+                        <h4>Commit Workflow</h4>
+                        
+                        <img src='images/git_checkout-commit.png' alt='commit workflow diagram'>
+                    </section>
+                    
+                    <section>
+                        <h4>Commit Hashes</h4>
+                        
+                        <pre><code class='no-highlight' data-trim data-noescape>
+~$ git commit -m "Added documentation"
+[master (root-commit) <strong>b9bdb02</strong>] Added documentation
+                        </code></pre>
+                        
+                        <pre class='fragment'><code class='no-highlight' data-trim data-noescape>
+~$ git log
+commit <strong>b9bdb0261ee9bcaa31d7eb062c0bcafee3e530f0</strong>
+Author: jdoe &lt;john@doe.com&gt;
+Date:   Fri Jul 11 17:27:14 2014 -0500
+
+    Added documentation
+                        </code></pre>
+                    </section>
+                    
+                </section>
+                
+                
+                <section>
+                
+                    <section>
+                        
+                    </section>
+                
+                </section>
+
 
 
                 <section>
