@@ -435,7 +435,7 @@ Date:   Fri Jul 10 14:31:36 2014 -0500
                         
                         <pre class='fragment'><code class='no-highlight' data-trim data-noescape>
 ~$ git status
-# On branch master
+# On branch new-feature
 # Changes not staged for commit:
 #   (use "git add &lt;file&gt;..." to update what will be committed)
 #   <strong>(use "git checkout -- &lt;file&gt;..." to discard changes in working directory)</strong>
@@ -451,7 +451,7 @@ Date:   Fri Jul 10 14:31:36 2014 -0500
 ~$ git checkout README.md
 
 ~$ git status
-# On branch master
+# On branch new-feature
 nothing to commit (working directory clean)
                         </code></pre>
                         
@@ -472,12 +472,220 @@ nothing to commit (working directory clean)
                         </code></pre>
                     </section>
                     
-                    <section>
-                        <h4></h4>
+                    <section data-transition='none'>
+                        <h4>Staged Changes</h4>
                         
                         <pre><code class='no-highlight' data-trim data-noescape>
-
+~$ echo "foobar" &gt;&gt; README.md
+~$ git add README.md
                         </code></pre>
+                        
+                        <pre class='fragment'><code class='no-highlight' data-trim data-noescape>
+~$ git status
+# On branch new-feature
+# Changes to be committed:
+#   (use "git reset HEAD &lt;file&gt;..." to unstage)
+#
+#   modified:   README.md
+                        </code></pre>
+                    </section>
+                    
+                    <section data-transition='none'>
+                        <h4>Staged Changes</h4>
+                        
+                        <pre><code class='no-highlight' data-trim data-noescape>
+~$ echo "foobar" &gt;&gt; README.md
+~$ git add README.md
+                        </code></pre>
+                        
+                        <pre><code class='no-highlight' data-trim data-noescape>
+~$ git status
+# On branch new-feature
+# Changes to be committed:
+#   <strong>(use "git reset HEAD &lt;file&gt;..." to unstage)</strong>
+#
+#   modified:   README.md
+                        </code></pre>
+                    </section>
+                    
+                    <section>
+                        <h4>Unstaged Changes</h4>
+                        
+                        <pre><code class='no-highlight' data-trim data-noescape>
+~$ git reset HEAD README.md
+
+~$ git status
+# On branch new-feature
+# Changes not staged for commit:
+#   (use "git add &lt;file&gt;..." to update what will be committed)
+#   (use "git checkout -- &lt;file&gt;..." to discard changes in working directory)
+#
+#   modified:   README.md
+                        </code></pre>
+                    </section>
+                    
+                    <section>
+                        <h4>Remember the Three States!</h4>
+                        
+                        <img src='images/git_checkout-commit.png' alt='checkout and push workflow diagram'>
+                    </section>
+                    
+                    <section>
+                        <h3>Committed Changes</h3>
+                        <p style='margin-top:3em' class='fine'>(a.k.a. Oops)</p>
+                    </section>
+                    
+                    <section>
+                        <h4>Bad Commit</h4>
+                        
+                        <pre><code class='no-highlight' data-trim data-noescape>
+~$ echo "foobar" >> README.md
+
+~$ git add README.md
+~$ git commit -m "this is not a good change"
+                        </code></pre>
+                        
+                        <pre class='fragment'><code class='no-highlight' data-trim data-noescape>
+~$ git log
+commit d42c38661ee9bcaa31d7eb062c0bcafee3e530f0
+Author: jdoe &lt;john@doe.com&gt;
+Date:   Fri Jul 11 17:27:14 2014 -0500
+
+    this is not a good change
+                        </code></pre>
+                    </section>
+                    
+                    <section>
+                        <h4>Understanding the Three States</h4>
+                        
+                        <img src='images/git_reset-1.png' alt='three states of a git repo'>
+                    </section>
+                    
+                    <section>
+                        <img src='images/git_reset-2.png' alt='soft reset diagram'>
+                        
+                        <p><code>git reset --soft HEAD^</code></p>
+                    </section>
+                    
+                    <section>
+                        <h4>Soft Reset</h4>
+                        
+                        <pre><code class='no-highlight' data-trim data-noescape>
+~$ git reset --soft HEAD^
+
+~$ git log
+commit b86e65dab535623d487e063ef1337cfdecfaf99d
+Author: jdoe &lt;john@doe.com&gt;
+Date:   Fri Jul 10 12:45:11 2014 -0500
+
+    the immediately previous change (totally normal)
+                        </code></pre>
+                        
+                        <pre class='fragment'><code class='no-highlight' data-trim data-noescape>
+~$ git status
+# On branch new-feature
+# <strong>Changes to be committed:</strong>
+#   (use "git reset HEAD &lt;file&gt;..." to unstage)
+#
+#    modified:   README.md
+                        </code></pre>
+                    </section>
+                    
+                    <section>
+                        <img src='images/git_reset-3.png' alt='mixed reset diagram'>
+                        
+                        <p><code>git reset --mixed HEAD^</code></p>
+                    </section>
+                    
+                    <section>
+                        <h4>Mixed Reset</h4>
+                        
+                        <pre><code class='no-highlight' data-trim data-noescape>
+~$ git reset --mixed HEAD^
+
+~$ git log
+commit b86e65dab535623d487e063ef1337cfdecfaf99d
+Author: jdoe &lt;john@doe.com&gt;
+Date:   Fri Jul 10 12:45:11 2014 -0500
+
+    the immediately previous change (totally normal)
+                        </code></pre>
+                        
+                        <pre class='fragment'><code class='no-highlight' data-trim data-noescape>
+~$ git status
+# On branch new-feature
+# <strong>Changes not staged for commit:</strong>
+#   (use "git add &lt;file&gt;..." to update what will be committed)
+#   (use "git checkout -- &lt;file&gt;..." to discard changes in working directory)
+#
+#   modified:   README.md
+                        </code></pre>
+                    </section>
+                    
+                    <section>
+                        <img src='images/git_reset-4.png' alt='hard reset diagram'>
+                        
+                        <p><code>git reset --hard HEAD^</code></p>
+                    </section>
+                    
+                    <section>
+                        <h4>Hard Reset</h4>
+                        
+                        <pre><code class='no-highlight' data-trim data-noescape>
+~$ git reset --hard HEAD^
+
+~$ git log
+commit b86e65dab535623d487e063ef1337cfdecfaf99d
+Author: jdoe &lt;john@doe.com&gt;
+Date:   Fri Jul 10 12:45:11 2014 -0500
+
+    the immediately previous change (totally normal)
+
+~$ git status
+# On branch new-feature
+nothing to commit (working directory clean)
+                        </code></pre>
+                    </section>
+                    
+                    <section>
+                        <h3>Oh no!</h3>
+                        <p>I reset --hard and lost some work...</p>
+                    </section>
+                    
+                    <section>
+                        <h4>Understanding the reflog</h4>
+                        
+                        <pre><code class='no-highlight' data-trim data-noescape>
+~$ git reflog
+
+<strong>b86e65d HEAD@{0}: reset: moving to HEAD^</strong>
+d42c386 HEAD@{1}: commit: this is not a good change
+<strong>b86e65d</strong> HEAD@{2}: commit: the immediately previous change (totally normal)
+e098369 HEAD@{3}: checkout: moving from master to new-feature
+b9bdb02 HEAD@{4}: commit: a really good change
+e098369 HEAD@{5}: pull: Fast-forward
+                        </code></pre>
+                        
+                        <pre class='fragment'><code class='no-highlight' data-trim data-noescape>
+~$ git reset HEAD@{1}
+                        </code></pre>
+                    </section>
+                    
+                    <section>
+                        <h4>HEAD notation</h4>
+                        
+                        <ul>
+                            <li><code>HEAD^</code> (back one place from current HEAD)</li>
+                            <li><code>HEAD^^</code> (back two places from current HEAD)</li>
+                            <li><code>HEAD~n</code> (back 'n' places from current HEAD)</li>
+                            <li><code>HEAD@{i}</code> (back to reflog index 'i')</li>
+                        </ul>
+                    </section>
+                    
+                    <section>
+                        <img src='images/git_reset-5.png' alt='mixed reset back 2 places in reflog'>
+                        
+                        <p><code>git reset --mixed HEAD~2</code></p>
                     </section>
 
                 
