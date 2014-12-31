@@ -1053,25 +1053,304 @@ Switched to branch 'new-feature'
                 
                 <section>
                     
-                        <section>
-                            <h3>Playing Nice With Others</h3>
-                        </section>
+                    <section>
+                        <h3>Playing Nice With Others</h3>
                         
-                        <section>
-                            
-                        </section>
+                        <p>
+                            <code>merge</code>,
+                            <code>rebase</code>, and
+                            <code>cherry-pick</code>
+                        </p>
+                    </section>
                     
-                </section>
-
-
-
-<section>
-                        <h4></h4>
+                    <section>
+                        <h4>Merging</h4>
+                        
+                        <p>With no divergent changes...</p>
+                        
+                        <img src='images/git_merge-1.png' alt='git pre-merge diagram with one commit'>
+                    </section>
+                    
+                    <section>
+                        <h4>Fast Forward</h4>
+                        
+                        <p>With no divergent changes... we can "fast forward"</p>
                         
                         <pre><code class='no-highlight' data-trim data-noescape>
-
+~$ git checkout master
+~$ git merge feature
+                        </code></pre>
+                        
+                        <pre class='fragment'><code class='no-highlight' data-trim data-noescape>
+Updating b86e65d..d42c386
+<strong>Fast forward</strong>
+ src/js/some-file.js |   13 ++++--+++
+ 1 files changed, 7 insertions(+), 2 deletions(-)
+                        </code></pre>
+                        
+                        <img class='fragment' src='images/git_merge_ff.png' alt='git merge diagram, fast-forward'>
+                    </section>
+                    
+                    <section>
+                        <h4>No Fast Forward</h4>
+                        
+                        <pre><code class='no-highlight' data-trim data-noescape>
+~$ git checkout master
+~$ git merge feature --no-ff
+                        </code></pre>
+                        
+                        <h5>Why?</h5>
+                        
+                        <p class='fragment'>
+                            Because you lose branch/merge history with fast-forward!
+                        </p>
+                    </section>
+                    
+                    <section data-transition='none'>
+                        <h4>Divergent Changes</h4>
+                        
+                        <p>When code in <code>feature</code> diverges from the current trunk...</p>
+                        
+                        <div class='fragment'>
+                            <img style='margin-right: 3.9em;' src='images/git_merge-2.png' alt='git branch diagram with divergent changes'>
+                            
+                            <pre><code class='no-highlight' data-trim data-noescape>
+~$ git checkout master
+~$ git merge feature
+                            </code></pre>
+                        </div>
+                    </section>
+                    
+                    <section data-transition='none'>
+                        <h4>Divergent Changes</h4>
+                        
+                        <p>When code in <code>feature</code> diverges from the current trunk...</p>
+                        
+                        <img src='images/git_merge-3.png' alt='git merge diagram with merge commit'>
+                        
+                        <pre><code class='no-highlight' data-trim data-noescape>
+~$ git checkout master
+~$ git merge feature
                         </code></pre>
                     </section>
+                    
+                    <section data-transition='none'>
+                        <h4>Divergent Changes</h4>
+                        
+                        <p>When code in <code>feature</code> diverges from the current trunk...</p>
+                        
+                        <img style='margin:1.25em 0;' src='images/git_merge-4.png' alt='git merge diagram with merged branch'>
+                        
+                        <pre><code class='no-highlight' data-trim data-noescape>
+~$ git checkout master
+~$ git merge feature
+                        </code></pre>
+                    </section>
+                    
+                    <section>
+                        <h3>Merge Conflicts</h3>
+                    </section>
+                    
+                    <section>
+                        <h4>Conflicts</h4>
+                        
+                        <p>When git can't determine how to handle multiple changes...</p>
+                        
+                        <pre><code class='no-highlight' data-trim data-noescape>
+~$ git checkout master
+~$ git merge feature
+Auto-merging README.md
+<strong>CONFLICT (content): Merge conflict in README.md</strong>
+Automatic merge failed; fix conflicts and then commit the result.
+                        </code></pre>
+                    </section>
+                    
+                    <section>
+                        <h4>Conflicts</h4>
+                        
+                        <p>Inside the <code>README.md</code> file...</p>
+                        
+                        <pre><code class='no-highlight' data-trim data-noescape>
+...some text common to both branches
+
+&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD
+text only in master
+=======
+same line, different text in branch
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; feature
+
+more common text...
+                        </code></pre>
+                    </section>
+                    
+                    <section>
+                        <h4>Resolving the Conflict</h4>
+                        
+                        <ol>
+                            <li>Fix the conflict in the file!</li>
+                            <li class='fragment'>
+                                Stage the fixed file<br>
+                                <code>~$ git add README.md</code>
+                            </li>
+                            <li class='fragment'>
+                                Commit the files<br>
+                                <span class='fine'>(This is your merge commit, it may include other files!)</span><br>
+                                <code>~$ git commit</code>
+                            </li>
+                            <li class='fragment'>
+                                Remove the "orig"inal file from the branch<br>
+                                <code>~$ rm README.md.orig</code>
+                            </li>
+                        </ol>
+                    </section>
+                    
+                    <section>
+                        <h3>Rebasing</h3>
+                        
+                        <p class='fragment illuminate'>Do not rebase if you have already pushed to a shared repo!</p>
+                    </section>
+                    
+                    <section data-transition='none'>
+                        <h4>Divergent Changes</h4>
+                        
+                        <img style='margin: 0.1em 4.8em 0 0;' src='images/git_rebase_1.png' alt='git rebase diagram with divergent changes'>
+                        
+                        <pre><code class='no-highlight' data-trim data-noescape>
+~$ git checkout feature
+~$ git rebase master
+                        </code></pre>
+                    </section>
+                    
+                    <section data-transition='none'>
+                        <h4>Rewriting History</h4>
+                        
+                        <img style='margin:0.4em 0;' src='images/git_rebase_2.png' alt='git rebase diagram with rewritten branch commits'>
+                        
+                        <pre><code class='no-highlight' data-trim data-noescape>
+~$ git checkout feature
+~$ git rebase master
+                        </code></pre>
+                    </section>
+                    
+                    <section data-transition='none'>
+                        <h4>Rebasing on Master</h4>
+                        
+                        <img style='margin:1em 0;' src='images/git_rebase_3.png' alt='git rebase diagram with rewritten commits on master'>
+                        
+                        <pre><code class='no-highlight' data-trim data-noescape>
+~$ git checkout feature
+~$ git rebase master
+                        </code></pre>
+                    </section>
+                    
+                    <section>
+                        <h4>You can still get conflicts with <code>rebase</code>!</h4>
+                    </section>
+                    
+                    <section>
+                        <h4>REbase Conflicts</h4>
+                        
+                        <pre><code class='no-highlight' data-trim data-noescape>
+~$ git rebase master
+
+First, rewinding head to replay your work on top of it...
+Applying: feature
+<strong>error: patch failed: README.md:1
+error: README.md: patch does not apply</strong>
+Using index info to reconstruct a base tree...
+Falling back to patching base and 3-way merge...
+Auto-merging README.md
+<strong>CONFLICT (content): Merge conflict in README.md</strong>
+Failed to merge in the changes.
+                        </code></pre>
+                    </section>
+                    
+                    <section>
+                        <h4>Resolving the Conflict</h4>
+                        
+                        <ol>
+                            <li>Fix the conflict in the file!</li>
+                            <li class='fragment'>
+                                Stage the fixed file<br>
+                                <code>~$ git add README.md</code>
+                            </li>
+                            <li class='fragment'>
+                                Continue the rebase<br>
+                                <code>~$ git rebase --continue</code>
+                            </li>
+                        </ol>
+                    </section>
+                    
+                    <section>
+                        <h4>Too Much Confliction?</h4>
+                        
+                        <div class='fragment'>
+                            <p>
+                                You can skip an individual conflict...<br>
+                                <span class='fine'>(probably not a good idea)</span>
+                            </p>
+                        
+                            <pre><code class='no-highlight' data-trim data-noescape>
+~$ git rebase --skip
+                            </code></pre>
+                        </div>
+                    </section>
+                    
+                    <section>
+                        <h4>Too Much Confliction?</h4>
+                        
+                        <p>
+                            Or you can abort the entire process...
+                        </p>
+                        
+                        <pre><code class='no-highlight' data-trim data-noescape>
+~$ git rebase --abort
+                        </code></pre>
+                    </section>
+                    
+                    <section>
+                        <p class='illuminate'>Do not rebase if you have already pushed to a shared repo!</p>
+                    </section>
+                    
+                    <section>
+                        <h3>Cherry-picking</h3>
+                    </section>
+                    
+                    <section data-transition='none'>
+                        <h4>Multiple Branches</h4>
+                        
+                        <img style='margin-right: 2.85em;' src='images/git_cherry-pick_1.png' alt='git multiple branch diagram'>
+                        
+                        <pre style='opacity:0'><code class='no-highlight' data-trim data-noescape>
+{{just spacing}}
+{{just spacing}}
+                        </code></pre>
+                    </section>
+                    
+                    <section data-transition='none'>
+                        <h4>Cherry Pick</h4>
+                        
+                        <img style='margin:0.5em 0;' src='images/git_cherry-pick_2.png' alt='git cherry-pick diagram'>
+                        
+                        <pre><code class='no-highlight' data-trim data-noescape>
+~$ git checkout new-feature
+~$ git cherry-pick d42c386
+                        </code></pre>
+                    </section>
+                    
+                    <section data-transition='none'>
+                        <h4>Cherry Pick</h4>
+                        
+                        <img src='images/git_cherry-pick_3.png' alt='git branch deletion after cherry-pick diagram'>
+                        
+                        <pre><code class='no-highlight' data-trim data-noescape>
+~$ git checkout new-feature
+~$ git branch -D old-feature
+                        </code></pre>
+                    </section>
+                    
+                    
+                </section>
 
 
                 <section>
