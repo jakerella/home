@@ -687,11 +687,381 @@ e098369 HEAD@{5}: pull: Fast-forward
                         
                         <p><code>git reset --mixed HEAD~2</code></p>
                     </section>
-
                 
                 </section>
                 
                 
+                <section>
+                    
+                    <section>
+                        <h3 style='text-transform:none; margin-top:1em;'>My boss just told me to pivot...</h3>
+                        
+                        <p style='margin-top:1em;'>Using <code>git stash</code></p>
+                        
+                        <img src='images/stache.png' alt='A "stache"... not the same thing' style='width:50%;'>
+                    </section>
+                    
+                    <section>
+                        <h4>The Situation</h4>
+                        
+                        <p>You've made some changes on a feature branch, but they are not ready to commit yet...</p>
+                        
+                        <pre class='fragment'><code class='no-highlight' data-trim data-noescape>
+~$ git checkout -b hot-fix-123
+
+~$ git status
+# On branch hot-fix-123
+# <strong>Changes not staged for commit:</strong>
+#   (use "git add &lt;file&gt;..." to update what will be committed)
+#   (use "git checkout -- &lt;file&gt;..." to discard changes in working directory)
+#
+#   <strong>modified:   some-unrelated-file.js</strong>
+                        </code></pre>
+                    </section>
+                    
+                    <section>
+                        <h4>Using the Stash</h4>
+                        
+                        <p><strong>Before</strong> switching branches...</p>
+                        
+                        <div class='fragment'>
+                            <pre><code class='no-highlight' data-trim data-noescape>
+~$ git add some-unrelated-file.js
+
+~$ git stash
+Saved working directory and index state WIP on new-feature: 3c927dd Added text to readme
+HEAD is now at 3c927dd Added text to readme
+                            </code></pre>
+                            
+                            <pre class='fragment'><code class='no-highlight' data-trim data-noescape>
+~$ git status
+# On branch new-feature
+nothing to commit (working directory clean)
+                            </code></pre>
+                        
+                            <p class='fine'>(Note that you can only stash staged changes!)</p>
+                        </div>
+                    </section>
+                    
+                    <section>
+                        <h4>Managing Your Stash</h4>
+                        
+                        <pre><code class='no-highlight' data-trim data-noescape>
+~$ git stash list
+stash@{0}: WIP on new-feature: 3c927dd Added text to readme
+                        </code></pre>
+                        
+                        <pre class='fragment'><code class='no-highlight' data-trim data-noescape>
+~$ git stash list
+stash@{0}: WIP on new-feature: 3c927dd Added text to readme
+stash@{1}: WIP on new-feature: 3c927dd Added text to readme
+stash@{2}: WIP on new-feature: 3c927dd Added text to readme
+stash@{3}: WIP on hot-fix-456: a46c33b Replaced old lib with new one
+                        </code></pre>
+                    </section>
+                    
+                    <section>
+                        <h4>Naming Your Stash</h4>
+                        
+                        <pre><code class='no-highlight' data-trim data-noescape>
+~$ git stash save 'work on the API for new feature'
+
+~$ git stash list
+stash@{0}: On new-feature: work on the API for new feature
+stash@{1}: On new-feature: trying out some async behavior
+stash@{2}: On hot-fix-456: attempt to fix bug #456, but incomplete
+                        </code></pre>
+                    </section>
+                    
+                    <section>
+                        <h3>Great, but how do I use it?</h3>
+                    </section>
+                    
+                    <section>
+                        <h4>Applying Your Stash</h4>
+                        
+                        <pre><code class='no-highlight' data-trim data-noescape>
+~$ git stash apply
+                        </code></pre>
+                        
+                        <pre class='fragment'><code class='no-highlight' data-trim data-noescape>
+# On branch new-feature
+# <strong>Changes not staged for commit:</strong>
+#   (use "git add &lt;file&gt;..." to update what will be committed)
+#   (use "git checkout -- &lt;file&gt;..." to discard changes in working directory)
+#
+#   <strong>modified:   some-unrelated-file.js</strong>
+                        </code></pre>
+                        
+                        <pre class='fragment'><code class='no-highlight' data-trim data-noescape>
+~$ git stash list
+stash@{0}: On new-feature: work on the API for new feature
+stash@{1}: On new-feature: trying out some async behavior
+stash@{2}: On hot-fix-456: attempt to fix bug #456, but incomplete
+                        </code></pre>
+                    </section>
+                    
+                    <section>
+                        <h4>Popping Your Stash</h4>
+                        
+                        <pre><code class='no-highlight' data-trim data-noescape>
+~$ git stash <strong>pop</strong>
+                        </code></pre>
+                        
+                        <pre class='fragment'><code class='no-highlight' data-trim data-noescape>
+# On branch new-feature
+# Changes not staged for commit:
+#   (use "git add &lt;file&gt;..." to update what will be committed)
+#   (use "git checkout -- &lt;file&gt;..." to discard changes in working directory)
+#
+#   modified:   some-unrelated-file.js
+...
+<strong>Dropped refs/stash@{0} (a52d9c3ba1121dd94eb3925ba60d3f8ef30540c8)</strong>
+                        </code></pre>
+                        
+                        <pre class='fragment'><code class='no-highlight' data-trim data-noescape>
+~$ git stash list
+stash@{0}: On new-feature: trying out some async behavior
+stash@{1}: On hot-fix-456: attempt to fix bug #456, but incomplete
+                        </code></pre>
+                    </section>
+                    
+                    <section>
+                        <h4>Dropping Your Stash</h4>
+                        
+                        <pre><code class='no-highlight' data-trim data-noescape>
+~$ git stash <strong>drop stash@{1}</strong>
+Dropped refs/stash@{0} (a52d9c3ba1121dd94eb3925ba60d3f8ef30540c8)
+                        </code></pre>
+                        
+                        <p class='illuminate'>Make sure you know which stash you're dropping!</p>
+                    </section>
+                    
+                </section>
+                
+                
+                <section>
+                    
+                    <section data-background='#fff' style='height:15em'>
+                        <h3 style='margin-top:4em;'>Logs and Blame</h3>
+                        
+                        <img src='images/log.png' alt='Log (from Ren &amp; Stimpy)' style='position:absolute; bottom:-1em; left:0;'>
+                        
+                        <cite>http://thedailyomnivore.net/2012/02/20/ren-stimpy/</cite>
+                    </section>
+                    
+                    <section>
+                        <h4>The Basic Log</h4>
+                        
+                        <pre><code class='no-highlight' data-trim data-noescape>
+~$ git log
+commit d42c38691161f42fcc07d806f7df4579e8cd189e
+Author: jakerella &lt;jordan@jordankasper.com&gt;
+Date:   Sat Jul 5 15:57:36 2014 -0500
+
+    Added text to readme
+
+commit b9bdb0261ee9bcaa31d7eb062c0bcafee3e530f0
+Author: jakerella &lt;jordan@jordankasper.com&gt;
+Date:   Sat Jul 5 15:36:30 2014 -0500
+
+    Added documentation
+...
+                        </code></pre>
+                    </section>
+                    
+                    <section>
+                        <h4>Log Options</h4>
+                        
+                        <pre><code class='no-highlight' data-trim data-noescape>
+~$ git log <strong>--oneline</strong>
+
+d42c386 Added text to readme
+b9bdb02 Added documentation
+c2cb87e removed unused files from test harness
+2e8a119 Merge pull request #186 from jakerella/feature-async-response
+79eec03 Reorganized 'Documentation' section and renamed
+...
+                        </code></pre>
+                    </section>
+                    
+                    <section>
+                        <h4>Log Graphs</h4>
+                        
+                        <pre><code class='no-highlight' data-trim data-noescape>
+~$ git log --oneline <strong>--graph</strong>
+
+*   714e0dd Merge pull request #220 from appendto/feature-two
+|\ 
+| * c8bcfc1 last update for feature two
+| *   3e3a8fd Merge branch 'feature-two-tweak' into feature-two
+| |\  
+| | * 46f4cf1 tweak for feature two
+| * | 1471f2b one more thing on feature two
+| |/ 
+| * 5ce150b feature two initial work
+|/  
+* 062b1f0 some previous work
+                        </code></pre>
+                    </section>
+                    
+                    <section>
+                        <h4>Filtering the Log</h4>
+                        
+                        <pre><code class='no-highlight' data-trim data-noescape>
+~$ git log <strong>--no-merges</strong>
+
+~$ git log <strong>--author="jakerella"</strong>
+
+~$ git log <strong>--before="2014-07-01"</strong>
+
+~$ git log <strong>-- src/js/</strong>
+
+~$ git log <strong>-S foobar</strong>
+                        </code></pre>
+                    </section>
+                    
+                    <section>
+                        <h3>Pointing Blame</h3>
+                        
+                        <p class='fragment fine illuminate'>(Many times at yourself...)</p>
+                    </section>
+                    
+                    <section>
+                        <h4>Blame Game</h4>
+                        
+                        <pre><code class='lang-javascript' data-trim data-noescape>
+/* utility functions */
+
+function sum(x, y) {
+    return x * y;
+}
+                        </code></pre>
+                        
+                        <pre class='fragment'><code class='no-highlight' data-trim data-noescape>
+~$ <strong>git blame src/js/utilities.js</strong>
+<span style='letter-spacing:0.06em;'>d35241e6 (Ryan      2014-03-13   1) /* utility functions */
+d35241e6 (Ryan      2014-03-13   2) 
+d35241e6 (Ryan      2014-03-13   3) function sum(x, y) {</span>
+<strong>27cc7225 (Jordan    2014-03-15   4)     return x * y;</strong>
+<span style='letter-spacing:0.06em;'>d35241e6 (Ryan      2014-03-13   5) }</span>
+                        </code></pre>
+                    </section>
+                    
+                    <section>
+                        <h4>Blame Game</h4>
+                        
+                        <pre><code class='no-highlight' data-trim data-noescape>
+~$ git <strong>L3,5</strong> blame src/js/utilities.js
+d35241e6 (Ryan      2014-03-13   3) function sum(x, y) {
+27cc7225 (Jordan    2014-03-15   4)     return x * y;
+d35241e6 (Ryan      2014-03-13   5) }
+                        </code></pre>
+                    </section>
+                    
+                    <section>
+                        <h4>Dissecting the Log</h4>
+                        
+                        <h4 class='fragment'>Using <code>git bisect</code></h4>
+                    </section>
+                    
+                    <section data-transition='none'>
+                        <h4>Using Bisect</h4>
+                        
+                        <p>First, switch to a broken branch...</p>
+                        
+                        <pre class='fragment'><code class='no-highlight' data-trim data-noescape>
+~$ git bisect start
+                        </code></pre>
+                        <pre class='fragment'><code class='no-highlight' data-trim data-noescape>
+~$ git bisect bad
+                        </code></pre>
+                        <pre class='fragment'><code class='no-highlight' data-trim data-noescape>
+~$ git bisect good b9bdb02
+Bisecting: 3 revisions left to test after this (roughly 2 steps)
+[7e3f9393a716b1bf5c935031bae679249352726d] implemented some cool new thing
+                        </code></pre>
+                        <pre class='fragment'><code class='no-highlight' data-trim data-noescape>
+~$ git status
+# Not currently on any branch.
+nothing to commit (working directory clean)
+                        </code></pre>
+                    </section>
+                    
+                    <section data-transition='none'>
+                        <h4>Using Bisect</h4>
+                        
+                        <p>First, switch to a broken branch...</p>
+                        
+                        <pre><code class='no-highlight' data-trim data-noescape>
+~$ git bisect start
+                        </code></pre>
+                        <pre><code class='no-highlight' data-trim data-noescape>
+~$ git bisect bad
+                        </code></pre>
+                        <pre><code class='no-highlight' data-trim data-noescape>
+~$ git bisect good b9bdb02
+Bisecting: 3 revisions left to test after this (roughly 2 steps)
+[7e3f9393a716b1bf5c935031bae679249352726d] implemented some cool new thing
+                        </code></pre>
+                        <pre class='fragment'><code class='no-highlight' data-trim data-noescape>
+<strong>~$ grunt test</strong>
+                        </code></pre>
+                        <pre class='fragment'><code class='no-highlight' data-trim data-noescape>
+~$ git bisect <strong>[good|bad]</strong>
+Bisecting: 1 revision left to test after this (roughly 1 step)
+[b86e65d056ea750f1f882df7c10dc5e1bf2deeb2] risky change that may break things
+                        </code></pre>
+                    </section>
+                    
+                    <section>
+                        <h4>Using Bisect</h4>
+                        
+                        <pre><code class='no-highlight' data-trim data-noescape>
+~$ git bisect start
+~$ git bisect bad
+~$ git bisect good b9bdb02
+Bisecting: 3 revisions left to test after this (roughly 2 steps)
+[7e3f9393a716b1bf5c935031bae679249352726d] implemented some cool new thing
+
+...
+
+                        </code></pre>
+                        
+                        <pre class='fragment'><code class='no-highlight' data-trim data-noescape>
+~$ git bisect good
+<strong>7e3f9393a716b1bf5c935031bae679249352726d is the first bad commit</strong>
+commit 7e3f9393a716b1bf5c935031bae679249352726d
+Author: jakerella
+                        </code></pre>
+                    </section>
+                    
+                    <section>
+                        <h4>Now You Know...</h4>
+                        
+                        <p class='illuminate'>Remember, we're no longer on a branch!</p>
+                        
+                        <pre class='fragment'><code class='no-highlight' data-trim data-noescape>
+~$ git bisect <strong>reset</strong>
+Previous HEAD position was b86e65d... Added some stuff
+Switched to branch 'new-feature'
+                        </code></pre>
+                    </section>
+                
+                </section>
+                
+                
+                <section>
+                    
+                        <section>
+                            <h3>Playing Nice With Others</h3>
+                        </section>
+                        
+                        <section>
+                            
+                        </section>
+                    
+                </section>
 
 
 
