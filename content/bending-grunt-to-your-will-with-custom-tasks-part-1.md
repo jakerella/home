@@ -1,9 +1,9 @@
 
-## Bending Grunt to Your Will with Custom Tasks
+## Bending Grunt to Your Will with Custom Tasks, Part 1
 
 
 <img src='/images/grunt-logo.png' alt='Grunt logo' class='right' style='width:12em; margin-top:-2em; padding-top:0;'>
-    
+
 I've been answering a lot of [questions on Stack Overflow](http://stackoverflow.com/questions/tagged/gruntjs) lately about Grunt. I find that that tag is a little less attended to than some others given the growing popularity of the tool. I also think that I have useful knowledge and experience to share. What I've discovered is that there are a lot of people new to Grunt - but familiar with JavaScript - who aren't sure how to accomplish what they hope to. I'd like to take a few minutes to talk about [writing custom tasks](http://gruntjs.com/creating-tasks) in Grunt and how to use your existing JavaScript skills to make a better build process.
 
 
@@ -77,11 +77,9 @@ module.exports = function (grunt) {
     
     grunt.registerMultiTask('osdetect', 'Detect OS and run different task based on it', function() {
         if (/linux/.test(process.platform)) {
-            
             grunt.task.run( ['someCommonTask:linux'] );
             
         } else if (/darwin/.test(process.platform)) { // This is what Grunt returns for OSX
-            
             grunt.task.run( ['someCommonTask:osx'] );
             
         }
@@ -105,14 +103,13 @@ This will [load all JavaScript files in that directory](http://gruntjs.com/api/g
 ~/my-project$ grunt osdetect
 ```
 
-### We Can Do Better
+<h3 style='margin-top:2em;'>We Can Do Better</h3>
 
 <img src='/images/not-impressed.jpg' alt='Not impressed' class='left' style='width:15em; margin-top:-0.5em; padding-top:0; padding-left:0'>
 
-Maybe the previos example doesn't look so difficult, but that's the point! We can make custom Grunt tasks very easily. Now, what if we wanted to make our OS detection script a little more extensible? We could, for example, add some configuration to allow any number of tasks to be run and to match them against a set of os-to-task options. This will require us to use a bit more of the [Grunt API](http://gruntjs.com/api/grunt), but you won't really need to know anything else about Node specifically.
+Maybe the previous example doesn't look so difficult, but that's the point! We can make custom Grunt tasks very easily. Now, what if we wanted to make our OS detection script a little more extensible? We could, for example, add some configuration to allow any number of tasks to be run and to match them against an os-to-task mapping option. This will require us to use a bit more of the [Grunt API](http://gruntjs.com/api/grunt), but you won't really need to know anything else about Node specifically.
 
-
-
+We'll continue this discussion in Part Two of this blog post series. Join us then!
 
 
 {{January 2, 2015}}
