@@ -133,8 +133,18 @@
                         
                         <pre><code class='no-highlight' data-trim>
 ~$ git branch -vv
-* master            b956c45 [origin/master] Initial commit
-  some-local-branch a74b295 Implemented that cool feature
+* master             b956c45 [origin/master] Initial commit
+  some-local-branch  a74b295 Implemented that cool feature
+                        </code></pre>
+                    </section>
+
+                    <section>
+                        <h4>Wherezitat?</h4>
+                        
+                        <pre><code class='no-highlight' data-trim>
+~$ git remote -v
+origin  https://github.com/jakerella/repo-name.git (fetch)
+origin  https://github.com/jakerella/repo-name.git (push)
                         </code></pre>
                     </section>
                     
@@ -142,15 +152,13 @@
                         <h4>Tracking</h4>
                         
                         <p>
-                            If "origin" is set up on master,<br>
-                            how do I make a new branch "track" that remote repo?
+                            How do I make a new branch "track" that remote repo?
                         </p>
                         
                         <div class='fragment'>
                             <pre><code class='no-highlight' data-trim>
 ~$ git checkout -b new-feature
-...
-~$ git branch -u origin/new-feature
+~$ git push -u origin new-feature
                             </code></pre>
                             
                             <p>The <code>-u</code> option sets the "upstream" remote repo to track.</p>
@@ -162,31 +170,6 @@
   some-local-branch a74b295 Implemented that cool feature
                             </code></pre>
                         </div>
-                    </section>
-                    
-                    <section>
-                        <h4>Tracking</h4>
-                        
-                        <p>
-                            Or if you've already committed some code to that branch<br>
-                            you can push and set the remote at the same time:
-                        </p>
-                        
-                        <pre class='fragment'><code class='no-highlight' data-trim>
-~$ git commit -m "new stuff!"
-...
-~$ git push -u origin new-feature
-                        </code></pre>
-                    </section>
-                    
-                    <section>
-                        <h4>Wherezitat?</h4>
-                        
-                        <pre><code class='no-highlight' data-trim>
-~$ git remote -v
-origin  https://github.com/jakerella/repo-name.git (fetch)
-origin  https://github.com/jakerella/repo-name.git (push)
-                        </code></pre>
                     </section>
                     
                     <section>
@@ -269,7 +252,7 @@ index 0000000..e69de29
                         <h4>Branch Differences</h4>
                         
                         <pre><code class='no-highlight' data-trim data-noescape>
-~$ git diff <strong>master...stuff</strong>
+~$ git diff <strong>master..stuff</strong>
 diff --git a/STUFF.md b/STUFF.md
 new file mode 100644
 index 0000000..e69de29
@@ -315,12 +298,6 @@ index 0000000..e69de29
                         <img src='images/snapshots.png' alt='snapshots diagram'>
                         
                         <cite>http://git-scm.com/book/en/Getting-Started-Git-Basics</cite>
-                    </section>
-                    
-                    <section>
-                        <h4>Commit Workflow</h4>
-                        
-                        <img src='images/git_checkout-commit.png' alt='commit workflow diagram'>
                     </section>
                     
                     <section>
@@ -800,6 +777,17 @@ stash@{1}: On new-feature: trying out some async behavior
 stash@{2}: On hot-fix-456: attempt to fix bug #456, but incomplete
                         </code></pre>
                     </section>
+
+                    <section>
+                        <h4>Dropping Your Stash</h4>
+                        
+                        <pre><code class='no-highlight' data-trim data-noescape>
+~$ git stash <strong>drop stash@{1}</strong>
+Dropped refs/stash@{0} (a52d9c3ba1121dd94eb3925ba60d3f8ef30540c8)
+                        </code></pre>
+                        
+                        <p class='illuminate'>Make sure you know which stash you're dropping!</p>
+                    </section>
                     
                     <section>
                         <h4>Popping Your Stash</h4>
@@ -824,17 +812,6 @@ stash@{2}: On hot-fix-456: attempt to fix bug #456, but incomplete
 stash@{0}: On new-feature: trying out some async behavior
 stash@{1}: On hot-fix-456: attempt to fix bug #456, but incomplete
                         </code></pre>
-                    </section>
-                    
-                    <section>
-                        <h4>Dropping Your Stash</h4>
-                        
-                        <pre><code class='no-highlight' data-trim data-noescape>
-~$ git stash <strong>drop stash@{1}</strong>
-Dropped refs/stash@{0} (a52d9c3ba1121dd94eb3925ba60d3f8ef30540c8)
-                        </code></pre>
-                        
-                        <p class='illuminate'>Make sure you know which stash you're dropping!</p>
                     </section>
                     
                 </section>
@@ -959,95 +936,6 @@ d35241e6 (Ryan      2014-03-13   5) }
                         </code></pre>
                     </section>
                     
-                    <section>
-                        <h4>Dissecting the Log</h4>
-                        
-                        <h4 class='fragment'>Using <code>git bisect</code></h4>
-                    </section>
-                    
-                    <section data-transition='none'>
-                        <h4>Using Bisect</h4>
-                        
-                        <p>First, switch to a broken branch...</p>
-                        
-                        <pre class='fragment'><code class='no-highlight' data-trim data-noescape>
-~$ git bisect start
-                        </code></pre>
-                        <pre class='fragment'><code class='no-highlight' data-trim data-noescape>
-~$ git bisect bad
-                        </code></pre>
-                        <pre class='fragment'><code class='no-highlight' data-trim data-noescape>
-~$ git bisect good b9bdb02
-Bisecting: 3 revisions left to test after this (roughly 2 steps)
-[7e3f9393a716b1bf5c935031bae679249352726d] implemented some cool new thing
-                        </code></pre>
-                        <pre class='fragment'><code class='no-highlight' data-trim data-noescape>
-~$ git status
-# Not currently on any branch.
-nothing to commit (working directory clean)
-                        </code></pre>
-                    </section>
-                    
-                    <section data-transition='none'>
-                        <h4>Using Bisect</h4>
-                        
-                        <p>First, switch to a broken branch...</p>
-                        
-                        <pre><code class='no-highlight' data-trim data-noescape>
-~$ git bisect start
-                        </code></pre>
-                        <pre><code class='no-highlight' data-trim data-noescape>
-~$ git bisect bad
-                        </code></pre>
-                        <pre><code class='no-highlight' data-trim data-noescape>
-~$ git bisect good b9bdb02
-Bisecting: 3 revisions left to test after this (roughly 2 steps)
-[7e3f9393a716b1bf5c935031bae679249352726d] implemented some cool new thing
-                        </code></pre>
-                        <pre class='fragment'><code class='no-highlight' data-trim data-noescape>
-<strong>~$ grunt test</strong>
-                        </code></pre>
-                        <pre class='fragment'><code class='no-highlight' data-trim data-noescape>
-~$ git bisect <strong>[good|bad]</strong>
-Bisecting: 1 revision left to test after this (roughly 1 step)
-[b86e65d056ea750f1f882df7c10dc5e1bf2deeb2] risky change that may break things
-                        </code></pre>
-                    </section>
-                    
-                    <section>
-                        <h4>Using Bisect</h4>
-                        
-                        <pre><code class='no-highlight' data-trim data-noescape>
-~$ git bisect start
-~$ git bisect bad
-~$ git bisect good b9bdb02
-Bisecting: 3 revisions left to test after this (roughly 2 steps)
-[7e3f9393a716b1bf5c935031bae679249352726d] implemented some cool new thing
-
-...
-
-                        </code></pre>
-                        
-                        <pre class='fragment'><code class='no-highlight' data-trim data-noescape>
-~$ git bisect good
-<strong>7e3f9393a716b1bf5c935031bae679249352726d is the first bad commit</strong>
-commit 7e3f9393a716b1bf5c935031bae679249352726d
-Author: jakerella
-                        </code></pre>
-                    </section>
-                    
-                    <section>
-                        <h4>Now You Know...</h4>
-                        
-                        <p class='illuminate'>Remember, we're no longer on a branch!</p>
-                        
-                        <pre class='fragment'><code class='no-highlight' data-trim data-noescape>
-~$ git bisect <strong>reset</strong>
-Previous HEAD position was b86e65d... Added some stuff
-Switched to branch 'new-feature'
-                        </code></pre>
-                    </section>
-                
                 </section>
                 
                 
