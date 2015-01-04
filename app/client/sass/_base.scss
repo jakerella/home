@@ -28,7 +28,8 @@ a {
     text-decoration: none;
 
     &:hover {
-        border-bottom: 1px dashed $linkText;
+        color: $linkHover;
+        border-bottom: 1px dashed $linkHover;
     }
 }
 
@@ -37,7 +38,7 @@ a {
 }
 
 .fine {
-    color: #666;
+    color: $finePrint;
     font-size: 0.8em;
 }
 

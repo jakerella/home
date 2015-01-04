@@ -4,7 +4,7 @@ nav ul {
 
     li {
         display: inline-block;
-        background-color: #444;
+        background-color: $headerBackground;
         padding: 1.65em 0;
         transition: background 0.3s linear;
 
@@ -20,6 +20,7 @@ nav ul {
         padding: 1em 2em;
 
         &:hover {
+            color: #fff;
             border-bottom: none;
         }
 

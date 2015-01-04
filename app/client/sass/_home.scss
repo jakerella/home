@@ -14,6 +14,10 @@
     }
 }
 
+.recent-posts img {
+    display: none;
+}
+
 [data-slug=home] .paging {
     position: fixed;
     top: 3.5em;

@@ -2,6 +2,13 @@
 .blog-post {
     p {
         line-height: 1.4em;
+        
+        code {
+            background-color: $codeBackground;
+            border-radius: 4px;
+            font-size: 0.9em;
+            padding: 0.2em 0.3em;
+        }
     }
 
     h2, h3, h4 {
@@ -13,10 +20,22 @@
         color: #446;
     }
 
+    blockquote {
+        font-style: italic;
+        padding: 0.1em 1em;
+        background-color: $quoteBackground;
+        background: -moz-linear-gradient(left, $quoteBackground 0%, white 100%); /* FF3.6+ */
+        background: -webkit-gradient(linear, left top, right top, color-stop(0%, white), color-stop(100%, white)); /* Chrome,Safari4+ */
+        background: -webkit-linear-gradient(left, $quoteBackground 0%, white 100%); /* Chrome10+,Safari5.1+ */
+        background: -o-linear-gradient(left, $quoteBackground 0%, white 100%); /* Opera 11.10+ */
+        background: -ms-linear-gradient(left, $quoteBackground 0%, white 100%); /* IE10+ */
+        background: linear-gradient(to right, $quoteBackground 0%, white 100%);
+    }
+
     pre {
         margin: 0.5em;
         padding: 0.5em;
-        background-color: #f9f9f9;
+        background-color: $codeBackground;
         border: 1px solid #ddd;
         border-right-color: #bbb;
         border-bottom-color: #bbb;
@@ -24,13 +43,13 @@
 
     .publish-time {
         font-size: 0.9em;
-        color: #333;
+        color: $slightDim;
         float: left;
     }
 
     .post-tags {
         font-size: 0.85em;
-        color: #333;
+        color: $slightDim;
         text-align: right;
         margin-top: 2em;
     }
@@ -40,13 +59,13 @@
     }
 
     .sharing {
-        color: #333;
+        color: $slightDim;
         clear: left;
         text-align: center;
 
         a, a:visited {
             font-size: 2em;
-            color: #333;
+            color: $slightDim;
 
             @media (min-width: $largeBreakpoint) {
                 font-size: 1.3em;
@@ -54,7 +73,7 @@
         }
         a:hover {
             border: none;
-            color: #557
+            color: $linkHover
         }
     }
 }
