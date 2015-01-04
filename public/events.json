@@ -39,6 +39,16 @@
             ]
         },
         {
+            "name": "Lone Star PHP",
+            "url": "http://lonestarphp.com",
+            "location": "Dallas, TX",
+            "date": "Apr 17 2015",
+            "topics": [
+                "Advanced Git",
+                "Object Oriented JavaScript"
+            ]
+        },
+        {
             "name": "Fluent",
             "url": "http://fluentconf.com",
             "location": "San Francisco, CA",
