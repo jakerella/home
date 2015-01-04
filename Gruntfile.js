@@ -7,7 +7,7 @@ module.exports = function (grunt) {
         jshint: {
             options: {
                 jshintrc: '.jshintrc',
-                jshintignore: '.jshintignore'
+                ignores: ['public/js/vendor/**/*.js']
             },
             client: {
                 files: {
