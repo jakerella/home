@@ -1,10 +1,10 @@
 
-## Bending Grunt to Your Will with Custom Tasks
+## Bending Grunt to Your Will with Custom Tasks, Part 2
 
 
 <img src='/images/grunt-logo.png' alt='Grunt logo' class='right' style='width:12em; margin-top:-2em; padding-top:0;'>
     
-This is Part Two of a series on custom Grunt tasks. Have you [read Part One](/bending-grunt-to-your-will-with-custom-tasks)?
+This is Part Two of a series on custom Grunt tasks. Have you [read Part One](/bending-grunt-to-your-will-with-custom-tasks-part-1)?
 
 As I mentioned last time, I've been answering a lot of [questions on Stack Overflow](http://stackoverflow.com/questions/tagged/gruntjs) about Grunt lately. What I've discovered is that there are a lot of people new to Grunt - but familiar with JavaScript - who aren't sure how to accomplish what they hope to. In Part Two of this series I'm going to take our custom tasks further and show you some of the other aspects of [Grunt API](http://gruntjs.com/api/grunt) and some tips for writing better tasks.
 
@@ -228,9 +228,9 @@ The `grunt.file.expand()` method let's us take a source directory (including [gl
 
 Hopefully if've been able to show you that creating a custo Grunt task can be quite easy, and yet very extensible and powerful. You should never feel constrained by a pre-made task, nor should you feel that you need to restrict yourself to what that task can do. And let's not reinvent the wheel here, make use of [what is already out there](http://gruntjs.com/plugins), and build on top of it... or better yet, contribute to it!
 
-I hope you've gotten a lot out of these [two posts](/bending-grunt-to-your-will-with-custom-tasks)! Now go forth and create! And let's keep the conversation going in the comments below.
+I hope you've gotten a lot out of these [two posts](/bending-grunt-to-your-will-with-custom-tasks-part-1)! Now go forth and create! And let's keep the conversation going in the comments below.
 
-### Have you read [Part One](/bending-grunt-to-your-will-with-custom-tasks)?
+### Have you read [Part One](/bending-grunt-to-your-will-with-custom-tasks-part-1)?
 
 {{January 5, 2015}}
 
