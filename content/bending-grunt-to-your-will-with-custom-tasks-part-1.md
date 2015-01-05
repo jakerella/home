@@ -6,7 +6,6 @@
 
 I've been answering a lot of [questions on Stack Overflow](http://stackoverflow.com/questions/tagged/gruntjs) lately about Grunt. I find that that tag is a little less attended to than some others given the growing popularity of the tool. I also think that I have useful knowledge and experience to share. What I've discovered is that there are a lot of people new to Grunt - but familiar with JavaScript - who aren't sure how to accomplish what they hope to. I'd like to take a few minutes to talk about [writing custom tasks](http://gruntjs.com/creating-tasks) in Grunt and how to use your existing JavaScript skills to make a better build process.
 
-
 ### The Nature of Grunt
 
 This isn't an article on [how to use Grunt](http://gruntjs.com/getting-started), I'll let others take care of that for me. And as such, I'm not going to spend a lot of time on the basics of Grunt, but I do want to talk a little about what Grunt is... under the covers.
@@ -109,7 +108,7 @@ This will [load all JavaScript files in that directory](http://gruntjs.com/api/g
 
 Maybe the previous example doesn't look so difficult, but that's the point! We can make custom Grunt tasks very easily. Now, what if we wanted to make our OS detection script a little more extensible? We could, for example, add some configuration to allow any number of tasks to be run and to match them against an os-to-task mapping option. This will require us to use a bit more of the [Grunt API](http://gruntjs.com/api/grunt), but you won't really need to know anything else about Node specifically.
 
-We'll continue this discussion in Part Two of this blog post series. Join us then!
+We'll continue this discussion in [Part Two](/bending-grunt-to-your-will-with-custom-tasks-part-2) of this blog post series. Join us then!
 
 
 {{January 2, 2015}}
