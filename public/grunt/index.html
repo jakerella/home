@@ -4,9 +4,9 @@
     <head>
         <meta charset='utf-8'>
 
-        <title>Object Oriented JavaScript (yes, it really exists)</title>
+        <title>Groking Grunt</title>
 
-        <meta name='description' content='A deep dive into object oriented JavaScript and prototypical inheritance'>
+        <meta name='description' content='An overview of Grunt and using task plugins'>
         <meta name='author' content='Jordan Kasper'>
 
         <meta name='apple-mobile-web-app-capable' content='yes' />
@@ -67,6 +67,90 @@
                         <a href='http://nomadjavascript.com'>
                             <img src='/images/nomad-js.png' alt='NomadJS' style='width:25%' />
                         </a>
+                    </section>
+                    
+                </section>
+                
+                <section>
+                
+                    <section>
+                        <a href='http://gruntjs.com'>
+                            <img src='/images/grunt-logo.png' alt='Grunt'>
+                        </a>
+                    </section>
+                    
+                    <section>
+                        <h3>Grunt is a task runner</h3>
+                        
+                        <p>written in JavaScript (Node)</p>
+                    </section>
+                    
+                    <section>
+                        <h3>What would I do with it?</h3>
+                        
+                        <ul>
+                            <li class='fragment'>Minifying &amp; concatentating JS files</li>
+                            <li class='fragment'>Compiling Sass or LESS styles</li>
+                            <li class='fragment'>Running tests</li>
+                            <li class='fragment'>Linting JS &amp; CSS files</li>
+                            <li class='fragment'>Optimizing images</li>
+                            <li class='fragment'>Preparing a build &amp; deploying it</li>
+                        </ul>
+                    </section>
+                    
+                    <section>
+                        <img src='images/doge-tasks.jpg' alt='Doge meme'>
+                    </section>
+                    
+                    <section>
+                        <h4>Okay, it can do a lot...</h4>
+                        
+                        <p class='fragment'>
+                            Actually, it doesn't do much at all.
+                        </p>
+                    </section>
+                    
+                    <section data-background='#fff'>
+                        <img src='images/wut.jpg' alt='wut meme'>
+                    </section>
+                    
+                    <section>
+                        <h3>Grunt is <strong><em>only</em></strong> a task runner</h3>
+                        
+                        <p>Not a set of executable tasks</p>
+                        
+                        <p class='fragment' style='margin-top:2em;'>Instead, Grunt has a <a href='http://gruntjs.com/plugins'>long list of task plugins</a>... over 4,000.</p>
+                    </section>
+                    
+                    <section data-background='#fff'>
+                        <h3>So what <em>is</em> it?</h3>
+                        
+                        <div class='fragment'>
+                            <p>Grunt is a series of Node modules.</p>
+                            <img src='images/grunt-diagram.png' alt='Diagram of Grunt'>
+                        </div>
+                    </section>
+                
+                </section>
+                
+                <section>
+                    
+                    <section>
+                        <h3>My first time</h3>
+                        
+                        <p class='margin-top:2em;'>How to get running with Grunt</p>
+                    </section>
+                    
+                    <section>
+                        <h4>Step 1: Install <a href='http://nodejs.org'>Node.js</a></h4>
+                        
+                        <div class='fragment'>
+                            <h4>Step 2: Install the Grunt CLI</h4>
+                            
+                            <pre><code class='no-highlight' data-trim>
+~/my-project$ npm install -g grunt-cli
+                            </code></pre>
+                        </div>
                     </section>
                     
                 </section>
