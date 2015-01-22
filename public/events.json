@@ -20,6 +20,22 @@
             ]
         },
         {
+            "name": "SF Node.js Meetup",
+            "url": "http://www.meetup.com/Node-js-Serverside-Javascripters-Club-SF/events/219937616/",
+            "location": "San Francisco, CA",
+            "date": "Feb 9 2015",
+            "topics": [
+                "Custom Grunt tasks"
+            ]
+        },
+        {
+            "name": "Node Summit",
+            "url": "http://nodesummit.com",
+            "location": "San Francisco, CA",
+            "date": "Feb 10 2015",
+            "topics": []
+        },
+        {
             "name": "ConFoo",
             "url": "http://confoo.ca",
             "location": "Montreal, Canada",
