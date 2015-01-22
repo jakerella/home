@@ -14,14 +14,14 @@ Last time we created a simple Node module to detect the operating system and run
 
 ```javascript
 // ./tasks/osdetect.js
-
+    
 module.exports = function (grunt) {
 
     grunt.registerMultiTask('osdetect', 'Detect OS and run different task based on it', function() {
         if (/linux/.test(process.platform)) {
             grunt.task.run( ['someCommonTask:linux'] );
 
-        } else if (/darwin/.test(process.platform)) { // This is what Grunt returns for OSX
+        } else if (/darwin/.test(process.platform)) { // This is what Node returns for OSX
             grunt.task.run( ['someCommonTask:osx'] );
 
         }
@@ -226,7 +226,7 @@ The `grunt.file.expand()` method let's us take a source directory (including [gl
 
 ### Go Forth!
 
-Hopefully if've been able to show you that creating a custo Grunt task can be quite easy, and yet very extensible and powerful. You should never feel constrained by a pre-made task, nor should you feel that you need to restrict yourself to what that task can do. And let's not reinvent the wheel here, make use of [what is already out there](http://gruntjs.com/plugins), and build on top of it... or better yet, contribute to it!
+Hopefully you've been able to show you that creating a custom Grunt task can be quite easy, and yet very extensible and powerful. You should never feel constrained by a pre-made task, nor should you feel that you need to restrict yourself to what that task can do. And let's not reinvent the wheel here, make use of [what is already out there](http://gruntjs.com/plugins), and build on top of it... or better yet, contribute to it!
 
 I hope you've gotten a lot out of these [two posts](/bending-grunt-to-your-will-with-custom-tasks-part-1)! Now go forth and create! And let's keep the conversation going in the comments below.
 
