@@ -73,7 +73,7 @@ aside.title-text h3 {
     color: #888 !important;
 }
 
-.slides p code, .slides li code, .slides h3 code, .slides h4 code {
+.slides p code, .slides li > code, .slides h3 code, .slides h4 code {
     background-color: #ddeff0;
     color: #2f85aa;
     font-size: 0.8em;
