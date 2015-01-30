@@ -115,3 +115,14 @@ ul.file-structure .file {
     color: #555;
     box-shadow: none;
 }
+
+footer {
+    position: absolute;
+    bottom: 0.3em;
+}
+footer.left {
+    left: 0.5em;
+}
+footer.right {
+    left: 0.5em;
+}
