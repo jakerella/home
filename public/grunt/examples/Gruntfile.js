@@ -1,6 +1,6 @@
 
 module.exports = function (grunt) {
-    'use strict';
+    
 
     grunt.initConfig({
         
@@ -32,19 +32,17 @@ module.exports = function (grunt) {
         },
         
         
-        clean: ['build'],
-        
         
         copy: {
             images: {
                 files: [
                     {
                         expand: true,
-                        src: ['src/images/*'],
-                        src: ['src/images/**'],
+                        src: ['app/client/images/*'],
+                        src: ['app/client/images/**'],
                         src: ['**'],
                         src: ['**/*.png'],
-                        cwd: 'src/images/',
+                        cwd: 'app/client/images/',
                         dest: 'build/images'
                     }
                 ]
@@ -58,10 +56,10 @@ module.exports = function (grunt) {
             },
             libs: {
                 files: {
-                    'build/js/lib.min.js': ['src/js/vendor/**/*.js'],
+                    'build/js/lib.min.js': ['app/client/vendor/**/*.js'],
                     'build/js/lib.min.js': [
-                        'src/js/vendor/jquery/jquery.js',
-                        'src/js/vendor/some-plugin/jquery.some-plugin.js'
+                        'app/client/vendor/jquery/jquery.js',
+                        'app/client/vendor/some-plugin/jquery.some-plugin.js'
                     ]
                 }
             },
@@ -70,11 +68,11 @@ module.exports = function (grunt) {
                     banner: '/* These are my application JS files */'
                 },
                 files: {
-                    'build/js/app.min.js': ['src/js/**/*.js'],
+                    'build/js/app.min.js': ['app/client/**/*.js'],
                     'build/js/app.min.js': [
-                        'src/js/app.js',
-                        'src/js/**/*.js',
-                        '!src/js/vendor/**',
+                        'app/client/app.js',
+                        'app/client/**/*.js',
+                        '!app/client/vendor/**',
                     ]
                 }
             }
@@ -84,7 +82,7 @@ module.exports = function (grunt) {
         cssmin: {
             build: {
                 files: {
-                    'build/css/site.min.css': ['src/css/**/*.css']
+                    'build/css/site.min.css': ['build/css/**/*.css']
                 }
             }
         },
@@ -92,20 +90,22 @@ module.exports = function (grunt) {
         
         jshint: {
             options: {
-                jshintrc: '.jshintrc',
-                ignores: ['src/js/vendor/**/*.js']
+                eqeqeq: true,
+                browser: true,
+                ignores: ['app/vendor/**/*.js']
             },
             client: {
                 files: {
-                    src: ['src/js/**/*.js']
+                    src: ['app/client/**/*.js']
                 }
             },
             server: {
                 files: {
-                    src: ['app/**/*.js']
+                    src: ['app/sever/**/*.js']
                 }
             }
         },
+        
         
 
         sass: {
@@ -114,7 +114,7 @@ module.exports = function (grunt) {
             },
             main: {
                 files: {
-                    'public/css/style.css': 'app/client/sass/main.scss'
+                    'build/css/style.css': 'app/client/sass/main.scss'
                 }
             }
         },
@@ -127,9 +127,9 @@ module.exports = function (grunt) {
             all: {
                 files: [{
                     expand: true,
-                    cwd: 'src/images/',
-                    src: ['**/*.{png,jpg,gif}'],
-                    dest: 'build/images'
+                    cwd: 'app/client/images/',
+                    src: [ '**/*.{png,jpg,gif}' ],
+                    dest: 'build/images/'
                 }]
             }
         },
@@ -137,7 +137,7 @@ module.exports = function (grunt) {
 
         watch: {
             js: {
-                files: ['public/js/**/*.js', 'app/**/*.js'],
+                files: ['app/client/**/*.js', 'app/server/**/*.js'],
                 tasks: ['jshint']
             },
             sass: {
@@ -155,9 +155,9 @@ module.exports = function (grunt) {
                 awesome: false
             }
         }
-
+        
         // ...
-
+        
     });
 
 
@@ -177,11 +177,11 @@ module.exports = function (grunt) {
 
     grunt.registerTask('default', ['greet']);
 
-    grunt.registerTask('default', ['clean', 'copy']);
+    grunt.registerTask('default', ['jshint']);
     
     grunt.registerTask(
         'build',
-        ['clean', 'jshint:client', 'sass', 'uglify', 'copy', 'imagemin']
+        ['clean', 'jshint:client', 'sass', 'uglify', 'imagemin', 'copy']
     );
     
     grunt.registerTask('deploy', ['build', 'upload']);
@@ -196,5 +196,5 @@ module.exports = function (grunt) {
     
     grunt.loadTasks('./tasks');
     
-    
+    // ...
 };

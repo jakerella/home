@@ -187,13 +187,13 @@
                     <section>
                         <h4>A basic <code>package.json</code> file:</h4>
 
-                        <pre><code class='lang-json' data-srcbyline='examples/package.json?1-4;7-8'></code></pre>
+                        <pre><code class='lang-json' data-srcbyline='examples/package.json?1-4;12-13'></code></pre>
                     </section>
 
                     <section>
                         <h4>A basic Grunt config file (<code>Gruntfile.js</code>):</h4>
 
-                        <pre><code class='lang-javascript' data-srcbyline='examples/Gruntfile.js?2-8;161;199-200'></code></pre>
+                        <pre><code class='lang-javascript' data-srcbyline='examples/Gruntfile.js?2;4-8;161;198-200'></code></pre>
                     </section>
 
                     <section>
@@ -203,31 +203,67 @@
 ~/my-project$ npm install grunt-contrib-jshint --save-dev
                         </code></pre>
 
-                        <pre class='fragment'><code class='lang-javascript' data-srcbyline='examples/package.json?1-4;6-8'></code></pre>
+                        <pre class='fragment'><code class='lang-javascript' data-srcbyline='examples/package.json?1-4;11-13'></code></pre>
                     </section>
 
                     <section>
                         <h4>Configuring tasks</h4>
 
-[TODO: fix up lines (task/target config)]
-                        <pre><code class='lang-javascript' data-srcbyline='examples/Gruntfile.js?5-10'></code></pre>
+                        <pre><code class='lang-javascript' data-srcbyline='examples/Gruntfile.js?2;4-5;9-12;14;19;21;25;158-161;198-200'></code></pre>
+                    </section>
+                    
+                    <section>
+                        <h4>Configuring tasks</h4>
+
+                        <pre><code class='lang-javascript' data-srcbyline='examples/Gruntfile.js?9-12;14;19;21;25'></code></pre>
+                    </section>
+                    
+                    <section>
+                        <h4>Add a Second Target</h4>
+
+                        <pre><code class='lang-javascript' data-srcbyline='examples/Gruntfile.js?9-12;14;19;21-25'></code></pre>
+                    </section>
+                    
+                    <section>
+                        <h4>Override Task Options</h4>
+
+                        <pre><code class='lang-javascript' data-srcbyline='examples/Gruntfile.js?9-12;14-19;21-25'></code></pre>
+                    </section>
+                    
+                    <section>
+                        <h4>Remember... We've already installed jshint:</h4>
+                        
+                        
+                        <pre><code class='no-highlight' data-trim>
+~/my-project$ npm install grunt-contrib-jshint --save-dev
+                        </code></pre>
                     </section>
 
                     <section>
                         <h4>Configuring jshint</h4>
 
-[TODO: fix up lines (jshint config)]
-                        <pre><code class='lang-javascript' data-srcbyline='examples/Gruntfile.js?5-10'></code></pre>
+                        <pre><code class='lang-javascript' data-srcbyline='examples/Gruntfile.js?5-6;91-100;106-108;161'></code></pre>
+                    </section>
+                    
+                    <section>
+                        <h4>Configuring jshint</h4>
+
+                        <pre><code class='dim lang-none' data-srcbyline='examples/Gruntfile.js?5-6;91-100;106-108;161;'></code></pre>
+                        <pre><code class='lang-javascript' data-trim data-noescape>
+<strong>grunt.loadNpmTasks('grunt-contrib-jshint');</strong>
+                        </code></pre>
                     </section>
 
                     <section>
                         <h4>Run it!</h4>
 
-                        <pre class='fragment'><code class='no-highlight' data-trim>
-~/my-project$ grunt jshint
+                        <pre class='fragment'><code class='no-highlight' data-trim data-noescape>
+~/my-project$ <strong>grunt jshint:client</strong>
                         </code></pre>
-
-[TOOD: meme?]
+                        
+                        <pre class='fragment'><code class='no-highlight' data-trim data-noescape>
+~/my-project$ <strong>grunt jshint</strong>
+                        </code></pre>
 
                     </section>
 
@@ -238,22 +274,28 @@
                     <section>
                         <h4>Default Task</h4>
 
-[TODO: fix up lines (default task)]
-                        <pre class='fragment'><code class='lang-javascript' data-srcbyline='examples/Gruntfile.js?1-10'></code></pre>
+                        <pre class='fragment'><code class='lang-javascript' data-srcbyline='examples/Gruntfile.js?2-3;5-7;159-162;180;198;200'></code></pre>
 
-                        <pre class='fragment'><code class='no-highlight' data-trim>
+                        <pre class='fragment'><code class='no-highlight' data-trim data-noescape>
 ~/my-project$ grunt
+<span style='text-decoration:underline'>Running "jshint:client" (jshint) task</span>
+...
                         </code></pre>
                     </section>
 
                     <section>
                         <h4>A Simple <code>build</code> Task</h4>
 
-[TODO: fix up lines (build task)]
-                        <pre><code class='lang-javascript' data-srcbyline='examples/Gruntfile.js?1-10'></code></pre>
+                        <pre><code class='lang-javascript' data-srcbyline='examples/Gruntfile.js?180-185;'></code></pre>
 
-                        <pre class='fragment'><code class='no-highlight' data-trim>
+                        <pre class='fragment'><code class='no-highlight' data-trim data-noescape>
 ~/my-project$ grunt build
+<span style='text-decoration:underline'>Running "clean:all" (clean) task</span>
+...
+
+<span style='text-decoration:underline'>Running "jshint:client" (jshint) task</span>
+...
+
                         </code></pre>
                     </section>
 
@@ -264,25 +306,111 @@
 
                     <section>
                         <h3>Common Tasks</h3>
-
-[TODO: meme?]
                     </section>
 
                     <section>
-[TODO: sass compilation config]
+                        <h3>Cleaning a Build Directory</h3>
+                        
+                        <pre class='fragment'><code class='no-highlight' data-trim data-noescape>
+~/my-project$ npm install --save-dev grunt-contrib-clean
+                        </code></pre>
+                        
+                        <pre class='fragment'><code class='lang-javascript' data-srcbyline='examples/Gruntfile.js?5-6;28-32;158-161'></code></pre>
+
+                        <pre class='fragment'><code class='lang-javascript' data-trim data-noescape>
+<strong>grunt.loadNpmTasks('grunt-contrib-clean');</strong>
+                        </code></pre>
                     </section>
 
                     <section>
-[TODO: other task config]
+                        <h3>Compiling Sass Code</h3>
+                        
+                        <pre class='fragment'><code class='no-highlight' data-trim data-noescape>
+~/my-project$ npm install --save-dev grunt-sass
+                        </code></pre>
+                        
+                        <pre class='fragment'><code class='lang-javascript' data-srcbyline='examples/Gruntfile.js?111-120'></code></pre>
+                    </section>
+                    
+                    <section>
+                        <h3>Concatenate JavaScript</h3>
+                        
+                        <pre class='fragment'><code class='no-highlight' data-trim data-noescape>
+~/my-project$ npm install --save-dev grunt-contrib-uglify
+                        </code></pre>
+                        
+                        <pre class='fragment'><code class='lang-javascript' data-srcbyline='examples/Gruntfile.js?53-56;66-71;77-79'></code></pre>
+                    </section>
+                    
+                    <section>
+                        <h3>Concatenate JavaScript</h3>
+                        
+                        <pre><code class='lang-javascript' data-srcbyline='examples/Gruntfile.js?53-56;66-70;72-79'></code></pre>
                     </section>
 
                     <section>
-[TODO: watch task config (and running)]
+                        <h3>Optimize Images</h3>
+                        
+                        <pre class='fragment'><code class='no-highlight' data-trim data-noescape>
+~/my-project$ npm install --save-dev grunt-contrib-imagemin
+                        </code></pre>
+                        
+                        <pre class='fragment'><code class='lang-javascript' data-srcbyline='examples/Gruntfile.js?123-135'></code></pre>
+                    </section>
+
+
+                    <section>
+                        <h3>The <span style='text-transform:none;font-family:monospace;'>watch</span> Task</h3>
+                    </section>
+                    
+                    <section>
+                        <h4>Watching Files for Changes</h4>
+                        
+                        <div class='fragment'>
+                            <pre><code class='no-highlight' data-trim data-noescape>
+~/my-project$ npm install --save-dev grunt-contrib-watch
+                            </code></pre>
+                            
+                            <pre><code class='lang-javascript' data-srcbyline='examples/Gruntfile.js?138-147'></code></pre>
+                        </div>
+                    </section>
+                    
+                    <section>
+                        <h4>Watching Files for Changes</h4>
+                        
+                        <pre><code class="no-highlight" data-trim data-noescape>
+~/myproject$ <strong>grunt watch</strong>
+<span class="fragment">Running "watch" task
+Waiting...</span>
+<span class="fragment"><span style="color:green !important;">OK</span>
+<span style="color:green !important;">>></span> File "app/client/foo.js" changed.
+
+<span style="text-decoration:underline">Running "jshint:client" (jshint) task</span>
+
+...
+
+<span style="color:green !important;">Done, without errors.</span>
+<span style="color:cyan !important;">Completed in 2.028s at Wed Feb 18 2015 09:23:51 GMT-0500 (CDT)</span> - Waiting...</span>
+                        </code></pre>
                     </section>
 
                 </section>
 
 
+                <section class='no-footer'>
+                    <h2>Thank You!</h2>
+                    <h3 style='margin-top:1.5em;'>Groking Grunt</h3>
+                    
+                    <p style='margin-top: 2em'>Jordan Kasper</p>
+                    <p style='font-size:0.8em; margin-bottom:2em'>
+                        <a href='http://twitter.com/jakerella'>@jakerella</a> |
+                        <a href='http://jordankasper.com/grunt'>jordankasper.com/grunt</a>
+                    </p>
+                    
+                    <p><img src='/images/strongloop_logo_horiz.png' alt='StrongLoop' style='width:30%;'></p>
+                </section>
+                
+                
                 <section>
 
                     <section>
@@ -321,20 +449,7 @@
                     </section>
 
                 </section>
-
-
-                <section class='no-footer'>
-                    <h2>Thank You!</h2>
-                    <h3 style='margin-top:1.5em;'>Groking Grunt</h3>
-                    
-                    <p style='margin-top: 2em'>Jordan Kasper</p>
-                    <p style='font-size:0.8em; margin-bottom:2em'>
-                        <a href='http://twitter.com/jakerella'>@jakerella</a> |
-                        <a href='http://jordankasper.com/grunt'>jordankasper.com/grunt</a>
-                    </p>
-                    
-                    <p><img src='/images/strongloop_logo_horiz.png' alt='StrongLoop' style='width:30%;'></p>
-                </section>
+                
 
             </div> <!-- .slides -->
         </div> <!-- .reveal -->
