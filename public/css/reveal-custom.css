@@ -1,4 +1,15 @@
 
+/* Override background from Sky theme */
+body {
+    background-color: #cce3d6;
+    background: -moz-radial-gradient(bottom right, circle cover, #fbfcf7 0%, #cce3d6 50%);
+    background: -webkit-radial-gradient(bottom right, circle cover, #fbfcf7 0%, #cce3d6 50%);
+    background: -o-radial-gradient(bottom right, circle cover, #fbfcf7 0%, #cce3d6 50%);
+    background: -ms-radial-gradient(bottom right, circle cover, #fbfcf7 0%, #cce3d6 50%);
+    background: radial-gradient(bottom right, circle cover, #fbfcf7 0%, #cce3d6 50%);
+}
+
+
 aside.title-text {
     position: relative;
     top: -9.5em;
