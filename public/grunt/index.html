@@ -162,11 +162,18 @@
                                 <h4>
                                     Step 3: Create <code>package.json</code> and <code>Gruntfile.js</code>
                                     <br>
-                                    <span class='fine'><em>(in your project root, most likely)</em></span>
+                                    <blockquote class='fine'><em>(in your project root, most likely)</em></blockquote>
                                 </h4>
                             </li>
                             <li class='fragment'>
-                                <h4>Step 4: Configure and run some tasks!
+                                <h4>Step 4: Install Grunt in your project</h4>
+                                
+                                <pre><code class='no-highlight' data-trim>
+~/my-project$ npm install grunt --save-dev
+                                </code></pre>
+                            </li>
+                            <li class='fragment'>
+                                <h4>Step 5: Configure and run some tasks!
                             </li>
                         </ul>
                     </section>
@@ -180,15 +187,13 @@
                     <section>
                         <h4>A basic <code>package.json</code> file:</h4>
 
-[TODO: fix up lines]
-                        <pre><code class='lang-javascript' data-srcbyline='examples/package.json?1-7'></code></pre>
+                        <pre><code class='lang-json' data-srcbyline='examples/package.json?1-4;7-8'></code></pre>
                     </section>
 
                     <section>
                         <h4>A basic Grunt config file (<code>Gruntfile.js</code>):</h4>
 
-[TODO: fix up lines]
-                        <pre><code class='lang-javascript' data-srcbyline='examples/Gruntfile.js?1-9;25'></code></pre>
+                        <pre><code class='lang-javascript' data-srcbyline='examples/Gruntfile.js?2-8;161;199-200'></code></pre>
                     </section>
 
                     <section>
@@ -198,8 +203,7 @@
 ~/my-project$ npm install grunt-contrib-jshint --save-dev
                         </code></pre>
 
-[TODO: fix up lines (devDeps only)]
-                        <pre class='fragment'><code class='lang-javascript' data-srcbyline='examples/package.json?1-7'></code></pre>
+                        <pre class='fragment'><code class='lang-javascript' data-srcbyline='examples/package.json?1-4;6-8'></code></pre>
                     </section>
 
                     <section>
