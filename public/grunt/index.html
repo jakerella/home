@@ -91,15 +91,15 @@
                     </section>
                     
                     <section>
-                        <h3>What would I do with it?</h3>
+                        <h3>What can I do with it?</h3>
                         
                         <ul>
-                            <li class='fragment'>Minifying &amp; concatentating JS files</li>
-                            <li class='fragment'>Compiling Sass or LESS styles</li>
-                            <li class='fragment'>Running tests</li>
-                            <li class='fragment'>Linting JS &amp; CSS files</li>
-                            <li class='fragment'>Optimizing images</li>
-                            <li class='fragment'>Preparing a build &amp; deploying it</li>
+                            <li class='fragment'>Minify &amp; concatentate JS files</li>
+                            <li class='fragment'>Compile Sass or LESS styles</li>
+                            <li class='fragment'>Run tests</li>
+                            <li class='fragment'>Lint JS &amp; CSS files</li>
+                            <li class='fragment'>Optimize images</li>
+                            <li class='fragment'>Prepare a build &amp; deploy it</li>
                         </ul>
                     </section>
                     
@@ -124,7 +124,7 @@
                         
                         <p>Not a set of executable tasks</p>
                         
-                        <p class='fragment' style='margin-top:2em;'>Instead, Grunt has a <a href='http://gruntjs.com/plugins'>long list of task plugins</a>... over 4,000.</p>
+                        <p class='fragment' style='margin-top:2em;'>Instead, Grunt has a <a href='http://gruntjs.com/plugins'>long list of task plugins</a>... <span class='fragment'>over 4,000.</a></p>
                     </section>
                     
                     <section data-background='#fff'>
@@ -143,24 +143,180 @@
                     <section>
                         <h3>My first time</h3>
                         
-                        <p class='margin-top:2em;'>How to get running with Grunt</p>
+                        <p class='margin-top:2em;'>How to get running with Grunt.</p>
                     </section>
                     
                     <section>
-                        <h4>Step 1: Install <a href='http://nodejs.org'>Node.js</a></h4>
-                        
-                        <div class='fragment'>
-                            <h4>Step 2: Install the Grunt CLI</h4>
-                            
-                            <pre><code class='no-highlight' data-trim>
+                        <ul style='list-style:none;'>
+                            <li>
+                                <h4>Step 1: Install <a href='http://nodejs.org'>Node.js</a></h4>
+                            </li>
+                            <li class='fragment'>
+                                <h4>Step 2: Install the Grunt CLI</h4>
+                                
+                                <pre><code class='no-highlight' data-trim>
 ~/my-project$ npm install -g grunt-cli
-                            </code></pre>
-                        </div>
+                                </code></pre>
+                            </li>
+                            <li class='fragment'>
+                                <h4>
+                                    Step 3: Create <code>package.json</code> and <code>Gruntfile.js</code>
+                                    <br>
+                                    <span class='fine'><em>(in your project root, most likely)</em></span>
+                                </h4>
+                            </li>
+                            <li class='fragment'>
+                                <h4>Step 4: Configure and run some tasks!
+                            </li>
+                        </ul>
                     </section>
                     
+                    <section>
+                        <h3>Why <code>package.json</code>?</h3>
+
+                        <h4 class='fragment'>Dependency Management</h4>
+                    </section>
+
+                    <section>
+                        <h4>A basic <code>package.json</code> file:</h4>
+
+[TODO: fix up lines]
+                        <pre><code class='lang-javascript' data-srcbyline='examples/package.json?1-7'></code></pre>
+                    </section>
+
+                    <section>
+                        <h4>A basic Grunt config file (<code>Gruntfile.js</code>):</h4>
+
+[TODO: fix up lines]
+                        <pre><code class='lang-javascript' data-srcbyline='examples/Gruntfile.js?1-9;25'></code></pre>
+                    </section>
+
+                    <section>
+                        <h4>What about the tasks?</h4>
+
+                        <pre class='fragment'><code class='no-highlight' data-trim>
+~/my-project$ npm install grunt-contrib-jshint --save-dev
+                        </code></pre>
+
+[TODO: fix up lines (devDeps only)]
+                        <pre class='fragment'><code class='lang-javascript' data-srcbyline='examples/package.json?1-7'></code></pre>
+                    </section>
+
+                    <section>
+                        <h4>Configuring tasks</h4>
+
+[TODO: fix up lines (task/target config)]
+                        <pre><code class='lang-javascript' data-srcbyline='examples/Gruntfile.js?5-10'></code></pre>
+                    </section>
+
+                    <section>
+                        <h4>Configuring jshint</h4>
+
+[TODO: fix up lines (jshint config)]
+                        <pre><code class='lang-javascript' data-srcbyline='examples/Gruntfile.js?5-10'></code></pre>
+                    </section>
+
+                    <section>
+                        <h4>Run it!</h4>
+
+                        <pre class='fragment'><code class='no-highlight' data-trim>
+~/my-project$ grunt jshint
+                        </code></pre>
+
+[TOOD: meme?]
+
+                    </section>
+
+                    <section>
+                        <h3>Multi-Task Aliases</h3>
+                    </section>
+
+                    <section>
+                        <h4>Default Task</h4>
+
+[TODO: fix up lines (default task)]
+                        <pre class='fragment'><code class='lang-javascript' data-srcbyline='examples/Gruntfile.js?1-10'></code></pre>
+
+                        <pre class='fragment'><code class='no-highlight' data-trim>
+~/my-project$ grunt
+                        </code></pre>
+                    </section>
+
+                    <section>
+                        <h4>A Simple <code>build</code> Task</h4>
+
+[TODO: fix up lines (build task)]
+                        <pre><code class='lang-javascript' data-srcbyline='examples/Gruntfile.js?1-10'></code></pre>
+
+                        <pre class='fragment'><code class='no-highlight' data-trim>
+~/my-project$ grunt build
+                        </code></pre>
+                    </section>
+
                 </section>
 
-                
+
+                <section>
+
+                    <section>
+                        <h3>Common Tasks</h3>
+
+[TODO: meme?]
+                    </section>
+
+                    <section>
+[TODO: sass compilation config]
+                    </section>
+
+                    <section>
+[TODO: other task config]
+                    </section>
+
+                    <section>
+[TODO: watch task config (and running)]
+                    </section>
+
+                </section>
+
+
+                <section>
+
+                    <section>
+                        <h3>Custom Tasks</h3>
+                    </section>
+
+                    <section>
+                        <h4>Grunt tasks === Node modules</h4>
+
+[TODO: meme?]
+                    </section>
+
+                    <section>
+                        <h4>Trolling Task</h4>
+
+                        <pre><code class='lang-javascript' data-srcbyline='examples/tasks/foo.js?2-16'></code></pre>
+                    </section>
+
+                    <section>
+                        <h4>Configuring the Troll</h4>
+
+[TODO: meme]
+                    </section>
+
+                    <section>
+                        <h4>Configuring the Troll</h4>
+
+[TODO: fix up lines (troll task)]
+                        <pre><code class='lang-javascript' data-srcbyline='examples/Gruntfile.js?10-15'></code></pre>
+                    </section>
+
+                    <section>
+                        <p>Remember...</p>
+
+                        <h4>Grunt tasks === Node modules</h4>
+                    </section>
+
+                </section>
 
 
                 <section class='no-footer'>
