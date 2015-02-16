@@ -1,0 +1,538 @@
+<!doctype html>
+<html lang='en'>
+
+    <head>
+        <meta charset='utf-8'>
+
+        <title>Confessions of a Remote Worker</title>
+
+        <meta name='description' content='A presentation on the successes and failures of remote working'>
+        <meta name='author' content='Jordan Kasper'>
+
+        <meta name='apple-mobile-web-app-capable' content='yes' />
+        <meta name='apple-mobile-web-app-status-bar-style' content='black-translucent' />
+
+        <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no'>
+
+        <!-- Base styles and theme -->
+        <link rel='stylesheet' href='/js/vendor/reveal.js/css/reveal.min.css'>
+        <link rel='stylesheet' href='/css/sky-jordan.css' id='theme'>
+        <!-- Syntax highlighting -->
+        <link rel='stylesheet' href='//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.3/styles/tomorrow.min.css'>
+        <!-- My own stuff... -->
+        <link rel='stylesheet' href='/css/reveal-custom.css'>
+
+        <!-- If the query includes 'print-pdf', use the PDF print sheet -->
+        <script>
+        if( window.location.search.match( /print-pdf/gi ) ) {
+            var link = document.createElement( 'link' );
+            link.rel = 'stylesheet';
+            link.type = 'text/css';
+            link.href = '/js/vendor/reveal.js/css/print/pdf.css';
+            document.getElementsByTagName( 'head' )[0].appendChild( link );
+        }
+        </script>
+
+        <!--[if lt IE 9]>
+        <script src='/js/vendor/reveal.js/lib/js/html5shiv.js'></script>
+        <![endif]-->
+    </head>
+
+    <body>
+
+        <div class="reveal">
+            <div class="slides">
+                
+                <!-- ________________ Intro Slides ________________ -->
+
+                <section>
+                    <section id="title">
+                        <h1 style="font-size:1.5em;">Confessions of a Remote Worker</h1>
+                        <p style="margin-top: 3em">
+                            Jordan Kasper
+                        </p>
+                        <p class="fine">
+                            <a href="http://twitter.com/jakerella">@jakerella</a>
+                        </p>
+
+                    </section>
+
+                    <section id="apendto">
+                        <h3 style="text-transform:none;">
+                            <a href="http://strongloop.com">
+                                <img src="/images/strongloop_logo_stacked.png" alt="StrongLoop" />
+                            </a>
+                        </h3>
+                    </section>
+
+                    <section id="lessons">
+                        <h2>Remote Working</h2>
+                        <p class="fragment">What is it?</p>
+                        <p class="fragment">Why bother?</p>
+                        <p class="fragment">Who's doing it?</p>
+                        <p class="fragment">What should I expect?</p>
+                        <p class="fragment">How do I manage these people?</p>
+                    </section>
+
+                </section>
+
+
+                <!-- ________________ What is it? ________________ -->
+
+                <section>
+                    <section id="what-i-do">
+                        <h2>What do you do exactly?</h2>
+                    </section>
+
+                    <section id="what-people-think-i-do" data-background="images/what-i-do.jpg">
+                        <aside class="notes">
+                            heh...
+                        </aside>
+                    </section>
+
+                    <section id="coworking">
+                        <img src="images/colab.jpg" alt="Colab Nashville" style="width:80%" />
+
+                        <aside class="notes">
+                            it is not simply working from your couch (although you can);<br />
+                            sometimes it's not even working from home (coworking, smaller remote groups)
+                        </aside>
+                    </section>
+
+                    <section id="homer-hacking" data-background="images/homer_remote.gif">
+                        <aside class="notes">
+                            it's not even just for software developers
+                        </aside>
+                    </section>
+
+                    <section id="knowledge-worker">
+                        <img src="images/knowledge_worker.jpg" alt="A knowledge worker (monkey)" style="width:45%" />
+
+                        <aside class="notes">
+                            Anyone whose main working capital is knowledge<br />
+                            People who generally tackle problem solving tasks day-to-day
+                        </aside>
+                    </section>
+
+                    <section id="confession-1">
+                        <h2>Confession</h2>
+
+                        <aside class="notes">
+                            I do not like coworking spaces, or coffee shops for that matter
+                        </aside>
+                    </section>
+                </section>
+
+                <!-- ________________ Why do it? ________________ -->
+
+                <section>
+                    <section id="why-i-do-it">
+                        <h2>Why bother?</h2>
+                    </section>
+
+                    <section id="cost-savings">
+                        <img src="images/monkey_money.gif" alt="Monkey money" />
+
+                        <aside class="notes">
+                            a typical business could save up to $11,000 per employee per year<br />
+                            (electricity, real estate, office furniture)<br />
+                            Also save on absenteeism!!<br />
+                            Not just the company, workers save on travel, child and elder care, and free time.<br>
+                            The estimated economic damage to the US economy due to weather in 2012 was $46 billion
+                        </aside>
+                    </section>
+
+                    <section id="carbon-footprint">
+                        <img src="images/carbon_footprint.jpg" alt="Leaf footprint" style="width:40%" />
+
+                        <aside class="notes">
+                            Consider all of the cars off the road<br />
+                            discount HVAC since companies would do it anyway
+                        </aside>
+                    </section>
+
+                    <section id="workplace-distractions">
+                        <img src="images/workplace_distractions.jpg" alt="Meme: workplace distractions" style="width:70%" />
+
+                        <aside class="notes">
+                            Both the company and the employee gain from increased productivity<br />
+                            Yes, distrctions exist at home, but can be controlled better
+                        </aside>
+                    </section>
+
+                    <section id="confession-2">
+                        <h2>Confession</h2>
+
+                        <aside class="notes">
+                            I don't want to save the company money, and any money I 
+                            personally save I convince myself is "extra" and I spend
+                            on hats instead of a proper office chair.
+                        </aside>
+                    </section>
+                </section>
+
+                <!-- ________________ Who does it? ________________ -->
+
+                <section>
+                    <section id="who-is-doing-it">
+                        <h2>Who's doing it?</h2>
+                    </section>
+
+                    <section id="stats">
+                        <ul>
+                            <li>5-20+% of total US workforce, 8-30 million</li>
+                            <li class="fragment">Expected to jump to 43% in US by 2016</li>
+                            <li class="fragment">50% <em>could</em> work from home</li>
+                            <li class="fragment">79% say thet would <em>like to</em></li>
+                            <li class="fragment">
+                                Typically college educated, salaried, in management or professional role
+                            </li>
+                            <li class="fragment">Average age of 49</li>
+                        </ul>
+
+                        <p style="font-size:50%; margin-top:5em;">
+                            <a href="http://www.globalworkplaceanalytics.com/telecommuting-statistics" target="_blank">
+                                http://www.globalworkplaceanalytics.com/telecommuting-statistics
+                            </a>
+                            <br>
+                            <a href="http://web.esna.com/blog/remote-worker-collaboration-infographic-2014" target="_blank">
+                                http://web.esna.com/blog/remote-worker-collaboration-infographic-2014
+                            </a>
+                        </p>
+
+                        <aside class="notes">
+                            Maybe mention average age: 49
+                        </aside>
+                    </section>
+
+                    <section id="examples">
+                        <h3>Okay, but it's only small companies, right?</h3>
+                        <ul class="fragment">
+                            <li><a href='https://github.com/about/team'>Github</a>: 100%</li>
+                            <li class="fragment"><a href='http://blogs.cisco.com/ciscoit/how-not-where-is-what-matters-most-in-a-collaborative-work-environment/'>Cisco</a>: 89%</li>
+                            <li class="fragment"><a href='http://www.reuters.com/article/2013/03/01/us-yahoo-telecommuting-aetna-idUSBRE92006820130301'>Aetna</a>: 47%</li>
+                            <li class="fragment"><a href='http://strongloop.com/about/'>StrongLoop</a>: 100%</li>
+                            <li class="fragment"><a href='http://allthingsd.com/20130222/physically-together-heres-the-internal-yahoo-no-work-from-home-memo-which-extends-beyond-remote-workers/'>Yahoo</a>: 0%</li>
+                        </ul>
+
+                        <aside class="notes">
+                            Mention the "typical" remote worker is in a company of over 100 total staff.<br>
+                            Some of these are only part-time remote<br>
+                            Myers: Speed and quality are often sacrificed when we work from home. We need to be one Yahoo!, and that starts with physically being together.<br>
+                            Yahoo only had a few hundred remote when they changed policies.
+                        </aside>
+                    </section>
+
+                    <section id="confession-3">
+                        <h2>Confession</h2>
+
+                        <aside class="notes">
+                            Best part of working from home: using your own bathroom. There. I said it.
+                        </aside>
+                    </section>
+                </section>
+
+                <!-- ________________ What to expect? ________________ -->
+
+                <section>
+                    <section id="expectations">
+                        <h2>What should I expect?</h2>
+                    </section>
+
+                    <section id="pants">
+                        <img src="images/pants.jpg" alt="Meme: yes, you have to wear pants" style="width:70%" />
+                        
+                        <aside class="notes">
+                            For many reasons: a sense of self-worth, video conferences
+                            (what if you have to stand up?), answering the door, etc.
+                            Also, talk about independence and informality.
+                        </aside>
+                    </section>
+
+                    <section id="home-distractions" data-background="images/home_distractions.jpg">
+                        <aside class="notes">
+                            There are lots of distractions at home, these can range 
+                            from human, to animal, to simple household chores.
+                        </aside>
+                    </section>
+
+                    <section id="home-office">
+                        <img src="images/home_office.jpg" alt="Home office" style="width:90%" />
+                        
+                        <aside class="notes">
+                            Note that at most companies your setup at home will be 
+                            entirely on you in terms of cost. While this might seem 
+                            obvious and easy, consider that even a simple, but 
+                            decent office chair at a big company will be several 
+                            hundred dollars.
+                        </aside>
+                    </section>
+
+                    <section id="freedom">
+                        <img src="images/freedom.jpg" alt="Freedom" style="width:95%" />
+                        
+                        <aside class="notes">
+                            This freedom comes in many forms, but requires the worker
+                            to have initiative, focus, and to some degree ambition.
+                        </aside>
+                    </section>
+
+                    <section id="isolation" data-background="images/isolation.jpg">
+                        <aside class="notes">
+                            Combat isolation by simply getting out of the house. This
+                            doesn't have to be during work hours - look into various 
+                            user groups, happy hours, physical activities, etc.
+                        </aside>
+                    </section>
+
+                    <section id="confession-4">
+                        <h2>Confession</h2>
+
+                        <aside class="notes">
+                            My biggest distraction: squirrels.
+                        </aside>
+                    </section>
+                </section>
+
+                <!-- ________________ Management? ________________ -->
+
+                <section>
+                    <section id="management">
+                        <h2>How do I manage these people?</h2>
+                    </section>
+
+                    <section id="touchpoints">
+                        <img src="images/touchpoint.jpg" alt="Touchpoint" style="width:90%" />
+                        
+                        <aside class="notes">
+                            A lack of physical interaction requires more touchpoints, 
+                            not fewer. Not just chatting, but consider code reviews, 
+                            (virtual) pair programming, and reports from other team 
+                            members.
+                        </aside>
+                    </section>
+
+                    <section id="dont-come-in">
+                        <img src="images/lumberg.jpg" alt="Obligatory Office Space reference" style="width:80%" />
+                        
+                        <aside class="notes">
+                            Engage on a personal level and realize that 
+                            without an office environment, everyone is that much 
+                            more unique in their needs and desires.
+                        </aside>
+                    </section>
+
+                    <section id="two-sides">
+                        <img src="images/lisa-alone.png" alt="Lisa alone" style="width:100%" />
+                        
+                        <aside class="notes">
+                            Don't treat remote workers as outcasts!
+                        </aside>
+                    </section>
+
+                    <section id="work-when-you-feel-like-it">
+                        <img src="images/work-when-you-feel-like-it.jpg" alt="Work when you feel like it" style="width:95%" />
+                        
+                        <aside class="notes">
+                            Okay, maybe not WHENEVER you feel like it<br>
+                            but yes, working from home *can* mean you work when it makes sense for you.
+                        </aside>
+                    </section>
+
+                    <section id="confession-5">
+                        <h2>Confession</h2>
+
+                        <aside class="notes">
+                            I play a LOT of minesweeper.
+                        </aside>
+                    </section>
+                </section>
+
+                <!-- ________________ Tools? ________________ -->
+
+                <section>
+                    <section id="toolbox">
+                        <h2>What's in your toolbox?</h2>
+                    </section>
+
+                    <section id="embrace-tech" data-background="images/embrace-tech.jpg">
+                        <!-- <img src="images/embrace-tech.jpg" alt="Embrace technology" /> -->
+                        
+                        <aside class="notes">
+                            It's not just older folks though, young people need to be 
+                            open to other technologies: unfamiliar platforms, diverse
+                            environments, etc.
+                        </aside>
+                    </section>
+
+                    <section id="back-up">
+                        <p>
+                            Everybody watch out...<br />
+                            <img src="images/back_up.jpg" alt="Everybody back up, he uses linux" style="width:70%" /><br />
+                            he uses Linux!
+                        </p>
+                        
+                        <aside class="notes">
+                            With everyone in their own environment, it's important
+                            to choose open tools, things everyone can use... that or 
+                            give everyone a new machine when hired.
+                        </aside>
+                    </section>
+
+                    <section id="chat">
+                        <img src="images/skype.png" alt="Skype" style="max-width:40%;max-height:30%;margin-right:5%;" />
+                        <img src="images/gtalk.png" alt="Google Talk" style="max-width:30%;max-height:30%;" />
+                        <img src="images/hipchat.png" alt="Hipchat" style="max-width:40%;max-height:40%;margin-right:10%;" />
+                        <img src="images/slack.png" alt="Slack" style="max-width:30%;max-height:40%;" />
+                        
+                        <aside class="notes">
+                            You may want a tool that will allow you to save history, 
+                            which can be done with all of these, although only with 
+                            plugins/bots on gtalk or irc.
+                        </aside>
+                    </section>
+
+                    <section id="video">
+                        <img src="images/hangouts.gif" alt="Google Hangouts" style="max-width:40%;max-height:40%;margin-right:10%;" />
+                        <img src="images/skype.png" alt="Skype" style="max-width:40%;max-height:40%;" />
+                        <img src="images/fuze.png" alt="Google Hangouts" style="max-width:40%;max-height:40%;margin-right:10%;" />
+                        <img src="images/gotomeeting.png" alt="GoToMeeting" style="max-width:40%;max-height:40%;" />
+                        
+                        <aside class="notes">
+                            Don't feel constrained, we use multiple tools depending 
+                            on the situation.
+                        </aside>
+                    </section>
+
+                    <section id="screen-sharing">
+                        <img src="images/joinme.png" alt="Join.me" style="max-width:40%;max-height:40%;margin-right:10%;" />
+                        <img src="images/sqwiggle.png" alt="Sqwiggle" style="max-width:40%;max-height:40%;top:-70px;position:relative;" />
+                        <img src="images/hangouts.gif" alt="Google Hangouts" style="max-width:40%;max-height:40%;margin-right:10%;" />
+                        <img src="images/skype.png" alt="Skype" style="max-width:40%;max-height:40%;" />
+                        
+                        <aside class="notes">
+                            
+                        </aside>
+                    </section>
+
+                    <section id="meet-in-person">
+                        <img src="images/barcamp.jpg" alt="Barcamp Nashville" />
+                        
+                        <p style="font-size:50%; margin-top:0;">
+                            <a href="http://www.flickr.com/photos/wonderdawg777/4030455813/" target="_blank">
+                                Kerry Woo Photography
+                            </a>
+                        </p>
+
+                        <aside class="notes">
+                            Don't be afraid to meet in person! Go to conferences, 
+                            have a retreat, have planning meetings. It doesn't have 
+                            to be the entire team, either.
+                        </aside>
+                    </section>
+
+
+                    <section id="confession-6">
+                        <h2>Confession</h2>
+
+                        <aside class="notes">
+                            One one unfortunate occasion, I did actually attend a meeting mostly naked<br>
+                            Was just getting out of a shower, didn't realize the time.<br>
+                            But the meeting was audio only!
+                        </aside>
+                    </section>
+                </section>
+
+
+                <!-- ________________ Thank You Slide(s) ________________ -->
+
+                <section id="thank-you">
+                    <h2>Thank You!</h2>
+                    <h3 style="font-size:1.4em; margin-top:2em;">Confessions of a Remote Worker</h3>
+                    <p style="margin-top: 2em">
+                        Jordan Kasper
+                    </p>
+                    <p class="fine">
+                        <a href="http://twitter.com/jakerella">@jakerella</a> |
+                        <a href="http://JordanKasper.com/remote">JordanKasper.com/remote</a>
+                    </p>
+
+                    <ul style="font-size:50%; margin-top: 2em;">
+                        <li style="display:inline;"><a href="http://www.globalworkplaceanalytics.com/telecommuting-statistics">Stats &amp; Stuff</a> |</li>
+                        <li style="display:inline;"><a href="http://www.bls.gov/opub/mlr/2012/06/art3full.pdf">In Depth Study</a> |</li>
+                        <li style="display:inline;"><a href="http://www.forrester.com/US+Telecommuting+Forecast+2009+To+2016/fulltext/-/E-RES46635?objectid=RES46635">Forrester's Telecommuting Forecast ($)</a> |</li>
+                        <li style="display:inline;"><a href="http://37signals.com/svn/posts/3435-remote-office-not-required-the-new-book-by-37signals-coming-fall-2013">Jason Fried's: <em>Remote</em></a></li>
+                    </ul>
+                </section>
+
+
+            </div> <!-- .slides -->
+        </div> <!-- .reveal -->
+
+
+        <script src='/js/vendor/reveal.js/lib/js/head.min.js'></script>
+        <script src='/js/vendor/reveal.js/js/reveal.min.js'></script>
+        <script src='//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.3/highlight.min.js'></script>
+
+        <script>
+        // Full list of configuration options available here:
+        // https://github.com/hakimel/reveal.js#configuration
+        Reveal.initialize({
+            controls: false,
+            progress: false,
+            history: true,
+            center: true,
+            transition: 'linear',
+            backgroundTransition: 'slide',
+
+            // Optional libraries used to extend on reveal.js
+            dependencies: [
+                { src: '/js/vendor/reveal.js/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+                { src: '/js/vendor/reveal.js/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+                { src: '/js/vendor/reveal.js/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+                { src: '/js/vendor/reveal.js/plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } },
+                { src: '/js/vendor/source-by-line/srcByLine.js', async: true, callback: function() { window.srcbyline.init(); } }
+            ]
+        });
+
+        (function() {
+            // Check if we want the footer on the current slide
+            var footer = document.querySelector('.reveal > footer');
+            function checkForFooter(e) {
+                footer.style.display = (e.currentSlide.classList.contains('no-footer') || e.currentSlide.parentNode.classList.contains('no-footer')) ? 'none' : 'block';
+            }
+            Reveal.addEventListener('slidechanged', checkForFooter);
+            checkForFooter({ currentSlide: Reveal.getCurrentSlide() });
+        })();
+
+        (function highlightCode() {
+            if( typeof window.addEventListener === 'function' ) {
+                var code = document.querySelectorAll( 'pre code' );
+
+                for( var i = 0, len = code.length; i < len; i++ ) {
+                    var element = code[i];
+
+                    // trim whitespace if data-trim attribute is present
+                    if( element.hasAttribute( 'data-trim' ) && typeof element.innerHTML.trim === 'function' ) {
+                        element.innerHTML = element.innerHTML.trim();
+                    }
+
+                    // Now escape html unless prevented by author
+                    if( ! element.hasAttribute( 'data-noescape' )) {
+                        element.innerHTML = element.innerHTML.replace(/</g,"&lt;").replace(/>/g,"&gt;");
+                    }
+
+                    // re-highlight when focus is lost (for edited code)
+                    element.addEventListener( 'focusout', function( event ) {
+                        hljs.highlightBlock( event.currentTarget );
+                    }, false );
+                }
+            }
+
+            hljs.initHighlighting();
+
+        })();
+        </script>
+
+    </body>
+</html>
