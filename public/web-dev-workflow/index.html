@@ -1,0 +1,232 @@
+<!doctype html>
+<html lang='en'>
+
+    <head>
+        <meta charset='utf-8'>
+
+        <title>Web Developer's Workflow</title>
+
+        <meta name='description' content='A full-day workshop on common tools used by the modern web developer'>
+        <meta name='author' content='Jordan Kasper'>
+
+        <meta name='apple-mobile-web-app-capable' content='yes' />
+        <meta name='apple-mobile-web-app-status-bar-style' content='black-translucent' />
+
+        <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no'>
+
+        <!-- Base styles and theme -->
+        <link rel='stylesheet' href='/js/vendor/reveal.js/css/reveal.min.css'>
+        <link rel='stylesheet' href='/css/sky-jordan.css' id='theme'>
+        <!-- Syntax highlighting -->
+        <link rel='stylesheet' href='//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.3/styles/tomorrow.min.css'>
+        <!-- My own stuff... -->
+        <link rel='stylesheet' href='/css/reveal-custom.css'>
+
+        <!-- If the query includes 'print-pdf', use the PDF print sheet -->
+        <script>
+        if( window.location.search.match( /print-pdf/gi ) ) {
+            var link = document.createElement( 'link' );
+            link.rel = 'stylesheet';
+            link.type = 'text/css';
+            link.href = '/js/vendor/reveal.js/css/print/pdf.css';
+            document.getElementsByTagName( 'head' )[0].appendChild( link );
+        }
+        </script>
+
+        <!--[if lt IE 9]>
+        <script src='/js/vendor/reveal.js/lib/js/html5shiv.js'></script>
+        <![endif]-->
+    </head>
+
+    <body>
+
+        <div class="reveal">
+            <div class="slides">
+                
+                <!-- ________________ Intro Slides ________________ -->
+
+                <section>
+                    <h1 style="font-size:1.5em;">Web Developer's Workflow</h1>
+                    <p style="margin-top: 3em">
+                        Jordan Kasper
+                    </p>
+                    <p class="fine">
+                        <a href="http://twitter.com/jakerella">@jakerella</a>
+                    </p>
+
+                </section>
+
+                <section>
+                    <h3 style="text-transform:none;">
+                        <a href="http://strongloop.com">
+                            <img src="/images/strongloop_logo_stacked.png" alt="StrongLoop" style="width:30%;" />
+                        </a>
+                    </h3>
+                    <div class='fragment' style="margin-top:-1em;">
+                        <a href="http://nodejs.org" style="display:block;">
+                            <img src="/images/node.svg" alt="Node.js" style="width:40%; background-color:#333; padding: 0px 1em 0.5em 1em; border-radius:1em;" />
+                        </a>
+                        <h4 style="font-size: 2em; width: 50%; float: left; text-transform: none; text-align: center; margin-top: 0.6em; font-family:'Helvetica Neue','Open Sans',sans-serif;"><a href="http://expressjs.com">
+                            Express
+                        </a></h4>
+                        <a href="http://loopback.io" style="display:block;">
+                            <img src="/images/loopback.png" alt="Loopback" />
+                        </a>
+                    </div>
+                </section>
+
+                <section>
+                    <a href='http://nomadjavascript.com'>
+                        <img src='/images/nomad-js.png' alt='NomadJS' style='width:25%' />
+                    </a>
+                </section>
+                
+                <section>
+                    <h3>Thank You!</h3>
+                    
+                    <h3 style='margin-top:1em;'><a href='http://appendto.com'>
+                        <img src='images/appendTo-logo.png' alt='appendTo'>
+                    </a></h3>
+                </section>
+
+                <section>
+                    <h3>Follow Along!</h3>
+                    
+                    <ul style='margin-top:2em;'>
+                        <li>Slides: <a href="http://jordankasper.com/web-dev-workflow">jordankasper.com/web-dev-workflow</a></li>
+                        <li>Labs: <a href="http://bit.ly/web-dev-labs">bit.ly/web-dev-labs</a></li>
+                    </ul>
+                </section>
+                
+                <section>
+                    <ol>
+                        <li>
+                            <a href='git.html'>Understanding Git</a>
+                            <br>
+                            > Exercise
+                        </li>
+                        <li>
+                            <a href='grunt.html'>Task Automation with Grunt</a>
+                            <br>
+                            > <a href='https://github.com/appendto/training-labs-webdevworkflow/blob/master/LABS.md#lab-1'>Lab #1</a>
+                            <br>
+                            Break
+                        </li>
+                        <li>
+                            <a href='git.html'>Preventing Errors with JSHint and JSLint</a>
+                        </li>
+                        <li>
+                            <a href='uglify.html'>Minifying Your Code with UglifyJS</a>
+                        </li>
+                        <li>
+                            <a href='bower.html'>Managing Front-end Dependencies with Bower</a>
+                            <br>
+                            Lunch
+                        </li>
+                        <li>
+                            > <a href='https://github.com/appendto/training-labs-webdevworkflow/blob/master/LABS.md#lab-2'>Lab #2</a>
+                        </li>
+                        <li>
+                            <a href='qunit.html'>Testing Your JavaScript with QUnit</a>
+                            <br>
+                            > <a href='https://github.com/appendto/training-labs-webdevworkflow/blob/master/LABS.md#lab-3'>Lab #3</a>
+                            <br>
+                            Break
+                        </li>
+                        <li>
+                            <a href='sass.html'>Simplify Your CSS workflow with Sass</a>
+                            <br>
+                            > <a href='https://github.com/appendto/training-labs-webdevworkflow/blob/master/LABS.md#lab-4'>Lab #4</a>
+                        </li>
+                    </ol>
+                    
+                    <h3 style='transform: rotate(270deg); transform-origin: left top 0; position: relative; right: 1em;'>
+                        Agenda
+                    </h3>
+                </section>
+
+
+                <section>
+                    <h2>Thank You!</h2>
+                    <h3 style="font-size:1.4em; margin-top:2em;">Web Developer's Workflow</h3>
+                    <p style="margin-top: 2em">
+                        Jordan Kasper
+                    </p>
+                    <p class="fine">
+                        <a href="http://twitter.com/jakerella">@jakerella</a> |
+                        <a href="http://jordankasper.com/web-dev-workflow">jordankasper.com/web-dev-workflow</a>
+                    </p>
+
+                </section>
+
+
+            </div> <!-- .slides -->
+        </div> <!-- .reveal -->
+
+
+        <script src='/js/vendor/reveal.js/lib/js/head.min.js'></script>
+        <script src='/js/vendor/reveal.js/js/reveal.min.js'></script>
+        <script src='//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.3/highlight.min.js'></script>
+
+        <script>
+        // Full list of configuration options available here:
+        // https://github.com/hakimel/reveal.js#configuration
+        Reveal.initialize({
+            controls: false,
+            progress: false,
+            history: true,
+            center: true,
+            transition: 'linear',
+            backgroundTransition: 'slide',
+
+            // Optional libraries used to extend on reveal.js
+            dependencies: [
+                { src: '/js/vendor/reveal.js/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+                { src: '/js/vendor/reveal.js/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+                { src: '/js/vendor/reveal.js/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+                { src: '/js/vendor/reveal.js/plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } },
+                { src: '/js/vendor/source-by-line/srcByLine.js', async: true, callback: function() { window.srcbyline.init(); } }
+            ]
+        });
+
+        (function() {
+            // Check if we want the footer on the current slide
+            var footer = document.querySelector('.reveal > footer');
+            function checkForFooter(e) {
+                footer.style.display = (e.currentSlide.classList.contains('no-footer') || e.currentSlide.parentNode.classList.contains('no-footer')) ? 'none' : 'block';
+            }
+            Reveal.addEventListener('slidechanged', checkForFooter);
+            checkForFooter({ currentSlide: Reveal.getCurrentSlide() });
+        })();
+
+        (function highlightCode() {
+            if( typeof window.addEventListener === 'function' ) {
+                var code = document.querySelectorAll( 'pre code' );
+
+                for( var i = 0, len = code.length; i < len; i++ ) {
+                    var element = code[i];
+
+                    // trim whitespace if data-trim attribute is present
+                    if( element.hasAttribute( 'data-trim' ) && typeof element.innerHTML.trim === 'function' ) {
+                        element.innerHTML = element.innerHTML.trim();
+                    }
+
+                    // Now escape html unless prevented by author
+                    if( ! element.hasAttribute( 'data-noescape' )) {
+                        element.innerHTML = element.innerHTML.replace(/</g,"&lt;").replace(/>/g,"&gt;");
+                    }
+
+                    // re-highlight when focus is lost (for edited code)
+                    element.addEventListener( 'focusout', function( event ) {
+                        hljs.highlightBlock( event.currentTarget );
+                    }, false );
+                }
+            }
+
+            hljs.initHighlighting();
+
+        })();
+        </script>
+
+    </body>
+</html>

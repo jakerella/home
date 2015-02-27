@@ -1,0 +1,948 @@
+<!doctype html>
+<html lang="en">
+
+    <head>
+        <meta charset="utf-8">
+
+        <title>Testing Your JavaScript with QUnit</title>
+
+        <meta name="description" content="An introduction to writing testable JavaScript, writing JS tests, and automation.">
+        <meta name="author" content="Jordan Kasper">
+
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+        <!-- Base styles and theme -->
+        <link rel='stylesheet' href='/js/vendor/reveal.js/css/reveal.min.css'>
+        <link rel='stylesheet' href='/css/sky-jordan.css' id='theme'>
+        <!-- Syntax highlighting -->
+        <link rel='stylesheet' href='//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.3/styles/tomorrow.min.css'>
+        <!-- My own stuff... -->
+        <link rel='stylesheet' href='/css/reveal-custom.css'>
+
+        <!-- If the query includes 'print-pdf', use the PDF print sheet -->
+        <script>
+        if( window.location.search.match( /print-pdf/gi ) ) {
+            var link = document.createElement( 'link' );
+            link.rel = 'stylesheet';
+            link.type = 'text/css';
+            link.href = '/js/vendor/reveal.js/css/print/pdf.css';
+            document.getElementsByTagName( 'head' )[0].appendChild( link );
+        }
+        </script>
+
+        <!--[if lt IE 9]>
+        <script src='/js/vendor/reveal.js/lib/js/html5shiv.js'></script>
+        <![endif]-->
+        
+        <style type='text/css'>
+            body {
+                background: rgb(42,42,42);
+                background-image: url('images/css/pattern_0ca1582ad635a686fb528fe443a905cd457bd968.png');
+            }
+            .reveal .slides p,
+            .reveal .slides h1,
+            .reveal .slides h2,
+            .reveal .slides h3,
+            .reveal .slides h4,
+            .reveal .slides li {
+                color: #fff;
+                font-family: BonvenoCFLight, sans-serif;
+            }
+            
+            .reveal .slides .title h1,
+            .reveal .slides .title h2,
+            .reveal .slides .title h3,
+            .reveal .slides .title h4 {
+                color: rgb(241, 196, 113);
+                text-shadow: -2px -2px 5px rgb(51, 51, 51);
+                font-family: "nevisBold", arial, sans-serif;
+            }
+        </style>
+    </head>
+
+    <body>
+
+        <div class="reveal">
+            <div class="slides">
+                
+                <section class='title' data-background='rgb(173, 0, 0)'>
+                    <h2>Testing Your JavaScript with QUnit</h2>
+                </section>
+
+                <section>
+                    <h3>Is this your testing process?</h3>
+
+                    <ol>
+                        <li class="fragment">Write some JavaScript code</li>
+                        <li class="fragment">Check it in Chrome (looks great)</li>
+                        <li class="fragment">Change something, breaking it in Chrome</li>
+                        <li class="fragment">Spend 2 hours trying to figure out what you did</li>
+                        <li class="fragment">Rinse, repeat</li>
+                        <li class="fragment">Test in Internet Explorer..... crap.</li>
+                    </ol>
+                </section>
+
+                <section data-background='#fff'>
+                    <img src="images/ie.jpg" alt="Meme: Can't tell if it's my code or Internet Explorer..." />
+                </section>
+
+                <section>
+                    <h3>There's a better way...</h3>
+
+                    <aside class="notes">
+                        Discuss test-driven development trends, the sanity it brings, etc
+                    </aside>
+                </section>
+
+
+
+                <section class='title' data-background='rgb(173, 0, 0)'>
+                    <h3>Writing Testable Code</h3>
+
+                    <aside class="notes">
+                        Talk about the fact that we want a more unit-testable approach, but that 
+                        integration testing can be very helpful as well.
+                    </aside>
+                </section>
+
+                <section>
+                    <h4>Search Example</h4>
+
+                    <pre><code class='lang-javascript' data-srcbyline='testing-example/src/bad.js?2-3;7-11;13-16;20-21;23-25;29-34'></code></pre>
+                </section>
+
+                <section>
+                    <h3>What's so bad about that?</h3>
+                </section>
+
+                <section>
+                    <h4>Anonymous Functions</h4>
+
+                    <pre><code class='lang-javascript' data-srcbyline='testing-example/src/bad.js?2-3;5;11-12;15-19;23-27;31-34'></code></pre>
+                </section>
+
+                <section>
+                    <img src="images/meme-functions.jpg" alt="Meme: I've got functions inside functions... inside functions." />
+                </section>
+
+                <section>
+
+                    <h4>Does this look familiar?</h4>
+
+                    <pre><code data-trim class="lang-bash" data-noescape>
+<strong>Call Stack</strong>
+    (anonymous)         app.min.js 3
+    (anonymous)         app.min.js 3
+    (anonymous)         app.min.js 3
+    (anonymous)         app.min.js 3
+                    </pre></code>
+
+                    <aside class="notes">
+                        In production we may have minified code, and be unable to see what's
+                        really going on. Even if it isn't minified, this can make for much 
+                        easier diagnosis of a problem.
+                    </aside>
+
+                </section>
+
+                <section>
+                    <h4>DOM Coupling</h4>
+
+                    <pre><code class='lang-javascript' data-srcbyline='testing-example/src/bad.js?2;4-6;34'></code></pre>
+
+                    <aside class="notes">
+                        Associating initialization with document onload means we can't test the initialization!
+                    </aside>
+                </section>
+
+                <section>
+                    <h4>DOM Coupling</h4>
+
+                    <pre><code class='lang-javascript' data-srcbyline='testing-example/src/bad.js?3-5;8-12;15;18-22;24;27;32-33'></code></pre>
+
+                    <aside class="notes">
+                        Tight coupling with the HTML makes testing outside of the context
+                        of an entire page difficult.
+                    </aside>
+                </section>
+
+                <section>
+                    <h4>Server Coupling</h4>
+                    <h5>(and asynchronous activity)</h5>
+
+                    <pre><code class='lang-javascript' data-srcbyline='testing-example/src/bad.js?11;13-15;18;24-25;27;31-32'></code></pre>
+                </section>
+
+
+
+                <section>
+                    <h3>Refactor Until It Hurts</h3>
+
+                    <p class="fine fragment">(and then refactor a little more)</p>
+
+                    <aside class="notes">
+                        Discuss refactoring in chuncks, abstract one thing at a time
+                    </aside>
+                </section>
+
+                <section>
+                    <h4>Search Example - Redux</h4>
+
+                    <pre><code class='lang-javascript' data-srcbyline='testing-example/src/app.js?2-3;13;31-32;61-62;75-76'></code></pre>
+
+                    <aside class="notes">
+                        Be sure to mention namespacing and the named, separate functions.<br>
+                        Mention callback on doSearch()
+                    </aside>
+
+                </section>
+
+                <section>
+
+                    <h4>Now isn't that nice?</h4>
+
+                    <pre><code data-trim class="no-bash" data-noescape>
+<strong>Call Stack</strong>
+    jk.handleResults       app.min.js 3
+    successHandler         app.min.js 3
+    jk.doSearch            app.min.js 3
+    submitHandler          app.min.js 3
+    jk.initSearch          app.min.js 3
+    initPage               index.html 376
+                    </pre></code>
+
+                </section>
+
+                <section>
+                    <h4>Search Example - Initialization</h4>
+
+                    <pre><code class='lang-javascript' data-srcbyline='testing-example/src/app.js?13-16;20-23;25-29'></code></pre>
+
+                    <pre class='fragment'><code class='lang-javascript' data-srcbyline='testing-example/src/app.js?5-10'></code></pre>
+
+                    <aside class="notes">
+                        Note that we can test this much easier now by passing in whatever
+                        DOM nodes we want to test - loose coupling.
+
+                        Also point out naming of inline functions.
+                    </aside>
+
+                </section>
+
+                <section>
+                    <h4>Inline != Anonymous</h4>
+
+                    <pre><code class='lang-javascript' data-srcbyline='testing-example/src/app.js?22;24;26'></code></pre>
+                </section>
+
+                <section>
+                    <h4>Search Example - Redux</h4>
+
+                    <pre><code class='lang-javascript' data-srcbyline='testing-example/src/app.js?32;36-38;41;43-45;47-50;53-59'></code></pre>
+
+                    <aside class="notes">
+                        Mention mocking ajax requests (will be mentioned later as well).
+                    </aside>
+
+                </section>
+
+                <section>
+                    <h4>Search Example - Redux</h4>
+
+                    <pre><code class='lang-javascript' data-srcbyline='testing-example/src/app.js?47-50;52-55'></code></pre>
+                </section>
+
+                <section>
+                    <h4>Search Example - Redux</h4>
+
+                    <pre><code class='lang-javascript' data-srcbyline='testing-example/src/app.js?62-72'></code></pre>
+
+                    <aside class="notes">
+                        There are LOTS of ways this could be improved, but the basic idea 
+                        is to refactor JavaScript code to be testable independent of as 
+                        much of the rest of your code as possible. This ensures that that 
+                        little bit of code works as expected.
+                    </aside>
+
+                </section>
+
+                <section>
+                    <img src="images/meme-refactor.jpg" alt="Meme: Yeah, I'm gonna need you to refactor ALL the JavaScript." />
+                </section>
+
+
+
+                <section class='title' data-background='rgb(173, 0, 0)'>
+                    <h3>Testing Frameworks</h3>
+
+                    <aside class="notes">
+                        Discuss what a testing framework gets you, the general idea behind a 
+                        "test", a "group" (or "module"), and a "suite"
+                    </aside>
+                </section>
+
+                <section data-background='#c2e2e4' data-transition='none'>
+                    <p>
+                        <a href="http://pivotal.github.io/jasmine/" style="margin-right: 3em;">
+                            <img src="images/jasmine_logo.png" alt="Jasmine" />
+                        </a>
+                        <a href="http://visionmedia.github.io/mocha/" style="">
+                            <img src="images/mocha.png" alt="Mocha" />
+                        </a>
+                        <br>
+                        <a href="http://docs.seleniumhq.org/" style="">
+                            <img src="images/selenium.png" alt="Selenium" />
+                        </a>
+                        <a href="http://qunitjs.com/" style="left: 1.5em;">
+                            <img src="images/qunit.png" alt="QUnit" />
+                        </a>
+                    </p>
+
+                    <aside class="notes">
+                        Mention that they general do the same things, although Selenium handles 
+                        things very differently and is much more user-experience focused.
+                        <br />
+                        Also mention that the terminology is not shared among frameworks, so be 
+                        careful (e.g. "expect" means different things).
+                    </aside>
+                </section>
+
+                <section data-background='#c2e2e4' data-transition='none'>
+                    <p>
+                        <a href="http://pivotal.github.io/jasmine/" style="margin-right: 3em;">
+                            <img src="images/jasmine_logo.png" alt="Jasmine" style="opacity:0.5">
+                        </a>
+                        <a href="http://visionmedia.github.io/mocha/">
+                            <img src="images/mocha.png" alt="Mocha" style="opacity:0.5">
+                        </a>
+                        <br>
+                        <a href="http://docs.seleniumhq.org/">
+                            <img src="images/selenium.png" alt="Selenium" style="opacity:0.5">
+                        </a>
+                        <a href="http://qunitjs.com/" style="left: 1.5em;">
+                            <img src="images/qunit.png" alt="QUnit" />
+                        </a>
+                    </p>
+
+                    <aside class="notes">
+                        Why QUnit? It's very simple, does what we need, and it was developed 
+                        by the jQuery team (of which appendTo happens to be stocked full of).
+                    </aside>
+                </section>
+
+                <section>
+                    <img src="images/test-structure.png" alt="Suites contain modules which contain tests which contain assertions." />
+                </section>
+
+
+
+                <section class='title' data-background='rgb(173, 0, 0)'>
+                    <h3>Setting up QUnit</h3>
+
+                    <aside class="notes">
+                        Show web site, discuss that there are NO dependencies, and only two 
+                        source files (JS library and CSS).
+                    </aside>
+                </section>
+
+                <section>
+                    <h3>A Minimal Test File</h3>
+
+                    <pre><code class='lang-html' data-srcbyline='testing-example/tests/example.html?1-3;5-10;13;46-49;53-54'></code></pre>
+
+                    <aside class="notes">
+                        Talk about overall structure, but details are in following slides
+                    </aside>
+                </section>
+
+                <section>
+                    <h3>A Minimal Test File</h3>
+
+                    <pre><code class='lang-html' data-srcbyline='testing-example/tests/example.html?3;5-7;11-13;50-53'></code></pre>
+
+                    <aside class="notes">
+                        Just a regular HTML document, so you can put anything you need in the head.
+                        Here we see how to include the QUnit library files
+                    </aside>
+                </section>
+
+                <section>
+                    <h3>A Minimal Test File</h3>
+
+                    <pre><code class='lang-html' data-srcbyline='testing-example/tests/example.html?7-12;53'></code></pre>
+
+                    <aside class="notes">
+                        Mention that the test results and general UI go in the "#qunit" div
+                        and that the test HTML fixtures go in the "#qunit-fixture" div.
+                    </aside>
+                </section>
+
+                <section>
+                    <h3>A Minimal Test File</h3>
+
+                    <pre><code class='lang-html' data-srcbyline='testing-example/tests/example.html?7;10-12;47-50;53'></code></pre>
+
+                    <aside class="notes">
+                        Mention using QUnit.config, referencing more than one source file,
+                        more than one test file, and the ordering of these script tags.
+                    </aside>
+                </section>
+
+
+
+                <section class='title' data-background='rgb(173, 0, 0)'>
+                    <h3>Writing Tests</h3>
+
+                    <aside class="notes">
+                        Talk about unit versus functional tests, what you want to test 
+                        (every decision tree), testing for valid and invalid input to 
+                        functions, etc.
+                    </aside>
+                </section>
+
+                <section>
+                    <h3>Test Structure</h3>
+
+                    <p><em>In our <code>app.js</code> file...</em></p>
+                    <pre><code class='lang-javascript' data-srcbyline='testing-example/src/app.js?2-3;13;24;29'></code></pre>
+
+                    <div class='fragment'>
+                        <p><em>In our <code>tests.js</code> file...</em></p>
+                        <pre><code class='lang-javascript' data-srcbyline='testing-example/tests/core-tests.js?18-24'></code></pre>
+                    </div>
+
+                    <aside class="notes">
+                        Discuss the simple "truthy" test and the structure of the test call.
+                        Also mention how tests are run in order... mostly.
+                    </aside>
+                </section>
+
+                <section>
+                    <h3 style="text-transform: none;">QUnit UI</h3>
+
+                    <iframe src="testing-example/tests/core.html" height="400" style="width:90%;background-color:#fff;"></iframe>
+                </section>
+
+                <section>
+                    <h3 style="text-transform: none;">QUnit UI - Failures</h3>
+
+                    <iframe src="testing-example/tests/show-error.html" height="400" style="width:90%;background-color:#fff;"></iframe>
+                </section>
+
+                <section>
+                    <img src="images/meme-srsly.jpg" alt="Meme: No seriously, what else do I have to do?" />
+                </section>
+
+                <section>
+                    <h3>Various Assertions - OK</h3>
+
+                    <pre><code class='lang-javascript' data-srcbyline='testing-example/tests/assertions.js?3-6;67-68'></code></pre>
+
+                    <pre class='fragment'><code class='lang-javascript' data-srcbyline='testing-example/tests/assertions.js?8-9'></code></pre>
+                    
+                    <pre class='fragment'><code class='lang-javascript' data-srcbyline='testing-example/tests/assertions.js?10-11'></code></pre>
+                </section>
+
+                <section>
+                    <h3>Various Assertions - (in)equality</h3>
+
+                    <pre><code class='lang-javascript' data-srcbyline='testing-example/tests/assertions.js?13-14'></code></pre>
+
+                    <pre class='fragment'><code class='lang-javascript' data-srcbyline='testing-example/tests/assertions.js?16-17'></code></pre>
+
+                    <pre class='fragment'><code class='lang-javascript' data-srcbyline='testing-example/tests/assertions.js?19-21'></code></pre>
+                </section>
+
+                <section data-transition="fade">
+                    <h3>Various Assertions - properties</h3>
+
+                    <pre><code class='lang-javascript' data-srcbyline='testing-example/tests/assertions.js?23-24;26-31'></code></pre>
+                </section>
+
+                <section data-transition="fade">
+                    <h3>Various Assertions - properties</h3>
+
+                    <pre><code class='lang-javascript' data-srcbyline='testing-example/tests/assertions.js?23-24;26-30;33-34'></code></pre>
+                </section>
+
+                <section>
+                    <h3>Various Assertions - errors</h3>
+
+                    <pre><code class='lang-javascript' data-srcbyline='testing-example/tests/assertions.js?37-44'></code></pre>
+
+                    <pre class='fragment'><code class='lang-javascript' data-srcbyline='testing-example/tests/assertions.js?47-48;51-55'></code></pre>
+
+                    <pre class='fragment'><code class='lang-javascript' data-srcbyline='testing-example/tests/assertions.js?58-59;62-66'></code></pre>
+                </section>
+
+                <section>
+                    <h3>Test Modules</h3>
+
+                    <pre><code class='lang-javascript' data-srcbyline='testing-example/tests/show-modules.html?18-24'></code></pre>
+                </section>
+
+                <section>
+                    <h3 style="text-transform: none;">QUnit UI - Modules</h3>
+
+                    <iframe src="testing-example/tests/show-modules.html" height="370" style="width:90%;background-color:#fff;"></iframe>
+                </section>
+
+                <section>
+                    <h2>WRITE MOAR TESTS</h2>
+                </section>
+
+                <section>
+                    <h3>MOAR TESTS</h3>
+
+                    <pre><code class='lang-html' data-srcbyline='testing-example/tests/search.html?11-21;36'></code></pre>
+                    
+                    <aside class="notes">
+                        Remind about how #qunit-fixture works
+                    </aside>
+                </section>
+
+                <section>
+                    <h3>MOAR TESTS - THE SETUP</h3>
+
+                    <pre><code class='lang-html' data-srcbyline='testing-example/tests/search.html?11;20-26;33-36'></code></pre>
+                </section>
+
+                <section>
+                    <h3>MOAR TESTS - <span style='text-transform:none;'>initSearch()</h3>
+
+                    <pre><code class='lang-javascript' data-srcbyline='testing-example/tests/search-tests.js?51-53;58-59'></code></pre>
+                </section>
+
+                <section>
+                    <h3>MOAR TESTS - <span style='text-transform:none;'>initSearch()</h3>
+
+                    <pre><code class='lang-javascript' data-srcbyline='testing-example/tests/search-tests.js?51-59'></code></pre>
+                </section>
+
+                <section>
+                    <h3>MOAR TESTS - <span style='text-transform:none;'>initSearch()</h3>
+
+                    <pre><code class='lang-javascript' data-srcbyline='testing-example/tests/search-tests.js?62-67;72-73'></code></pre>
+                </section>
+                
+                <section>
+                    <h3>MOAR TESTS - <span style='text-transform:none;'>initSearch()</h3>
+
+                    <pre><code class='lang-javascript' data-srcbyline='testing-example/tests/search-tests.js?62-73'></code></pre>
+                </section>
+
+                <section>
+                    <h3>MOAR TESTS - <span style='text-transform:none;'>handleResults()</h3>
+
+                    <pre><code class='lang-javascript' data-srcbyline='testing-example/tests/search-tests.js?75-82'></code></pre>
+                </section>
+
+                <section class='title' data-background='rgb(173, 0, 0)'>
+                    <h3>Asynchronous Tests</h3>
+
+                    <p class="fragment" style="margin-top:2em;"><em>
+                        "But asynchronous testing is difficult..."
+                    </em></p>
+
+                    <aside class="notes">
+                        Discuss the issue, that the anonymous function that IS the test will 
+                        silently fail because the function returns before the async action
+                        is finished (and then the next test will start).
+                    </aside>
+                </section>
+
+                <section data-background="#fff">
+                    <img src="images/meme-test-all.jpg" alt="Meme: Test all the things." />
+                </section>
+
+                <section>
+                    <h3>Asynchronous Tests</h3>
+
+                    <pre><code class='lang-javascript' data-srcbyline='testing-example/src/app.js?41;43;46;47;50-51;56'></code></pre>
+
+                    <pre class='fragment'><code class='lang-javascript' data-srcbyline='testing-example/tests/search-tests.js?104;109-114;119-119;121'></code></pre>
+                </section>
+
+                <section>
+                    <h3>Asynchronous Tests</h3>
+
+                    <pre><code class='lang-javascript' data-srcbyline='testing-example/tests/search-tests.js?104-106;109-114;116-119;121'></code></pre>
+                </section>
+
+                <section>
+                    <h3>Asynchronous Tests</h3>
+
+                    <p style="margin-top:1em;"><em>
+                        "But you said not to rely on external services!"
+                    </em></p>
+
+                    <p class="fragment" style="margin-top:1em;">
+                        <a href="http://sinonjs.org">Sinon</a> |
+                        <a href="https://github.com/appendto/jquery-mockjax">jQuery Mockjax</a> |
+                        <br>
+                        <a href="https://github.com/pivotal/jasmine-ajax">Jasmine-ajax</a> |
+                        <a href="https://docs.angularjs.org/api/ngMock/service/$httpBackend">angular ng-mocks</a>
+                    </p>
+                </section>
+
+                <section>
+                    <h3>Mocking Ajax with Mockjax</h3>
+
+                    <pre><code class='lang-javascript' data-srcbyline='testing-example/tests/search-tests.js?14-19'></code></pre>
+
+                    <pre class='fragment'><code class='lang-javascript' data-srcbyline='testing-example/tests/search-tests.js?21-27'></code></pre>
+
+                    <aside class='notes'>
+                        Discuss where these calls should be located, it will be covered in the next section
+                    </aside>
+                </section>
+
+
+
+                <section class='title' data-background='rgb(173, 0, 0)'>
+                    <h3>Testing Lifecycle</h3>
+
+                    <img class="fragment" src="images/test-lifecycle.png" alt="Testing lifecycle: suite start, module start, test start, assertions, test done, module done, suite done." />
+                </section>
+
+                <section>
+                    <h3>Testing Lifecycle</h3>
+
+                    <pre><code class='lang-html' data-srcbyline='testing-example/tests/example.html?7;11-13;16-22;25;45;50-53'></code></pre>
+                </section>
+
+                <section>
+                    <h3>Testing Lifecycle</h3>
+
+                    <pre><code class='lang-html' data-srcbyline='testing-example/tests/example.html?27-33'></code></pre>
+                </section>
+                
+                <section>
+                    <h3>Testing Lifecycle</h3>
+
+                    <pre><code class='lang-html' data-srcbyline='testing-example/tests/example.html?35-41'></code></pre>
+                </section>
+                
+                <section>
+                    <h2>Idempotency</h2>
+                </section>
+                
+                <section>
+                    <h3>Module Lifecycle</h3>
+
+                    <pre><code class='lang-html' data-srcbyline='testing-example/tests/show-modules.html?18;21-22'></code></pre>
+                    
+                    <pre class='fragment'><code class='lang-javascript' data-srcbyline='testing-example/tests/search-tests.js?8-10;12;29-30;33;35;39;41-42'></code></pre>
+                </section>
+                
+                <section>
+                    <h3>Module Lifecycle</h3>
+                    
+                    <pre><code class='lang-javascript' data-srcbyline='testing-example/tests/search-tests.js?8-10;14-19;29-30;33;37;39;41-42'></code></pre>
+                </section>
+
+
+                <section class='title' data-background='rgb(173, 0, 0)'>
+                    <h3>Cross Browser Testing</h3>
+                    <p class="fragment">
+                        <br>
+                        <a href="http://www.browserstack.com" style="margin-right:2em;">
+                            <img src="images/browserstack.png" alt="BrowserStack">
+                        </a>
+                        <a href="https://saucelabs.com" style="top:-20px;">
+                            <img src="images/sauce-labs-logo.png" alt="Sauce Labs">
+                        </a>
+                        <br>
+                        <a href="https://code.google.com/p/selenium/wiki/RemoteWebDriverServer" style="margin-right:2em;left:-40px;">
+                            <img src="images/selenium.png" alt="Selenium">
+                        </a>
+                        <a href="https://github.com/airportyh/testem" style="top:-40px;">Test 'em</a>
+                    </p>
+
+                    <aside class="notes">
+                        Browserstack (automation with Testswarm, Testem, etc); 
+                        Saucelabs (automation with Travic CI or Grunt); 
+                        Testem (automation with Browserstack-cli); 
+                        Testswarm; 
+                        Selenium (using the Remote WebDriver server)
+                    </aside>
+                </section>
+
+
+
+                <section class='title' data-background='rgb(173, 0, 0)'>
+                    <h3>Automating Tests with Grunt</h3>
+                </section>
+
+                <section>
+                    <h3>Install the Grunt QUnit Task</h3>
+
+                    <pre><code class="bash" data-noescape>
+~/myproject$ <strong>npm install grunt-contrib-qunit --save-dev</strong>
+                    </code></pre>
+                </section>
+
+                <section>
+                    <h3>Configure the Task</h3>
+
+                    <pre><code class='lang-javascript' data-srcbyline='testing-example/Gruntfile.js?5-6;9-16;26;42-43;45-46;48'></code></pre>
+                </section>
+
+                <section>
+                    <h3>Configure the Task</h3>
+
+                    <pre><code class='lang-javascript' data-srcbyline='testing-example/Gruntfile.js?5-6;9;17-19;24;26;42-43;'></code></pre>
+                </section>
+
+                <section class='title' data-background='rgb(173, 0, 0)'>
+                    <h3>But QUnit Tests run in a browser...</h3>
+                </section>
+
+                <section data-background='#fff'>
+                    <img src="images/meme-no-browser.jpg" alt="Meme: You say there is no browser?" style="width: 30%;" />
+                </section>
+
+                <section data-background='#fff'>
+                    <p style="text-align:center; line-height:2.5em;">
+                        <a href="http://qunitjs.com/">
+                            <img src="images/qunit.png" alt="QUnit">
+                        </a>
+                        <br>
+                        <strong>and</strong>
+                        <br>
+                        <a href="http://phantomjs.org">
+                            <img src="images/phantomjs.png" alt="PhantomJS">
+                        </a>
+                    </p>
+
+                    <aside class="notes">
+                        Talk about Phantom briefly (headless, Webkit, JavaScriptCore (not V8))
+                    </aside>
+                </section>
+
+                <section>
+                    <h3>Running QUnit Tests with Grunt</h3>
+
+                    <pre style="background-color:#fff;"><code data-trim class="no-highlight" data-noescape>
+~/myproject$ <strong>grunt qunit:basic</strong>
+<span class="fragment dim">~/myproject$ <strong>grunt qunit</strong></span>
+<span class="fragment"><span style="text-decoration:underline;">Running "qunit:basic" (qunit) task</span>
+Testing tests/core.html .....<span style="color:green;">OK</span>
+<span style="color:green;">>></span> 12 assertions passed (21ms)
+
+<span style="color:green;">Done, without errors.</span></span>
+                    </code></pre>
+
+                    <aside class="notes">
+                        Talk about how we have to run this from the project root (and why).
+                        Discuss the "dots" which signify each test (different from the assertions).
+                    </aside>
+                </section>
+
+                <section>
+                    <h3>QUnit Errors</h3>
+
+                    <pre style="background-color:#fff;"><code class="no-highlight" data-noescape>
+~/myproject$ grunt qunit:basic
+<span style="text-decoration:underline;">Running "qunit:basic" (qunit) task</span>
+<strong>Testing tests/core.html ...<span style="color:red;">F</span>.</strong>
+<span style="color:red;">>></span> Some Module Name - Your Test Name
+<strong><span style="color:red;">>></span> Message: <span style="color:purple;">The message you entered for this assertion</span>
+<span style="color:red;">>></span> Actual: <span style="color:purple;">0</span>
+<span style="color:red;">>></span> Expected: <span style="color:purple;">1</span></strong>
+<span style="color:red;">>></span> at file:///myproject/tests/lib/qunit-1.12.0.js:556
+<span style="color:red;">>></span> at file:///myproject/tests/tests.js:38   
+   ...
+
+<span style="color:orange;">Warning: 1/12 assertions failed (21ms) Use --force to continue.</span>
+
+<span style="color:red;">Aborted due to warnings.</span>
+                    </code></pre>
+                </section>
+
+                <section>
+                    <h3>Multiple Test Suites</h3>
+
+                    <pre><code class='lang-javascript' data-srcbyline='testing-example/Gruntfile.js?5-6;9;17;19-21;25-26;42-43;'></code></pre>
+
+                    <aside class="notes">
+                        Talk about how you would run each target separately, or all of them
+                        with "grunt qunit"
+                    </aside>
+                </section>
+
+                <section>
+                    <h3>Multiple Test Files</h3>
+
+                    <pre><code class='lang-javascript' data-srcbyline='testing-example/Gruntfile.js?5-6;9;17;19-20;22;25-26;42-43;'></code></pre>
+                </section>
+                
+                <section>
+                    <h3>Multiple Test Files</h3>
+
+                    <pre><code class='lang-javascript' data-srcbyline='testing-example/Gruntfile.js?5-6;9;17;19-20;23;25-26;42-43;'></code></pre>
+                </section>
+
+                <section>
+                    <h3>Running Task Targets</h3>
+
+                    <pre style="background-color:#fff;"><code data-trim class="no-highlight" data-noescape>
+~/myproject$ <strong>grunt qunit:basic</strong>
+<span class='fragment'>~/myproject$ <strong>grunt qunit:search</strong></span>
+<span class='fragment'>~/myproject$ <strong>grunt qunit</strong></span>
+                    </code></pre>
+
+                </section>
+
+
+
+                <section class='title' data-background='rgb(173, 0, 0)'>
+                    <h3>LAB #3</h3>
+                    <p>Testing with QUnit</p>
+                    <ol>
+                        <li>
+                            Get familiar with QUnit
+                            <ul>
+                                <li>Investigate the <code>beer-model.html</code> test file (and JS tests)</li>
+                                <li>Write some new tests</li>
+                            </ul>
+                        </li>
+                        <li>
+                            Create a new QUnit test suite
+                            <ul>
+                                <li>Create the html &amp; JS files for testing the <code>IndexViewModel</code></li>
+                                <li>Write some tests for the <code>IndexViewModel</code></li>
+                                <li>Check tests in browser</li>
+                            </ul>
+                        </li>
+                        <li>
+                            Automating test runs
+                            <ul>
+                                <li>Add the QUnit Grunt task and configure it</li>
+                            </ul>
+                        </li>
+                    </ol>
+                </section>
+                
+                
+                
+                <section class='title' data-background='rgb(173, 0, 0)'>
+                    <h3>Can't you make it easier?</h3>
+
+                    <img src="images/meme-not-impressed.jpg" alt="" />
+                </section>
+
+                <section>
+                    <h3>The Watch plugin</h3>
+
+                    <pre class="fragment"><code class="bash" data-noescape>
+~/myproject$ <strong>npm install grunt-contrib-watch --save-dev</strong>
+                    </code></pre>
+
+                    <aside class="notes">
+                        Discuss what watch task does
+                        <br />
+                        Remind them what the "--save-dev" option does.
+                    </aside>
+                </section>
+
+                <section>
+                    <h3>Watch Task Setup</h3>
+
+                    <pre><code class='lang-javascript' data-srcbyline='testing-example/Gruntfile.js?5-6;29-33;39-40;43;45-46;48-49'></code></pre>
+
+                    <aside class="notes">
+                        Note that this will only match "something-tests.html" inside of the 
+                        "tests/search" directory or any subdirectory therein.
+                        <br />
+                        Also mention that this file globbing is common to all Grunt tasks
+                    </aside>
+                </section>
+
+                <section>
+                    <h3>Starting the watch</h3>
+
+                    <pre style="background-color:#fff;"><code data-trim class="no-highlight" data-noescape>
+~/myproject$ <strong>grunt watch</strong>
+<span class="fragment">Running "watch" task
+Waiting...</span>
+<span class="fragment"><span style="color:green;">OK</span>
+<span style="color:green;">>></span> File "src/app.js" changed.
+
+<span style="text-decoration:underline">Running "qunit:core" (qunit) task</span>
+.....
+<span style="color:green;">Done, without errors.</span>
+<span style="color:cyan;">Completed in 2.028s at Sun Aug 17 2013 09:23:51 GMT-0500 (CDT)</span> - Waiting...
+</span>
+                    </code></pre>
+
+                    <aside class="notes">
+                        Talk about what happens when you run the command, and the fact 
+                        that you don't have to watch a specific target (although you can).
+                    </aside>
+                </section>
+
+
+            </div> <!-- .slides -->
+        </div> <!-- .reveal -->
+
+
+        <script src="/js/vendor/reveal.js/lib/js/head.min.js"></script>
+        <script src="/js/vendor/reveal.js/js/reveal.min.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.3/highlight.min.js"></script>
+
+        <script>
+        // Full list of configuration options available here:
+        // https://github.com/hakimel/reveal.js#configuration
+        Reveal.initialize({
+            controls: false,
+            progress: false,
+            history: true,
+            center: true,
+            transition: 'linear',
+            backgroundTransition: 'slide',
+
+            // Optional libraries used to extend on reveal.js
+            dependencies: [
+                { src: '/js/vendor/reveal.js/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+                { src: '/js/vendor/reveal.js/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+                { src: '/js/vendor/reveal.js/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+                { src: '/js/vendor/reveal.js/plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } },
+                { src: '/js/vendor/source-by-line/srcByLine.js', async: true, callback: function() { window.srcbyline.init(); } }
+            ]
+        });
+
+        (function highlightCode() {
+            if( typeof window.addEventListener === 'function' ) {
+                var code = document.querySelectorAll( 'pre code' );
+
+                for( var i = 0, len = code.length; i < len; i++ ) {
+                    var element = code[i];
+
+                    // trim whitespace if data-trim attribute is present
+                    if( element.hasAttribute( 'data-trim' ) && typeof element.innerHTML.trim === 'function' ) {
+                        element.innerHTML = element.innerHTML.trim();
+                    }
+
+                    // Now escape html unless prevented by author
+                    if( ! element.hasAttribute( 'data-noescape' )) {
+                        element.innerHTML = element.innerHTML.replace(/</g,"&lt;").replace(/>/g,"&gt;");
+                    }
+
+                    // re-highlight when focus is lost (for edited code)
+                    element.addEventListener( 'focusout', function( event ) {
+                        hljs.highlightBlock( event.currentTarget );
+                    }, false );
+                }
+            }
+
+            hljs.initHighlighting();
+
+        })();
+        </script>
+
+    </body>
+</html>

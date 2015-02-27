@@ -1,0 +1,54 @@
+<!doctype html>
+<html>
+    <head>
+        <title>QUnit Test Runner</title>
+        <link rel='stylesheet' href='path/to/qunit.css'>
+    </head>
+    <body>
+        <div id="qunit"></div>
+        <div id="qunit-fixture"></div>
+        
+        <!--  ...  -->
+        
+        <script src='path/to/qunit.js'></script>
+        <script> /* QUnit options (via QUnit.config) */ </script>
+        
+        <script>
+        QUnit.begin(function(details) {
+            /* details = { totalTests: 13 } */
+        });
+        
+        QUnit.done(function(details) {
+            /* details = { failed: 0, passed: 13, total: 13, runtime: 30 } */
+            
+            // code to run after the test suite ends
+        });
+        
+        QUnit.moduleStart(function(details) {
+            /* details = { name: "some module" } */
+        });
+        
+        QUnit.moduleDone(function(details) {
+            /* details = { name: "some module", failed: 1, ... } */
+        });
+        
+        QUnit.testStart(function(details) {
+            /* details = { name: "testy", module: "some module" } */
+        });
+        
+        QUnit.testDone(function(details) {
+            /* details = { name: "testy", module: "some module", failed: 1, ... } */
+        });
+        
+        <!--  ...  -->
+        
+        </script>
+        
+        <script src='path/to/source-code.js'></script>
+        
+        <script src='path/to/tests.js'></script>
+        
+        <!--  ...  -->
+        
+    </body>
+</html>
