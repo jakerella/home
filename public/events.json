@@ -55,6 +55,24 @@
             ]
         },
         {
+            "name": "Workshop",
+            "url": "https://strongloop.com/node-js/training/2015-guadalajara/",
+            "location": "Guadalajara, Mexico",
+            "date": "Mar 25 2015",
+            "topics": [
+                "Node.js and API Development"
+            ]
+        },
+        {
+            "name": "Workshop",
+            "url": null,
+            "location": "Dallas, TX",
+            "date": "Apr 15 2015",
+            "topics": [
+                "Creating APIs in Node"
+            ]
+        },
+        {
             "name": "Lone Star PHP",
             "url": "http://lonestarphp.com",
             "location": "Dallas, TX",
@@ -71,6 +89,33 @@
             "date": "Apr 20 2015",
             "topics": [
                 "Advanced Git"
+            ]
+        },
+        {
+            "name": "EmpireJS",
+            "url": "http://2015.empirejs.org",
+            "location": "Washington, DC",
+            "date": "Apr 26 2015",
+            "topics": [
+                "Generating a New Async"
+            ]
+        },
+        {
+            "name": "node.dc",
+            "url": "http://www.meetup.com/node-dc/",
+            "location": "Washington, DC",
+            "date": "May 7 2015",
+            "topics": [
+                "Creating APIs in Node"
+            ]
+        },
+        {
+            "name": "KCDC",
+            "url": "http://www.kcdc.info/#!/",
+            "location": "Kansas City, MO",
+            "date": "Jun 24 2015",
+            "topics": [
+                
             ]
         },
         {
