@@ -41,15 +41,15 @@
     <body>
 
         <div class='reveal'>
-            
+
             <footer class='left'>
                 <img src='/images/strongloop_logo_horiz.png' alt='StrongLoop' style='width:15%;'>
             </footer>
-                
+
             <div class='slides'>
-                
+
                 <section class='no-footer'>
-                    
+
                     <section>
                         <h2>Groking Grunt</h2>
                         <p style='margin-top: 3em'>Jordan Kasper</p>
@@ -86,26 +86,26 @@
                             <img src='/images/nomad-js.png' alt='NomadJS' style='width:25%' />
                         </a>
                     </section>
-                    
+
                 </section>
-                
+
                 <section>
-                
+
                     <section>
                         <a href='http://gruntjs.com'>
                             <img src='/images/grunt-logo.png' alt='Grunt'>
                         </a>
                     </section>
-                    
+
                     <section>
                         <h3>Grunt is a task runner</h3>
-                        
+
                         <p>written in JavaScript (Node)</p>
                     </section>
-                    
+
                     <section>
                         <h3>What can I do with it?</h3>
-                        
+
                         <ul>
                             <li class='fragment'>Minify &amp; concatentate JS files</li>
                             <li class='fragment'>Compile Sass or LESS styles</li>
@@ -115,50 +115,50 @@
                             <li class='fragment'>Prepare a build &amp; deploy it</li>
                         </ul>
                     </section>
-                    
+
                     <section>
                         <img src='images/doge-tasks.jpg' alt='Doge meme'>
                     </section>
-                    
+
                     <section>
                         <h4>Okay, it can do a lot...</h4>
-                        
+
                         <p class='fragment'>
                             Actually, it doesn't do much at all.
                         </p>
                     </section>
-                    
+
                     <section data-background='#fff'>
                         <img src='images/wut.jpg' alt='wut meme'>
                     </section>
-                    
+
                     <section>
                         <h3>Grunt is <strong><em>only</em></strong> a task runner</h3>
-                        
+
                         <p>Not a set of executable tasks</p>
-                        
+
                         <p class='fragment' style='margin-top:2em;'>Instead, Grunt has a <a href='http://gruntjs.com/plugins'>long list of task plugins</a>... <span class='fragment'>over 4,000.</a></p>
                     </section>
-                    
+
                     <section data-background='#fff'>
                         <h3>So what <em>is</em> it?</h3>
-                        
+
                         <div class='fragment'>
                             <p>Grunt is a series of Node modules.</p>
                             <img src='images/grunt-diagram.png' alt='Diagram of Grunt'>
                         </div>
                     </section>
-                
+
                 </section>
-                
+
                 <section>
-                    
+
                     <section>
                         <h3>My first time</h3>
-                        
+
                         <p class='margin-top:2em;'>How to get running with Grunt.</p>
                     </section>
-                    
+
                     <section>
                         <ul style='list-style:none;'>
                             <li>
@@ -166,7 +166,7 @@
                             </li>
                             <li class='fragment'>
                                 <h4>Step 2: Install the Grunt CLI</h4>
-                                
+
                                 <pre><code class='no-highlight' data-trim>
 ~/my-project$ npm install -g grunt-cli
                                 </code></pre>
@@ -180,7 +180,7 @@
                             </li>
                             <li class='fragment'>
                                 <h4>Step 4: Install Grunt in your project</h4>
-                                
+
                                 <pre><code class='no-highlight' data-trim>
 ~/my-project$ npm install grunt --save-dev
                                 </code></pre>
@@ -190,7 +190,7 @@
                             </li>
                         </ul>
                     </section>
-                    
+
                     <section>
                         <h3>Why <code>package.json</code>?</h3>
 
@@ -224,29 +224,29 @@
 
                         <pre><code class='lang-javascript' data-srcbyline='examples/Gruntfile.js?2;4-5;9-12;14;19;21;25;158-161;198-200'></code></pre>
                     </section>
-                    
+
                     <section>
                         <h4>Configuring tasks</h4>
 
                         <pre><code class='lang-javascript' data-srcbyline='examples/Gruntfile.js?9-12;14;19;21;25'></code></pre>
                     </section>
-                    
+
                     <section>
                         <h4>Add a Second Target</h4>
 
                         <pre><code class='lang-javascript' data-srcbyline='examples/Gruntfile.js?9-12;14;19;21-25'></code></pre>
                     </section>
-                    
+
                     <section>
                         <h4>Override Task Options</h4>
 
                         <pre><code class='lang-javascript' data-srcbyline='examples/Gruntfile.js?9-12;14-19;21-25'></code></pre>
                     </section>
-                    
+
                     <section>
                         <h4>Remember... We've already installed jshint:</h4>
-                        
-                        
+
+
                         <pre><code class='no-highlight' data-trim>
 ~/my-project$ npm install grunt-contrib-jshint --save-dev
                         </code></pre>
@@ -257,7 +257,7 @@
 
                         <pre><code class='lang-javascript' data-srcbyline='examples/Gruntfile.js?5-6;91-100;106-108;161'></code></pre>
                     </section>
-                    
+
                     <section>
                         <h4>Configuring jshint</h4>
 
@@ -273,7 +273,7 @@
                         <pre class='fragment'><code class='no-highlight' data-trim data-noescape>
 ~/my-project$ <strong>grunt jshint:client</strong>
                         </code></pre>
-                        
+
                         <pre class='fragment'><code class='no-highlight' data-trim data-noescape>
 ~/my-project$ <strong>grunt jshint</strong>
                         </code></pre>
@@ -323,11 +323,11 @@
 
                     <section>
                         <h3>Cleaning a Build Directory</h3>
-                        
+
                         <pre class='fragment'><code class='no-highlight' data-trim data-noescape>
 ~/my-project$ npm install --save-dev grunt-contrib-clean
                         </code></pre>
-                        
+
                         <pre class='fragment'><code class='lang-javascript' data-srcbyline='examples/Gruntfile.js?5-6;28-32;158-161'></code></pre>
 
                         <pre class='fragment'><code class='lang-javascript' data-trim data-noescape>
@@ -337,37 +337,37 @@
 
                     <section>
                         <h3>Compiling Sass Code</h3>
-                        
+
                         <pre class='fragment'><code class='no-highlight' data-trim data-noescape>
 ~/my-project$ npm install --save-dev grunt-sass
                         </code></pre>
-                        
+
                         <pre class='fragment'><code class='lang-javascript' data-srcbyline='examples/Gruntfile.js?111-120'></code></pre>
                     </section>
-                    
+
                     <section>
                         <h3>Concatenate JavaScript</h3>
-                        
+
                         <pre class='fragment'><code class='no-highlight' data-trim data-noescape>
 ~/my-project$ npm install --save-dev grunt-contrib-uglify
                         </code></pre>
-                        
+
                         <pre class='fragment'><code class='lang-javascript' data-srcbyline='examples/Gruntfile.js?53-56;66-71;77-79'></code></pre>
                     </section>
-                    
+
                     <section>
                         <h3>Concatenate JavaScript</h3>
-                        
+
                         <pre><code class='lang-javascript' data-srcbyline='examples/Gruntfile.js?53-56;66-70;72-79'></code></pre>
                     </section>
 
                     <section>
                         <h3>Optimize Images</h3>
-                        
+
                         <pre class='fragment'><code class='no-highlight' data-trim data-noescape>
 ~/my-project$ npm install --save-dev grunt-contrib-imagemin
                         </code></pre>
-                        
+
                         <pre class='fragment'><code class='lang-javascript' data-srcbyline='examples/Gruntfile.js?123-135'></code></pre>
                     </section>
 
@@ -375,22 +375,22 @@
                     <section>
                         <h3>The <span style='text-transform:none;font-family:monospace;'>watch</span> Task</h3>
                     </section>
-                    
+
                     <section>
                         <h4>Watching Files for Changes</h4>
-                        
+
                         <div class='fragment'>
                             <pre><code class='no-highlight' data-trim data-noescape>
 ~/my-project$ npm install --save-dev grunt-contrib-watch
                             </code></pre>
-                            
+
                             <pre><code class='lang-javascript' data-srcbyline='examples/Gruntfile.js?138-147'></code></pre>
                         </div>
                     </section>
-                    
+
                     <section>
                         <h4>Watching Files for Changes</h4>
-                        
+
                         <pre><code class="no-highlight" data-trim data-noescape>
 ~/myproject$ <strong>grunt watch</strong>
 <span class="fragment">Running "watch" task
@@ -413,22 +413,22 @@ Waiting...</span>
                 <section class='no-footer'>
                     <h2>Thank You!</h2>
                     <h3 style='margin-top:1.5em;'>Groking Grunt</h3>
-                    
+
                     <p style='margin-top: 1em'>
                         Jordan Kasper |
                         <a href='http://twitter.com/jakerella'>@jakerella</a>
                     </p>
 
                     <p style='margin-top: 1em'><strong>
-                        Slides: 
+                        Slides:
                         <a href='https://joind.in/talk/view/13305'>joind.in/13305</a><br>
                         Please rate me!!
                     </strong></p>
-                    
+
                     <p style='margin-top:2em;'><img src='/images/strongloop_logo_horiz.png' alt='StrongLoop' style='width:30%;'></p>
                 </section>
-                
-                
+
+
                 <section>
 
                     <section>
@@ -449,13 +449,13 @@ Waiting...</span>
                         <h4>Configuring the Troll</h4>
 
                         <pre><code class='lang-javascript' data-srcbyline='examples/Gruntfile.js?5-6;150-157;160-161'></code></pre>
-                        
+
                         <pre class='fragment'><code class='lang-javascript' data-srcbyline='examples/Gruntfile.js?197'></code></pre>
                     </section>
 
                     <section>
                         <h4>Troll 'em</h4>
-                        
+
                         <pre><code class="no-highlight" data-trim data-noescape>
 ~/myproject$ <strong>grunt troll:mac</strong>
 <span style="text-decoration:underline;">Running "troll:mac" (troll) task</span>
@@ -464,10 +464,10 @@ Waiting...</span>
 <span style="color:red !important;">Aborted due to warnings.</span>
                         </code></pre>
                     </section>
-                    
+
                     <section>
                         <h4>Troll 'em</h4>
-                        
+
                         <pre><code class="no-highlight" data-trim data-noescape>
 ~/myproject$ grunt troll:mac <strong>--force</strong>
 <span style="text-decoration:underline;">Running "troll:mac" (troll) task</span>
@@ -489,21 +489,21 @@ Waiting...</span>
                 <section class='no-footer'>
                     <h2>Thank You!</h2>
                     <h3 style='margin-top:1.5em;'>Groking Grunt</h3>
-                    
+
                     <p style='margin-top: 1em'>
                         Jordan Kasper |
                         <a href='http://twitter.com/jakerella'>@jakerella</a>
                     </p>
 
                     <p style='margin-top: 1em'><strong>
-                        Slides: 
+                        Slides:
                         <a href='https://joind.in/talk/view/13305'>joind.in/13305</a><br>
                         Please rate me!!
                     </strong></p>
-                    
+
                     <p style='margin-top:2em;'><img src='/images/strongloop_logo_horiz.png' alt='StrongLoop' style='width:30%;'></p>
                 </section>
-                
+
 
             </div> <!-- .slides -->
         </div> <!-- .reveal -->
@@ -511,7 +511,7 @@ Waiting...</span>
 
         <script src='/js/vendor/reveal.js/lib/js/head.min.js'></script>
         <script src='/js/vendor/reveal.js/js/reveal.min.js'></script>
-        <script src='/js/vendor/highlight.min.js'></script>
+        <script src='/js/vendor/highlightjs/highlight.pack.js'></script>
 
         <script>
         // Full list of configuration options available here:

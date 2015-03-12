@@ -1,14 +1,15 @@
 {
-    "name": "jk-home",
-    "version": "0.1.0",
-    "homepage": "http://jordankasper.com",
-    "authors": [
-        "Jordan Kasper"
-    ],
-    "license": "MIT",
-    "private": true,
-    "dependencies": {
-        "reveal.js": "2.6.x",
-        "source-by-line": "git://github.com/jakerella/source-by-line.git"
-    }
+  "name": "jk-home",
+  "version": "0.1.0",
+  "homepage": "http://jordankasper.com",
+  "authors": [
+    "Jordan Kasper"
+  ],
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "reveal.js": "2.6.x",
+    "source-by-line": "git://github.com/jakerella/source-by-line.git",
+    "highlightjs": "~8.4.0"
+  }
 }
