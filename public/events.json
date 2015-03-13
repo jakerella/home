@@ -115,7 +115,19 @@
             "location": "Kansas City, MO",
             "date": "Jun 24 2015",
             "topics": [
-                
+                "APIs in Node",
+                "Node API workshop",
+                "Node is the future"
+            ]
+        },
+        {
+            "name": "MidwestJS",
+            "url": "http://midwestjs.com/",
+            "location": "Minneapolis, MN",
+            "date": "Aug 12 2015",
+            "topics": [
+                "Triage and scale Node",
+                "JS prototype"
             ]
         },
         {
