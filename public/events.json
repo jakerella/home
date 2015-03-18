@@ -65,11 +65,11 @@
         },
         {
             "name": "Workshop",
-            "url": null,
+            "url": "https://strongloop.com/node-js/training/workshop-dallas-2015/",
             "location": "Dallas, TX",
             "date": "Apr 15 2015",
             "topics": [
-                "Creating APIs in Node"
+                "Node.js API Development"
             ]
         },
         {
