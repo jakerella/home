@@ -74,15 +74,15 @@ The last note about using `const` is that it follows the same new scoping rules 
 
 It's true. The new `let` and `const` keywords are not available in ES5, and thus in most execution environments. However, with good transpilers such as [Babel](https://babeljs.io/) we can compile our ES6 JavaScript into runnable ES5 code for deployment to a browser environment.
 
-Luckily for us Node.js (and io.js) developers we don't have to worry about what browser someone is executing our JavaScript code in! If you're using [Node v0.12](https://strongloop.com/strongblog/whats-new-node-v0-12-features/) (you are, right?), you can have access to these features with two small changes to your execution command:
+Luckily for us Node.js (and io.js) developers we don’t have to worry about what browser someone is executing our JavaScript code in! If you’re using [Node v0.12](https://strongloop.com/strongblog/whats-new-node-v0-12-features/) (you are, right?), you can have access to these features with two small changes. First, you have to run your code with “harmony” features enabled (the original codename for ES6 was “harmony”):
 
-```bash
-~$ node --harmony --use-strict /path/to/script
+```shell
+~$ node --harmony /path/to/script
 ```
 
-Why two options? The first enables ES6 features generally (it was originally codenamed "Harmony"), and the second enforces "strict mode" within your code. Enabling this second option will make your code better by pointing out potential issues that a more relaxed interpreter might not catch.
+The second change is that any code using let or const (or any other ES6 feature) must be in strict mode. To do so, simply place "use strict;" at the top of every module. Alternatively, you could use the --use-strict flag on the CLI, but that may be a bit much.
 
-In io.js you don't need the `--harmony` flag because all of those features are being rolled right into the code. However, you do still need to make your code strict. This can be done in io.js by simply placing a `"use strict";` statement at the top of your module files.
+In io.js you don’t need the --harmony flag because all of those features are being rolled right into the code. However, you do still need to make your code strict. Again, this can be done by simply placing a "use strict"; statement at the top of your module files.
 
 **Now go forth, and create a better variable declaration workflow!**
 
