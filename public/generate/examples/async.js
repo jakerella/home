@@ -8,9 +8,9 @@ var run = require('./run');
 var readFile = denodeify(fs.readFile);
 
 
-// Simple example using our denodeified readFile method (just to show it works)
+/**** Using the denodeified readFile method */
 
-readFile('./data-0.json')
+readFile('./data-1.json')
     .then(
         function(data) {
             console.log('File data!', data.toString());
@@ -21,53 +21,75 @@ readFile('./data-0.json')
     );
 
 
-// Example with "synchronous" processing of multiple file reads
+
+/**** 3 file reads in a row */
 
 run(function* () {
-    var allData = [];
     
-    allData.push( yield readFile('data-0.json') );
-    allData.push( yield readFile('data-1.json') );
-    allData.push( yield readFile('data-2.json') );
+    console.log( (yield readFile('data-1.json')).toString() );
+    
+    console.log( (yield readFile('data-2.json')).toString() );
+    
+    console.log( (yield readFile('data-5.json')).toString() );
+    
+});
+
+
+
+/**** 3 file reads in a row using a while loop with returned data */
+
+run(function* () {
+    var nextIndex = 1,
+        prevData = null,
+        allData = [];
+    
+    while (nextIndex) {
+        
+        prevData = yield readFile('data-' + nextIndex + '.json');
+        allData.push( prevData );
+        nextIndex = prevData.nextIndex;
+        
+    }
     
     console.log('All data:\n' + allData);
-    // { "zero": "foo" },{ "one": "bar" },{ "two": "baz" }
 });
 
+
+
+/**** Using a single yield statement for the 3 file reads */
 
 run(function* () {
+    
     var allData = yield Promise.all([
-        readFile('data-0.json'),
         readFile('data-1.json'),
-        readFile('data-2.json')
+        readFile('data-2.json'),
+        readFile('data-5.json')
     ]);
         
-    console.log('All data in one yield:\n' + allData);
-    // { "zero": "foo" },{ "one": "bar" },{ "two": "baz" }
+    console.log('All data in one yield: ' + allData);
 });
 
 
 
-// Example of encountering an Error while processing async actions
+/**** Example of error handling with async calls */
 
 run(function* () {
     var data = [];
     
     try {
         
-        data.push( (yield readFile('data-0.json')).toString() );
         data.push( (yield readFile('data-1.json')).toString() );
+        data.push( (yield readFile('data-2.json')).toString() );
         data.push( (yield readFile('data-infinity.json')).toString() );
 
     } catch(err) {
-        console.log(err.code, '::', err.message);
+        console.log('ERROR!', err.message);
         
         // Notice that we can let this error go...
     }
     
-    console.log('Retrieved data:', data);
     
-    // We'll still get the data from the first two reads:
-    // [ '{ "zero": "foo" }', '{ "one": "bar" }' ]
+    // We'll still get the data from the first two reads!
+    console.log('Retrieved data:', data);
 });
 

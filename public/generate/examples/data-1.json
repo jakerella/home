@@ -1,1 +1,1 @@
-{ "one": "bar" }
+{ "foo": "bar", "nextIndex": 2 }

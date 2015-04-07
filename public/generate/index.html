@@ -87,6 +87,7 @@
                 </section>
 
 
+
                 <section>
                     
                     <section>
@@ -101,6 +102,123 @@
                         <img src="images/sonic-pause.gif">
                     </section>
                     
+                    
+                    <section>
+                        <h3>Generators are <strong>NOT</strong><br>asynchronous.</h3>
+                    </section>
+                    
+                    <section>
+                        <img src='images/why-async.jpg' alt='Then why is this talk called "Generating a New Async?!"'>
+                    </section>
+                    
+                    <section>
+                        <h4>Let's look at some asynchronous code...</h4>
+                        
+                        <pre><code class='lang-javascript' data-srcbyline='examples/timeout.js?4-6'></code></pre>
+                        
+                        <pre class='fragment'><code class='lang-javascript' data-srcbyline='examples/timeout.js?8;22-32;'></code></pre>
+                        
+                        <pre class='fragment'><code class='lang-none no-highlight' data-trim>
+~$ node example.js 
+Long run complete
+1 ms timeout
+                        </code></pre>
+                    </section>
+                    
+                    <section>
+                        <h3>JavaScript follows a <br> <strong>"run to completion"</strong> paradigm...</h3>
+                        
+                        <h3 class='fragment'>...along with an <strong>event-based</strong> asynchronous loop.</h3>
+                    </section>
+                    
+                    <section>
+                        <p>This code runs without stopping all the way through the end of the <code>longRun()</code> function...</p>
+                        
+                        <pre style='position:relative;'><code class='lang-javascript' data-srcbyline='examples/timeout.js?4-7;8;22-32;'></code><svg data-arrow='{"length":300, "thickness":10, "direction":2, "color":"green"}' style='position:absolute;top:1em;left:60%;'></svg></pre>
+                    </section>
+                    
+                    <section>
+                        <p>...the async <code>setTimeout()</code> call will add another function to the event loop queue...</p>
+                        
+                        <pre style='position:relative;'><code class='lang-javascript' data-srcbyline='examples/timeout.js?4-7;8;22-32;'></code><svg data-arrow='{"length":150, "thickness":10, "direction":3, "color":"orange"}' style='position:absolute;top:0;left:50%;'></svg></pre>
+                    </section>
+                    
+                    <section>
+                        <p>...but this <code>for</code> loop will block until it's done (longer than 1ms).</p>
+                        
+                        <pre style='position:relative;'><code class='lang-javascript' data-srcbyline='examples/timeout.js?4-7;8;22-32;'></code><svg data-arrow='{"length":150, "thickness":10, "direction":3, "color":"red"}' style='position:absolute;top:9.5em;left:52%;'></svg></pre>
+                    </section>
+                    
+                    <section>
+                        <h3><strong>Generators</strong> <em>do not</em><br>solve this problem.</h3>
+                        
+                        <img class='fragment' src='images/face-palm.png' alt=''>
+                    </section>
+                </section>
+                
+                
+                
+                <section>
+                    
+                    <section data-transition='none'>
+                        <h3>A Solveable Problem...</h3>
+                        
+                        <pre class='fragment'><code class='lang-javascript' data-srcbyline='examples/callback-hell.js?2-4;9;11;26;'></code></pre>
+                    </section>
+                    
+                    <section data-transition='none'>
+                        <h3>A Solveable Problem...</h3>
+                        
+                        <pre><code class='lang-javascript' data-srcbyline='examples/callback-hell.js?4-12;17;25;26;'></code></pre>
+                    </section>
+                    
+                    <section data-transition='none'>
+                        <h3>A Solveable Problem...</h3>
+                        
+                        <pre><code class='lang-javascript' data-srcbyline='examples/callback-hell.js?4-26;'></code></pre>
+                    </section>
+                    
+                    <section>
+                        <img src='images/meme-functions.jpg' alt='Functions inside functions inside functions'>
+                    </section>
+                    
+                    <section>
+                        <h4>We <em>could</em> just make this code <strong>synchronous</strong>...</h4>
+                        
+                        <pre><code class='lang-javascript' data-srcbyline='examples/readfile-sync.js?5-7;10-12;16-18'></code></pre>
+                    </section>
+                    
+                    <section>
+                        <img src='images/mario-jump.gif' alt='Mario not able to jump very high' style='width:50%;'>
+                    </section>
+                    
+                    <section>
+                        <h3 style='line-height:1.5em;'>
+                            We want to <em>write</em> code<br>
+                            in a <strong>synchronous</strong> fashion,<br>
+                            but with the <em>runtime</em> benefits<br>
+                            of <strong>asynchronicity</strong>.
+                        </h3>
+                    </section>
+                    
+                </section>
+
+
+
+                <section>
+                    
+                    <section>
+                        <h2>Enter Generators</h2>
+                    </section>
+                    
+                    <section>
+                        <p>
+                            Allow functions to <strong>pause and resume</strong> execution!
+                        </p>
+                    </section>
+                    
+                    
+                
                 </section>
 
 
@@ -141,7 +259,8 @@
                 { src: '/js/vendor/reveal.js/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
                 { src: '/js/vendor/reveal.js/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
                 { src: '/js/vendor/reveal.js/plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } },
-                { src: '/js/vendor/source-by-line/srcByLine.js', async: true, callback: function() { window.srcbyline.init(); } }
+                { src: '/js/vendor/source-by-line/srcByLine.js', async: true, callback: function() { window.srcbyline.init(); } },
+                { src: '/js/draw-arrow.js', async: true, callback: function() { window.drawarrow.init(); } }
             ]
         });
 
