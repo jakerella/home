@@ -22,7 +22,7 @@ readFile('./data-1.json')
 
 
 
-/**** 3 file reads in a row */
+/**** 3 file reads in a row - still asynchronous */
 
 run(function* () {
     
@@ -33,6 +33,28 @@ run(function* () {
     console.log( (yield readFile('data-5.json')).toString() );
     
 });
+
+
+
+/**** Example converted from readfile-sync.js */
+
+run(function* getData() {
+    var data = yield readFile('data-1.json');
+
+    // Do something with the data...
+    data = JSON.parse( data );
+    console.log('Data from file 1', data);
+
+    var moreData = yield readFile('data-' + data.nextIndex + '.json');
+
+    moreData = JSON.parse( moreData );
+    console.log('Data from file 2', moreData);
+
+    if (moreData.whatever) {
+        var otherData = yield readFile('some-other-data.json');
+    }
+});
+
 
 
 

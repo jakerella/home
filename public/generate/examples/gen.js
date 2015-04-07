@@ -4,7 +4,11 @@
 // Example of a basic generator yielding two values and returning a third
 
 function* foo() {
+    console.log('Inside foo');
+    
     yield 'a';
+    
+    console.log('Back inside foo');
     
     yield { 'b': 2 };
     
@@ -14,13 +18,18 @@ function* foo() {
 var gen = foo();
 
 var one = gen.next();
-console.log( one );    // { value: 'a', done: false }
+console.log( one );
+// { value: 'a', done: false }
+
+console.log('Outside foo');
 
 var two = gen.next();
-console.log( two );    // { value: { b: 2 }, done: false }
+console.log( two );
+// { value: { b: 2 }, done: false }
 
 var three = gen.next();
-console.log( three );  // { value: 'c', done: true }
+console.log( three );
+// { value: 'c', done: true }
 
 
 // Example of using a generator as in Iterable in a for..of loop
@@ -58,7 +67,8 @@ for ( var value of numbers() ) {
     result.push( value );
 }
 
-console.log( result ); // [ 1, 2, 'a', 'b', 'c', 3 ]
+console.log( result );
+// [ 1, 2, 'a', 'b', 'c', 3 ]
 
 
 
@@ -83,7 +93,8 @@ for ( var next of getFibonacciSequence( 10 ) ) {
     fib.push( next );
 }
 
-console.log( fib );  // [ 1, 1, 2, 3, 5, 8, 13, 21, 34, 55 ]
+console.log( fib );
+// [ 1, 1, 2, 3, 5, 8, 13, 21, 34, 55 ]
 
 
 
@@ -99,10 +110,12 @@ var gen = yieldExpression( 5 );
 
 var type = gen.next();
 
-console.log( type );  // { value: 'multiplier', done: false }
+console.log( type );
+// { value: 'multiplier', done: false }
 
 if (type.value === 'multiplier') {
-    console.log( gen.next( 2 ) );  // { value: 100, done: true }
+    console.log( gen.next( 2 ) );
+    // { value: 100, done: true }
 }
 
 

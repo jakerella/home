@@ -107,7 +107,7 @@
                         <h3>Generators are <strong>NOT</strong><br>asynchronous.</h3>
                     </section>
                     
-                    <section>
+                    <section data-background='white'>
                         <img src='images/why-async.jpg' alt='Then why is this talk called "Generating a New Async?!"'>
                     </section>
                     
@@ -149,10 +149,10 @@ Long run complete
                         <pre style='position:relative;'><code class='lang-javascript' data-srcbyline='examples/timeout.js?4-7;8;22-32;'></code><svg data-arrow='{"length":150, "thickness":10, "direction":3, "color":"red"}' style='position:absolute;top:9.5em;left:52%;'></svg></pre>
                     </section>
                     
-                    <section>
+                    <section data-background='white'>
                         <h3><strong>Generators</strong> <em>do not</em><br>solve this problem.</h3>
                         
-                        <img class='fragment' src='images/face-palm.png' alt=''>
+                        <img src='images/face-palm.png' alt=''>
                     </section>
                 </section>
                 
@@ -178,17 +178,17 @@ Long run complete
                         <pre><code class='lang-javascript' data-srcbyline='examples/callback-hell.js?4-26;'></code></pre>
                     </section>
                     
-                    <section>
+                    <section data-background='white'>
                         <img src='images/meme-functions.jpg' alt='Functions inside functions inside functions'>
                     </section>
                     
                     <section>
                         <h4>We <em>could</em> just make this code <strong>synchronous</strong>...</h4>
                         
-                        <pre><code class='lang-javascript' data-srcbyline='examples/readfile-sync.js?5-7;10-12;16-18'></code></pre>
+                        <pre><code class='lang-javascript' data-srcbyline='examples/readfile-sync.js?4-8;11-13;17-22'></code></pre>
                     </section>
                     
-                    <section>
+                    <section data-background='white'>
                         <img src='images/mario-jump.gif' alt='Mario not able to jump very high' style='width:50%;'>
                     </section>
                     
@@ -216,6 +216,80 @@ Long run complete
                             Allow functions to <strong>pause and resume</strong> execution!
                         </p>
                     </section>
+                    
+                    <section>
+                        <h4>Remember our <strong>synchronous</strong> code?</h4>
+                        
+                        <pre><code class='lang-javascript' data-srcbyline='examples/readfile-sync.js?4-8;11-13;17-22'></code></pre>
+                    </section>
+                    
+                    <section>
+                        <h4>Now with 100% more generators...</h4>
+                        
+                        <pre><code class='lang-javascript' data-srcbyline='examples/async.js?41-44;47-49;53-56'></code></pre>
+                    </section>
+                    
+                    <section data-background='white'>
+                        <img src='images/popcorn.gif' alt='Eating popcorn in anticipation' style='width:40%;'>
+                    </section>
+                    
+                    <section>
+                        <h3>Let's step back...</h3>
+                    </section>
+                    
+                    <section>
+                        <h4>This is a generator.</h4>
+                        
+                        <pre><code class='lang-javascript' data-srcbyline='examples/gen.js?6-7;9-11;13;16'></code></pre>
+                        
+                        <div class='fragment'>
+                            <p class='fine'>And this is how you execute it...</p>
+                            <pre><code class='lang-javascript' data-srcbyline='examples/gen.js?18-20;23-26'></code></pre>
+                        </div>
+                        
+                        <pre class='fragment'><code class='lang-none no-highlight' data-trim>
+~$ node --harmony generator-example.js
+Inside foo
+Outside foo
+Back inside foo
+                        </code></pre>
+                    </section>
+                    
+                    <section>
+                        <h3>This does <strong>not</strong> break the<br>"run to completion" paradigm!</h3>
+                    </section>
+                    
+                    <section>
+                        <p>Notice that my generator "yielded" two values:</p>
+                        
+                        <pre><code class='lang-javascript' data-srcbyline='examples/gen.js?6-7;9-11;13;16'></code></pre>
+                        
+                        <div class='fragment'>
+                            <pre><code class='lang-javascript' data-srcbyline='examples/gen.js?18-21;25-27'></code></pre>
+                            
+                            <pre><code class='lang-none no-highlight' data-trim>
+{ value: 'a', done: false }
+{ value: { b: 2 }, done: true }
+                            </code></pre>
+                        </div>
+                    </section>
+                    
+                    <section>
+                        <h2>Generators are Iterators</h2>
+                        
+                        <p class='fragment'>In fact, we can iterate (or <em>loop</em>) over them!</p>
+                    </section>
+                    
+                    <section>
+                        <pre><code class='lang-javascript' data-srcbyline='examples/gen.js?6;9-10;13;16-17;36-37;41'></code></pre>
+                        
+                        <pre class='fragment'><code class='lang-none no-highlight' data-trim>
+~$ node --harmony generator-loop.js
+a
+{ b: 2 }
+                            </code></pre>
+                    </section>
+                    
                     
                     
                 
