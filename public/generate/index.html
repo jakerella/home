@@ -315,9 +315,88 @@ a
                             </code></pre>
                     </section>
                     
+                    <section>
+                        <p>Example of a more "useful" generator-as-iterator</p>
+                        
+                        <pre><code class='lang-javascript' data-srcbyline='examples/gen.js?77-88'></code></pre>
+                        
+                        <p class='fragment fine'>1, 1, 2, 3, 5, 8, 13, 21, 34, 55</p>
+                        
+                        <pre class='fragment'><code class='lang-javascript' data-srcbyline='examples/gen.js?90-94'></code></pre>
+                    </section>
                     
+                    <section>
+                        <h3 style='line-height:1.5em;'>A generator can receive<br>input with each <code>yield</code></h3>
+                    </section>
                     
+                    <section>
+                        <div style='width:63%; float:left;'>
+                            <pre><code class='lang-javascript' data-srcbyline='examples/gen.js?125-133'></code></pre>
+                            
+                            <pre class='fragment'><code class='lang-javascript' data-srcbyline='examples/gen.js?135-144'></code></pre>
+                        </div>
+                        
+                        <pre style='width:35%; float:left;' class='fragment'><code class='lang-none no-highlight' data-trim>
+Knock knock!
+Who's there?
+Boo.
+Boo. who?
+Yesssss, let the tears flow!
+                        </code></pre>
+                    </section>
+                    
+                    <section>
+                        <h3>Error handling is easy.</h3>
+                    </section>
+                    
+                    <section data-background='white'>
+                        <img src='images/troll-meme.jpg' alt="Can't tell if you're being serious or trolling all of us." style='width:75%;'>
+                    </section>
+                    
+                    <section>
+                        <h3>Error handling <strong>is</strong> easy!</h3>
+                        <p>We just <code>throw</code> and <code>catch</code> Error objects.</p>
+                    </section>
+                    
+                    <section>
+                        <pre><code class='lang-javascript' data-srcbyline='examples/errors.js?4;6;8;12-14;17'></code></pre>
+                        
+                        <p class='fragment'>If an error occurs <em>outside</em> the generator...</p>
+                        
+                        <pre class='fragment'><code class='lang-javascript' data-srcbyline='examples/errors.js?21-26'></code></pre>
+                        
+                        <pre class='fragment'><code class='lang-none no-highlight' data-trim>
+~$ node --harmony lucky-number.js
+Oops! I did it again.
+                        </code></pre>
+                    </section>
+                    
+                    <section>
+                        <p>If an error occurs <em>inside</em> the generator...</p>
+                        <pre class='fragment'><code class='lang-javascript' data-srcbyline='examples/errors.js?4;6;8;12-14;15-17'></code></pre>
+                        
+                        <pre class='fragment'><code class='lang-javascript' data-srcbyline='examples/errors.js?62-69;71-73'></code></pre>
+                        
+                        <pre class='fragment'><code class='lang-none no-highlight' data-trim>
+~$ node --harmony lucky-number.js
+Caught outside generator: Nope nope nope.
+                        </code></pre>
+                    </section>
                 
+                </section>
+                
+                
+                
+                <section>
+                    
+                    <section data-background='white'>
+                        <h3>And finally...<br>Async with Generators</h3>
+                        
+                        <img class='fragment' style='width:50%;' src='images/its-happening.gif' alt="It's happening!">
+                    </section>
+                    
+                    
+                    
                 </section>
 
 

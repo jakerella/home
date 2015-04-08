@@ -120,67 +120,25 @@ if (type.value === 'multiplier') {
 
 
 
-// Example of using error handling with generators
+// Example passing values into a generator
 
-function* handleErrors() {
+function* joke() {
+    var greeting = yield 'Knock knock!';
+    console.log( greeting );
     
-    try {
-        
-        var x = yield 13;
-        console.log('The value of x is', x);
-        
-    } catch( err ) {
-        console.log('Caught inside generator:', err.message);
-    }
+    var question  = yield 'Boo.';
+    console.log( question );
     
-    throw new Error('barbat');
+    return "Yesssss, let the tears flow!";
 }
 
-var gen = handleErrors();
+var joke = joke();
 
-try {
+var line = joke.next().value;
+console.log( line );
 
-    var y = gen.next();
-    gen.throw( new Error('foobar') );
-    
-} catch(err) {
-    // We'll never get here because the error is caught inside the generator
-    console.log('Caught outside genertor:', err.message);
-}
+var answer = joke.next( "Who's there?" ).value;
+console.log( answer );
 
-
-var gen = handleErrors();
-
-try {
-    
-    gen.throw( new Error('batbaz') );
-    
-} catch(err) {
-    // Because we haven't called next() yet, the Error above is caught here, NOT inside the generator
-    console.log('Caught outside genertor:', err.message);
-}
-
-try {
-    
-    var gen = handleErrors();
-    gen.next();
-    throw new Error('bazfoo');
-    
-} catch(err) {
-    // Errors thrown without using the generators .throw() method will never make it into the generator
-    console.log('Caught outside genertor:', err.message);
-}
-
-
-try {
-    
-    var gen = handleErrors();
-    gen.next();
-    gen.next(42);
-    
-} catch(err) {
-    // Errors thrown inside the generator can be caught outside of it
-    console.log('Caught outside genertor:', err.message);
-}
-
-
+var punchline = joke.next( answer + ' who?' );
+console.log( punchline.value );
