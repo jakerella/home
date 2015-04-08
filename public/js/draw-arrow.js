@@ -6,26 +6,81 @@ window.drawarrow = (function(app) {
     
     app.init = function() {
         var arrows = [].slice.call( document.querySelectorAll( '[data-arrow]' ) );
-        arrows.forEach(processArrow);
+        
+        arrows.forEach(function(node) {
+            var options = getOptions(node);
+            
+            if (node.tagName.toLowerCase() === 'code' && node.parentNode.tagName.toLowerCase() === 'pre') {
+                
+                generateSVG(node, options);
+                
+            } else if (node.tagName.toLowerCase() === 'svg') {
+                
+                processArrow(node, options);
+                
+            }
+        });
     };
 
-    function processArrow(node) {
-        if (node.tagName.toLowerCase() !== 'svg') { return; }
-
-        var options = node.dataset['arrow'] || "{}";
+    function getOptions(node) {
+        var options,
+            optionsString = node.dataset['arrow'] || "{}";
         
         try {
-            options = JSON.parse(options);
+            
+            options = JSON.parse(optionsString);
+            
         } catch(err) {
-            console.warn('Unable to draw arrow for node', node, options);
+            console.warn('Invalid options specified for arrow!', node, optionsString);
         }
+        
+        options = options || {};
         
         options.length = Number(options.length) || 100;
         options.thickness = Number(options.thickness) || 15;
         options.direction = Number(options.direction) || 0;
         options.color = options.color || 'red';
+        options.horizPadding = options.horizPadding || 3;
+        options.vertPadding = options.vertPadding || 0;
         
-        var markerHeight = (options.thickness * triangleWidth);
+        return options;
+    }
+    
+    function generateSVG(node, options) {
+        var codeText = node.innerText.split(/\n/),
+            lineHeight = window.getComputedStyle(node).getPropertyValue('line-height'),
+            lineUnits = lineHeight.match(/[^0-9\.]+$/)[0];
+        
+        if (!options.codelines || !options.codelines.splice || !options.codelines.length) {
+            console.warn('No lines specified for code arrows! Use: {"codelines": [1, 5, ...]} (defaulting to [1])', options);
+            options.codelines = [1];
+        }
+        
+        options.codelines.forEach(function(line) {
+            
+            var svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg'),
+                lineText = codeText[ (line - 1) ];
+            
+            if (!lineText) {
+                console.warn('Skipped non-existant line:', line);
+                return;
+            }
+            
+            processArrow(svg, options);
+            
+            svg.style.position = 'absolute';
+            svg.style.top = ((parseFloat(lineHeight, 10) * (line - 1)) + options.vertPadding) + lineUnits;
+            svg.style.left = (lineText.length + options.horizPadding) + 'ex';
+            
+            node.parentNode.appendChild(svg);
+        });
+        
+        node.parentNode.style.position = 'relative';
+    }
+
+    function processArrow(node, options) {
+        var markerHeight = (options.thickness * triangleWidth),
+            lineCoor = 'M0,' + options.length + ' L0,' + markerHeight;
         
         if (options.direction === 0 || options.direction === 2) {
             node.setAttribute('viewBox', [
@@ -47,13 +102,6 @@ window.drawarrow = (function(app) {
             node.style.height = markerHeight + 'px';
         }
         
-        node.innerHTML = getArrow(options);
-    }
-    
-    function getArrow(options) {
-        var markerHeight = (options.thickness * triangleWidth),
-            lineCoor = 'M0,' + options.length + ' L0,' + markerHeight;
-        
         if (options.direction === 1) {
             lineCoor = 'M-' + (options.length / 2) + ',0 L' + (options.length - markerHeight) + ',0';
         } else if (options.direction === 2) {
@@ -62,7 +110,7 @@ window.drawarrow = (function(app) {
             lineCoor = 'M' + options.length + ',0 L' + markerHeight + ',0';
         }
         
-        return [
+        node.innerHTML = [
             '<defs>',
                 '<marker id="arrow-tip-' + (++nextId) + '" markerWidth="' + triangleWidth + '" markerHeight="4" refx="0.1" refy="2" orient="auto">',
                     '<path d="M-1,0 V4 L3,2 Z" style="fill:' + options.color + ';" />',

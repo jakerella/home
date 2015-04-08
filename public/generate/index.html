@@ -140,13 +140,17 @@ Long run complete
                     <section>
                         <p>...the async <code>setTimeout()</code> call will add another function to the event loop queue...</p>
                         
-                        <pre style='position:relative;'><code class='lang-javascript' data-srcbyline='examples/timeout.js?4-7;8;22-32;'></code><svg data-arrow='{"length":150, "thickness":10, "direction":3, "color":"orange"}' style='position:absolute;top:0;left:50%;'></svg></pre>
+                        <pre style='position:relative;'><code class='lang-javascript'
+                            data-srcbyline='examples/timeout.js?4-7;8;22-32;'
+                            data-arrow='{"codelines":[1], "length":150, "thickness":10, "direction":3, "color":"orange", "vertPadding":3}'></code></pre>
                     </section>
                     
                     <section>
                         <p>...but this <code>for</code> loop will block until it's done (longer than 1ms).</p>
                         
-                        <pre style='position:relative;'><code class='lang-javascript' data-srcbyline='examples/timeout.js?4-7;8;22-32;'></code><svg data-arrow='{"length":150, "thickness":10, "direction":3, "color":"red"}' style='position:absolute;top:9.5em;left:52%;'></svg></pre>
+                        <pre 'position:relative;'><code class='lang-javascript'
+                            data-srcbyline='examples/timeout.js?4-7;8;22-32;'
+                            data-arrow='{"codelines":[9], "length":150, "thickness":10, "direction":3, "color":"red"}'></code></pre>
                     </section>
                     
                     <section data-background='white'>
@@ -334,7 +338,7 @@ a
                 { src: '/js/vendor/reveal.js/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
                 { src: '/js/vendor/reveal.js/plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } },
                 { src: '/js/vendor/source-by-line/srcByLine.js', async: true, callback: function() { window.srcbyline.init(); } },
-                { src: '/js/draw-arrow.js', async: true, callback: function() { window.drawarrow.init(); } }
+                { src: '/js/draw-arrow.js', async: true, callback: function() { setTimeout(function() { window.drawarrow.init();}, 1000); } }
             ]
         });
 
