@@ -41,8 +41,8 @@ run(function* () {
 run(function* getData() {
     var data = yield readFile('data-1.json');
 
-    // Do something with the data...
     data = JSON.parse( data );
+    // Do something with the data...
     console.log('Data from file 1', data);
 
     var moreData = yield readFile('data-' + data.nextIndex + '.json');

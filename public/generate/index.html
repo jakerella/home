@@ -116,7 +116,7 @@
                         
                         <pre><code class='lang-javascript' data-srcbyline='examples/timeout.js?4-6'></code></pre>
                         
-                        <pre class='fragment'><code class='lang-javascript' data-srcbyline='examples/timeout.js?8;22-32;'></code></pre>
+                        <pre class='fragment'><code class='lang-javascript' data-srcbyline='examples/timeout.js?8-15;'></code></pre>
                         
                         <pre class='fragment'><code class='lang-none no-highlight' data-trim>
 ~$ node example.js 
@@ -134,23 +134,23 @@ Long run complete
                     <section>
                         <p>This code runs without stopping all the way through the end of the <code>longRun()</code> function...</p>
                         
-                        <pre style='position:relative;'><code class='lang-javascript' data-srcbyline='examples/timeout.js?4-7;8;22-32;'></code><svg data-arrow='{"length":300, "thickness":10, "direction":2, "color":"green"}' style='position:absolute;top:1em;left:60%;'></svg></pre>
+                        <pre style='position:relative;'><code class='lang-javascript' data-srcbyline='examples/timeout.js?4-15;'></code><svg data-arrow='{"length":250, "thickness":10, "direction":2, "color":"green"}' style='position:absolute;top:1em;left:60%;'></svg></pre>
                     </section>
                     
                     <section>
                         <p>...the async <code>setTimeout()</code> call will add another function to the event loop queue...</p>
                         
                         <pre style='position:relative;'><code class='lang-javascript'
-                            data-srcbyline='examples/timeout.js?4-7;8;22-32;'
+                            data-srcbyline='examples/timeout.js?4-15;'
                             data-arrow='{"codelines":[1], "length":150, "thickness":10, "direction":3, "color":"orange", "vertPadding":3}'></code></pre>
                     </section>
                     
                     <section>
-                        <p>...but this <code>for</code> loop will block until it's done (longer than 1ms).</p>
+                        <p>...but this <code>for</code> loop will <strong>block</strong> that queue until it's done.</p>
                         
                         <pre 'position:relative;'><code class='lang-javascript'
-                            data-srcbyline='examples/timeout.js?4-7;8;22-32;'
-                            data-arrow='{"codelines":[9], "length":150, "thickness":10, "direction":3, "color":"red"}'></code></pre>
+                            data-srcbyline='examples/timeout.js?4-15;'
+                            data-arrow='{"codelines":[8], "length":150, "thickness":10, "direction":3, "color":"red"}'></code></pre>
                     </section>
                     
                     <section data-background='white'>
@@ -167,19 +167,19 @@ Long run complete
                     <section data-transition='none'>
                         <h3>A Solveable Problem...</h3>
                         
-                        <pre class='fragment'><code class='lang-javascript' data-srcbyline='examples/callback-hell.js?2-4;9;11;26;'></code></pre>
+                        <pre class='fragment'><code class='lang-javascript' data-srcbyline='examples/callback-hell.js?2-10;13;31;'></code></pre>
                     </section>
                     
                     <section data-transition='none'>
                         <h3>A Solveable Problem...</h3>
                         
-                        <pre><code class='lang-javascript' data-srcbyline='examples/callback-hell.js?4-12;17;25;26;'></code></pre>
+                        <pre><code class='lang-javascript' data-srcbyline='examples/callback-hell.js?2;4-10;13-14;25-27;30-31'></code></pre>
                     </section>
                     
                     <section data-transition='none'>
                         <h3>A Solveable Problem...</h3>
                         
-                        <pre><code class='lang-javascript' data-srcbyline='examples/callback-hell.js?4-26;'></code></pre>
+                        <pre><code class='lang-javascript' data-srcbyline='examples/callback-hell.js?2;4-10;13-19;23-31'></code></pre>
                     </section>
                     
                     <section data-background='white'>
@@ -189,7 +189,7 @@ Long run complete
                     <section>
                         <h4>We <em>could</em> just make this code <strong>synchronous</strong>...</h4>
                         
-                        <pre><code class='lang-javascript' data-srcbyline='examples/readfile-sync.js?4-8;11-13;17-22'></code></pre>
+                        <pre><code class='lang-javascript' data-srcbyline='examples/readfile-sync.js?6-8;11-13;17-19'></code></pre>
                     </section>
                     
                     <section data-background='white'>
@@ -224,7 +224,7 @@ Long run complete
                     <section>
                         <h4>Remember our <strong>synchronous</strong> code?</h4>
                         
-                        <pre><code class='lang-javascript' data-srcbyline='examples/readfile-sync.js?4-8;11-13;17-22'></code></pre>
+                        <pre><code class='lang-javascript' data-srcbyline='examples/readfile-sync.js?6-8;11-13;17-19'></code></pre>
                     </section>
                     
                     <section>
@@ -266,16 +266,37 @@ Back inside foo
                     <section>
                         <p>Notice that my generator "yielded" two values:</p>
                         
-                        <pre><code class='lang-javascript' data-srcbyline='examples/gen.js?6-7;9-11;13;16'></code></pre>
+                        <pre><code class='lang-javascript' data-srcbyline='examples/gen.js?6;9-10;13;16'></code></pre>
                         
                         <div class='fragment'>
                             <pre><code class='lang-javascript' data-srcbyline='examples/gen.js?18-21;25-27'></code></pre>
                             
                             <pre><code class='lang-none no-highlight' data-trim>
 { value: 'a', done: false }
-{ value: { b: 2 }, done: true }
+{ value: { b: 2 }, done: false }
                             </code></pre>
                         </div>
+                        
+                        <div class='fragment'>
+                            <pre><code class='lang-javascript' data-srcbyline='examples/gen.js?30-31'></code></pre>
+                            <pre><code class='lang-none no-highlight' data-trim>
+{ value: undefined, done: true }
+                            </code></pre>
+                        </div>
+                    </section>
+                    
+                    <section>
+                        <p>Adding a <code>return</code> statement:</p>
+                        
+                        <pre><code class='lang-javascript' data-srcbyline='examples/gen.js?6;9-10;13;14-16'></code></pre>
+                        
+                        <pre><code class='lang-javascript' data-srcbyline='examples/gen.js?18;20-21;26-27;30-31'></code></pre>
+                        
+                        <pre class='fragment'><code class='lang-none no-highlight' data-trim>
+{ value: 'a', done: false }
+{ value: { b: 2 }, done: false }
+{ value: 'c', done: true }
+                        </code></pre>
                     </section>
                     
                     <section>
