@@ -10,7 +10,9 @@ module.exports = function run(generator) {
     var genObj = generator();
     
     function runGen(result) {
-        let item = genObj.next(result);
+        
+        var item = genObj.next(result);
+        
         if (!item.done) {
             item.value
                 .then(

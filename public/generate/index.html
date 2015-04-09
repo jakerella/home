@@ -400,10 +400,204 @@ Caught outside generator: Nope nope nope.
                         <img class='fragment' style='width:50%;' src='images/its-happening.gif' alt="It's happening!">
                     </section>
                     
+                    <section>
+                        <h4>Tools We'll Need:</h4>
+                        <p>
+                            Generators <span class='fine'>(Obviously)</span>
+                            <span class='fragment'>and Promises</span>
+                        </p>
+                    </section>
                     
+                    <section data-background='white'>
+                        <img src='images/promise-meme.jpg' alt='Promises???' style='width:50%;'>
+                    </section>
+                    
+                    <section>
+                        <h3>Why Promises?</h3>
+                        <h4>Remember: generators are <strong>not</strong> asynchronous...</h4>
+                        
+                        <p class='fragment'>We need a way to know when an async action is complete...</p>
+                        
+                        <p class='fragment'>...while avoiding <em>callback hell.</em></p>
+                    </section>
+                    
+                    <section>
+                        <h4>But what if I have <strong>Node-style callbacks</strong>?</h4>
+                        
+                        <p class='fragment'>Easy, just <code>denodify</code> the function!</p>
+                        
+                        <pre class='fragment'><code class='lang-javascript' data-srcbyline='examples/async.js?4;8'></code></pre>
+                        
+                        <pre class='fragment'><code class='lang-javascript' data-srcbyline='examples/async.js?13-21'></code></pre>
+                    </section>
+                    
+                    <section>
+                        <h3>
+                            Denodification breakdown<br>
+                            <span class='fine'>(simplified)</span>
+                        </h3>
+                        
+                        <pre><code class='lang-javascript' data-trim>
+function denodify( nodeStyleFn ) {
+    return promiseStyleFn(arg1) {
+        
+        return new Promise(function( resolve, reject ) {
+            
+            nodeStyleFn(arg1, function(err, value) {
+                
+                if (err) { return reject(err); }
+                
+                resolve(value);
+                
+            });
+        });
+    };
+}
+                        </code></pre>
+                        
+                        <p class='fine'>(Warning: don't use this code! It is not complete by far.)</p>
+                    </section>
+                    
+                    <section>
+                        <h3>But generators are cumbersome...</h3>
+                        
+                        <pre><code class='lang-javascript' data-trim>
+function* someFn() {
+    // ...
+}
+
+var genObj = someFn();
+var value = genObj.next().value;
+if (value === whatever) {
+    anotherThing = 'foo';
+}
+var final = genObj.next(anotherThing);
+// ...
+                        </code></pre>
+                    </section>
+                    
+                    <section>
+                        <h3>Async generators</h3>
+                        
+                        <p>We want abstract away their "Iterable" nature a bit...</p>
+                    </section>
+                    
+                    <section data-background='black'>
+                        <h4 style='color: #8fd4d5;'>We need a . . .</h4>
+                        
+                        <img src='images/lode-runner.png' alt='Lode Runner... er... Generator Runner'>
+                    </section>
+                    
+                    <section>
+                        <h4>Our simple generator runner must...</h4>
+                        
+                        <ol>
+                            <li>Accept a generator function</li>
+                            <li class='fragment'>Create generator object</li>
+                            <li class='fragment'>Call <code>next()</code> initially</li>
+                            <li class='fragment'>Wait for <code>yield</code>ed Promise to resolve / reject</li>
+                            <li class='fragment'>Continue processing generator to completion</li>
+                        </ol>
+                    </section>
+                    
+                    <section>
+                        <pre><code class='lang-javascript' data-srcbyline='examples/run.js?9-31'></code></pre>
+                        
+                        <p class='fine'>(Warning: don't use this code! It is not complete.)</p>
+                    </section>
+                    
+                    <section>
+                        <h4>Now we have everything in place...</h4>
+                        
+                        <pre class='fragment'><code class='lang-javascript' data-srcbyline='examples/async.js?27-35'></code></pre>
+                        
+                        <pre class='fragment'><code class='lang-none no-highlight' data-trim>
+{ "foo": "bar", "nextIndex": 2 }
+{ "foo": "bat", "nextIndex": 5 }
+{ "foo": "baz", "nextIndex": null }
+                        </code></pre>
+                    </section>
+                    
+                    <section>
+                        <h4>But is it <em>really</em> asynchronous?</h4>
+                        
+                        <pre><code class='lang-javascript' data-srcbyline='examples/timeout.js?4-6'></code></pre>
+                        <pre><code class='lang-javascript' data-srcbyline='examples/async.js?27;29;31;33;35'></code></pre>
+                        
+                        <pre class='fragment'><code class='lang-none no-highlight' data-trim>
+1 ms timeout
+{ "foo": "bar", "nextIndex": 2 }
+{ "foo": "bat", "nextIndex": 5 }
+{ "foo": "baz", "nextIndex": null }
+                        </code></pre>
+                    </section>
+                    
+                    <section>
+                        <h4>Here's our previous example...</h4>
+                        
+                        <pre><code class='lang-javascript' data-srcbyline='examples/async.js?41-44;47-49;53-56'></code></pre>
+                    </section>
+                    
+                    <section>
+                        <h3>What about errors?!</h3>
+                        
+                        <pre class='fragment'><code class='lang-javascript' data-srcbyline='examples/async.js?98-108;111-112;115;116'></code></pre>
+                        
+                        <pre class='fragment'><code class='lang-none no-highlight' data-trim>
+~$ node --harmony async-read.js
+ERROR! ENOENT, open 'data-infinity.json'
+Retrieved data: [ '{ "foo": "bar", "nextIndex": 2 }',
+                  '{ "foo": "bat", "nextIndex": 5 }' ]
+                        </code></pre>
+                    </section>
                     
                 </section>
 
+
+                <section>
+                    
+                    <section data-background='white'>
+                        <h3>So you're thinking...</h3>
+                        
+                        <img src='images/riker-smile.gif' alt='Sly smile from Riker' style='width:40%;'>
+                        
+                        <p>... aaaah, but how long until I can use this?</p>
+                    </section>
+
+                    <section>
+                        <h3>
+                            Generators are 
+                            <a href='https://kangax.github.io/compat-table/es6/' title='ES6 support table'>supported</a> in:
+                        </h3>
+                        
+                        <ul>
+                            <li>Chrome (stable)</li>
+                            <li>Firefox (stable)</li>
+                            <li>Opera (stable)</li>
+                            <li>Node (with <code>--harmony</code>)</li>
+                            <li>io.js (stable)</li>
+                            
+                            <li style='margin-top:1em'>And if all else fails... in Traceur and Babel!</li>
+                        </ul>
+                    </section>
+                    
+                    <section>
+                        <h3>Don't reinvent sliced bread!</h3>
+                        
+                        <p>Don't write <code>denodeify()</code> or <code>run()</code>, use a library!</p>
+                        
+                        <p>
+                            <a href='https://github.com/tj/co'>co</a>,
+                            <a href='https://github.com/kriskowal/q'>q</a>,
+                            <a href='https://github.com/caolan/async'>async</a>,
+                            <a href='https://github.com/jmar777/suspend'>suspend</a>,
+                            <a href='https://github.com/petkaantonov/bluebird'>bluebird</a>,
+                            <a href='https://github.com/cujojs/when'>when</a>,
+                            <a href='https://github.com/bjouhier/galaxy'>galaxy</a>
+                        </p>
+                    </section>
+                    
+                </section>
 
 
                 <section>
