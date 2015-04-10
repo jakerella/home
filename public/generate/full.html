@@ -321,6 +321,16 @@ a
                     </section>
                     
                     <section>
+                        <p>Example of a more "useful" generator-as-iterator</p>
+                        
+                        <pre><code class='lang-javascript' data-srcbyline='examples/gen.js?77-88'></code></pre>
+                        
+                        <p class='fragment'>0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55</p>
+                        
+                        <pre class='fragment'><code class='lang-javascript' data-srcbyline='examples/gen.js?90-94'></code></pre>
+                    </section>
+                    
+                    <section>
                         <h3 style='line-height:1.5em;'>A generator can receive<br>input with each <code>yield</code></h3>
                     </section>
                     
@@ -412,15 +422,48 @@ Caught outside generator: Nope nope nope.
                     </section>
                     
                     <section>
+                        <h3>
+                            Denodification breakdown<br>
+                            <span class='fine'>(simplified)</span>
+                        </h3>
+                        
+                        <pre><code class='lang-javascript' data-trim>
+function denodify( nodeStyleFn ) {
+    return promiseStyleFn(arg1) {
+        
+        return new Promise(function( resolve, reject ) {
+            
+            nodeStyleFn(arg1, function(err, value) {
+                
+                if (err) { return reject(err); }
+                
+                resolve(value);
+                
+            });
+        });
+    };
+}
+                        </code></pre>
+                        
+                        <p class='fine'>(Warning: don't use this code! It is not complete by far.)</p>
+                    </section>
+                    
+                    <section>
                         <h3>But generators are cumbersome...</h3>
                         
-                        <ol class='fragment' style='width:65%'>
-                            <li>Create the generator object</li>
-                            <li>Call next to start it</li>
-                            <li>Get the <code>value</code> off the yielded object</li>
-                            <li>Call <code>next()</code> over and over</li>
-                            <li>Remember to use <code>gen.throw()</code></li>
-                        </ol>
+                        <pre><code class='lang-javascript' data-trim>
+function* someFn() {
+    // ...
+}
+
+var genObj = someFn();
+var value = genObj.next().value;
+if (value === whatever) {
+    anotherThing = 'foo';
+}
+var final = genObj.next(anotherThing);
+// ...
+                        </code></pre>
                     </section>
                     
                     <section>
@@ -543,6 +586,42 @@ Retrieved data: [ '{ "foo": "bar", "nextIndex": 2 }',
                             <a href='https://github.com/cujojs/when'>when</a>,
                             <a href='https://github.com/bjouhier/galaxy'>galaxy</a>
                         </p>
+                    </section>
+                    
+                    <section data-background='#2c4762'>
+                        <h3 style='color:white; text-shadow: 2px 1px black'>And what about ES7?</h3>
+                        
+                        <img src='images/es7-meme.jpg' alt='Why not ES7?'>
+                    </section>
+                    
+                    <section>
+                        <h3><code>async</code> and <code>await</code></h3>
+                        
+                        <pre class='fragment'><code class='lang-javascript' data-trim>
+async function getData() {
+    try {
+        
+        var data = await readFile('data-1.json');
+        data = JSON.parse( data );
+
+        var moreData = await readFile('data-' + data.nextIndex + '.json');
+        moreData = JSON.parse( moreData );
+
+        if (moreData.whatever) {
+            var otherData = await readFile('some-other-data.json');
+        }
+        
+    } catch(err) {
+        // Handle the error...
+    }
+}
+                        </code></pre>
+                    </section>
+                    
+                    <section data-background='white'>
+                        <h4>And when can I use <code>async</code> and <code>await</code>?</h4>
+                        
+                        <img class='fragment' src='images/obama-shrug.gif' alt='Obama shrugging'>
                     </section>
                     
                 </section>

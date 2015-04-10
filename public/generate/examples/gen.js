@@ -122,23 +122,29 @@ if (type.value === 'multiplier') {
 
 // Example passing values into a generator
 
-function* joke() {
-    var greeting = yield 'Knock knock!';
-    console.log( greeting );
+function* tellFortune() {
+    var sign = yield 'Tell me your sign.';
     
-    var question  = yield 'Boo.';
-    console.log( question );
-    
-    return "Yesssss, let the tears flow!";
+    switch (sign) {
+        case 'aries':
+            yield 'You are awesome.';
+            break;
+        // ...
+        case 'leo':
+            yield 'You will tell a bad joke.';
+            break;
+        // ...
+        default:
+            yield 'No fortune for you.';
+    }
 }
 
-var joke = joke();
+var seer = tellFortune();
+seer.next();
 
-var line = joke.next().value;
-console.log( line );
+var fortune = seer.next('leo').value;
+console.log( 'My fortune:', fortune );
 
-var answer = joke.next( "Who's there?" ).value;
-console.log( answer );
+// The other yield(s) in the switch will NOT affect the "done" property...
+console.log( seer.next() );
 
-var punchline = joke.next( answer + ' who?' );
-console.log( punchline.value );
