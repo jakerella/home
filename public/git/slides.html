@@ -29,12 +29,6 @@
         </div>
     </section>
 
-    <section>
-        <a href="http://nomadjavascript.com">
-            <img src="/images/nomad-js.png" alt="NomadJS" style="width:25%" />
-        </a>
-    </section>
-    
 </section>
 
 
@@ -91,7 +85,7 @@
             <pre><code class='no-highlight' data-trim>
 ~$ git branch -a
 * master
-remotes/origin/master
+  remotes/origin/master
             </code></pre>
             
             <p>Cloning creates a remote called "origin"</p>
@@ -106,7 +100,7 @@ remotes/origin/master
         <pre><code class='no-highlight' data-trim>
 ~$ git branch -vv
 * master             b956c45 [origin/master] Initial commit
-some-local-branch  a74b295 Implemented that cool feature
+  some-local-branch  a74b295 Implemented that cool feature
         </code></pre>
     </section>
 
@@ -137,9 +131,9 @@ origin  https://github.com/jakerella/repo-name.git (push)
             
             <pre class='fragment'><code class='no-highlight' data-trim>
 ~$ git branch -vv
-master            b956c45 [origin/master] Initial commit
+  master            b956c45 [origin/master] Initial commit
 * new-feature       b956c45 [origin/new-feature] Initial commit
-some-local-branch a74b295 Implemented that cool feature
+  some-local-branch a74b295 Implemented that cool feature
             </code></pre>
         </div>
     </section>
@@ -165,7 +159,7 @@ jquery-source  https://github.com/jquery/jquery.git (push)
         <pre class='fragment'><code class='no-highlight' data-trim>
 ~$ git fetch jquery-source
 ...
-~$ git pull
+~$ git merge jquery-source/master
         </code></pre>
     </section>
     
@@ -183,10 +177,10 @@ jquery-source  https://github.com/jquery/jquery.git (push)
         
         <pre><code class='no-highlight' data-trim>
 ~$ git branch
-hot-fix
+  hot-fix
 * master
-new-feature
-stuff
+  new-feature
+  stuff
         </code></pre>
         
         <pre class='fragment'><code class='no-highlight' data-trim>
@@ -221,7 +215,7 @@ index 0000000..e69de29
     </section>
     
     <section>
-        <h4>Branch Differences</h4>
+        <h4>Single-Branch Differences</h4>
         
         <pre><code class='no-highlight' data-trim data-noescape>
 ~$ git diff <strong>master..stuff</strong>
@@ -232,7 +226,7 @@ index 0000000..e69de29
     </section>
 
     <section>
-        <h4>Branch Differences</h4>
+        <h4>Single-Branch Differences</h4>
         
         <pre><code class='no-highlight' data-trim data-noescape>
 ~$ git diff <strong>b9bdb02 b86e65d</strong>
@@ -417,6 +411,7 @@ nothing to commit (working directory clean)
         </p>
         
         <pre><code class='no-highlight' data-trim data-noescape>
+~$ git checkout content/
 ~$ rm NewFile.md
         </code></pre>
     </section>
@@ -505,13 +500,13 @@ this is not a good change
     </section>
     
     <section>
-        <h4>Understanding the Three States</h4>
+        <h4>Understanding the Three Seashells</h4>
         
-        <img src='images/git_reset-1.png' alt='three states of a git repo'>
+        <img src='images/git_reset-1.png' alt='three states of a git repo' style='width:70%;'>
     </section>
     
     <section>
-        <img src='images/git_reset-2.png' alt='soft reset diagram'>
+        <img src='images/git_reset-2.png' alt='soft reset diagram' style='width:70%;'>
         
         <p><code>git reset --soft HEAD^</code></p>
     </section>
@@ -541,7 +536,7 @@ the immediately previous change (totally normal)
     </section>
     
     <section>
-        <img src='images/git_reset-3.png' alt='mixed reset diagram'>
+        <img src='images/git_reset-3.png' alt='mixed reset diagram' style='width:70%;'>
         
         <p><code>git reset --mixed HEAD^</code></p>
     </section>
@@ -572,7 +567,7 @@ the immediately previous change (totally normal)
     </section>
     
     <section>
-        <img src='images/git_reset-4.png' alt='hard reset diagram'>
+        <img src='images/git_reset-4.png' alt='hard reset diagram' style='width:70%;'>
         
         <p><code>git reset --hard HEAD^</code></p>
     </section>
@@ -675,8 +670,6 @@ e098369 HEAD@{5}: pull: Fast-forward
         
         <div class='fragment'>
             <pre><code class='no-highlight' data-trim data-noescape>
-~$ git add some-unrelated-file.js
-
 ~$ git stash
 Saved working directory and index state WIP on new-feature: 3c927dd Added text to readme
 HEAD is now at 3c927dd Added text to readme
@@ -688,7 +681,7 @@ HEAD is now at 3c927dd Added text to readme
 nothing to commit (working directory clean)
             </code></pre>
         
-            <p class='fine'>(Note that you can only stash staged changes!)</p>
+            <p class='illuminate'>(Note that you can only stash TRACKED files!)</p>
         </div>
     </section>
     
@@ -883,7 +876,7 @@ c2cb87e removed unused files from test harness
 /* utility functions */
 
 function sum(x, y) {
-return x * y;
+    return x * y;
 }
         </code></pre>
         
@@ -892,7 +885,7 @@ return x * y;
 <span style='letter-spacing:0.06em;'>d35241e6 (Ryan      2014-03-13   1) /* utility functions */
 d35241e6 (Ryan      2014-03-13   2) 
 d35241e6 (Ryan      2014-03-13   3) function sum(x, y) {</span>
-<strong>27cc7225 (Jordan    2014-03-15   4)     return x * y;</strong>
+<strong>27cc7225   (Jordan      2014-03-15     4)      return x * y;</strong>
 <span style='letter-spacing:0.06em;'>d35241e6 (Ryan      2014-03-13   5) }</span>
         </code></pre>
     </section>
@@ -945,14 +938,8 @@ nothing to commit (working directory clean)
     <section data-transition='none'>
         <h4>Using Bisect</h4>
         
-        <p>First, switch to a broken branch...</p>
+        <p>Test the current commit...</p>
         
-        <pre><code class='no-highlight' data-trim data-noescape>
-~$ git bisect start
-        </code></pre>
-        <pre><code class='no-highlight' data-trim data-noescape>
-~$ git bisect bad
-        </code></pre>
         <pre><code class='no-highlight' data-trim data-noescape>
 ~$ git bisect good b9bdb02
 Bisecting: 3 revisions left to test after this (roughly 2 steps)
@@ -1022,7 +1009,7 @@ Switched to branch 'new-feature'
         
         <p>With no divergent changes...</p>
         
-        <img src='images/git_merge-1.png' alt='git pre-merge diagram with one commit'>
+        <img src='images/git_merge-1.png' alt='git pre-merge diagram with one commit' style='width:60%;'>
     </section>
     
     <section>
@@ -1042,7 +1029,7 @@ src/js/some-file.js |   13 ++++--+++
 1 files changed, 7 insertions(+), 2 deletions(-)
         </code></pre>
         
-        <img class='fragment' src='images/git_merge_ff.png' alt='git merge diagram, fast-forward'>
+        <img class='fragment' src='images/git_merge_ff.png' alt='git merge diagram, fast-forward' style='width:60%;'>
     </section>
     
     <section>
@@ -1066,7 +1053,7 @@ src/js/some-file.js |   13 ++++--+++
         <p>When code in <code>feature</code> diverges from the current trunk...</p>
         
         <div class='fragment'>
-            <img style='margin-right: 3.9em;' src='images/git_merge-2.png' alt='git branch diagram with divergent changes'>
+            <img style='margin-right: 3.9em; width:40%;' src='images/git_merge-2.png' alt='git branch diagram with divergent changes'>
             
             <pre><code class='no-highlight' data-trim data-noescape>
 ~$ git checkout master
@@ -1080,7 +1067,7 @@ src/js/some-file.js |   13 ++++--+++
         
         <p>When code in <code>feature</code> diverges from the current trunk...</p>
         
-        <img src='images/git_merge-3.png' alt='git merge diagram with merge commit'>
+        <img src='images/git_merge-3.png' alt='git merge diagram with merge commit' style='width:60%;'>
         
         <pre><code class='no-highlight' data-trim data-noescape>
 ~$ git checkout master
@@ -1161,13 +1148,13 @@ more common text...
     <section>
         <h3>Rebasing</h3>
         
-        <p class='fragment illuminate'>Do not rebase if you have already pushed to a shared repo!</p>
+        <p class='fragment illuminate'>BE CAREFUL rebasing if you have<br>already pushed to a shared branch!</p>
     </section>
     
     <section data-transition='none'>
         <h4>Divergent Changes</h4>
         
-        <img style='margin: 0.1em 4.8em 0 0;' src='images/git_rebase_1.png' alt='git rebase diagram with divergent changes'>
+        <img style='margin: 0.1em 4.8em 0 0; width:40%;' src='images/git_rebase_1.png' alt='git rebase diagram with divergent changes'>
         
         <pre><code class='no-highlight' data-trim data-noescape>
 ~$ git checkout feature
@@ -1178,7 +1165,7 @@ more common text...
     <section data-transition='none'>
         <h4>Rewriting History</h4>
         
-        <img style='margin:0.4em 0;' src='images/git_rebase_2.png' alt='git rebase diagram with rewritten branch commits'>
+        <img style='margin:0.4em 0; width: 60%;' src='images/git_rebase_2.png' alt='git rebase diagram with rewritten branch commits'>
         
         <pre><code class='no-highlight' data-trim data-noescape>
 ~$ git checkout feature
@@ -1189,7 +1176,7 @@ more common text...
     <section data-transition='none'>
         <h4>Rebasing on Master</h4>
         
-        <img style='margin:1em 0;' src='images/git_rebase_3.png' alt='git rebase diagram with rewritten commits on master'>
+        <img style='margin:1em 0; width: 60%;' src='images/git_rebase_3.png' alt='git rebase diagram with rewritten commits on master'>
         
         <pre><code class='no-highlight' data-trim data-noescape>
 ~$ git checkout feature
@@ -1202,7 +1189,7 @@ more common text...
     </section>
     
     <section>
-        <h4>REbase Conflicts</h4>
+        <h4>Rebase Conflicts</h4>
         
         <pre><code class='no-highlight' data-trim data-noescape>
 ~$ git rebase master
@@ -1263,7 +1250,19 @@ Failed to merge in the changes.
     </section>
     
     <section>
-        <p class='illuminate'>Do not rebase if you have already pushed to a shared repo!</p>
+        <p class='illuminate'>I don't always rebase, but when I do... I do it by default.</p>
+        
+        <pre><code class='no-highlight' data-trim data-noescape>
+~$ git pull --rebase
+        </code></pre>
+
+        <pre class='fragment'><code class='no-highlight' data-trim data-noescape>
+~$ git config branch.master.rebase true
+~$ git config branch.some-other-branch.rebase true
+~$ 
+~$ git config branch.autosetuprebase always
+        </code></pre>
+
     </section>
     
     <section>
@@ -1273,7 +1272,7 @@ Failed to merge in the changes.
     <section data-transition='none'>
         <h4>Multiple Branches</h4>
         
-        <img style='margin-right: 2.85em;' src='images/git_cherry-pick_1.png' alt='git multiple branch diagram'>
+        <img style='margin-right: 2.85em; width: 47%;' src='images/git_cherry-pick_1.png' alt='git multiple branch diagram'>
         
         <pre style='opacity:0'><code class='no-highlight' data-trim data-noescape>
 {{just spacing}}
@@ -1284,7 +1283,7 @@ Failed to merge in the changes.
     <section data-transition='none'>
         <h4>Cherry Pick</h4>
         
-        <img style='margin:0.5em 0;' src='images/git_cherry-pick_2.png' alt='git cherry-pick diagram'>
+        <img style='margin:0.5em 0; width: 60%;' src='images/git_cherry-pick_2.png' alt='git cherry-pick diagram'>
         
         <pre><code class='no-highlight' data-trim data-noescape>
 ~$ git checkout new-feature
@@ -1295,14 +1294,13 @@ Failed to merge in the changes.
     <section data-transition='none'>
         <h4>Cherry Pick</h4>
         
-        <img src='images/git_cherry-pick_3.png' alt='git branch deletion after cherry-pick diagram'>
+        <img style='width: 60%;' src='images/git_cherry-pick_3.png' alt='git branch deletion after cherry-pick diagram'>
         
         <pre><code class='no-highlight' data-trim data-noescape>
 ~$ git checkout new-feature
 ~$ git branch -D old-feature
         </code></pre>
     </section>
-    
     
 </section>
 
