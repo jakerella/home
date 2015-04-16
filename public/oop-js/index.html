@@ -159,7 +159,7 @@
                         
                         <ul class='illuminate'>
                             <li class='fragment'>Public, private, &amp; protected</li>
-                            <li class='fragment'>Static members</li>
+                            <li class='fragment cut-me-1'>Static members</li>
                             <li class='fragment'>Interfaces</li>
                             <li class='fragment'>Abstracts</li>
                         </ul>
@@ -170,7 +170,7 @@
                         
                         <ul class='illuminate'>
                             <li>Public, private, &amp; <del>protected</del> privileged</li>
-                            <li>Static members</li>
+                            <li class='cut-me-1'>Static members</li>
                             <li><del>Interfaces</del> Mixins</li>
                             <li><del>Abstracts</del></li>
                         </ul>
@@ -179,7 +179,7 @@
                 </section>
 
 
-                <section>
+                <section class='cut-me-1'>
                     <section>
                         <h3>"I thought JavaScript was a functional language?"</h3>
                     </section>
@@ -458,11 +458,11 @@
                         <pre><code class='lang-javascript' data-srcbyline='example/animal-dog.js?79-80;96-97;112;113'></code></pre>
                     </section>
                     
-                    <section>
+                    <section class='cut-me-1'>
                         <h3>Static Members</h3>
                     </section>
                     
-                    <section>
+                    <section class='cut-me-1'>
                         <h4>Static Members</h4>
                         
                         <p>Static members are set directly on our Dog constructor function.</p>
@@ -472,7 +472,7 @@
                         <pre><code class='lang-javascript' data-srcbyline='example/animal-dog.js?82-86'></code></pre>
                     </section>
                     
-                    <section>
+                    <section class='cut-me-1'>
                         <h4>Static Members</h4>
                         
                         <pre style='margin-top:2em;'><code class='lang-javascript' data-srcbyline='example/animal-dog.js?82-86'></code></pre>
@@ -480,7 +480,7 @@
                         <pre><code class='lang-javascript' data-srcbyline='example/animal-dog.js?146-148'></code></pre>
                     </section>
                     
-                     <section>
+                     <section class='cut-me-1'>
                         <h4>Static Members</h4>
                         
                         <p>
@@ -679,6 +679,20 @@
         <script src='//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.3/highlight.min.js'></script>
 
         <script>
+        // Cut certain sections for shorter-form presentations
+        (function() {
+            var i, j, l, nodes,
+                query = document.location.search.match(/(?:\?|&)cut\=(\d+)(?:$|&)/),
+                cutLevel = (query && Number(query[1])) || 0;
+
+            for (i=0; i<(cutLevel + 1); ++i) {
+                nodes = document.querySelectorAll('.cut-me-' + i);
+                for (j=0, l=nodes.length; j<l; ++j) {
+                    nodes[j].parentNode.removeChild(nodes[j]);
+                }
+            }
+        })();
+
         // Full list of configuration options available here:
         // https://github.com/hakimel/reveal.js#configuration
         Reveal.initialize({
