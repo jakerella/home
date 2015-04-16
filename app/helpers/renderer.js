@@ -24,7 +24,7 @@ module.exports = {
             renderContent: function() {
                 return jade.render(
                     'include:markdown ' + path.join(site.contentDir, slug + '.md'),
-                    { filename: 'FOOBAR' } // this option must be here, but is not used
+                    { filename: path.join(site.contentDir, slug + '.md') } // this option must be here, but is not used
                 );
             }
         });
@@ -52,7 +52,23 @@ module.exports = {
         var data = require(path.join('..', '..', site.publicDir, slug, 'slides.json'));
 
         data.renderSlideContent = function() {
-            return fs.readFileSync(path.join(site.publicDir, slug, data.slides));
+            var content = '';
+
+            if (/\.jade$/.test(data.slides)) {
+                content = jade.render(
+                    fs.readFileSync(path.join(site.publicDir, slug, data.slides)),
+                    { filename: path.join(site.publicDir, slug, data.slides) } // this option must be here, but is not used
+                );
+            } else if (/\.md$/.test(data.slides)) {
+                content = jade.render(
+                    'include:markdown ' + path.join(site.publicDir, slug, data.slides),
+                    { filename: path.join(site.contentDir, slug + '.md') } // this option must be here, but is not used
+                );
+            } else {
+                content = fs.readFileSync(path.join(site.publicDir, slug, data.slides));
+            }
+
+            return content;
         };
 
         return jade.renderFile(path.join(site.templateDir, 'preso.jade'), data);
