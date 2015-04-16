@@ -1,0 +1,621 @@
+<section class='no-footer'>
+                    
+    <section>
+        <h2>Object Oriented JavaScript</h2>
+        <h3>(yes, it really exists)</h3>
+        <p style='margin-top: 3em'>Jordan Kasper</p>
+        <p class='fine'>
+            <a href='http://twitter.com/jakerella'>@jakerella</a>
+        </p>
+    </section>
+
+    <section>
+        <h3 style="text-transform:none;">
+            <a href="http://strongloop.com">
+                <img src="/images/strongloop_logo_stacked.png" alt="StrongLoop" style="width:30%;" />
+            </a>
+        </h3>
+        <div class='fragment' style="margin-top:-2em;">
+            <a href="http://nodejs.org" style="display:block;">
+                <img src="/images/nodejs.png" alt="Node.js" style="width:40%;" />
+            </a>
+            <div style='margin-top:-1em;'>
+                <h4 style="font-size: 2em; width: 50%; float: left; text-transform: none; text-align: center; margin-top: 0.8em; font-family:'Helvetica Neue','Open Sans',sans-serif;"><a href="http://expressjs.com">
+                    Express
+                </a></h4>
+                <a href="http://loopback.io" style="display:block;">
+                    <img src="/images/loopback.png" alt="Loopback" />
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <a href="http://nomadjavascript.com">
+            <img src="/images/nomad-js.png" alt="NomadJS" style="width:25%" />
+        </a>
+    </section>
+    
+</section>
+
+<section>
+    
+    <section>
+        <h3>What is Object Oriented Programming (OOP)?</h3>
+    </section>
+    
+    <section>
+        <h3>What is Object Oriented Programming (OOP)?</h3>
+        <img src='images/vincent.jpg' alt='My dog, Vincent' style='display:block; float:right;'>
+        <p style='padding-top:10%; font-size:1.2em;'>
+            A way of representing things as collections of code with data and 
+            actions, including mechanisms for reusing code among related 
+            collections.
+        </p>
+    </section>
+    
+    <section data-background='#d7ecee' data-transition='none'>
+        <h3>OOP Core Concepts</h3>
+        
+        <ul>
+            <li>
+                Abstraction
+                <p class='illuminate'>"Abstraction is the stripping away of details so that you can see the essence." (Douglas Hofstatder)</p>
+            </li>
+        </ul>
+    </section>
+    
+    <section data-background='#d7ecee' data-transition='none'>
+        <h3>OOP Core Concepts</h3>
+        
+        <ul>
+            <li>Abstraction</li>
+            <li>
+                Encapsulation
+                <p class='illuminate'>Creating an interface for your object model and abstracting the implementation of the actions of that model.</p>
+            </li>
+        </ul>
+    </section>
+    
+    <section data-background='#d7ecee' data-transition='none'>
+        <h3>OOP Core Concepts</h3>
+        
+        <ul>
+            <li>Abstraction</li>
+            <li>Encapsulation</li>
+            <li>
+                Inheritance
+                <p class='illuminate'>Can you explain the relationship between two objects "A" and "B" by: "A is a B" within the code structure provided in the language?</p>
+            </li>
+        </ul>
+    </section>
+    
+    <section data-background='#d7ecee' data-transition='none'>
+        <h3>OOP Core Concepts</h3>
+        
+        <ul>
+            <li>Abstraction</li>
+            <li>Encapsulation</li>
+            <li>Inheritance</li>
+            <li>
+                Polymorphism
+                <p class='illuminate'>Literally: "many forms". The ability for a member of a collection to have different forms within the inheritance chain without changing the interface exposed outside the object.</p>
+            </li>
+        </ul>
+    </section>
+    
+    <section>
+        <h3>OOP Secondary Concepts</h3>
+        
+        <ul class='illuminate'>
+            <li class='fragment'>Public, private, &amp; protected</li>
+            <li class='fragment cut-me-1'>Static members</li>
+            <li class='fragment'>Interfaces</li>
+            <li class='fragment'>Abstracts</li>
+        </ul>
+    </section>
+    
+    <section>
+        <h3>OOP Secondary Concepts</h3>
+        
+        <ul class='illuminate'>
+            <li>Public, private, &amp; <del>protected</del> privileged</li>
+            <li class='cut-me-1'>Static members</li>
+            <li><del>Interfaces</del> Mixins</li>
+            <li><del>Abstracts</del></li>
+        </ul>
+    </section>
+    
+</section>
+
+
+<section class='cut-me-1'>
+    <section>
+        <h3>"I thought JavaScript was a functional language?"</h3>
+    </section>
+    
+    <section>
+        <h3><span class='fine'>(dis)</span> Functional</h3>
+        
+        <pre><code class='lang-javascript' data-srcbyline='example/functional.js?2-5'></code></pre>
+        
+        <pre class='fragment'><code class='lang-javascript' data-srcbyline='example/functional.js?7-11'></code></pre>
+    </section>
+    
+    <section>
+        <h3>So is it functional<br>or object oriented?</h3>
+        
+        <p class='fragment'>
+            <em>JavaScript is a multi-paradigm language.</em>
+        </p>
+    </section>
+</section>
+
+
+<section>
+
+    <section>
+        <img src='images/orly.jpg' alt='O Rly?' class='fragment' style='width:25%; display:block; float:right; position:relative; top:-3em;'>
+        
+        <h4>But JavaScript isn't <em>really</em><br>object oriented...</h4>
+        
+        <pre class='fragment' style='margin-top:4em; width:50%;'><code class='lang-javascript' data-srcbyline='example/basic-objects.js?2-8'></code></pre>
+    </section>
+    
+    <section>
+        <h3>Even our functions are objects!</h3>
+        
+        <pre><code class='lang-javascript' data-srcbyline='example/basic-objects.js?16-24'></code></pre>
+        
+        <p class='fine' style='margin-top:2em;'>
+            FYI, while <code>undefined</code> is clearly not an object,<br>
+            <code>null</code> is: <code>typeof null === "object"</code>
+        </p>
+    </section>
+    
+    <section>
+        <h3>Simple Objects</h3>
+        
+        <div class='fragment'>
+            <p>Using the "curly brace" syntax (object literals)...</p>
+            
+            <pre><code class='lang-javascript' data-srcbyline='example/basic-objects.js?28-33'></code></pre>
+        </div>
+        
+        <div class='fragment'>
+            <p>which is equivalent to...</p>
+            <pre><code class='lang-javascript' data-srcbyline='example/basic-objects.js?36-40'></code></pre>
+        </div>
+    </section>
+    
+    <section>
+        <h3>Calling object methods</h3>
+        
+        <pre><code class='lang-javascript' data-srcbyline='example/basic-objects.js?28-33;42-43'></code></pre>
+        
+        <p class='fragment illuminate'><code>this</code> inside an object method refers to the current context.</p>
+
+        <p class='fragment fine' style='margin-top:2em;'>
+            Context is typically the variable before the "." when called:<br>
+            <code>this === literalDog</code> inside <code>speak()</code>
+        </p>
+    </section>
+    
+    <section>
+        <h3>Why not use object literals?</h3>
+        
+        <ul>
+            <li class='fragment'>Limited reusability</li>
+            <li class='fragment'>More difficult for inheritance</li>
+            <li class='fragment'>Verbose</li>
+            <li class='fragment'>Poor abstraction</li>
+        </ul>
+    </section>
+</section>
+
+<section>
+
+    <section>
+        
+        <h3>Constructors</h3>
+    
+    </section>
+    
+    <section>
+        <h4>A Dog by any other name...</h4>
+        
+        <pre><code class='lang-javascript' data-srcbyline='example/animal-dog.js?23-28;31'></code></pre>
+        
+        <pre class='fragment'><code class='lang-javascript' data-srcbyline='example/animal-dog.js?96;106-107;130;132'></code></pre>
+    </section>
+    
+    <section>
+        <h4>What have we created?</h4>
+        
+        <pre class='fragment'><code class='lang-javascript' data-srcbyline='example/prototypes.js?2;5-6'></code></pre>
+        
+        <div class='fragment'>
+            <pre><code class='lang-javascript' data-srcbyline='example/prototypes.js?8;10-16;21-22'></code></pre>
+            
+            <p class='fine'>Notice how our <code>name</code> and <code>speak</code> members are NOT in our prototype!</p>
+        </div>
+    </section>
+    
+    <section>
+        <h4>The "new" keyword</h4>
+        
+        <pre><code class='lang-javascript' data-srcbyline='example/animal-dog.js?96'></code></pre>
+        
+        <div class='fragment'>
+            <p>JavaScript is actually taking 3 distinct actions:</p>
+            <ul>
+                <li class='fragment'>Create an empty object;</li>
+                <li class='fragment'>set the new object's <code>__proto__</code> property to point to <code>Dog.prototype</code>;</li>
+                <li class='fragment'>and call the <code>constructor</code> method on the new object.</li>
+            </ul>
+        </div>
+    </section>
+    
+    <section>
+        <h4>The "new" keyword</h4>
+        
+        <p>In fact, we can do these actions on our own:</p>
+        
+        <pre style='margin:2em 0;'><code class='lang-javascript' data-srcbyline='example/animal-dog.js?99-100;102;105-106'></code></pre>
+    
+        <p class='fragment fine'>Note that <code>Object.create()</code> does not exist in IE &lt; 9, but you can use a shim.</p>
+    </section>
+    
+    <section>
+        <h4>A better Dog</h4>
+
+        <p>
+            What about <code>name</code> and <code>speak</code>not being on the prototype?<br>
+            We probably want them to be...
+        </p>
+        
+        <pre class='fragment'><code class='lang-javascript' data-srcbyline='example/animal-dog.js?23-24;31-32;61-64'></code></pre>
+        
+        <pre class='fragment'><code class='lang-javascript' data-srcbyline='example/animal-dog.js?134;138-139'></code></pre>
+    </section>
+    
+    <section>
+        <h4>A prototypical Dog</h4>
+        
+        <pre><code class='lang-javascript' data-srcbyline='example/prototypes.js?6-8;10-11;16-22'></code></pre>
+    </section>
+    
+    <section>
+        <h4>Dun dun dun...</h4>
+        
+        <p class='fine' style='font-size:0.7em;'>(That's pronounced "dunder proto", as in: "double underscore proto")</p>
+        
+        <pre style='margin:3em 0;'><code class='lang-javascript' data-srcbyline='example/animal-dog.js?96-97;142-144'></code></pre>
+    </section>
+
+</section>
+
+
+<section>
+    
+    <section>
+        <h3>Member Access Types</h3>
+        
+        <p>public, private, privileged</p>
+    </section>
+    
+    <section>
+        <h4>Public Members</h4>
+        
+        <p>Anything attached to the <code>prototype</code>:</p>
+        
+        <pre style='margin-top:2em;'><code class='lang-javascript' data-srcbyline='example/animal-dog.js?68-69'></code></pre>
+    </section>
+    
+    <section>
+        <h4>Public Members</h4>
+        
+        <p>Anything on <code>this</code> or a reference to the object instance:</p>
+        
+        <pre style='margin-top:2em;'><code class='lang-javascript' data-srcbyline='example/animal-dog.js?23;41-43;53-54;96-97;109'></code></pre>
+    </section>
+    
+    <section>
+        <h3>Private Variables</h3>
+        
+        <p>And privileged methods</p>
+    </section>
+    
+    <section>
+        <h4>Private Variables</h4>
+        
+        <p>Variables declared inside a <code>function</code> block only exist while that function's execution context exists.</p>
+        
+        <pre style='margin-top:2em;'><code class='lang-javascript' data-srcbyline='example/animal-dog.js?23;41-42;46-47;53'></code></pre>
+        
+        <pre class='fragment'><code class='lang-javascript' data-srcbyline='example/animal-dog.js?96-97;117'></code></pre>
+    </section>
+    
+    <section>
+        <h4>Priveleged Methods</h4>
+        
+        <p>If we want access to a private variable we have to create a "privileged" method...</p>
+        
+        <pre style='margin-top:2em;'><code class='lang-javascript' data-srcbyline='example/animal-dog.js?23;41-42;46-50;53'></code></pre>
+        
+        <p class='fragment'>
+            Access to the <code>alive</code> variable from <code>isAlive()</code> and <code>die()</code> is possible 
+            because functions in JavaScript are <strong>closures</strong>.
+        </p>
+    </section>
+    
+    <section data-transition='none'>
+        <h4>Closures</h4>
+        <img src='images/closures_global_var.png' alt='Closure diagram (1/7)'>
+    </section>
+    
+    <section data-transition='none'>
+        <h4>Closures</h4>
+        <img src='images/closures_local_var.png' alt='Closure diagram (2/7)'>
+    </section>
+    
+    <section data-transition='none'>
+        <h4>Closures</h4>
+        <img src='images/closures_inner_funct.png' alt='Closure diagram (3/7)'>
+    </section>
+    
+    <section data-transition='none'>
+        <h4>Closures</h4>
+        <img src='images/closures_private_access.png' alt='Closure diagram (4/7)'>
+    </section>
+    
+    <section data-transition='none'>
+        <h4>Closures</h4>
+        <img src='images/closures_funct_2.png' alt='Closure diagram (5/7)'>
+    </section>
+    
+    <section data-transition='none'>
+        <h4>Closures</h4>
+        <img src='images/closures_no_access.png' alt='Closure diagram (6/7)'>
+    </section>
+    
+    <section data-transition='none'>
+        <h4>Closures</h4>
+        <img src='images/closures_final.png' alt='Closure diagram (7/7)'>
+    </section>
+    
+    <section>
+        <h4>Priveleged Methods</h4>
+        
+        <p>If we want access to a private variable we have to create a "privileged" method...</p>
+        
+        <pre style='margin-top:2em;'><code class='lang-javascript' data-srcbyline='example/animal-dog.js?23;41-42;46-50;53'></code></pre>
+    </section>
+    
+    <section>
+        <h4>Priveleged Methods</h4>
+
+        <pre style='margin-top:2em;'><code class='no-highlight dim' data-srcbyline='example/animal-dog.js?23;41-42;46-50;53'></code></pre>
+        
+        <pre><code class='lang-javascript' data-srcbyline='example/animal-dog.js?96-97;113-117'></code></pre>
+    </section>
+    
+    <section>
+        <h4>Priveleged Methods</h4>
+        
+        <pre style='margin-top:2em;'><code class='no-highlight dim' data-srcbyline='example/animal-dog.js?23;41-42;46-50;53'></code></pre>
+        
+        <pre><code class='lang-javascript' data-srcbyline='example/animal-dog.js?79-80;96-97;112;113'></code></pre>
+    </section>
+    
+    <section class='cut-me-1'>
+        <h3>Static Members</h3>
+    </section>
+    
+    <section class='cut-me-1'>
+        <h4>Static Members</h4>
+        
+        <p>Static members are set directly on our Dog constructor function.</p>
+        
+        <pre style='margin-top:2em;'><code class='no-highlight dim' data-srcbyline='example/animal-dog.js?23-24;53-54;68-69'></code></pre>
+        
+        <pre><code class='lang-javascript' data-srcbyline='example/animal-dog.js?82-86'></code></pre>
+    </section>
+    
+    <section class='cut-me-1'>
+        <h4>Static Members</h4>
+        
+        <pre style='margin-top:2em;'><code class='lang-javascript' data-srcbyline='example/animal-dog.js?82-86'></code></pre>
+        
+        <pre><code class='lang-javascript' data-srcbyline='example/animal-dog.js?146-148'></code></pre>
+    </section>
+    
+     <section class='cut-me-1'>
+        <h4>Static Members</h4>
+        
+        <p>
+            Be careful when using static methods,<br>
+            you cannot access the instance (<code>this</code>) inside them!
+        </p>
+        
+        <pre style='margin-top:2em;'><code class='lang-javascript' data-srcbyline='example/animal-dog.js?23-24;31-32;88-91;150'></code></pre>
+        <pre class='fragment'><code class='lang-javascript' data-srcbyline='example/animal-dog.js?96-97;152'></code></pre>
+    </section>
+    
+</section>
+
+<section>
+
+    <section>
+        <h3>Inheritance!</h3>
+    </section>
+    
+    <section>
+        <h4>Inheritance</h4>
+        
+        <pre><code class='lang-javascript' data-srcbyline='example/animal-dog.js?10-14;16'></code></pre>
+        
+        <pre class='fragment'><code class='lang-javascript' data-srcbyline='example/animal-dog.js?23;35-36;40-41;53'></code></pre>
+        
+        <pre class='fragment'><code class='lang-javascript' data-srcbyline='example/animal-dog.js?56-58;66;68-69'></code></pre>
+    </section>
+    
+    <section>
+        <h4>Our New Chain</h4>
+        
+        <pre><code class='lang-javascript' data-srcbyline='example/prototypes.js?4;24-37'></code></pre>
+    </section>
+    
+    <section>
+        <h4>Our New Chain</h4>
+        
+        <img src='images/prototype_chain.png' alt='prototype chain'>
+    </section>
+    
+    <section>
+        <h4>Checking instances</h4>
+        
+        <pre><code class='lang-javascript' data-srcbyline='example/animal-dog.js?96;120-124'></code></pre>
+    </section>
+    
+    <section>
+        <h3>Polymorphism<br>and Parent Methods</h3>
+    </section>
+    
+    <section>
+        <h4>Parent Method Declaration</h4>
+        
+        <pre><code class='lang-javascript' data-srcbyline='example/animal-dog.js?2-5;7-8;19-20'></code></pre>
+        
+        <pre class='fragment'><code class='lang-javascript' data-srcbyline='example/animal-dog.js?34;38-39;52-53;'></code></pre>
+    </section>
+    
+    <section>
+        <h4>Parent Method Declaration</h4>
+        
+        <pre><code class='no-highlight dim' data-srcbyline='example/animal-dog.js?2-5;7-8;19-20'></code></pre>
+        
+        <pre><code class='lang-javascript' data-srcbyline='example/animal-dog.js?72-77'></code></pre>
+        
+        <pre class='fragment'><code class='lang-javascript' data-srcbyline='example/animal-dog.js?104;127'></code></pre>
+    </section>
+
+</section>
+
+<section>
+    
+    <section>
+        <h3>Mixins</h3>
+        <h4>Interfaces</h4>
+    </section>
+    
+    <section>
+        <h4>Define the Mixin</h4>
+        
+        <pre><code class='lang-javascript' data-srcbyline='example/mixins.js?26-34'></code></pre>
+    </section>
+    
+    <section>
+        <h3>Mixing it in</h3>
+        
+        <p>
+            We need to copy our properties and methods<br>
+            from the mixin to the desired prototype...
+        </p>
+        
+        <p class='fragment illuminate'>
+            Use a helper method!!
+        </p>
+    </section>
+    
+    <section>
+        <h4>Mixing it in - <span class='illuminate'>Use a helper method!</span></h4>
+        
+        <pre><code class='no-highlight' data-srcbyline='example/mixins.js?3-15'></code></pre>
+    </section>
+    
+    <section>
+        <h4>Mix it in</h4>
+        
+        <pre><code class='lang-javascript' data-srcbyline='example/mixins.js?19;21-22;26;28;30-32;34-35;37'></code></pre>
+    </section>
+    
+    <section>
+        <h4>Using the Mixin</h4>
+        
+        <pre><code class='lang-javascript' data-srcbyline='example/mixins.js?39;43-48'></code></pre>
+    </section>
+    
+</section>
+
+
+<section>
+    
+    <section>
+        <h3>The Future</h3>
+    </section>
+    
+    <section>
+        <h4>ES6 Classes</h4>
+        
+        <pre><code class='lang-javascript' data-srcbyline='example/es6-classes.js?2-23'></code></pre>
+    </section>
+    
+    <section>
+        <h3>ECMAScript 6 Classes</h3>
+        
+        <p>This looks nice, but it's just syntactic sugar!</p>
+
+        <p class='fine'>In my opinion, this will just lead to more confusion...</p>
+    </section>
+    
+    <section>
+        <h3>Don't write a framework!</h3>
+        
+        <div class='fragment'>
+            <p>There are plenty of good solutions out there...</p>
+            
+            <ul>
+                <li>
+                    Lightweight
+                    <ul>
+                        <li><a href='https://github.com/rauschma/proto-js' target='_blank'>Proto.js</a></li>
+                        <li><a href='http://prototypejs.org' target='_blank'>Prototype.js</a></li>
+                    </ul>
+                </li>
+                <li>
+                    Middleweight
+                    <ul>
+                        <li><a href='http://mootools.net' target='_blank'>MooTools</a></li>
+                        <li><a href='http://backbonejs.org' target='_blank'>Backbone</a></li>
+                    </ul>
+                </li>
+                <li>
+                    Heavyweight
+                    <ul>
+                        <li><a href='http://dojotoolkit.org' target='_blank'>dojo toolkit</a></li>
+                        <li><a href='http://www.sencha.com/products/extjs' target='_blank'>ExtJS</a> (commercial)</li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </section>
+    
+</section>
+
+
+<section>
+    <h2>Thank You!</h2>
+    <h3 style='margin-top:1.5em;'>Object Oriented JavaScript</h3>
+    <h4>(yes, it really exists)</h4>
+    <p style='margin-top: 2em'>Jordan Kasper</p>
+    <p style='font-size:0.8em;'>
+        <a href='http://twitter.com/jakerella'>@jakerella</a> |
+        <a href='http://jordankasper.com/oop-js'>jordankasper.com/oop-js</a>
+    </p>
+    <p style='font-size:0.6em;'>
+        <a href='http://www.2ality.com/2011/06/prototypes-as-classes.html' targt='_blank'>Guide to JS inheritance</a> | 
+        <a href='http://javascript.crockford.com/private.html' targt='_blank'>Crockford on private vars</a> | 
+        <a href='http://wiki.ecmascript.org/doku.php?id=strawman:maximally_minimal_classes' targt='_blank'>ES6 Classes Spec</a>
+    </p>
+</section>

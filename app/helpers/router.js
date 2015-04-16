@@ -3,20 +3,20 @@ var fs = require('fs'),
     path = require('path'),
     jade = require('jade'),
     q = require('q'),
-    render = require('./renderer.js');
+    renderer = require('./renderer.js');
 
 function getContentForRoute(url, site) {
-    var def = q.defer();
-
-    url = url.replace(/\/$/, ''); // we don't want this trailing slash
+    var def = q.defer(),
+        // we don't want this trailing slashes or query strings
+        slug = url.replace(/\/$/, '').replace(/\?.+/, '');
     
-    fs.exists(path.join(site.contentDir, url + '.md'), function(exists) {
+    fs.exists(path.join(site.contentDir, slug + '.md'), function(exists) {
         var content;
 
         if (exists) {
             
             // strip leading slash and render the content
-            content = render(url.substr(1), site);
+            content = renderer.renderContent(slug.substr(1), site);
             
             if (content instanceof Error) {
                 content.status = 500;
@@ -27,27 +27,44 @@ function getContentForRoute(url, site) {
 
         } else {
 
-            fs.exists(path.join(site.contentDir, url + '.jade'), function(exists) {
+            fs.exists(path.join(site.publicDir, slug, 'slides.json'), function(exists) {
                 if (exists) {
-
-                    def.resolve(jade.renderFile(path.join(site.contentDir, url + '.jade'), {
-                        url: url
-                    }));
+                    
+                    // strip leading slash and render the content
+                    content = renderer.renderSlides(slug.substr(1), site);
+                    
+                    if (content instanceof Error) {
+                        content.status = 500;
+                        def.reject(content);
+                    } else {
+                        def.resolve(content);
+                    }
 
                 } else {
-                    fs.exists(path.join(site.contentDir, url, 'index.jade'), function(exists) {
-                        var err;
 
+                    fs.exists(path.join(site.contentDir, slug + '.jade'), function(exists) {
                         if (exists) {
 
-                            def.resolve(jade.renderFile(path.join(site.contentDir, url + '/index.jade'), {
-                                url: url
+                            def.resolve(jade.renderFile(path.join(site.contentDir, slug + '.jade'), {
+                                url: slug
                             }));
 
                         } else {
-                            err = new Error('Sorry, but that page does not exist: ' + url);
-                            err.status = 404;
-                            def.reject(err);
+                            fs.exists(path.join(site.contentDir, slug, 'index.jade'), function(exists) {
+                                var err;
+
+                                if (exists) {
+
+                                    def.resolve(jade.renderFile(path.join(site.contentDir, slug + '/index.jade'), {
+                                        url: slug
+                                    }));
+
+                                } else {
+                                    err = new Error('Sorry, but that page does not exist: ' + url);
+                                    err.status = 404;
+                                    def.reject(err);
+                                }
+                            });
                         }
                     });
                 }
@@ -82,7 +99,7 @@ module.exports = function(app, site) {
 
     // Homepage (index) router
     app.get('/', function(req, res, next) {
-        var content = render('home', site);
+        var content = renderer.renderContent('home', site);
         
         if (content instanceof Error) {
             content.status = 500;
