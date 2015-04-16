@@ -41,9 +41,14 @@
     <body>
 
         <div class='reveal'>
+            
+            <footer class='left'>
+                <img src='/images/strongloop_logo_horiz.png' alt='StrongLoop' style='width:15%;'>
+            </footer>
+
             <div class='slides'>
                 
-                <section>
+                <section class='no-footer'>
                     
                     <section>
                         <h2>Object Oriented JavaScript</h2>
@@ -55,12 +60,29 @@
                     </section>
 
                     <section>
-                        <img src='/images/hobbes_large_trans.png' alt='Hobbes'>
+                        <h3 style="text-transform:none;">
+                            <a href="http://strongloop.com">
+                                <img src="/images/strongloop_logo_stacked.png" alt="StrongLoop" style="width:30%;" />
+                            </a>
+                        </h3>
+                        <div class='fragment' style="margin-top:-2em;">
+                            <a href="http://nodejs.org" style="display:block;">
+                                <img src="/images/nodejs.png" alt="Node.js" style="width:40%;" />
+                            </a>
+                            <div style='margin-top:-1em;'>
+                                <h4 style="font-size: 2em; width: 50%; float: left; text-transform: none; text-align: center; margin-top: 0.8em; font-family:'Helvetica Neue','Open Sans',sans-serif;"><a href="http://expressjs.com">
+                                    Express
+                                </a></h4>
+                                <a href="http://loopback.io" style="display:block;">
+                                    <img src="/images/loopback.png" alt="Loopback" />
+                                </a>
+                            </div>
+                        </div>
                     </section>
 
                     <section>
-                        <a href='http://nomadjavascript.com'>
-                            <img src='/images/nomad-js.png' alt='NomadJS' style='width:25%' />
+                        <a href="http://nomadjavascript.com">
+                            <img src="/images/nomad-js.png" alt="NomadJS" style="width:25%" />
                         </a>
                     </section>
                     
@@ -163,12 +185,6 @@
                     </section>
                     
                     <section>
-                        <h3>"I thought JavaScript was a functional language?"</h3>
-                        <p>The Functional paradigm (strictly speaking) states that any domain problem can be solved by combining a series of mathematical functions.</p>
-                        <p>Any function should return the same value for the same input every single time (in other words, there is no application "state").</p>
-                    </section>
-                    
-                    <section>
                         <h3><span class='fine'>(dis)</span> Functional</h3>
                         
                         <pre><code class='lang-javascript' data-srcbyline='example/functional.js?2-5'></code></pre>
@@ -202,8 +218,8 @@
                         <pre><code class='lang-javascript' data-srcbyline='example/basic-objects.js?16-24'></code></pre>
                         
                         <p class='fine' style='margin-top:2em;'>
-                            FYI, the only thing that isn't an object is <code>undefined</code>.<br>
-                            (Oddly enough, <code>null</code> is an "object", an empty one.)
+                            FYI, while <code>undefined</code> is clearly not an object,<br>
+                            <code>null</code> is: <code>typeof null === "object"</code>
                         </p>
                     </section>
                     
@@ -325,14 +341,6 @@
                         <p class='fine' style='font-size:0.7em;'>(That's pronounced "dunder proto", as in: "double underscore proto")</p>
                         
                         <pre style='margin:3em 0;'><code class='lang-javascript' data-srcbyline='example/animal-dog.js?96-97;142-144'></code></pre>
-                        
-                        <ul class='fragment illuminate'>
-                            <li>Reference to prototype that created current object</li>
-                            <li>Deprecated in previous versions of ECMAScript</li>
-                            <li>Back in ES6 as optional (supported by major browsers)</li>
-                            <li>Should NOT be used to change prototype reference!</li>
-                        </ul>
-                        
                     </section>
                 
                 </section>
@@ -690,6 +698,16 @@
                 { src: '/js/vendor/source-by-line/srcByLine.js', async: true, callback: function() { window.srcbyline.init(); } }
             ]
         });
+
+        (function() {
+            // Check if we want the footer on the current slide
+            var footer = document.querySelector('.reveal > footer');
+            function checkForFooter(e) {
+                footer.style.display = (e.currentSlide.classList.contains('no-footer') || e.currentSlide.parentNode.classList.contains('no-footer')) ? 'none' : 'block';
+            }
+            Reveal.addEventListener('slidechanged', checkForFooter);
+            checkForFooter({ currentSlide: Reveal.getCurrentSlide() });
+        })();
 
         (function highlightCode() {
             if( typeof window.addEventListener === 'function' ) {
