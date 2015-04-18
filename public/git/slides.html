@@ -453,11 +453,13 @@ nothing to commit (working directory clean)
     </section>
     
     <section>
-        <h4>Unstaged Changes</h4>
+        <h4>Staged Changes</h4>
         
         <pre><code class='no-highlight' data-trim data-noescape>
 ~$ git reset HEAD README.md
+        </code></pre>
 
+        <pre class='fragment'><code class='no-highlight' data-trim data-noescape>
 ~$ git status
 # On branch new-feature
 # Changes not staged for commit:
@@ -602,16 +604,30 @@ nothing to commit (working directory clean)
         <pre><code class='no-highlight' data-trim data-noescape>
 ~$ git reflog
 
+d42c386 HEAD@{0}: commit: this is not a good change
+b86e65d HEAD@{1}: commit: the immediately previous change (totally normal)
+e098369 HEAD@{2}: checkout: moving from master to new-feature
+b9bdb02 HEAD@{3}: commit: a really good change
+e098369 HEAD@{4}: pull: Fast-forward
+        </code></pre>
+        
+        <pre class='fragment'><code class='no-highlight' data-trim data-noescape>
+~$ git reset HEAD@{1}
+        </code></pre>
+    </section>
+
+    <section>
+        <h4>Understanding the reflog</h4>
+        
+        <pre><code class='no-highlight' data-trim data-noescape>
+~$ git reflog
+
 <strong>b86e65d HEAD@{0}: reset: moving to HEAD^</strong>
 d42c386 HEAD@{1}: commit: this is not a good change
 <strong>b86e65d</strong> HEAD@{2}: commit: the immediately previous change (totally normal)
 e098369 HEAD@{3}: checkout: moving from master to new-feature
 b9bdb02 HEAD@{4}: commit: a really good change
 e098369 HEAD@{5}: pull: Fast-forward
-        </code></pre>
-        
-        <pre class='fragment'><code class='no-highlight' data-trim data-noescape>
-~$ git reset HEAD@{1}
         </code></pre>
     </section>
     
@@ -681,7 +697,7 @@ HEAD is now at 3c927dd Added text to readme
 nothing to commit (working directory clean)
             </code></pre>
         
-            <p class='illuminate'>(Note that you can only stash TRACKED files!)</p>
+            <p class='illuminate fragment'>(Note that you can only stash TRACKED files!)</p>
         </div>
     </section>
     
@@ -692,6 +708,8 @@ nothing to commit (working directory clean)
 ~$ git stash list
 stash@{0}: WIP on new-feature: 3c927dd Added text to readme
         </code></pre>
+
+        <p class='fragment illuminate'>But what if you <code>stash</code> multiple times?!</p>
         
         <pre class='fragment'><code class='no-highlight' data-trim data-noescape>
 ~$ git stash list
