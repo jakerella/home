@@ -1,7 +1,7 @@
 <section>
     
     <section>
-        <h2>Gitting Past the Basics</h2>
+        <h2>Gitting More Out of Git</h2>
         <p style='margin-top: 3em'>Jordan Kasper</p>
         <p class='fine'>
             <a href='http://twitter.com/jakerella'>@jakerella</a>
@@ -364,6 +364,12 @@ I did a thing!
 ~$ git commit --amend
         </code></pre>
     </section>
+
+    <section>
+        <h4>And what if I need to modify an older commit?</h4>
+
+        <p class='fragment illuminate'>You'll need to use <code>git rebase --interactive</code></p>
+    </section>
     
     <section>
         <h3>Undoing Changes</h3>
@@ -604,15 +610,12 @@ nothing to commit (working directory clean)
         <pre><code class='no-highlight' data-trim data-noescape>
 ~$ git reflog
 
-d42c386 HEAD@{0}: commit: this is not a good change
-b86e65d HEAD@{1}: commit: the immediately previous change (totally normal)
-e098369 HEAD@{2}: checkout: moving from master to new-feature
-b9bdb02 HEAD@{3}: commit: a really good change
-e098369 HEAD@{4}: pull: Fast-forward
-        </code></pre>
-        
-        <pre class='fragment'><code class='no-highlight' data-trim data-noescape>
-~$ git reset HEAD@{1}
+<strong>b86e65d HEAD@{0}: reset: moving to HEAD^</strong>
+d42c386 HEAD@{1}: commit: this is not a good change
+<strong>b86e65d</strong> HEAD@{2}: commit: the immediately previous change (totally normal)
+e098369 HEAD@{3}: checkout: moving from master to new-feature
+b9bdb02 HEAD@{4}: commit: a really good change
+e098369 HEAD@{5}: pull: Fast-forward
         </code></pre>
     </section>
 
@@ -620,14 +623,19 @@ e098369 HEAD@{4}: pull: Fast-forward
         <h4>Understanding the reflog</h4>
         
         <pre><code class='no-highlight' data-trim data-noescape>
+~$ git reset --hard HEAD@{1}
+        </code></pre>
+
+        <pre class='fragment'><code class='no-highlight' data-trim data-noescape>
 ~$ git reflog
 
-<strong>b86e65d HEAD@{0}: reset: moving to HEAD^</strong>
-d42c386 HEAD@{1}: commit: this is not a good change
-<strong>b86e65d</strong> HEAD@{2}: commit: the immediately previous change (totally normal)
-e098369 HEAD@{3}: checkout: moving from master to new-feature
-b9bdb02 HEAD@{4}: commit: a really good change
-e098369 HEAD@{5}: pull: Fast-forward
+<strong>d42c386</strong> HEAD@{0}: reset: moving to HEAD@{1}
+b86e65d HEAD@{1}: reset: moving to HEAD^
+<strong>d42c386</strong> HEAD@{2}: commit: this is not a good change
+b86e65d HEAD@{3}: commit: the immediately previous change (totally normal)
+e098369 HEAD@{4}: checkout: moving from master to new-feature
+b9bdb02 HEAD@{5}: commit: a really good change
+e098369 HEAD@{6}: pull: Fast-forward
         </code></pre>
     </section>
     
@@ -642,12 +650,6 @@ e098369 HEAD@{5}: pull: Fast-forward
         </ul>
     </section>
     
-    <section>
-        <img src='images/git_reset-5.png' alt='mixed reset back 2 places in reflog'>
-        
-        <p><code>git reset --mixed HEAD~2</code></p>
-    </section>
-
 </section>
 
 
@@ -764,7 +766,7 @@ stash@{2}: On hot-fix-456: attempt to fix bug #456, but incomplete
         <h4>Dropping Your Stash</h4>
         
         <pre><code class='no-highlight' data-trim data-noescape>
-~$ git stash <strong>drop stash@{1}</strong>
+~$ git stash <strong>drop stash@{0}</strong>
 Dropped refs/stash@{0} (a52d9c3ba1121dd94eb3925ba60d3f8ef30540c8)
         </code></pre>
         
@@ -1329,15 +1331,14 @@ Failed to merge in the changes.
 
 <section>
     <h2>Thank You!</h2>
-    <h3 style='margin-top:1.5em;'>Gitting Past the Basics</h3>
+    <h3 style='margin-top:1.5em;'>Gitting More Out of Git</h3>
     <p style='margin-top: 2em'>Jordan Kasper</p>
     <p style='font-size:0.8em;'>
-        <a href='http://twitter.com/jakerella'>@jakerella</a> |
-        <a href='http://jordankasper.com/git'>jordankasper.com/git</a>
+        <a href='http://twitter.com/jakerella'>@jakerella</a>
     </p>
 
     <h3 style='margin-top:2em;'>
-        #LSP15 folks: PLEASE rate this talk!!<br>
-        <a href='https://joind.in/13574'>joind.in/13574</a>
+        FluentConf: PLEASE rate this session!!<br>
+        <a href='http://bit.ly/git-review'>bit.ly/git-review</a>
     </h3>
 </section>
