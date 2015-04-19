@@ -370,6 +370,74 @@ I did a thing!
 
         <p class='fragment illuminate'>You'll need to use <code>git rebase --interactive</code></p>
     </section>
+
+    <section class='cut-me-1'>
+        <h4>Interactive Rebasing</h4>
+
+        <pre><code class='no-highlight' data-trim data-noescape>
+~$ git rebase --interactive 80f9b87^
+        </code></pre>
+
+        <pre class='fragment'><code class='no-highlight' data-trim data-noescape>
+pick 80f9b87 added batbaz to testy
+pick 7a0aa9c uh oh?
+
+# Rebase 7e10e41..7a0aa9c onto 7e10e41
+#
+# Commands:
+#  p, pick = use commit
+#  r, reword = use commit, but edit the commit message
+#  <strong>e, edit = use commit, but stop for amending</strong>
+#  s, squash = use commit, but meld into previous commit
+#  f, fixup = like "squash", but discard this commit's log message
+#  x, exec = run command (the rest of the line) using shell
+...
+        </code></pre>
+    </section>
+
+    <section class='cut-me-1'>
+        <h4>Interactive Rebasing</h4>
+
+        <pre><code class='no-highlight' data-trim data-noescape>
+~$ git rebase --interactive 80f9b87^
+        </code></pre>
+
+        <pre><code class='no-highlight' data-trim data-noescape>
+<strong>edit</strong> 80f9b87 added batbaz to testy
+pick 7a0aa9c uh oh?
+
+# Rebase 7e10e41..7a0aa9c onto 7e10e41
+#
+# Commands:
+#  p, pick = use commit
+#  r, reword = use commit, but edit the commit message
+#  e, edit = use commit, but stop for amending
+#  s, squash = use commit, but meld into previous commit
+#  f, fixup = like "squash", but discard this commit's log message
+#  x, exec = run command (the rest of the line) using shell
+...
+        </code></pre>
+    </section>
+
+    <section>
+        <pre><code class='no-highlight' data-trim data-noescape>
+~$ git rebase --interactive 80f9b87^
+<strong>Stopped at 80f9b870a5d3d45006d7c9081be695aa6e976778... added batbaz to testy</strong>
+...
+        </code></pre>
+
+        <div class='fragment'>
+            <h4>Now alter the commit just like before...</h4>
+
+            <pre><code class='no-highlight' data-trim data-noescape>
+~$ git add forgotten-file.js
+~$ git commit --amend
+...
+~$ git rebase --continue
+Successfully rebased and updated refs/heads/new-feature.
+            </code></pre>
+        </div>
+    </section>
     
     <section>
         <h3>Undoing Changes</h3>
