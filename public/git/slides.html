@@ -686,7 +686,7 @@ e098369 HEAD@{5}: pull: Fast-forward
         
         <div class='fragment'>
             <pre><code class='no-highlight' data-trim data-noescape>
-~$ git stash
+~$ git stash --include-untracked
 Saved working directory and index state WIP on new-feature: 3c927dd Added text to readme
 HEAD is now at 3c927dd Added text to readme
             </code></pre>
@@ -697,7 +697,6 @@ HEAD is now at 3c927dd Added text to readme
 nothing to commit (working directory clean)
             </code></pre>
         
-            <p class='illuminate fragment'>(Note that you can only stash TRACKED files!)</p>
         </div>
     </section>
     
