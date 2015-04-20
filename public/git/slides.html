@@ -375,14 +375,14 @@ I did a thing!
         <h4>Interactive Rebasing</h4>
 
         <pre><code class='no-highlight' data-trim data-noescape>
-~$ git rebase --interactive 80f9b87^
+~$ git rebase --interactive HEAD^^^
         </code></pre>
 
         <pre class='fragment'><code class='no-highlight' data-trim data-noescape>
-pick 80f9b87 added batbaz to testy
-pick 7a0aa9c uh oh?
+pick 72267fc I did a thing!
+pick fd0091e This is the best.
 
-# Rebase 7e10e41..7a0aa9c onto 7e10e41
+# Rebase 7e10e41..fd0091e onto 7e10e41
 #
 # Commands:
 #  p, pick = use commit
@@ -399,14 +399,14 @@ pick 7a0aa9c uh oh?
         <h4>Interactive Rebasing</h4>
 
         <pre><code class='no-highlight' data-trim data-noescape>
-~$ git rebase --interactive 80f9b87^
+~$ git rebase --interactive HEAD^^^
         </code></pre>
 
         <pre><code class='no-highlight' data-trim data-noescape>
-<strong>edit</strong> 80f9b87 added batbaz to testy
-pick 7a0aa9c uh oh?
+<strong>edit</strong> 72267fc I did a thing!
+pick fd0091e This is the best.
 
-# Rebase 7e10e41..7a0aa9c onto 7e10e41
+# Rebase 7e10e41..fd0091e onto 7e10e41
 #
 # Commands:
 #  p, pick = use commit
@@ -419,15 +419,15 @@ pick 7a0aa9c uh oh?
         </code></pre>
     </section>
 
-    <section>
+    <section class='cut-me-1'>
         <pre><code class='no-highlight' data-trim data-noescape>
-~$ git rebase --interactive 80f9b87^
-<strong>Stopped at 80f9b870a5d3d45006d7c9081be695aa6e976778... added batbaz to testy</strong>
+~$ git rebase --interactive HEAD^^^
+<strong>Stopped at 72267fc26d88fa977d24760252da63b46ca3b81a... I did a thing!</strong>
 ...
         </code></pre>
 
         <div class='fragment'>
-            <h4>Now alter the commit just like before...</h4>
+            <p class='illuminate'>Now alter the commit just like before...</p>
 
             <pre><code class='no-highlight' data-trim data-noescape>
 ~$ git add forgotten-file.js
@@ -437,6 +437,23 @@ pick 7a0aa9c uh oh?
 Successfully rebased and updated refs/heads/new-feature.
             </code></pre>
         </div>
+    </section>
+
+    <section class='cut-me-1'>
+        <p class='illuminate'>Careful! You've just changed<br><strong>ALL history</strong> from that point forward.</p>
+
+        <pre><code class='no-highlight' data-trim data-noescape>
+~$ git reflog
+
+5e83670 HEAD@{0}: rebase -i (finish): returning to refs/heads/new-feature
+<strong>5e83670</strong> HEAD@{1}: rebase -i (pick): This is the best
+<strong>bcb51f9</strong> HEAD@{2}: commit (amend): I did a thing!
+72267fc HEAD@{3}: cherry-pick: fast-forward
+<strong>7e10e41</strong> HEAD@{4}: rebase -i (start): checkout HEAD^^^
+fd0091e HEAD@{9}: commit: This is the best
+72267fc HEAD@{10}: commit: I did a thing!
+7e10e41 HEAD@{11}: commit: some old commit
+        </code></pre>
     </section>
     
     <section>
@@ -547,7 +564,7 @@ nothing to commit (working directory clean)
     <section>
         <h4>Remember the Three States!</h4>
         
-        <img src='images/git_checkout-commit.png' alt='checkout and push workflow diagram'>
+        <img src='images/git_checkout-commit.png' alt='checkout and push workflow diagram' style='width:60%;'>
     </section>
     
     <section>
