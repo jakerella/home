@@ -102,18 +102,16 @@ Long run complete
                     
                     <section>
                         <h3>JavaScript follows a <br> <strong>"run to completion"</strong> paradigm...</h3>
-                        
-                        <h3 class='fragment'>...along with an <strong>event-based</strong> asynchronous loop.</h3>
                     </section>
                     
                     <section>
-                        <p>This code runs without stopping all the way through the end of the <code>longRun()</code> function...</p>
+                        <p>Runs without stopping to the end...</p>
                         
                         <pre style='position:relative;'><code class='lang-javascript' data-srcbyline='examples/timeout.js?4-15;'></code><svg data-arrow='{"length":250, "thickness":10, "direction":2, "color":"green"}' style='position:absolute;top:1em;left:60%;'></svg></pre>
                     </section>
                     
                     <section>
-                        <p>...the async <code>setTimeout()</code> call will add another function to the event loop queue...</p>
+                        <p><code>setTimeout()</code> causes an asynchronous callback after 1 ms...</p>
                         
                         <pre style='position:relative;'><code class='lang-javascript'
                             data-srcbyline='examples/timeout.js?4-15;'
@@ -121,7 +119,7 @@ Long run complete
                     </section>
                     
                     <section>
-                        <p>...but this <code>for</code> loop will <strong>block</strong> that queue until it's done.</p>
+                        <p>...but this <code>for</code> loop will <strong>block</strong> the event loop until it's done.</p>
                         
                         <pre 'position:relative;'><code class='lang-javascript'
                             data-srcbyline='examples/timeout.js?4-15;'
@@ -265,7 +263,12 @@ Back inside foo
                         
                         <pre><code class='lang-javascript' data-srcbyline='examples/gen.js?6;9-10;13;14-16'></code></pre>
                         
-                        <pre><code class='lang-javascript' data-srcbyline='examples/gen.js?18;20-21;26-27;30-31'></code></pre>
+                        <pre><code class='lang-javascript' data-trim>
+var genObj = foo();
+console.log( genObj.next() );
+console.log( genObj.next() );
+console.log( genObj.next() );
+                        </code></pre>
                         
                         <pre class='fragment'><code class='lang-none no-highlight' data-trim>
 { value: 'a', done: false }
@@ -347,7 +350,7 @@ Caught outside generator: Nope nope nope.
                     <section data-background='white'>
                         <h3>And finally...<br>Async with Generators</h3>
                         
-                        <img class='fragment' style='width:50%;' src='images/its-happening.gif' alt="It's happening!">
+                        <img style='width:60%;' src='images/its-happening.gif' alt="It's happening!">
                     </section>
                     
                     <section>
@@ -363,7 +366,7 @@ Caught outside generator: Nope nope nope.
                     </section>
                     
                     <section>
-                        <h3>Why Promises?</h3>
+                        <h3>Yes, Promises.</h3>
                         <h4>Remember: generators are <strong>not</strong> asynchronous...</h4>
                         
                         <p class='fragment'>We need a way to know when an async action is complete...</p>
@@ -386,7 +389,7 @@ Caught outside generator: Nope nope nope.
                         
                         <ol class='fragment' style='width:65%'>
                             <li>Create the generator object</li>
-                            <li>Call next to start it</li>
+                            <li>Call <code>next()</code> to start it</li>
                             <li>Get the <code>value</code> off the yielded object</li>
                             <li>Call <code>next()</code> over and over</li>
                             <li>Remember to use <code>gen.throw()</code></li>
@@ -477,9 +480,11 @@ Retrieved data: [ '{ "foo": "bar", "nextIndex": 2 }',
                     <section data-background='white'>
                         <h3>So you're thinking...</h3>
                         
-                        <img src='images/riker-smile.gif' alt='Sly smile from Riker' style='width:40%;'>
+                        <div class='fragment'>
+                            <img src='images/riker-smile.gif' alt='Sly smile from Riker' style='width:40%;'>
                         
-                        <p>... aaaah, but how long until I can use this?</p>
+                            <p>... aaaah, but how long until I can use this?</p>
+                        </div>
                     </section>
 
                     <section>
@@ -559,16 +564,6 @@ Retrieved data: [ '{ "foo": "bar", "nextIndex": 2 }',
                 { src: '/js/draw-arrow.js', async: true, callback: function() { setTimeout(function() { window.drawarrow.init();}, 1000); } }
             ]
         });
-
-        (function() {
-            // Check if we want the footer on the current slide
-            var footer = document.querySelector('.reveal > footer');
-            function checkForFooter(e) {
-                footer.style.display = (e.currentSlide.classList.contains('no-footer') || e.currentSlide.parentNode.classList.contains('no-footer')) ? 'none' : 'block';
-            }
-            Reveal.addEventListener('slidechanged', checkForFooter);
-            checkForFooter({ currentSlide: Reveal.getCurrentSlide() });
-        })();
 
         (function highlightCode() {
             if( typeof window.addEventListener === 'function' ) {

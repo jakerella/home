@@ -15,19 +15,19 @@ function* foo() {
     return 'c';
 }
 
-var gen = foo();
+var genObj = foo();
 
-var one = gen.next();
+var one = genObj.next();
 console.log( one );
 // { value: 'a', done: false }
 
 console.log('Outside foo');
 
-var two = gen.next();
+var two = genObj.next();
 console.log( two );
 // { value: { b: 2 }, done: false }
 
-var three = gen.next();
+var three = genObj.next();
 console.log( three );
 // { value: 'c', done: true }
 
