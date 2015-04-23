@@ -382,9 +382,9 @@ function denodify( nodeStyleFn ) {
 
         return new Promise(function( resolve, reject ) {
 
-        nodeStyleFn(arg1, function(err, value) {
+            nodeStyleFn(arg1, function(err, value) {
 
-            if (err) { return reject(err); }
+                if (err) { return reject(err); }
 
                 resolve(value);
 
