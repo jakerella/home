@@ -24,7 +24,7 @@ window.drawarrow = (function(app) {
 
     function getOptions(node) {
         var options,
-            optionsString = node.dataset['arrow'] || "{}";
+            optionsString = node.dataset.arrow || '{}';
         
         try {
             
@@ -110,6 +110,7 @@ window.drawarrow = (function(app) {
             lineCoor = 'M' + options.length + ',0 L' + markerHeight + ',0';
         }
         
+        /*jshint maxlen:200*/
         node.innerHTML = [
             '<defs>',
                 '<marker id="arrow-tip-' + (++nextId) + '" markerWidth="' + triangleWidth + '" markerHeight="4" refx="0.1" refy="2" orient="auto">',
@@ -122,6 +123,7 @@ window.drawarrow = (function(app) {
                 'd="' + lineCoor + '"',
             '/>'
         ].join(' ');
+        /*jshint maxlen:140*/
     }
 
     return app;
