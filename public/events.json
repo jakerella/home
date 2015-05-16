@@ -104,9 +104,27 @@
             "name": "node.dc",
             "url": "http://www.meetup.com/node-dc/",
             "location": "Washington, DC",
-            "date": "May 7 2015",
+            "date": "May 18 2015",
             "topics": [
                 "Creating APIs in Node"
+            ]
+        },
+        {
+            "name": "webinar",
+            "url": "https://strongloop.com/node-js/ca-technologies-and-strongloop-webinar-series/#toggle-id-2",
+            "location": "online",
+            "date": "May 28 2015",
+            "topics": [
+                "JavaScript and Node.js Fundamentals"
+            ]
+        },
+        {
+            "name": "webinar",
+            "url": "https://strongloop.com/node-js/ca-technologies-and-strongloop-webinar-series/#toggle-id-3",
+            "location": "online",
+            "date": "Jun 11 2015",
+            "topics": [
+                "Node.js Architecture and Express.js"
             ]
         },
         {
@@ -118,6 +136,15 @@
                 "APIs in Node",
                 "Node API workshop",
                 "Node is the future"
+            ]
+        },
+        {
+            "name": "webinar",
+            "url": "https://strongloop.com/node-js/ca-technologies-and-strongloop-webinar-series/#toggle-id-5",
+            "location": "online",
+            "date": "Jul 9 2015",
+            "topics": [
+                "Instroduction to LoopBack.io"
             ]
         },
         {
