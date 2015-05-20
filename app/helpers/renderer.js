@@ -55,15 +55,23 @@ module.exports = {
             var content = '';
 
             if (/\.jade$/.test(data.slides)) {
+                
                 content = jade.render(
                     fs.readFileSync(path.join(site.publicDir, slug, data.slides)),
                     { filename: 'FOOBAR' } // this option must be here, but is not used
                 );
+                
             } else if (/\.md$/.test(data.slides)) {
-                content = jade.render(
-                    'include:markdown ' + path.join(site.publicDir, slug, data.slides),
-                    { filename: 'FOOBAR' } // this option must be here, but is not used
-                );
+                
+                content = [
+                    '<section data-markdown="' + data.slides + '"',
+                    'data-separator="^\\r?\\n\\-\\-\\-\\r?\\n"',
+                    'data-separator-vertical="^\\r?\\n\\|\\|\\|\\r?\\n"',
+                    'data-separator-notes="^\\^"',
+                    'data-charset="utf-8">',
+                    '</section>'
+                ].join(' ');
+                
             } else {
                 content = fs.readFileSync(path.join(site.publicDir, slug, data.slides));
             }
