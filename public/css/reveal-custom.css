@@ -66,13 +66,21 @@ aside.title-text h3 {
     color: #446;
 }
 
+.reveal .slides li {
+    text-align: left;
+}
+
 .slides pre {
     background-color: #fff;
+    margin: 0.3em;
 }
 .reveal pre code {
     max-height: 600px;
     padding: 0.3em;
     display: block;
+    font-size: 0.7em;
+    text-align: left;
+    font-family: Consolas, monospace;
 }
 .reveal .xml .javascript {
     opacity: 1;
