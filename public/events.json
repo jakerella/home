@@ -119,6 +119,15 @@
             ]
         },
         {
+            "name": "JSCertif Summer Camp",
+            "url": "https://www.facebook.com/events/1618761485008314/",
+            "location": "Tunisia (online)",
+            "date": "Jun 6 2015",
+            "topics": [
+                "Debugging Node.js"
+            ]
+        },
+        {
             "name": "webinar",
             "url": "https://strongloop.com/node-js/ca-technologies-and-strongloop-webinar-series/#toggle-id-3",
             "location": "online",
@@ -152,6 +161,15 @@
             "date": "Jul 9 2015",
             "topics": [
                 "Instroduction to LoopBack.io"
+            ]
+        },
+        {
+            "name": "NYC Node UG",
+            "url": "http://www.meetup.com/nyc-node-js/events/223011090/",
+            "location": "New York City, NY",
+            "date": "Jul 28 2015",
+            "topics": [
+                "Developing APIs in Node"
             ]
         },
         {
