@@ -374,6 +374,43 @@
                 "Triage and scale Node",
                 "JS prototype"
             ]
+        },
+        {
+            "name": "Weat Valley Web Workers",
+            "url": "http://www.meetup.com/WebWorkers/events/221911631/",
+            "location": "Gilbert, AZ",
+            "date": "Sep 19 2015",
+            "topics": [
+                "Node.js"
+            ]
+        },
+        {
+            "name": "NCDevCon",
+            "url": "http://www.ncdevcon.com/",
+            "location": "Raleigh, NC",
+            "date": "Sep 26 2015",
+            "topics": [
+                "Object-Oriented JavaScript",
+                "Debugging Node"
+            ]
+        },
+        {
+            "name": "ConnectJS",
+            "url": "http://connect-js.com",
+            "location": "Atlanta, GA",
+            "date": "Oct 16 2015",
+            "topics": [
+                "Introduction to Node.js"
+            ]
+        },
+        {
+            "name": "Nodevember",
+            "url": "http://nodevember.org/",
+            "location": "Nashville, TN",
+            "date": "Nov 14 2015",
+            "topics": [
+                "Node.js"
+            ]
         }
     ]
 }
