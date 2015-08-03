@@ -96,7 +96,7 @@ Reveal.initialize({
     window.hljs.initHighlighting();
     
     setTimeout(function() {
-        [].slice.call(document.querySelectorAll('code'))
+        [].slice.call(document.querySelectorAll('pre code'))
             .forEach(function(n) {
                 window.hljs.highlightBlock(n);
             });
