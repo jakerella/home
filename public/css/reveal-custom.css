@@ -68,6 +68,7 @@ aside.title-text h3 {
 
 .reveal .slides li {
     text-align: left;
+    line-height: 1.2em;
 }
 
 .slides pre {
@@ -75,6 +76,7 @@ aside.title-text h3 {
     margin: 0.3em;
 }
 .reveal pre code {
+    line-height: 1.15em;
     max-height: 600px;
     padding: 0.3em;
     display: block;
