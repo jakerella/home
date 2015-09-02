@@ -372,7 +372,16 @@
             "date": "Aug 12 2015",
             "topics": [
                 "Triage and scale Node",
-                "JS prototype"
+                "JavaScript prototypes"
+            ]
+        },
+        {
+            "name": "DC PHP ",
+            "url": "http://www.meetup.com/DC-PHP/events/220739659/",
+            "location": "Washington, DC",
+            "date": "Sep 9 2015",
+            "topics": [
+                "Node.js: the 800-pound Gorilla"
             ]
         },
         {
@@ -381,7 +390,7 @@
             "location": "Gilbert, AZ",
             "date": "Sep 19 2015",
             "topics": [
-                "Node.js"
+                "What is Node.js?"
             ]
         },
         {
@@ -409,7 +418,7 @@
             "location": "Nashville, TN",
             "date": "Nov 14 2015",
             "topics": [
-                "Node.js"
+                "[sponsor]"
             ]
         }
     ]
