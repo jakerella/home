@@ -289,7 +289,7 @@ Dog.getName();  // What will this return?
 
 In this first installment of our two part series on object oriented JavaScript we have learned a lot about objects and functions generally, constructors and `new` in JavaScript, and various object member types. We can begin to see how the `prototype` object is used to create new objects following a pattern, and how we might use JavaScript to model real world items. In addition we've studied how functions operate in better detail, allowing us to create private variables, access object data.
 
-In the next post we'll introduce prototypical inheritance and polymorphism and round out our object oriented structure. We'll build off of our `Dog` example and go even deeper on the `prototype` object and JavaScript's fall back mechanism. Additionally, we'll introduce you to the future of objects in ECMAScript 6 and both what to expect, and what to watch out for, in the next generation of JavaScript.
+In the [next post](/object-oriented-javascript-part-the-second) we'll introduce prototypical inheritance and polymorphism and round out our object oriented structure. We'll build off of our `Dog` example and go even deeper on the `prototype` object and JavaScript's fall back mechanism. Additionally, we'll introduce you to the future of objects in ECMAScript 6 and both what to expect, and what to watch out for, in the next generation of JavaScript.
 
 
 ### Reference Links
