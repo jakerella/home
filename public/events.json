@@ -376,15 +376,6 @@
             ]
         },
         {
-            "name": "DC PHP ",
-            "url": "http://www.meetup.com/DC-PHP/events/220739659/",
-            "location": "Washington, DC",
-            "date": "Sep 9 2015",
-            "topics": [
-                "Node.js: the 800-pound Gorilla"
-            ]
-        },
-        {
             "name": "East Valley Web Workers",
             "url": "http://www.meetup.com/WebWorkers/events/221911631/",
             "location": "Gilbert, AZ",
@@ -413,12 +404,30 @@
             ]
         },
         {
+            "name": "DC PHP",
+            "url": "http://www.meetup.com/DC-PHP/events/220739659/",
+            "location": "Washington, DC",
+            "date": "Nov 11 2015",
+            "topics": [
+                "Node.js: the 800-pound Gorilla"
+            ]
+        },
+        {
             "name": "Nodevember",
             "url": "http://nodevember.org/",
             "location": "Nashville, TN",
             "date": "Nov 14 2015",
             "topics": [
                 "Testing Node.js"
+            ]
+        },
+        {
+            "name": "Big Data Developers",
+            "url": "http://www.meetup.com/Big-Data-Developers-in-Phoenix/",
+            "location": "Phoenix, AZ",
+            "date": "Nov 18 2015",
+            "topics": [
+                "Node.js"
             ]
         }
     ]
