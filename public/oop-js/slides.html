@@ -12,7 +12,7 @@
     <section>
         <h3 style="text-transform:none;">
             <a href="http://strongloop.com">
-                <img src="/images/strongloop_logo_stacked.png" alt="StrongLoop" style="width:30%;" />
+                <img src="/images/strongloop_logo_horiz.png" alt="StrongLoop" style="width:70%;" />
             </a>
         </h3>
         <div class='fragment' style="margin-top:-2em;">
@@ -28,12 +28,6 @@
                 </a>
             </div>
         </div>
-    </section>
-
-    <section>
-        <a href="http://nomadjavascript.com">
-            <img src="/images/nomad-js.png" alt="NomadJS" style="width:25%" />
-        </a>
     </section>
     
 </section>
@@ -167,7 +161,7 @@
         
         <pre><code class='lang-javascript' data-srcbyline='example/basic-objects.js?16-24'></code></pre>
         
-        <p class='fine' style='margin-top:2em;'>
+        <p class='fragment fine' style='margin-top:2em;'>
             FYI, while <code>undefined</code> is clearly not an object,<br>
             <code>null</code> is: <code>typeof null === "object"</code>
         </p>
@@ -291,6 +285,12 @@
         <p class='fine' style='font-size:0.7em;'>(That's pronounced "dunder proto", as in: "double underscore proto")</p>
         
         <pre style='margin:3em 0;'><code class='lang-javascript' data-srcbyline='example/animal-dog.js?96-97;142-144'></code></pre>
+    </section>
+
+    <section>
+        <h4>Dunder proto no more</h4>
+        
+        <p><code>__proto__</code> has existed for a long time, and in ES6/ES2015 it is <strong>deprecated</strong></p>
     </section>
 
 </section>
@@ -531,7 +531,7 @@
     <section>
         <h4>Mixing it in - <span class='illuminate'>Use a helper method!</span></h4>
         
-        <pre><code class='no-highlight' data-srcbyline='example/mixins.js?3-15'></code></pre>
+        <pre><code class='lang-javascript' data-srcbyline='example/mixins.js?3-16'></code></pre>
     </section>
     
     <section>
@@ -556,13 +556,13 @@
     </section>
     
     <section>
-        <h4>ES6 Classes</h4>
+        <h4>ES6/ES2015 Classes</h4>
         
         <pre><code class='lang-javascript' data-srcbyline='example/es6-classes.js?2-23'></code></pre>
     </section>
     
     <section>
-        <h3>ECMAScript 6 Classes</h3>
+        <h3>ES6/ES2015 Classes</h3>
         
         <p>This looks nice, but it's just syntactic sugar!</p>
 
@@ -607,21 +607,14 @@
 <section>
     <h2>Thank You!</h2>
     <h3 style='margin-top:1.5em;'>Object Oriented JavaScript</h3>
-    <h4>(yes, it really exists)</h4>
+
     <p style='margin-top: 2em'>Jordan Kasper</p>
     <p style='font-size:0.8em;'>
         <a href='http://twitter.com/jakerella'>@jakerella</a> |
         <a href='http://jordankasper.com/oop-js'>jordankasper.com/oop-js</a>
     </p>
 
-    <h3 style='margin:1em 0;'>
-        #LSP15 folks: PLEASE rate this talk!!<br>
-        <a href='https://joind.in/13553'>joind.in/13553</a>
-    </h3>
-
-    <p style='font-size:0.6em;'>
-        <a href='http://www.2ality.com/2011/06/prototypes-as-classes.html' targt='_blank'>Guide to JS inheritance</a> | 
-        <a href='http://javascript.crockford.com/private.html' targt='_blank'>Crockford on private vars</a> | 
-        <a href='http://wiki.ecmascript.org/doku.php?id=strawman:maximally_minimal_classes' targt='_blank'>ES6 Classes Spec</a>
+    <p style='font-size: 0.9em; font-weight:bold; margin-top:1em;'>
+        <a href='https://jordankasper.com/object-oriented-javascript-part-the-first' target='_blank'>See this talk in blog form!</a>
     </p>
 </section>

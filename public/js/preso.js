@@ -67,6 +67,8 @@ Reveal.initialize({
         }
     }
 
-    hljs.initHighlighting();
+    setTimeout(function() {
+        hljs.initHighlighting();
+    }, 500);
 
 })();
