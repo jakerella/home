@@ -8,7 +8,7 @@
   "license": "MIT",
   "private": true,
   "dependencies": {
-    "reveal.js": "2.6.x",
+    "reveal.js": "3.x",
     "source-by-line": "git://github.com/jakerella/source-by-line.git",
     "highlightjs": "8.x"
   }

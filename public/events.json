@@ -1,136 +1,6 @@
 {
     "events": [
         {
-            "name": "DCJS",
-            "url": "http://www.meetup.com/DC-JavaScript/events/218040632/",
-            "location": "Washington, DC",
-            "date": "Dec 11 2014",
-            "topics": [
-                "Mocking Ajax Requests"
-            ]
-        },
-        {
-            "name": "CodeMash",
-            "url": "http://www.codemash.org",
-            "location": "Sandusky, OH",
-            "date": "Jan 8 2015",
-            "topics": [
-                "Object Oriented JavaScript",
-                "Advanced Git"
-            ]
-        },
-        {
-            "name": "SF Node.js Meetup",
-            "url": "http://www.meetup.com/Node-js-Serverside-Javascripters-Club-SF/events/219937616/",
-            "location": "San Francisco, CA",
-            "date": "Feb 9 2015",
-            "topics": [
-                "Custom Grunt tasks"
-            ]
-        },
-        {
-            "name": "Node Summit",
-            "url": "http://nodesummit.com",
-            "location": "San Francisco, CA",
-            "date": "Feb 10 2015",
-            "topics": []
-        },
-        {
-            "name": "ConFoo",
-            "url": "http://confoo.ca",
-            "location": "Montreal, Canada",
-            "date": "Feb 18 2015",
-            "topics": [
-                "Remote Working",
-                "Grunt"
-            ]
-        },
-        {
-            "name": "jQuery UK",
-            "url": "http://jqueryuk.com/2015/",
-            "location": "Oxford, England",
-            "date": "Mar 5 2015",
-            "topics": [
-                "Web Developer's Workflow"
-            ]
-        },
-        {
-            "name": "Workshop",
-            "url": "https://strongloop.com/node-js/training/2015-guadalajara/",
-            "location": "Guadalajara, Mexico",
-            "date": "Mar 25 2015",
-            "topics": [
-                "Node.js and API Development"
-            ]
-        },
-        {
-            "name": "Workshop",
-            "url": "https://strongloop.com/node-js/training/workshop-dallas-2015/",
-            "location": "Dallas, TX",
-            "date": "Apr 15 2015",
-            "topics": [
-                "Node.js API Development"
-            ]
-        },
-        {
-            "name": "Lone Star PHP",
-            "url": "http://lonestarphp.com",
-            "location": "Dallas, TX",
-            "date": "Apr 17 2015",
-            "topics": [
-                "Advanced Git",
-                "Object Oriented JavaScript"
-            ]
-        },
-        {
-            "name": "Fluent",
-            "url": "http://fluentconf.com",
-            "location": "San Francisco, CA",
-            "date": "Apr 20 2015",
-            "topics": [
-                "Advanced Git"
-            ]
-        },
-        {
-            "name": "EmpireJS",
-            "url": "http://2015.empirejs.org",
-            "location": "Washington, DC",
-            "date": "Apr 26 2015",
-            "topics": [
-                "Generating a New Async"
-            ]
-        },
-        {
-            "name": "node.dc",
-            "url": "http://www.meetup.com/node-dc/",
-            "location": "Washington, DC",
-            "date": "May 7 2015",
-            "topics": [
-                "Creating APIs in Node"
-            ]
-        },
-        {
-            "name": "KCDC",
-            "url": "http://www.kcdc.info/#!/",
-            "location": "Kansas City, MO",
-            "date": "Jun 24 2015",
-            "topics": [
-                "APIs in Node",
-                "Node API workshop",
-                "Node is the future"
-            ]
-        },
-        {
-            "name": "MidwestJS",
-            "url": "http://midwestjs.com/",
-            "location": "Minneapolis, MN",
-            "date": "Aug 12 2015",
-            "topics": [
-                "Triage and scale Node",
-                "JS prototype"
-            ]
-        },
-        {
             "name": "JavaScript Summit",
             "url": "http://jssummit.com",
             "location": "(Virtual)",
@@ -321,6 +191,243 @@
             "date": "Feb 26 2013",
             "topics": [
                 "Propel ORM"
+            ]
+        },
+        {
+            "name": "DCJS",
+            "url": "http://www.meetup.com/DC-JavaScript/events/218040632/",
+            "location": "Washington, DC",
+            "date": "Dec 11 2014",
+            "topics": [
+                "Mocking Ajax Requests"
+            ]
+        },
+        {
+            "name": "CodeMash",
+            "url": "http://www.codemash.org",
+            "location": "Sandusky, OH",
+            "date": "Jan 8 2015",
+            "topics": [
+                "Object Oriented JavaScript",
+                "Advanced Git"
+            ]
+        },
+        {
+            "name": "SF Node.js Meetup",
+            "url": "http://www.meetup.com/Node-js-Serverside-Javascripters-Club-SF/events/219937616/",
+            "location": "San Francisco, CA",
+            "date": "Feb 9 2015",
+            "topics": [
+                "Custom Grunt tasks"
+            ]
+        },
+        {
+            "name": "Node Summit",
+            "url": "http://nodesummit.com",
+            "location": "San Francisco, CA",
+            "date": "Feb 10 2015",
+            "topics": []
+        },
+        {
+            "name": "ConFoo",
+            "url": "http://confoo.ca",
+            "location": "Montreal, Canada",
+            "date": "Feb 18 2015",
+            "topics": [
+                "Remote Working",
+                "Grunt"
+            ]
+        },
+        {
+            "name": "jQuery UK",
+            "url": "http://jqueryuk.com/2015/",
+            "location": "Oxford, England",
+            "date": "Mar 5 2015",
+            "topics": [
+                "Web Developer's Workflow"
+            ]
+        },
+        {
+            "name": "Workshop",
+            "url": "https://strongloop.com/node-js/training/2015-guadalajara/",
+            "location": "Guadalajara, Mexico",
+            "date": "Mar 25 2015",
+            "topics": [
+                "Node.js and API Development"
+            ]
+        },
+        {
+            "name": "Workshop",
+            "url": "https://strongloop.com/node-js/training/workshop-dallas-2015/",
+            "location": "Dallas, TX",
+            "date": "Apr 15 2015",
+            "topics": [
+                "Node.js API Development"
+            ]
+        },
+        {
+            "name": "Lone Star PHP",
+            "url": "http://lonestarphp.com",
+            "location": "Dallas, TX",
+            "date": "Apr 17 2015",
+            "topics": [
+                "Advanced Git",
+                "Object Oriented JavaScript"
+            ]
+        },
+        {
+            "name": "Fluent",
+            "url": "http://fluentconf.com",
+            "location": "San Francisco, CA",
+            "date": "Apr 20 2015",
+            "topics": [
+                "Advanced Git"
+            ]
+        },
+        {
+            "name": "EmpireJS",
+            "url": "http://2015.empirejs.org",
+            "location": "Washington, DC",
+            "date": "Apr 26 2015",
+            "topics": [
+                "Generating a New Async"
+            ]
+        },
+        {
+            "name": "node.dc",
+            "url": "http://www.meetup.com/node-dc/",
+            "location": "Washington, DC",
+            "date": "May 18 2015",
+            "topics": [
+                "Creating APIs in Node"
+            ]
+        },
+        {
+            "name": "webinar",
+            "url": "https://strongloop.com/node-js/ca-technologies-and-strongloop-webinar-series/#toggle-id-2",
+            "location": "online",
+            "date": "May 28 2015",
+            "topics": [
+                "JavaScript and Node.js Fundamentals"
+            ]
+        },
+        {
+            "name": "JSCertif Summer Camp",
+            "url": "https://www.facebook.com/events/1618761485008314/",
+            "location": "Tunisia (online)",
+            "date": "Jun 6 2015",
+            "topics": [
+                "Debugging Node.js"
+            ]
+        },
+        {
+            "name": "webinar",
+            "url": "https://strongloop.com/node-js/ca-technologies-and-strongloop-webinar-series/#toggle-id-3",
+            "location": "online",
+            "date": "Jun 11 2015",
+            "topics": [
+                "Node.js Architecture and Express.js"
+            ]
+        },
+        {
+            "name": "NoVa Node Unconference",
+            "url": "http://www.meetup.com/Nova-Node/events/222312195/",
+            "location": "Arlington, VA",
+            "date": "Jun 13 2015",
+            "topics": []
+        },
+        {
+            "name": "KCDC",
+            "url": "http://www.kcdc.info/#!/",
+            "location": "Kansas City, MO",
+            "date": "Jun 24 2015",
+            "topics": [
+                "APIs in Node",
+                "Node API workshop",
+                "Node is the future"
+            ]
+        },
+        {
+            "name": "webinar",
+            "url": "https://strongloop.com/node-js/ca-technologies-and-strongloop-webinar-series/#toggle-id-5",
+            "location": "online",
+            "date": "Jul 9 2015",
+            "topics": [
+                "Instroduction to LoopBack.io"
+            ]
+        },
+        {
+            "name": "NYC Node UG",
+            "url": "http://www.meetup.com/nyc-node-js/events/223011090/",
+            "location": "New York City, NY",
+            "date": "Jul 27 2015",
+            "topics": [
+                "Developing APIs in Node"
+            ]
+        },
+        {
+            "name": "MidwestJS",
+            "url": "http://midwestjs.com/",
+            "location": "Minneapolis, MN",
+            "date": "Aug 12 2015",
+            "topics": [
+                "Triage and scale Node",
+                "JavaScript prototypes"
+            ]
+        },
+        {
+            "name": "East Valley Web Workers",
+            "url": "http://www.meetup.com/WebWorkers/events/221911631/",
+            "location": "Gilbert, AZ",
+            "date": "Sep 19 2015",
+            "topics": [
+                "What is Node.js?"
+            ]
+        },
+        {
+            "name": "NCDevCon",
+            "url": "http://www.ncdevcon.com/",
+            "location": "Raleigh, NC",
+            "date": "Sep 26 2015",
+            "topics": [
+                "Object-Oriented JavaScript",
+                "Debugging Node"
+            ]
+        },
+        {
+            "name": "ConnectJS",
+            "url": "http://connect-js.com",
+            "location": "Atlanta, GA",
+            "date": "Oct 16 2015",
+            "topics": [
+                "Introduction to Node.js"
+            ]
+        },
+        {
+            "name": "DC PHP",
+            "url": "http://www.meetup.com/DC-PHP/events/220739659/",
+            "location": "Washington, DC",
+            "date": "Nov 11 2015",
+            "topics": [
+                "Node.js: the 800-pound Gorilla"
+            ]
+        },
+        {
+            "name": "Nodevember",
+            "url": "http://nodevember.org/",
+            "location": "Nashville, TN",
+            "date": "Nov 14 2015",
+            "topics": [
+                "Testing Node.js"
+            ]
+        },
+        {
+            "name": "Big Data Developers",
+            "url": "http://www.meetup.com/Big-Data-Developers-in-Phoenix/",
+            "location": "Phoenix, AZ",
+            "date": "Nov 18 2015",
+            "topics": [
+                "Node.js"
             ]
         }
     ]

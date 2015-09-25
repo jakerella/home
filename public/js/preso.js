@@ -1,3 +1,5 @@
+/*global Reveal*/
+
 // Cut certain sections for shorter-form presentations
 (function() {
     var i, j, l, nodes,
@@ -24,26 +26,52 @@ Reveal.initialize({
 
     // Optional libraries used to extend on reveal.js
     dependencies: [
-        { src: '/js/vendor/reveal.js/lib/js/classList.js', condition: function() { return !document.body.classList; } },
-        { src: '/js/vendor/reveal.js/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
-        { src: '/js/vendor/reveal.js/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
-        { src: '/js/vendor/reveal.js/plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } },
-        { src: '/js/vendor/source-by-line/srcByLine.js', async: true, callback: function() { window.srcbyline.init(); } },
-        { src: '/js/draw-arrow.js', async: true, callback: function() { setTimeout(function() { window.drawarrow.init();}, 1000); } }
+        {
+            src: '/js/vendor/reveal.js/lib/js/classList.js',
+            condition:function() { return !document.body.classList; }
+        },
+        {
+            src: '/js/vendor/reveal.js/plugin/markdown/marked.js',
+            condition: function() { return !!document.querySelector( '[data-markdown]' ); }
+        },
+        {
+            src: '/js/vendor/reveal.js/plugin/markdown/markdown.js',
+            condition: function() { return !!document.querySelector( '[data-markdown]' ); }
+        },
+        {
+            src: '/js/vendor/reveal.js/plugin/notes/notes.js',
+            async: true,
+            condition: function() { return !!document.body.classList; }
+        },
+        {
+            src: '/js/vendor/source-by-line/srcByLine.js',
+            async: true,
+            callback: function() { window.srcbyline.init(); }
+        },
+        {
+            src: '/js/draw-arrow.js',
+            async: true,
+            callback: function() { setTimeout(function() { window.drawarrow.init();}, 1000); }
+        }
     ]
 });
 
-(function() {
+(function toggleFooter() {
     // Check if we want the footer on the current slide
     var footer = document.querySelector('.reveal > footer');
     function checkForFooter(e) {
-        footer.style.display = (e.currentSlide.classList.contains('no-footer') || e.currentSlide.parentNode.classList.contains('no-footer')) ? 'none' : 'block';
+        var noFooter = e.currentSlide.classList.contains('no-footer') || e.currentSlide.parentNode.classList.contains('no-footer');
+        footer.style.display = (noFooter) ? 'none' : 'block';
     }
     Reveal.addEventListener('slidechanged', checkForFooter);
     checkForFooter({ currentSlide: Reveal.getCurrentSlide() });
 })();
 
 (function highlightCode() {
+    function highlightBlock( event ) {
+        window.hljs.highlightBlock( event.currentTarget );
+    }
+    
     if( typeof window.addEventListener === 'function' ) {
         var code = document.querySelectorAll( 'pre code' );
 
@@ -57,18 +85,21 @@ Reveal.initialize({
 
             // Now escape html unless prevented by author
             if( ! element.hasAttribute( 'data-noescape' )) {
-                element.innerHTML = element.innerHTML.replace(/</g,"&lt;").replace(/>/g,"&gt;");
+                element.innerHTML = element.innerHTML.replace(/</g,'&lt;').replace(/>/g,'&gt;');
             }
 
             // re-highlight when focus is lost (for edited code)
-            element.addEventListener( 'focusout', function( event ) {
-                hljs.highlightBlock( event.currentTarget );
-            }, false );
+            element.addEventListener( 'focusout', highlightBlock, false );
         }
     }
 
+    window.hljs.initHighlighting();
+    
     setTimeout(function() {
-        hljs.initHighlighting();
-    }, 500);
+        [].slice.call(document.querySelectorAll('pre code'))
+            .forEach(function(n) {
+                window.hljs.highlightBlock(n);
+            });
+    }, 1000);
 
 })();
