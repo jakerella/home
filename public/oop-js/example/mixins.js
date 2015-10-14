@@ -9,11 +9,11 @@ Object.extend(target, obj);
 // Backbone
 Model.extend({ /* ... */ });
 
-// Dojo
-lang.mixin(target, obj);
-// or use extend, which adds to the prototype automatically
-lang.extend(Class, obj);
+// Node
+util.inherits(target, obj);
 
+// Dojo
+lang.extend(Class, obj);
 
 
 function Animal(age) { /* ... */ }

@@ -100,6 +100,6 @@ Reveal.initialize({
             .forEach(function(n) {
                 window.hljs.highlightBlock(n);
             });
-    }, 2000);
+    }, 1000);
 
 })();

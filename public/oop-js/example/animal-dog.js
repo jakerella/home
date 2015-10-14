@@ -100,8 +100,8 @@ var v = Object.create(Dog.prototype);
 
 /* call the constructor function ("Dog" in our case) */
 v.constructor("Vincent");
-v.constructor("Vincent", 10);
-var v = new Dog("Vincent", 10);
+v.constructor("Vincent", 11);
+var v = new Dog("Vincent", 11);
 
 v.speak();   /* "Vincent says woof" */
 
@@ -124,7 +124,7 @@ v.alive;  /* undefined */
 Dog.prototype.isPrototypeOf( v ); /* true */
 
 
-v.getAge(); /* 70 */
+v.getAge(); /* 77 */
 
 
 var b = new Dog("Brian");
