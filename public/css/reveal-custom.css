@@ -9,6 +9,9 @@ body {
     background: radial-gradient(bottom right, circle cover, #fbfcf7 0%, #cce3d6 50%);
 }
 
+.reveal em {
+    font-style: italic;
+}
 
 aside.title-text {
     position: relative;
@@ -21,9 +24,11 @@ aside.title-text h2, aside.title-text h3, aside.title-text h4 {
     color: #111;
     font-family: 'Times New Roman', serif;
     letter-spacing: 0.01em;
-}
-aside.title-text h2, aside.title-text h3 {
     background-color: #fff;
+    padding: 0.2em;
+}
+aside.title-text h4 {
+    width: 25%;
 }
 aside.title-text h3 {
     position: relative;
@@ -146,4 +151,10 @@ footer.left {
 }
 footer.right {
     left: 0.5em;
+}
+footer span.tagline {
+    font-size: 0.5em;
+    color: #333;
+    vertical-align: middle;
+    margin-left: 1em;
 }

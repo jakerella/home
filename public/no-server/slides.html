@@ -1,5 +1,5 @@
 
-<section data-background='images/Alice_mock_turtle_cropped.png'>
+<section data-background='images/Alice_mock_turtle_cropped.png' class='no-footer'>
     <aside class='title-text'>
         <h2>Look Ma, No Server!</h2>
         <h3>Testing Front End Code Without a Server</h3>
@@ -16,7 +16,7 @@
     </aside>
 </section>
 
-<section>
+<section class='no-footer'>
     <h3 style="text-transform:none;">
         <a href="http://strongloop.com">
             <img src="/images/strongloop_logo_stacked.png" alt="StrongLoop" style="width:30%;" />
@@ -37,10 +37,6 @@
     </div>
 </section>
 
-<section>
-    <img src='images/nomad-js.png' style='width:25%;' alt='NomadJS'>
-</section>
-
 
 <!-- The Situation -->
 
@@ -54,15 +50,13 @@
 
 <section>
     <h3>You have a data-driven application...</h3>
+    
+    <h4 class='fragment'>...and a JavaScript app using these data services.</h4>
 </section>
 
 <section>
     <img alt='Diagram of data services architecture' src='images/data_services.png'>
     <cite>http://www.compositesw.com/data-virtualization/data-services/</cite>
-</section>
-
-<section>
-    <h3>And you have a thick client app<br>using these data services...</h3>
 </section>
 
 <section>
@@ -78,7 +72,7 @@
 </section>
 
 <section data-background='#fff'>
-    <h3 style='font-size:1.2em;'>You <em>want</em> to have JavaScript Tests...</h3>
+    <h3>Well, you <em>want</em> to have JavaScript Tests...</h3>
     <img src='images/disapproval.png' alt='Look of disapproval' style='width:40%;'>
 </section>
 
@@ -123,7 +117,7 @@
 </section>
 
 <section data-background='images/hijack.jpg'>
-    <h1 style='color:white; font-weight:bold; font-style:italic; position:relative; bottom:-1.7em; font-family:arial;'>
+    <h1 style='bottom:-3.7em; font: italic bold 2em arial; color:white; position:relative;'>
         Ajax
     </h1>
 
@@ -239,7 +233,7 @@
 </section>
 
 <section>
-    <pre><code class='lang-javascript' data-srcbyline='examples/test-favorite.js?60-75'></code></pre>
+    <pre><code class='lang-javascript' data-srcbyline='examples/test-favorite.js?60-64;68-75'></code></pre>
 </section>
 
 <section>
@@ -257,12 +251,12 @@
 </section>
 
 <section>
-    <h2>Idempotency</h2>
-    <p class='fine' style='font-style:italic;'>Just like real potency, only more idem.</p>
+    <pre><code class='lang-javascript' data-srcbyline='examples/test-search.js?7;9;11-14;16;18-20;22;24-25;28;42;47'></code></pre>
 </section>
 
 <section>
-    <pre><code class='lang-javascript' data-srcbyline='examples/test-search.js?7;9;11-14;16;18-20;22;24-25;28;42;47'></code></pre>
+    <h2>Idempotency</h2>
+    <p class='fine' style='font-style:italic;'>Just like real potency, only more idem.</p>
 </section>
 
 <section data-background='#eef'>
@@ -272,97 +266,121 @@
 </section>
 
 <section>
-    <h4>jQuery Mockjax</h4>
+    <h2>jQuery Mockjax</h2>
+    
+    <p style='margin-top:4em; font-style:italic;' class='fine'>Note: I maintain this one. ;)</p>
+</section>
+
+<section>
+    <h4>Basic Query</h4>
     <pre><code class='lang-javascript' data-srcbyline='examples/mockjax.js?5-11'></code></pre>
     <pre class='fragment'><code class='lang-javascript' data-srcbyline='examples/mockjax.js?181-185'></code></pre>
 </section>
 
 <section>
-    <h4>jQuery Mockjax</h4>
+    <h4>Changing Status</h4>
     <pre><code class='lang-javascript' data-srcbyline='examples/mockjax.js?45-50'></code></pre>
 </section>
 
 <section>
-    <h4>jQuery Mockjax</h4>
+    <h4>Custom Response Handler</h4>
     <pre><code class='lang-javascript' data-srcbyline='examples/mockjax.js?14;16-21;23-25;27;35-39;41'></code></pre>
 </section>
 
 <section>
-    <h4>jQuery Mockjax</h4>
+    <h4>Generating Lots of Data</h4>
     <pre><code class='lang-javascript' data-srcbyline='examples/mockjax.js?14-15;18-21;26;29;31-33;35-39;41'></code></pre>
 </section>
 
 <section>
-    <h4>jQuery Mockjax</h4>
+    <h4>Dynamic URLs</h4>
     <pre><code class='lang-javascript' data-srcbyline='examples/mockjax.js?54-58;77;80-82'></code></pre>
 </section>
 
 <section>
-    <h4>jQuery Mockjax</h4>
+    <h4>Using URL Params</h4>
     <pre><code class='lang-javascript' data-srcbyline='examples/mockjax.js?54;56-67;69;76;78-80;82'></code></pre>
 </section>
 
 <section>
-    <h4>Angular: ng-mocks and <span style='text-transform:none;'>$httpBackend</span></h4>
-    <pre><code class='lang-javascript' data-srcbyline='examples/ng-mocks.js?6-8;35-36'></code></pre>
-    <pre class='fragment'><code class='html'>
-&lt;html ng-app='testApp'&gt;
-    </code></pre>
+    <h2>Angular</h2>
+    <h3 style='text-transform:none;'>(ng-mocks and $httpBackend)</h3>
 </section>
 
 <section>
-    <h4>Angular Mocks</h4>
-    <pre><code class='lang-javascript' data-srcbyline='examples/ng-mocks.js?8-11;36'></code></pre>
+    <h4>Angular Setup</h4>
+    <pre><code class='lang-javascript' data-srcbyline='examples/ng-mocks.js?6-8;37-38'></code></pre>
+    <pre class='fragment'><code class='html'>&lt;html ng-app='testApp'&gt;
+  &lt;head&gt;
+    ...
+    &lt;script src="angular.js"&gt;
+    &lt;script src="angular-mocks.js"&gt;
+    ...
+  &lt;/head&gt;
+</code></pre>
 </section>
 
 <section>
-    <h4>Angular Mocks</h4>
-    <pre><code class='lang-javascript' data-srcbyline='examples/ng-mocks.js?8-9;13-22;36'></code></pre>
+    <h4>Basic Mock</h4>
+    <pre><code class='lang-javascript' data-srcbyline='examples/ng-mocks.js?8-11;38'></code></pre>
 </section>
 
 <section>
-    <h4>Angular Mocks</h4>
-    <pre><code class='lang-javascript' data-srcbyline='examples/ng-mocks.js?8-9;24-35;36'></code></pre>
+    <h4>Custom Handler</h4>
+    <pre><code class='lang-javascript' data-srcbyline='examples/ng-mocks.js?8-9;13-22;38'></code></pre>
 </section>
 
 <section>
-    <h4>Jasmine.ajax</h4>
-    <pre><code class='lang-javascript' data-srcbyline='examples/jasmine.js?6-13;25-26;29-33'></code></pre>
+    <h4>Dynamic URL</h4>
+    <pre><code class='lang-javascript' data-srcbyline='examples/ng-mocks.js?8-9;24-38'></code></pre>
 </section>
 
 <section>
-    <h4>Jasmine.ajax</h4>
-    <pre><code class='lang-javascript' data-srcbyline='examples/jasmine.js?8-11;19-25'></code></pre>
+    <h1>Jasmine</h1>
 </section>
 
 <section>
-    <h4>Jasmine.ajax</h4>
-    <pre><code class='lang-javascript' data-srcbyline='examples/jasmine.js?8-11;14-17;22-25'></code></pre>
+    <h4>Installing the Ajax Server</h4>
+    <pre><code class='lang-javascript' data-srcbyline='examples/jasmine.js?6-13;27-28;31-35'></code></pre>
 </section>
 
 <section>
-    <h4>Jasmine.ajax</h4>
-    <pre><code class='lang-javascript' data-srcbyline='examples/jasmine.js?40-58'></code></pre>
+    <h4>Basic Stub</h4>
+    <pre><code class='lang-javascript' data-srcbyline='examples/jasmine.js?8-11;19-27'></code></pre>
 </section>
 
 <section>
-    <h4>Sinon</h4>
+    <h4>Testing Errors</h4>
+    <pre><code class='lang-javascript' data-srcbyline='examples/jasmine.js?8-11;14-18;26-27'></code></pre>
+</section>
+
+<section>
+    <h4>Dynamically Composing Responses</h4>
+    <pre><code class='lang-javascript' data-srcbyline='examples/jasmine.js?42-60'></code></pre>
+</section>
+
+<section>
+    <h1>Sinon</h1>
+</section>
+
+<section>
+    <h4>Creating the Fake Server</h4>
     <pre><code class='lang-javascript' data-srcbyline='examples/sinon.js?6-10;45-51'></code></pre>
 </section>
 
 <section>
-    <h4>Sinon</h4>
+    <h4>Basic Mock</h4>
     <pre><code class='lang-javascript' data-srcbyline='examples/sinon.js?6-7;9-12;15-23;45'></code></pre>
 </section>
 
 <section>
-    <h4>Sinon</h4>
+    <h4>Dynamic URL</h4>
     <pre><code class='lang-javascript' data-srcbyline='examples/sinon.js?7;13;25-42;45'></code></pre>
 </section>
 
 
 <section>
-    <h3>MOAR EXAMPLES</h3>
+    <h1>MOAR EXAMPLES</h1>
 </section>
 
 <section>
@@ -396,9 +414,8 @@
 </section>
 
 <section>
-    <h3>jQuery Mockjax</h3>
-    <h4>request header matching</h4>
-    <pre><code class='lang-javascript' data-srcbyline='examples/mockjax.js?151-153;155-159;163-167;169-170;172-178'></code></pre>
+    <h4>Request Header Matching</h4>
+    <pre><code class='lang-javascript' data-srcbyline='examples/mockjax.js?151-153;155-156;158-159;163-167;169-170;172-175;177-178'></code></pre>
 </section>
 
 
@@ -409,13 +426,19 @@
     <p class='fragment'>Don't rely on external services (even your own).</p>
     <p class='fragment'>Find a library that works for you!</p>
 
-    <cite style='bottom:-20em;'>http://chainchomp2.deviantart.com/art/Rapper-Ponies-450348867</cite>
+    <cite style='top:-17em; text-align:center; width:98%;'>http://chainchomp2.deviantart.com/art/Rapper-Ponies-450348867</cite>
 </section>
 
-<section>
+<section class='no-footer'>
     <h1>Thank You!</h1>
     <p style='margin-top:2em;'>
-        Jordan Kasper<br>
-        <a href='http://twitter.com/jakerella'>@jakerella</a> | <a href='http://bit.ly/no-server'>bit.ly/no-server</a>
+        Jordan Kasper | <a href='http://twitter.com/jakerella'>@jakerella</a>
     </p>
+    
+    <p style='font-size:0.9em; margin-top:2em;'>
+        <a href='http://jordankasper.com/no-server'>jordankasper.com/no-server</a> | 
+        <a href='examples/mocking-ajax.zip'>Example Code</a>
+    </p>
+    
+    <img src='/images/strongloop_logo_horiz.png' style='width:50%; position:relative; top:2em;'>
 </section>

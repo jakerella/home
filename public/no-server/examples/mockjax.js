@@ -15,10 +15,10 @@ $.mockjax({
     // ...
     url: 'api/search',
     method: 'GET',
-    response: function(settings) {
+    response: function(req) {
         var data = [];
 
-        if (settings.data.query && settings.data.query === 'foobar') {
+        if (req.data.query && req.data.query === 'foobar') {
             
             data.push({
                 id: 13,
@@ -26,7 +26,7 @@ $.mockjax({
                 // ...
             });
 
-        } else if (settings.data.query && settings.data.query === 'lots') {
+        } else if (req.data.query && req.data.query === 'lots') {
 
             for (var i=0; i<100; ++i) {
                 data.push({ /* ... */ });
