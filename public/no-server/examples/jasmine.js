@@ -51,7 +51,7 @@ describe('Rate beer', function() {
             avgRating: 3.5
         };
         
-        request.response({
+        request.respondWith({
             status: 200,
             responseText: JSON.stringify(data)
         });
