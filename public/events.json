@@ -429,6 +429,88 @@
             "topics": [
                 "Node.js"
             ]
+        },
+        {
+            "name": "Webinar",
+            "url": "https://engage.vevent.com/index.jsp?eid=556&ecid=82653&code=web-jsk",
+            "location": "(online)",
+            "date": "Jan 13 2016",
+            "topics": [
+                "LoopBack Node APIs (part 1)"
+            ]
+        },
+        {
+            "name": "Webinar",
+            "url": "https://engage.vevent.com/index.jsp?eid=556&ecid=82653&code=web-jsk",
+            "location": "(online)",
+            "date": "Jan 20 2016",
+            "topics": [
+                "LoopBack Node APIs (part 2)"
+            ]
+        },
+        {
+            "name": "Webinar",
+            "url": "https://engage.vevent.com/index.jsp?eid=556&ecid=82653&code=web-jsk",
+            "location": "(online)",
+            "date": "Jan 27 2016",
+            "topics": [
+                "LoopBack Node APIs (part 3)"
+            ]
+        },
+        {
+            "name": "Code Junkies",
+            "url": "http://www.meetup.com/Code-Junkies/events/227293599/",
+            "location": "New Providence, NJ",
+            "date": "Feb 3 2016",
+            "topics": [
+                "APIs in Node.js"
+            ]
+        },
+        {
+            "name": "DevNexus",
+            "url": "https://www.devnexus.com",
+            "location": "Atlanta, GA",
+            "date": "Feb 15 2016",
+            "topics": []
+        },
+        {
+            "name": "IBM Interconnect",
+            "url": "https://www-950.ibm.com/events/global/interconnect/sessions/preview.html?sessionid=PEN-4147",
+            "location": "Las Vegas, NV",
+            "date": "Feb 21 2016",
+            "topics": [
+                "Node.js and Java"
+            ]
+        },
+        {
+            "name": "Fluent",
+            "url": "http://conferences.oreilly.com/fluent/javascript-html-us",
+            "location": "San Francisco, CA",
+            "date": "Mar 8 2016",
+            "topics": []
+        },
+        {
+            "name": "Render",
+            "url": "http://2016.render-conf.com/workshop/325/rapid-api-development-with-nodejs-and-loopback",
+            "location": "Oxford, UK",
+            "date": "Apr 20 2016",
+            "topics": [
+                "APIs in Node.js"
+            ]
+        },
+        {
+            "name": "OSCON",
+            "url": "http://conferences.oreilly.com/oscon/open-source-us",
+            "location": "Austin, TX",
+            "date": "May 18 2016",
+            "topics": []
+        },
+        {
+            "name": "GlueCon",
+            "url": "http://gluecon.com/",
+            "location": "Broomfield, CO",
+            "date": "May 25 2016",
+            "topics": []
         }
     ]
 }
