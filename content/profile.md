@@ -11,12 +11,6 @@ I'm a contributer to a few open source projects and love participating in user g
 hackathons, and conferences. I'm a fan of the Oxford comma, and in my down time I enjoy puzzles 
 of all sorts and tabletop games.
 
-[<img src='/images/nomad-js.png' style='width:5.5em;padding:0 1em 0 0;float:left;'>](http://nomadjavascript.com 'Visit the NomadJS site') 
-I also host and help run [NomadJS](http://nomadjavascript.com), a monthly viritual usergroup 
-bringing top quality conference speakers to anyone around the world. You have to keep learning 
-or risk turning into a paperweight, and we're here to help. Join us every third Tuesday of the 
-month for great talks, or get the video and watch afterward!
-
 <p style='clear:left;' class='text-center'>
     You can find me as [@jakerella](http://twitter.com/jakerella) on most social and code sites:<br>
     <span class='icon-links'>
