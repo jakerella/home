@@ -28,6 +28,7 @@ window.jk = (function (jk, $) {
 
         setupHobbesHover();
         adjustContentHeight();
+        setupSearch();
     }
 
     function addModule(module) {
@@ -93,6 +94,24 @@ window.jk = (function (jk, $) {
         }
     }
 
+    function setupSearch() {
+        var input = $('.search [type="query"]');
+        $('.search').on('submit', function(e) {
+            e.preventDefault();
+            window.location.href = [
+                'https://www.google.com/?gws_rd=ssl#q=site:jordankasper.com+',
+                input.val()
+            ].join('');
+            return false;
+        });
+
+        $('body').on('keypress', function(e) {
+            if (e.which === 47 || e.which === 63) {
+                e.preventDefault();
+                input.focus();
+            }
+        });
+    }
 
     return {
         init: init,

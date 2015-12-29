@@ -5,7 +5,10 @@ header.row.sm-12.top-sticky
     a.off-canvas-trigger-right.hide-md.right(href='#', aria-controls='off-canvas-nav')
         i.icon-menu
 
+    include search.jade
+
     nav#off-canvas-nav.off-canvas-right.no-bullets.text-center
+        include search.jade
         include nav.jade
 
     nav.show-md.no-bullets.right
