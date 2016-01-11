@@ -37,7 +37,7 @@ First, spin up a [new LoopBack project](http://strongloop.com/get-started/) (you
 
 Follow the prompts to create your application, then [create a new model](http://docs.strongloop.com/display/public/LB/Creating+models) which extends the `User` class - I called mine "Employee". Inside our new Employee model we'll create two new [remote methods](http://docs.strongloop.com/display/public/LB/Extend+your+API) for our 2(.5) step process. I'm going to skip straight to the methods themselves, but you can read about how to create them at the link in the last sentence.
 
-Here is our function for requesting a new two-factor, time-limited code. Note that it does 3 basic things: find the user, check their password, and send them a code. **I've left out a bunch of error handling**, but you can see it in the [example repository](https://github.com/strongloop/loopback-example-two-factor/blob/master/common/models/employee.js). We're also using the [speakeasy library](https://github.com/markbao/speakeasy) to generate our tokens, so we'll require that first (be sure to install it as a dependency: `npm install --save speakeasy`).
+Here is our function for requesting a new two-factor, time-limited code. Note that it does 3 basic things: find the user, check their password, and send them a code. **I've left out a bunch of error handling**, but you can see it in the [example repository](https://github.com/jakerella/loopback-example-two-factor/blob/master/common/models/employee.js). We're also using the [speakeasy library](https://github.com/markbao/speakeasy) to generate our tokens, so we'll require that first (be sure to install it as a dependency: `npm install --save speakeasy`).
 
 ```js
 var speakeasy = require('speakeasy');
@@ -148,7 +148,7 @@ That's it for the server! At this point you could execute `slc run` and go to [h
 
 ## A Lightweight Login Form
 
-First, you need to follow the [instructions here](http://docs.strongloop.com/display/public/LB/Add+a+static+web+page) for adding a middleware configuration for serving static files from the "/client" directory; then we can add a new HTML file inside that directory. You can grab [the file from my example repository](https://github.com/strongloop/loopback-example-two-factor/blob/master/client/index.html), but here is the important part, the form:
+First, you need to follow the [instructions here](http://docs.strongloop.com/display/public/LB/Add+a+static+web+page) for adding a middleware configuration for serving static files from the "/client" directory; then we can add a new HTML file inside that directory. You can grab [the file from my example repository](https://github.com/jakerella/loopback-example-two-factor/blob/master/client/index.html), but here is the important part, the form:
 
 ```html
 <form id='login' action='' method='POST'>
@@ -177,7 +177,7 @@ Now we can add a `<script>` tag at the bottom for our UI code to call those endp
 
 When the user submits the form we'll check to see if they have a verification code yet, and if not, request one for them. Once they have a code we'll send the second API call to complete the login process.
 
-**Note that the code below has been cut short for brevity!** You can see the actual, [full UI JavaScript code](https://github.com/strongloop/loopback-example-two-factor/blob/master/client/two-factor.js) in the example repository.
+**Note that the code below has been cut short for brevity!** You can see the actual, [full UI JavaScript code](https://github.com/jakerella/loopback-example-two-factor/blob/master/client/two-factor.js) in the example repository.
 
 ```js
 document
@@ -215,7 +215,7 @@ document
 
 ## Show me the app!
 
-You can access the [full example application code](https://github.com/strongloop/loopback-example-two-factor) on Github, just clone the repository (or download the code), execute `npm install` from a console to install all dependencies, then execute `slc run` to start the application! Head to [http://localhost:3000](http://localhost:3000) to see the application in action! You'll want to have the console up, since we don't have SMS integration hooked up yet, the verification code will simply print to the server console.
+You can access the [full example application code](https://github.com/jakerella/loopback-example-two-factor) on Github, just clone the repository (or download the code), execute `npm install` from a console to install all dependencies, then execute `slc run` to start the application! Head to [http://localhost:3000](http://localhost:3000) to see the application in action! You'll want to have the console up, since we don't have SMS integration hooked up yet, the verification code will simply print to the server console.
 
 ![The server console with the two-factor code prompt](http://strongloop.com/wp-content/uploads/2015/02/two-factor-code.png)
 
