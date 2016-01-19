@@ -479,7 +479,8 @@
             "location": "Las Vegas, NV",
             "date": "Feb 21 2016",
             "topics": [
-                "Node.js and Java"
+                "Node.js and Java",
+                "Zero to Node API"
             ]
         },
         {
@@ -510,6 +511,13 @@
             "url": "http://gluecon.com/",
             "location": "Broomfield, CO",
             "date": "May 25 2016",
+            "topics": []
+        },
+        {
+            "name": "NationJS Node Day",
+            "url": "http://nationjs.com/",
+            "location": "Washington, DC",
+            "date": "March 11 2016",
             "topics": []
         }
     ]
