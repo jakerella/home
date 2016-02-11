@@ -24,7 +24,7 @@ window.drawarrow = (function(app) {
 
     function getOptions(node) {
         var options,
-            optionsString = node.dataset.arrow || '{}';
+            optionsString = (node.dataset && node.dataset.arrow) || '{}';
         
         try {
             
