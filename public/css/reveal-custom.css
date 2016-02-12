@@ -71,6 +71,10 @@ aside.title-text h3 {
     color: #446;
 }
 
+.reveal .slides section strong {
+    font-weight: bold;
+}
+
 .reveal .slides li {
     text-align: left;
     line-height: 1.2em;
