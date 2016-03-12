@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang='en'>
+    <head>
+        <meta charset='utf-8'>
+        <title>Select Random String</title>
+
+        <meta name='description' content='Select a random value from the query string.'>
+        <meta name='author' content='Jordan Kasper'>
+        <meta name='viewport' content='width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no'>
+
+        <style>
+            main {
+                height: 20em;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+            article {
+                width: 80%;
+                height: 80%;
+                background-color: #eee;
+                border-radius: 1em;
+                box-shadow: 0.2em 0.3em 0.5em #999;
+                text-align: center;
+            }
+            h1 {
+                height: 20%;
+                margin-top: 2em;
+                font-size: 2em;
+            }
+            button {
+                border: none;
+                font-size: 1.5em;
+        	    border-radius: 5px;
+            	cursor: pointer;
+            	padding: 15px 70px;
+            	display: inline-block;
+            	margin: 15px 30px;
+            	position: relative;
+            	transition: all 0.3s;
+                background: #cb4e4e;
+                color: #fff;
+                box-shadow: 0 6px #ab3c3c;
+            }
+            button:hover {
+            	box-shadow: 0 4px #ab3c3c;
+            	top: 2px;
+            }
+            button:active {
+            	box-shadow: 0 0 #ab3c3c;
+            	top: 6px;
+            }
+
+            @-webkit-keyframes "pulse" {
+                0% { font-size: 2em; }
+                50% { font-size: 3em; }
+                100% { font-size: 2em; }
+            }
+
+            .pulse {
+            	-webkit-animation: pulse 1s linear infinite;
+            }
+        </style>
+    </head>
+    <body>
+        <main>
+            <article>
+                <h1 class='selection'></h1>
+                <button>Randomize</button>
+            </article>
+        </main>
+
+        <script>
+        (function() {
+            var displayInterval = 150;
+            var entries = (location.search.substr(1) || '').split(/&/).filter(function(item) { return item.length; });
+            var selection = document.querySelector('.selection');
+
+            document.querySelector('button')
+                .addEventListener('click', function selectRandomEntry(node) {
+                    console.info('Finding random entry', entries);
+                    if (!entries.length) {
+                        selection.innerHTML = 'Hmm, looks like you need to add some entries in the query string. Try this:<br>/random.html?foo&bar&bat&baz';
+                        return;
+                    }
+                    selection.classList.remove('pulse');
+                    showRandom(3000, function() {
+                        selection.innerHTML = entries[Math.floor(Math.random() * entries.length)];
+                        selection.classList.add('pulse');
+                    });
+                });
+
+            function showRandom(msRemaining, cb) {
+                if (msRemaining > 0) {
+                    selection.innerHTML = entries[Math.floor(Math.random() * entries.length)];
+                    setTimeout(function() {
+                        showRandom(msRemaining - displayInterval, cb);
+                    }, displayInterval);
+                } else {
+                    cb();
+                }
+            }
+        })();
+        </script>
+    </body>
+</html>
