@@ -500,25 +500,20 @@
             ]
         },
         {
-            "name": "OSCON",
-            "url": "http://conferences.oreilly.com/oscon/open-source-us",
-            "location": "Austin, TX",
-            "date": "May 18 2016",
-            "topics": []
-        },
-        {
-            "name": "GlueCon",
-            "url": "http://gluecon.com/",
-            "location": "Broomfield, CO",
-            "date": "May 25 2016",
-            "topics": []
-        },
-        {
             "name": "NationJS Node Day",
             "url": "http://nationjs.com/",
             "location": "Washington, DC",
             "date": "March 11 2016",
             "topics": []
+        },
+        {
+            "name": "Rochester JS Meetup",
+            "url": "https://plus.google.com/communities/111326506988884743140",
+            "location": "Rochester, NY",
+            "date": "May 17 2016",
+            "topics": [
+                "Testing Front End JavaScript"
+            ]
         }
     ]
 }
