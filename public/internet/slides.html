@@ -417,6 +417,52 @@
     </aside>
 </section>
 
+<section id='get-v-post'>
+    <h3>I'll <strong>GET</strong> you my pretty, and your little <strong>POST</strong>, too.</h3>
+
+    <div>
+        <div style='width:48%; float:left;' class='fragment'>
+            <h3>GET</h3>
+            <p>
+                Data Retrieval<br />
+                <img src='images/show-me-the-money.jpg' />
+            </p>
+        </div>
+
+        <div style='width:48%; float:left;' class='fragment'>
+            <h3>POST</h3>
+            <p>
+                Data Creation<br />
+                <img src='images/kitty_money.jpg' height='270px' /><br />
+                <cite class='image'>http://cheezburger.com/6339194624</cite>
+            </p>
+        </div>
+
+    </div>
+    <div style='clear:both;'></div>
+</section>
+
+<section id='other-http-methods'>
+    <h2>Grumpy, Sneezy, Dopey, Happy, Doc, ...</h2>
+
+    <div class='fragment' style='margin-top:2em; text-align:left;'>
+        <ul>
+            <li><strong>GET</strong> - Data Retrieval</li>
+            <li><strong>POST</strong> - Data Creation</li>
+            <li><strong>PUT</strong> - Data Updates</li>
+            <li><strong>DELETE</strong> - Data Deletion</li>
+        </ul>
+        <div class='fragment' style='font-size:0.8em;'>
+            <h3 style='margin-top:2em;'>Less used...</h3>
+            <ul style='margin-top:1em;'>
+                <li><strong>OPTIONS</strong> - Tells the client what methods are supported (and sometimes how to use them)</li>
+                <li><strong>PATCH</strong> - Update part of a record with the given data (if implemented, then PUT usually replaces the <em>entire record</em>)</li>
+                <li><strong>HEAD</strong> - basically a GET, but only retrieves http headers, not the full response</li>
+            </ul>
+        </div>
+    </div>
+</section>
+
 <section id='request-cookies'>
     <h2>Anatomy 101</h2>
 
@@ -470,11 +516,18 @@
     </aside>
 </section>
 
+<section id='status-codes'>
+    <h2>Status Codes</h2>
 
+    <ul>
+        <li class='fragment'>100-199 - Informational <span class='fine'>(very rarely used)</span></li>
+        <li class='fragment'>200-299 - Success <span class='fine'>(200, 201, 204)</span></li>
+        <li class='fragment'>300-399 - Redirection and Cache <span class='fine'>(301, 302, 304)</span></li>
+        <li class='fragment'>400-499 - Client Error <span class='fine'>(400, 401/403, 404, 405, 418)</span></li>
+        <li class='fragment'>500-599 - Server Error <span class='fine'>(500, 501)</span></li>
+    </ul>
 
-<!-- START HERE -->
-
-
+</section>
 
 <section id='browser-rendering'>
     <h2>It renders you helpless...</h2>
@@ -516,60 +569,6 @@
 </section>
 
 <!--
-<section id='get-v-post'>
-    <h3>I'll GET you my pretty, and your little POST, too.</h3>
-
-    <p>
-        You've heard of <strong>GET</strong> and <strong>POST</strong>...<br />
-        but are you using them correctly?
-    </p>
-
-    <div>
-        <div style='width:48%; float:left;' class='fragment'>
-            <h3>GET</h3>
-            <p>
-                Data Retrieval<br />
-                <img src='images/show-me-the-money.jpg' />
-            </p>
-        </div>
-
-        <div style='width:48%; float:left;' class='fragment'>
-            <h3>POST</h3>
-            <p>
-                Data Updating<br />
-                <img src='images/kitty_money.jpg' height='270px' /><br />
-                <cite class='image'>http://cheezburger.com/6339194624</cite>
-            </p>
-        </div>
-
-    </div>
-    <div style='clear:both;'></div>
-</section>
-
-<section id='other-http-methods'>
-    <h2>Grumpy, Sneezy, Dopey, Happy, Doc, ...</h2>
-
-    <p>
-        There are more than two methods!<br />
-        Generally these are used by more complex systems and <acronym title='Application Programming Interface'>API</acronym>s
-    </p>
-
-    <div class='fragment' style='margin-top:2em; text-align:left;'>
-        <ul>
-            <li><strong>PUT</strong> - Update a record with the given data (in APIs, a POST is used for <em>creating</em> records, while PUT is used for <em>updating</em>)</li>
-            <li><strong>DELETE</strong> - Delete the given record</li>
-        </ul>
-        <div class='fragment'>
-            <h3 style='margin-top:2em;'>Less used...</h3>
-            <ul style='margin-top:1em;'>
-                <li><strong>OPTIONS</strong> - Tells the client what methods are supported (and sometimes how to use them)</li>
-                <li><strong>PATCH</strong> - Update part of a record with the given data (if implemented, then PUT usually replaces the <em>entire record</em>)</li>
-                <li><strong>HEAD</strong> - basically a GET, but only retrieves http headers, not the full response</li>
-            </ul>
-        </div>
-    </div>
-</section>
-
 <section id='ajax'>
     <h2>AJAX: It's synchronicity!</h2>
 
