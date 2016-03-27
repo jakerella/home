@@ -75,6 +75,7 @@
             var displayInterval = 150;
             var entries = (location.search.substr(1) || '').split(/&/).filter(function(item) { return item.length; });
             var selection = document.querySelector('.selection');
+            var previous = [];
 
             document.querySelector('button')
                 .addEventListener('click', function selectRandomEntry(node) {
@@ -84,11 +85,25 @@
                         return;
                     }
                     selection.classList.remove('pulse');
-                    showRandom(3000, function() {
-                        selection.innerHTML = entries[Math.floor(Math.random() * entries.length)];
+                    showRandom(3000, function finalResult() {
+                        selection.innerHTML = getUniqueEntry();
                         selection.classList.add('pulse');
                     });
                 });
+
+            function getUniqueEntry() {
+                var next = entries[Math.floor(Math.random() * entries.length)];
+                if (previous.length >= entries.length) {
+                    previous = [];
+                }
+
+                if (previous.indexOf(next) > -1) {
+                    return getUniqueEntry();
+                } else {
+                    previous.push(next);
+                    return next;
+                }
+            }
 
             function showRandom(msRemaining, cb) {
                 if (msRemaining > 0) {
