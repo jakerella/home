@@ -69,6 +69,7 @@ aside.title-text h3 {
 
 .slides p {
     color: #446;
+    margin: 0.5em 0;
 }
 
 .reveal .slides section strong {
@@ -108,7 +109,7 @@ aside.title-text h3 {
     color: #2f85aa;
     font-size: 0.8em;
     padding: 0.05em 0.2em;
-    
+
     -webkit-border-radius: 0.4em;
     -moz-border-radius: 0.4em;
     border-radius: 0.4em;
@@ -156,9 +157,9 @@ footer.left {
 footer.right {
     left: 0.5em;
 }
-footer span.tagline {
+footer .copyright {
     font-size: 0.5em;
-    color: #333;
+    color: #666;
     vertical-align: middle;
     margin-left: 1em;
 }

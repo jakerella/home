@@ -2,15 +2,14 @@ doctype html
 html
     head
         include preso-head.jade
-    
+
     body
         div.reveal
-            
+
             footer.left
-                img(src="/images/strongloop_logo_horiz.png", alt="StrongLoop", style="width:15%;")
-                span.tagline.
-                    An IBM Company
-            
+                p.copyright.
+                    &copy; Jordan Kasper
+
             div.slides
                 != renderSlideContent()
 
