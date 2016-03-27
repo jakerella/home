@@ -5,11 +5,12 @@
 
 I'm a mild-mannered developer and evangelist by day... and, well, by night too, I suppose.
 
-Shortly after it arrived at my home in 1993, I began disassembling our first computer - my 
-mother was not happy. She breathed more easily when I moved from hardware into programming. 
-I'm a contributer to a few open source projects and love participating in user groups, barcamps, 
-hackathons, and conferences. I'm a fan of the Oxford comma, and in my down time I enjoy puzzles 
-of all sorts and tabletop games.
+Shortly after it arrived at my home in 1993, I began disassembling our first computer - my
+mother was not happy. She breathed more easily when I moved from hardware into programming.
+I'm a contributor to a few open source projects and love participating in user groups, barcamps,
+hackathons, and conferences. I'm currently a front-end engineering instructor for
+[The Iron Yard in Washington, DC](https://www.theironyard.com/locations/dc.html). I'm a fan of '
+the Oxford comma, and in my down time I enjoy puzzles of all sorts and tabletop games.
 
 <p style='clear:left;' class='text-center'>
     You can find me as [@jakerella](http://twitter.com/jakerella) on most social and code sites:<br>
