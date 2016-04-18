@@ -514,6 +514,24 @@
             "topics": [
                 "Testing Front End JavaScript"
             ]
+        },
+        {
+            "name": "TIY Crash Course",
+            "url": "http://www.meetup.com/The-Iron-Yard-DC/events/230136390/",
+            "location": "Washington, DC",
+            "date": "May 12 2016",
+            "topics": [
+                "Front End Engineering"
+            ]
+        },
+        {
+            "name": "The Iron Yard FEE Course",
+            "url": "https://www.theironyard.com/courses/javascript-and-mvc-frameworks.html",
+            "location": "Washington, DC",
+            "date": "Jun 20 2016",
+            "topics": [
+                "Front End Engineering - HTML, CSS, JS"
+            ]
         }
     ]
 }
