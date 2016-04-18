@@ -532,6 +532,15 @@
             "topics": [
                 "Front End Engineering - HTML, CSS, JS"
             ]
+        },
+        {
+            "name": "TIY Crash Course",
+            "url": "http://www.meetup.com/The-Iron-Yard-DC/events/229968543/",
+            "location": "Washington, DC",
+            "date": "Apr 12 2016",
+            "topics": [
+                "Intro to Sass"
+            ]
         }
     ]
 }
