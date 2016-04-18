@@ -1,0 +1,149 @@
+<section class='no-footer'>
+    <h2>Rapid API Development</h2>
+    <h3>with Node.js and LoopBack</h3>
+
+    <a href='http://loopback.io'><img src='/images/loopback.png' alt='LoopBack'></a>
+
+    <p style='margin-top:2em;'>Jordan Kasper | <a href='http://twitter.com/jakerella'>@jakerella</a></p>
+    <p>
+        <a href='http://jordankasper.com/node-apis'>jordankasper.com/node-apis</a>
+    </p>
+</section>
+
+<section>
+    <p>
+        <img src='/images/hobbes_large_trans.png' alt='me' style='width:40%'><br>
+        <a href='http://twitter.com/jakerella'>@jakerella</a>
+    </p>
+</section>
+
+<section>
+    <h2>Agenda</h2>
+
+    <ol>
+        <li>Node Basics (briefly)</li>
+        <li>LoopBack Feature Overview</li>
+        <li>Tools, Application Scaffolding, &amp; Configuration</li>
+        <li>Basic Data Models &amp; Data Sources</li>
+        <li>Relationship Modeling</li>
+        <li>Data Validation</li>
+        <li>Authentication &amp; Authorization</li>
+        <li>Custom Remote Methods</li>
+        <li><em>Basic Debugging and Profiling (time permitting)</em></li>
+    </ol>
+</section>
+
+<section>
+    <h2>Node Basics</h2>
+</section>
+
+<section data-background='white'>
+    <img src='/images/Node-Architecture.png' alt='Node Architecture'>
+    <cite>http://training.strongloop.com/node-and-java#/5</cite>
+</section>
+
+<section>
+    <h2>Basic Modules</h2>
+
+    <pre class='fragment'><code data-trim data-noescape>
+// math.js
+module.exports = function add(x, y) {
+    return x + y;
+};
+    </code></pre>
+
+    <pre class='fragment'><code data-trim>
+// index.js
+var addNumbers = require('math');
+
+addNumbers(6, 7);  // 13
+    </code></pre>
+</section>
+
+<section>
+    <h2>Basic Modules</h2>
+
+    <pre><code data-trim data-noescape>
+function add(x, y) { return x + y; }
+function subtract(x, y) { return x - y; }
+
+module.exports = {
+    add: add,
+    subtract: subtract
+};
+    </code></pre>
+
+    <pre class='fragment'><code data-trim>
+// index.js
+var mathApi = require('math');
+
+mathApi.add(6, 7);  // 13
+    </code></pre>
+</section>
+
+<section>
+    <h2>Revealing Module Patten</h2>
+
+    <pre><code data-trim data-noescape>
+module.exports = function myApi(option) {
+    // inspect options, build API methods...
+
+    return {
+        methodOne: function() { ... },
+        methodTwo: function() { ... }
+    };
+};
+    </code></pre>
+    <pre class='fragment'><code data-trim data-noescape>
+var express = require('express');
+
+var app = express();
+app.set('port', 3000);
+    </code></pre>
+</section>
+
+<section>
+    <h2>The Node.js API</h2>
+
+    <a href='https://nodejs.org/api/'>nodejs.org/api</a>
+</section>
+
+<section>
+    <img src='/images/loopback.png' alt='LoopBack'><br>
+
+    <a href='http://loopback.io'>http://LoopBack.io</a>
+</section>
+
+<section>
+    <h2>Slides from StrongLoop</h2>
+    <p>
+        <a href='http://training.strongloop.com/intro-to-loopback' target='_blank'>training.strongloop.com/intro-to-loopback</a>
+        <span class='fine'>
+            (<a href='http://training.strongloop.com/intro-to-loopback?print-pdf' target='_blank'>PDF</a>)
+        </span>
+    </p>
+
+    <p style='margin-top:2em;'>
+        StrongLoop Documentation:
+        <a href='https://docs.strongloop.com/display/public/LB/LoopBack' target='_blank'>docs.strongloop.com</a>
+    </p>
+</section>
+
+<section data-background='white'>
+    <img src='/images/loopback-high-level.png' alt='LoopBack at a high level'>
+
+    <cite>http://training.strongloop.com/intro-to-loopback#/9</cite>
+</section>
+
+<section>
+    <h2 style='font-size:3em;'>Let's Code!</h2>
+</section>
+
+<section class='no-footer'>
+    <h2>Thank You!</h2>
+
+    <p style='margin-top: 3em'>Jordan Kasper | <a href='http://twitter.com/jakerella'>@jakerella</a></p>
+    <p>
+        <a href='http://jordankasper.com/node-apis'>jordankasper.com/node-apis</a><br>
+    </p>
+</section>
