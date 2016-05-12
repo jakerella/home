@@ -9,15 +9,15 @@ function getContentForRoute(url, site) {
     var def = q.defer(),
         // we don't want this trailing slashes or query strings
         slug = url.replace(/\/$/, '').replace(/\?.+/, '');
-    
+
     fs.exists(path.join(site.contentDir, slug + '.md'), function(exists) {
         var content;
 
         if (exists) {
-            
+
             // strip leading slash and render the content
             content = renderer.renderContent(slug.substr(1), site);
-            
+
             if (content instanceof Error) {
                 content.status = 500;
                 def.reject(content);
@@ -29,10 +29,10 @@ function getContentForRoute(url, site) {
 
             fs.exists(path.join(site.publicDir, slug, 'slides.json'), function(exists) {
                 if (exists) {
-                    
+
                     // strip leading slash and render the content
                     content = renderer.renderSlides(slug.substr(1), site);
-                    
+
                     if (content instanceof Error) {
                         content.status = 500;
                         def.reject(content);
@@ -96,11 +96,12 @@ function getRedirectUrl(url, site) {
 
 module.exports = function(app, site) {
     var api = require('./api.js')(site);
+    var notes = require('./notes.js')(site);
 
     // Homepage (index) router
     app.get('/', function(req, res, next) {
         var content = renderer.renderContent('home', site);
-        
+
         if (content instanceof Error) {
             content.status = 500;
             next(content);
@@ -114,6 +115,8 @@ module.exports = function(app, site) {
     app.get('/api/content/posts', api.getAllPosts);
     app.get('/api/content/posts/recent', api.getRecentPosts);
 
+    app.get('/notes/:bin', notes);
+
     // Router for all other pages/posts
     app.get('*', function(req, res, next) {
         // Site redirects
@@ -122,7 +125,7 @@ module.exports = function(app, site) {
             res.redirect(301, redirect);
             return;
         }
-        
+
         if (/^\/[^\/]+$/.test(req.url)) {
             res.redirect(301, req.url + '/');
             return;

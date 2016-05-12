@@ -1,0 +1,32 @@
+doctype html
+html
+    head
+        include head.jade
+
+    body.notes.off-canvas-contain(data-slug=slug)
+        include header.jade
+
+        section.main-body.row
+
+            article.main-content.sm-12.md-9
+                h2.
+                    Live Notes (#{bin})
+                textarea.edit-notes
+
+            aside.sidebar.sm-12.md-3
+                div.events
+                    h2 Upcoming Events
+                    ul.upcoming-events
+                div.recent-posts
+                    h2 Recent Posts
+
+        include footer.jade
+
+        include scripts.jade
+
+        script.
+            jk.init({
+                notes: {
+                    bin: '#{bin}'
+                }
+            });
