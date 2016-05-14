@@ -4,4 +4,19 @@ body > footer {
     font-size: 0.8em;
     background-color: $footerBackground;
     color: $footerTextColor;
+
+    .rss {
+        font-size: 2em;
+        display: block;
+        float: right;
+        padding-right: 1em;
+
+        &:link, &:visited {
+            color: #333;
+        }
+        &:hover, &:active {
+            color: #33f;
+            border: none;
+        }
+    }
 }

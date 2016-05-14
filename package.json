@@ -12,6 +12,7 @@
     "lodash": "^2.4.1",
     "marked": "^0.3.2",
     "q": "^1.0.1",
+    "rss": "^1.2.1",
     "serve-static": "^1.7.1"
   },
   "devDependencies": {

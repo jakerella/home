@@ -122,6 +122,18 @@ module.exports = function(app, site) {
         res.end(renderer.renderTagPosts(req.params.tag, site));
     });
 
+    app.get('/rss', function(req, res) {
+        var contentHelper = require('./contentHelper')(site);
+        contentHelper.getRss()
+            .then(function(xml) {
+                res.end(xml);
+            })
+            .fail(function(err) {
+                console.log('RSS ERROR: ', err);
+                res.status(500).send('Unable to build RSS feed');
+            });
+    });
+
 
     // Router for all other pages/posts (content)
     app.get('*', function(req, res, next) {

@@ -14,6 +14,21 @@
         max-width: 99%;
         overflow: auto;
     }
+
+    .rss {
+        font-size: 1.2em;
+        display: block;
+        float: right;
+        padding: 0.5em 0 0 0;
+
+        &:link, &:visited {
+            color: #333;
+        }
+        &:hover, &:active {
+            color: #33f;
+            border: none;
+        }
+    }
 }
 
 .recent-posts img {

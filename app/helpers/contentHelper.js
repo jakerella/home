@@ -4,6 +4,8 @@ var fs = require('fs'),
     q = require('q'),
     _ = require('lodash'),
     marked = require('marked'),
+    RSS = require('rss'),
+    dateFormat = require('dateformat'),
 
     WORD_COUNT = 100,
     CACHE_FILE = path.join(__dirname, '..', 'tmp', 'contentcache.json'),
@@ -70,6 +72,48 @@ module.exports = function(site) {
             });
 
             return tags;
+        },
+
+        getRss: function() {
+            var feed = new RSS({
+                title: 'So long and thanks for all the fish',
+                description: 'Blog posts from Jordan Kasper',
+                feed_url: 'https://jordankasper.com/rss',
+                site_url: 'https://jordankasper.com',
+                image_url: 'https://jordankasper.com/images/hobbes_small.png',
+                managingEditor: 'Jordan Kasper',
+                webMaster: 'Jordan Kasper',
+                copyright: (new Date()).getFullYear() + ' Jordan Kasper',
+                language: 'en',
+                categories: ['Software Development','JavaScript'],
+                pubDate: dateFormat(new Date(), 'mmm dd, yyyy HH:MM:ss Z'),
+                ttl: (60 * 24)
+            });
+
+            return methods.getContent({
+                dir: site.contentDir,
+                includeStatic: false,
+                limit: 20
+            }).then(function(data) {
+
+                data.files.forEach(function(post) {
+                    var title = post.slug
+                        .replace(/\-/g, ' ')
+                        .replace(/\w*/g, function(t){ return t.charAt(0).toUpperCase()+t.substr(1).toLowerCase(); });
+
+                    feed.item({
+                        title: title,
+                        description: post.brief,
+                        url: 'https://jordankasper.com/' + post.slug,
+                        guid: post.slug,
+                        categories: post.tags,
+                        author: 'Jordan Kasper',
+                        date: dateFormat(post.publishTime, 'mmm d, yyyy')
+                    });
+                });
+
+                return feed.xml();
+            });
         }
     };
 
