@@ -541,6 +541,33 @@
             "topics": [
                 "Intro to Sass"
             ]
+        },
+        {
+            "name": "TIY Crash Course",
+            "url": "http://www.meetup.com/The-Iron-Yard-DC/events/230136390/",
+            "location": "Washington, DC",
+            "date": "May 19 2016",
+            "topics": [
+                "My first web site"
+            ]
+        },
+        {
+            "name": "DC JavaScript",
+            "url": "http://www.meetup.com/DC-JavaScript/",
+            "location": "Washington, DC",
+            "date": "Jun 13 2016",
+            "topics": [
+                "HTML5 APIs"
+            ]
+        },
+        {
+            "name": "The Iron Yard FEE Course",
+            "url": "https://www.theironyard.com/courses/javascript-and-mvc-frameworks.html",
+            "location": "Washington, DC",
+            "date": "Oct 3 2016",
+            "topics": [
+                "Front End Engineering - HTML, CSS, JS"
+            ]
         }
     ]
 }
