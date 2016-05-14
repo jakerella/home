@@ -32,4 +32,4 @@ What else are you doing do help others? Do you develop with purpose? And where w
 
 {{March 5, 2014}}
 
-@@ conference, purpose
+@@ conferences, miscellaneous

@@ -5,7 +5,7 @@ I wouldn't call myself an extrovert. Other people have - and do - but I think my
 You see, my trouble with tribes is that often it leads to entirely too many voices on any given topic. Whether any individual member of the tribe has any specific or useful knowledge on the topic seems to be irrelevant in most cases. Let me give you an example:
 
 > <div class='right'><img src='uploads/firewood.jpg' style='width:300px;' alt='Firewood'><br><cite>&copy; Baltic Firewood 2010</cite></div>
-> 
+>
 > Tribesman John needs to gather wood for tonight's bonfire. Paul says that the best wood is to the East. Mary disagrees and says the best wood is to the North. A tribe elder thinks this discussion is good so that we can determine the best location for wood in the future. The tribe leader asks George and Tony to join the discussion as they have both gathered wood before.
 
 Okay, I think we've taken that far enough, but hopefully you can identify with the situation and some of its deficiencies. If I am John, all I want to do is go get some wood. And if there is no good wood to the East, then I'll go a different direction. And just because there was plentiful wood to the North in the past doesn't mean there will be now.
@@ -20,4 +20,4 @@ So people, please, step up and control your tasks. And leaders, control your tri
 
 {{September 13, 2010}}
 
-@@ team, leadership
+@@ leadership, business

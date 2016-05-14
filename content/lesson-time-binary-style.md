@@ -61,4 +61,4 @@ A lot of people think programmer's write a bunch of 1s and 0s (known as [machine
 
 {{September 29, 2010}}
 
-@@ learning, binary, math
+@@ learning, development

@@ -88,4 +88,4 @@ In io.js you don’t need the --harmony flag because all of those features are b
 
 {{March 17, 2015}}
 
-@@ javascript, es6
+@@ development, javascript, es6

@@ -18,4 +18,4 @@ There are some nasty bugs we want to fix, but those may require some more signif
 
 {{October 24, 2014}}
 
-@@ jquery, mockjax, open source, javascript, testing
+@@ development, jquery, mockjax, open source, javascript, testing

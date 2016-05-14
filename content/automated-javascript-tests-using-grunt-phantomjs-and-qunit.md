@@ -10,7 +10,7 @@ First things first, you'll need to install the [Node](http://nodejs.org) (we'll 
 
 ```bash
 ~$ sudo apt-get install nodejs
- 
+
 ~$ sudo npm install -g grunt-cli
 ```
 
@@ -63,7 +63,7 @@ In order to get Grunt ready to run we need to create (and fill in) our Gruntfile
 module.exports = function(grunt) {
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'), // the package file to use
- 
+
     taskName: { // internal task or name of a plugin (like "qunit")
       // options, etc (see the task/plugin for details)
     },
@@ -110,29 +110,29 @@ At this point Grunt is ready (although we haven't done the "watch" task yet, we'
   <head>
       <meta charset='UTF-8' />
       <meta http-equiv='content-type' content='text/html; charset=utf-8' />
- 
+
       <title>jQuery.simpleFAQ QUnit Test Runner</title>
- 
+
       <link rel='stylesheet' href='lib/qunit-1.10.0.css'>
- 
+
       <!-- add any external libraries your code needs -->
       <script src='lib/jquery-1.7.2.min.js'></script>
- 
+
       <script src='../src/your.project.code.js'></script>
       <!-- add any JS files under test (or put them in different .html files) -->
- 
+
       <script src='lib/qunit-1.10.0.js'></script>
- 
+
       <!-- your tests, any and all to run with the given fixtures below -->
       <script src='tests.js'></script>
- 
+
   </head>
   <body>
     <div id="qunit"></div> <!-- QUnit fills this with results, etc -->
     <div id='qunit-fixture'>
- 
+
       <!-- any HTML you want to be present in each test (will be reset for each test) -->
- 
+
     </div>
   </body>
 </html>
@@ -142,7 +142,7 @@ Great, now we need to write some tests. Create a "test.js" file, also in your "t
 
 ```js
 module("Basic Tests");
- 
+
 test("truthy", function() {
   ok(true, "true is truthy");
   equal(1, true, "1 is truthy");
@@ -166,12 +166,12 @@ We should be ready to run our tests now, so navigate to your project directory a
 
 ```bash
 ~$ cd /path/to/project/root/
- 
+
 ~$ grunt
 Running "qunit:all" (qunit) task
 Testing tests/index.html..............OK
 >> 3 assertions passed (10ms)
- 
+
 Done, without errors.
 ```
 
@@ -212,9 +212,9 @@ Waiting...OK
 Running "qunit:all" (qunit) task
 Testing tests/index.html..............OK
 >> 3 assertions passed (10ms)
- 
+
 Done, without errors.
- 
+
 Completed in 0.771s at Sun Apr 21 2013 11:44:29 GMT-0500 (CDT) - Waiting...
 ```
 
@@ -224,4 +224,4 @@ Hope you enjoyed the tutorial, let me know if you have questions, corrections, o
 
 {{April 21, 2013}}
 
-@@ javascript, testing, qunit, phantomjs, grunt, automation
+@@ development, javascript, testing, automation

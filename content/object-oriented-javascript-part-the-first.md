@@ -303,4 +303,4 @@ In the [next post](/object-oriented-javascript-part-the-second) we'll introduce 
 
 {{August 31, 2015}}
 
-@@ javascript, objects, classes, oop
+@@ development, javascript

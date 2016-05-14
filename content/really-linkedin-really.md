@@ -1,6 +1,6 @@
 ## Really LinkedIn? REALLY?
 
-I receive a lot of job offers/interview requests on LinkedIn. My profile clearly indicates that I *do not* wish to receive these requests. And as much as you may hate Facebook, at least on here random people can't contact me if I don't want them to. On LinkedIn, pretty much anyone can contact me so long as they make the "category" somehting I want to hear about.
+I receive a lot of job offers/interview requests on LinkedIn. My profile clearly indicates that I *do not* wish to receive these requests. And as much as you may hate Facebook, at least on here random people can't contact me if I don't want them to. On LinkedIn, pretty much anyone can contact me so long as they make the "category" somehthing I want to hear about.
 
 This came Friday, below that is my response.
 
@@ -42,4 +42,4 @@ Too harsh? By the way, I also marked his message as spam - here's hoping someone
 
 {{June 18, 2012}}
 
-@@ social, spam, email, jobs
+@@ social, spam, jobs

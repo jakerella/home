@@ -254,4 +254,4 @@ This may look very appealing to you, especially coming from a class-based langua
 
 {{September 1, 2015}}
 
-@@ javascript, objects, classes, oop
+@@ development, javascript

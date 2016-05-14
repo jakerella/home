@@ -2,7 +2,7 @@
 
 Web developers, I mean this with the utmost seriousness, we have a weight problem.
 
-No, no... not YOU personally (well, maybe... we sit on our butts quite a bit) - I'm talking about our web sites. They're getting heavier, a LOT heavier. Year over year the top 1,000 web sites (according to Alexa ranking) have increased their page-weight about 24%*. This is according to the [HTTP Archive statistics site](http://httparchive.org/trends.php?s=Top1000&minlabel=Apr+1+2012&maxlabel=Apr+1+2013) which keeps such statistics for top 1000 and 100 web sites globally. And it's not just the number of bytes transferred, it's the number of HTTP requests made per page that has increased as well.
+No, no... not YOU personally (well, maybe... we sit on our butts quite a bit) - I'm talking about our web sites. They're getting heavier, a LOT heavier. Year over year the top 1,000 web sites (according to Alexa ranking) have increased their page-weight about 24% * . This is according to the [HTTP Archive statistics site](http://httparchive.org/trends.php?s=Top1000&minlabel=Apr+1+2012&maxlabel=Apr+1+2013) which keeps such statistics for top 1000 and 100 web sites globally. And it's not just the number of bytes transferred, it's the number of HTTP requests made per page that has increased as well.
 
 A lot of you may have already guessed one of the leading causes of this increase: single-page web applications.
 
@@ -24,4 +24,4 @@ In my opinion, the single-page application is not the best approach. I think mul
 
 {{April 12, 2013}}
 
-@@ efficiency, http
+@@ development, efficiency, http

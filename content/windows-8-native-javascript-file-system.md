@@ -22,14 +22,14 @@ function getFolderFromPathRecursive (path, rootFolder) {
         folders = normalizedPath.split(/\//),
         // remove the first folder in the path as the new one to create
         subFolderName = folders.shift();
- 
+
     return new WinJS.Promise(function (complete, error) {
         if (!subFolderName || !subFolderName.length) {
             // we're done!
             complete(rootFolder);
             return;
         }
- 
+
         // create the next subfolder...
         rootFolder
             .createFolderAsync(subFolderName, Windows.Storage.CreationCollisionOption.openIfExists)
@@ -51,7 +51,7 @@ function getFolderFromPathRecursive (path, rootFolder) {
                 )
     });
 }
- 
+
 // An example of how to call this...
 var theLowestFolder = getFolderFromPathRecursive(
     "foo/bar/bat/baz",
@@ -68,7 +68,7 @@ One of my other tasks was to find the oldest file in a folder and delete it. The
 function getFilesWithProperties (files) {
     var promises = [],
         filesWithProps = [];
- 
+
     return new WinJS.Promise(function (complete, error) {
         files.forEach(function (file) {
             promises.push(
@@ -82,7 +82,7 @@ function getFilesWithProperties (files) {
                 })
             );
         });
- 
+
         WinJS.Promise.join(promises).then(
             function () {
                 complete(filesWithProps);
@@ -91,7 +91,7 @@ function getFilesWithProperties (files) {
         );
     });
 }
- 
+
 // And here's how I was getting the initial file list:
 var folder = Windows.Storage.ApplicationData.current.localFolder; // (could be any StorageFolder)
 var options = new Windows.Storage.Search.QueryOptions(
@@ -99,7 +99,7 @@ var options = new Windows.Storage.Search.QueryOptions(
   [".log"] // filter to only files with a ".log" extension
 );
 var query = folder.createFileQueryWithOptions(options);
- 
+
 query.getFilesAsync().then(function (files) {
     getFilesWithProperties(files).then(function (filesWithProps) {
         filesWithProps.forEach(function (file) {
@@ -117,5 +117,4 @@ The native Windows 8 JavaScript APIs are not terribly intuitive, and for someone
 
 {{January 1, 2014}}
 
-@@ native, windows, winjs, javascript
-
+@@ mobile, windows, javascript, development

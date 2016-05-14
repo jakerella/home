@@ -53,4 +53,4 @@ Have a great 2013!
 
 {{January 7, 2013}}
 
-@@ learning, css, html, javascript, testing, development
+@@ learning, javascript, testing, development

@@ -10,7 +10,7 @@ The Sencha Touch version 2 (<acronym title='Sencha Touch 2'>ST2</acronym>) frame
 
 While you can simply [download the framework](http://www.sencha.com/products/touch/download/) and copy it to your application folder, this isn't the easiest way to set started (and not the one they recommend). Sencha has created a companion product called [Sencha Cmd](http://www.sencha.com/products/sencha-cmd) which is a command line generator and builder for your apps. In fact, Sencha Cmd works with ExtJS projects as well, and can do lots of things for you. To create a new project, download the [Sencha Touch SDK](http://www.sencha.com/products/touch/download/) and put it somewhere outside of your project folder, then [install Sencha Cmd](http://www.sencha.com/products/sencha-cmd/download). FYI, while the commands may differ slightly on Windows versus Linux versus Mac, they should be pretty close to the same (my examples were run on Ubuntu). Once you have Sencha Cmd, you simply navigate to the directory that the SDK is located in and run this command:
 1
-    
+
 sencha generate app --path /path/to/project/root
 
 This will create a number of folders, copying the SDK files from that location into the project files, and create a default "app.js" file and a default view for you. There are some things in the app.js file (in the project root directory) that you will want to change, first of all, the "name" property, which will also be your namespace for other files. In these examples, I'll be using "MyApp".
@@ -58,7 +58,7 @@ When I request a specific User, ST2 will use the proxy above to find my record -
 
 ```js
 var UserModel = Ext.ModelManager.getModel('User');
- 
+
 // Uses the configured AjaxProxy to make a GET request to
 // "/data/user.php" with "id" in the GET data
 UserModel.load(13, {
@@ -95,10 +95,10 @@ Ext.define('MyApp.controller.User', {
       // root (home) handler, and this line says that execution will
       // go to the method called "shoeHomePage" found in this class.
       '': 'showHomePage',
- 
+
       // If someone goes to www.domain.com/#users we'll hit this route
       'users': 'showUserList',
- 
+
       // Direct execution to the single user view, passing the ":id"
       // portion of the URL hash to the function as an argument
       'user/:id': {
@@ -110,7 +110,7 @@ Ext.define('MyApp.controller.User', {
       ...
     }
   },
- 
+
   showHomePage: function() {
     Ext.Viewport.add(
       // The object will be converted into an object of type: "Panel"
@@ -118,36 +118,36 @@ Ext.define('MyApp.controller.User', {
         xtype: 'panel',
         html: '
 This is the home page!
- 
+
 '
       }
     );
   },
- 
+
   showUserList: function() {
     Ext.Viewport.add(
       {
         xtype: 'list',
- 
+
         // The "itemTpl" is the template for each item in the store.
         // Since each item is a User Model we will have access to
         // the User properties defined above
         itemTpl: '
 User {id} is named {name}
- 
+
 ',
- 
+
         // once loaded, all Store records will be visible in the list
         store: Ext.getStore("AllUsers").load()
       }
     );
   },
- 
+
   showUser: function(userId) {
     // See code above for how to get a user by its "id" property,
     // then show your new view with that user's data
   }
- 
+
 });
 ```
 
@@ -158,7 +158,7 @@ If you're ready to deploy your application, you may be thinking how terrible per
 The first thing you need to do is define your build paths. Open up your "app.json" file in your project root, scroll down to (or search for) the "buildPaths" option. These define the directory that Sencha Cmd will store the final builds (the default settings may be fine for you). You may also want to include other directories in your build, you can do that with the "resources" setting (these would be things like images, server-side code, etc). You can also make Sencha Cmd ignore files in the production build with the "ignore" setting.
 
 When you're ready, head to the command line and navigate to your project root. Then execute the following command, after which you can navigate to your build directory and simply FTP those files to the proper server (or, you know, check it into source control and have you're <acronym title='Continuous INtegration'>CI</acronym> server pick it up, do some testing, and deploy).
-    
+
 ```bash
 sencha app build {environment}
 ```
@@ -201,4 +201,4 @@ _Some resources for you..._
 
 {{February 28, 2013}}
 
-@@ javascript, framework, html5, mobile
+@@ development, javascript, mobile

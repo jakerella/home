@@ -50,4 +50,4 @@ If you are curious about developer evangelism and want to learn more, I highly r
 
 {{December 28, 2015}}
 
-@@ evangelism, remote
+@@ evangelism, remote, jobs, community

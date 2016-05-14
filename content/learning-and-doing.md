@@ -12,4 +12,4 @@ So anyway, I'm going to [SXSWi](http://sxsw.com/interactive "SXSW Intercative"),
 
 {{January 26, 2009}}
 
-@@ freelancing, learning, conference, money
+@@ freelancing, learning, conferences

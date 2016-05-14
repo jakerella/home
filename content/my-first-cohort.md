@@ -42,4 +42,4 @@ And in case you were wondering, you'll still see me out in the community speakin
 
 {{May 14, 2016}}
 
-@@ learning, mentor
+@@ learning, mentorship, jobs, community

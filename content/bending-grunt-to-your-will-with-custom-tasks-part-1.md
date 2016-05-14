@@ -22,9 +22,9 @@ Honestly, if you know JavaScript, you know quite a bit of Node already. And if y
 // my-task.js
 
 module.exports = function(grunt) {
-    
+
     // do some stuff with `grunt`
-    
+
 }
 ```
 
@@ -73,14 +73,14 @@ Our simple solution creates a new task (with a new name) which does the check fo
 // ./tasks/osdetect.js
 
 module.exports = function (grunt) {
-    
+
     grunt.registerMultiTask('osdetect', 'Detect OS and run different task based on it', function() {
         if (/linux/.test(process.platform)) {
             grunt.task.run( ['someCommonTask:linux'] );
-            
+
         } else if (/darwin/.test(process.platform)) { // This is what Grunt returns for OSX
             grunt.task.run( ['someCommonTask:osx'] );
-            
+
         }
     });
 };
@@ -113,4 +113,4 @@ We'll continue this discussion in [Part Two](/bending-grunt-to-your-will-with-cu
 
 {{January 2, 2015}}
 
-@@ javascript, grunt, build tools, node
+@@ development, javascript, automation, node

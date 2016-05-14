@@ -225,4 +225,4 @@ That's really it! With just a couple of remote methods we can turn a fresh LoopB
 
 {{March 10, 2015}}
 
-@@ javascript, node, loopback, authentication
+@@ development, javascript, node, loopback, authentication

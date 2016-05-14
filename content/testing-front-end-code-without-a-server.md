@@ -75,4 +75,4 @@ The point here is that you have no excuse! There are many tools for ensuring tha
 
 {{June 2, 2014}}
 
-@@ javascript, testing, mocking, angular
+@@ development, javascript, testing, angular

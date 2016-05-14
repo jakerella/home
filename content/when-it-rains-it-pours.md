@@ -10,4 +10,4 @@ While this may seem like a rant, it is more of a long, drawn out question: Why d
 
 {{April 15, 2009}}
 
-@@ buisness, freelancing, time management
+@@ business, freelancing, time management

@@ -27,4 +27,4 @@ Are you interested in this? Do you know of someone who might benefit from it? Cu
 
 {{March 13, 2015}}
 
-@@ speaking, conferences, mentor
+@@ conferences, mentorship, community

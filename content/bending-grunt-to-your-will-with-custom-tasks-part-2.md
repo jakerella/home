@@ -3,7 +3,7 @@
 
 
 <img src='/images/grunt-logo.png' alt='Grunt logo' class='right' style='width:12em; margin-top:-2em; padding-top:0;'>
-    
+
 This is Part Two of a series on custom Grunt tasks. Have you [read Part One](/bending-grunt-to-your-will-with-custom-tasks-part-1)?
 
 As I mentioned last time, I've been answering a lot of [questions on Stack Overflow](http://stackoverflow.com/questions/tagged/gruntjs) about Grunt lately. What I've discovered is that there are a lot of people new to Grunt - but familiar with JavaScript - who aren't sure how to accomplish what they hope to. In Part Two of this series I'm going to take our custom tasks further and show you some of the other aspects of [Grunt API](http://gruntjs.com/api/grunt) and some tips for writing better tasks.
@@ -14,7 +14,7 @@ Last time we created a simple Node module to detect the operating system and run
 
 ```javascript
 // ./tasks/osdetect.js
-    
+
 module.exports = function (grunt) {
 
     grunt.registerMultiTask('osdetect', 'Detect OS and run different task based on it', function() {
@@ -45,11 +45,11 @@ Accessing the configuration data from within our task is extremely easy, we simp
 grunt.registerMultiTask('osdetect', 'Detect OS and run different task based on it', function() {
     // This will get our new "task map"
     var tasks = grunt.config('osdetect').taskMap;
-    
+
     // Now let's use it:
     if (/linux/.test(process.platform) && tasks.linux) {
         grunt.task.run( tasks.linux );
-        
+
     } else if (/darwin/.test(process.platform) && tasks.osx) {
         grunt.task.run( tasks.linux );
     }
@@ -75,7 +75,7 @@ Notice that we're simply getting the configuration object from Grunt's config AP
 grunt.registerMultiTask('osdetect', 'Detect OS and run different task based on it', function() {
     // This will get our new "task map"
     var tasks = grunt.config('osdetect').taskMap;
-    
+
     // Now let's use it:
     if (/linux/.test(process.platform) && tasks.linux) {
         if (!tasks.linux) {
@@ -83,9 +83,9 @@ grunt.registerMultiTask('osdetect', 'Detect OS and run different task based on i
         } else if (typeof tasks.linux !== 'string' || !(tasks.linux instanceof Array)) {
             grunt.fail.fatal('Tasks for an OS must either be a string or Array of strings.');
         }
-        
+
         grunt.task.run( tasks.linux );
-        
+
     } // ...
 });
 ```
@@ -112,7 +112,7 @@ We talked about being able to use multiple targets with Grunt's `registerMultiTa
 grunt.registerMultiTask('osdetect', 'Detect OS and run different task based on it', function() {
     // This will get our new "task map"
     var tasks = this.data.taskMap;
-    
+
     // ...
 });
 ```
@@ -140,11 +140,11 @@ In the config block above we've added `common` as the target, and we could add o
 
 ```javascript
 grunt.registerMultiTask('osdetect', 'Detect OS and run different task based on it', function() {
-    
+
     // Get the value of the "foobar" command line option or use a default:
-    
+
     var foobar = grunt.option('foobar'); // foobar here will equal "batbaz"
-    
+
     // ...
 });
 ```
@@ -157,9 +157,9 @@ To start, let's read a simple JSON file. Let's assume that your task needs to re
 
 ```javascript
 grunt.registerMultiTask('filereader', 'Example task', function() {
-    
+
     var data = grunt.file.readJSON('./config/data.json');
-    
+
 });
 ```
 
@@ -169,11 +169,11 @@ Lastly, if you need to read a non-JSON formatted file, simply leave off the `JSO
 
 ```javascript
 grunt.registerMultiTask('filereader', 'Example task', function() {
-    
+
     var sourceFile = grunt.file.read('./src/js/app.js');
-    
+
     // do whatever you need to with the `sourceFile` string!
-    
+
 });
 ```
 
@@ -181,13 +181,13 @@ Writing a new file is just as easy! Many tasks that perform actions like concate
 
 ```javascript
 grunt.registerMultiTask('filereader', 'Example task', function() {
-    
+
     var wasWritten = grunt.file.write('./build/output.js', 'foobar() {}');
-    
+
     if (wasWritten) {
         grunt.log.ok('Output successful!');
     }
-    
+
 });
 ```
 
@@ -212,13 +212,13 @@ In the config object above, it's clear that the user wants the task to look insi
 
 ```javascript
 grunt.registerMultiTask('filereader', 'Example task', function() {
-    
+
     var fileList = grunt.file.expand(this.data.files, this.data.files.src);
-    
+
     fileList.forEach(function(file) {
         // do something with `file`
     });
-    
+
 });
 ```
 
@@ -234,5 +234,4 @@ I hope you've gotten a lot out of these [two posts](/bending-grunt-to-your-will-
 
 {{January 5, 2015}}
 
-@@ javascript, grunt, build tools, node
-
+@@ development, javascript, automation, node
