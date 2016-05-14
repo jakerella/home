@@ -114,10 +114,16 @@ module.exports = function(app, site) {
     app.get('/api/content', api.getAllContent);
     app.get('/api/content/posts', api.getAllPosts);
     app.get('/api/content/posts/recent', api.getRecentPosts);
+    app.get('/api/content/tags', api.getTags);
 
     app.get('/notes/:bin', notes);
 
-    // Router for all other pages/posts
+    app.get('/tag/:tag', function(req, res) {
+        res.end(renderer.renderTagPosts(req.params.tag, site));
+    });
+
+
+    // Router for all other pages/posts (content)
     app.get('*', function(req, res, next) {
         // Site redirects
         var redirect = getRedirectUrl(req.url, site);

@@ -2,7 +2,7 @@ doctype html
 html
     head
         include head.jade
-    
+
     body.off-canvas-contain(data-slug=slug)
         include header.jade
 
@@ -29,13 +29,19 @@ html
             aside.sidebar.speaking.sm-12.md-3
                 h2 Upcoming Events
                 ul.upcoming-events
+                h2 Tag Cloud
+                section.tag-cloud
 
         include footer.jade
 
         include scripts.jade
 
         script.
-            jk.init();
+            jk.init({
+                tags: {
+                    elem: '.tag-cloud'
+                }
+            });
 
             // Disqus config
             var disqus_shortname = 'jordankasper';

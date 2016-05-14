@@ -6,7 +6,7 @@ module.exports = function(site) {
 
     // --------------- Public API methods --------------------- //
     return {
-    
+
         getAllContent: function(req, res) {
             contentHelper.getContent({
                 dir: site.contentDir,
@@ -52,6 +52,10 @@ module.exports = function(site) {
                     console.log('API ERROR (getRecentPosts): ' + err);
                     res.status(500).send('Unable to complete request');
                 });
+        },
+
+        getTags: function(req, res) {
+            res.json(contentHelper.getTags());
         }
 
     };

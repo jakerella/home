@@ -1,0 +1,45 @@
+doctype html
+html
+    head
+        include head.jade
+
+    body.off-canvas-contain(data-slug=slug)
+        include header.jade
+
+        section.main-body.row
+
+            article.main-content.posts-by-tag.sm-12.md-9
+                h2.
+                    Posts in <span class='tag-name'>#{tag}</span>
+                ol
+                    each post in posts
+                        li.post
+                            time.
+                                #{post.published}
+                            h3
+                                a(href='#{post.link}').
+                                    #{post.title}
+                            aside.tags
+                                p Other Tags:
+                                ul
+                                    each otherTag in post.tags
+                                        if otherTag != tag
+                                            li
+                                                a(href='/tag/#{otherTag}').
+                                                    #{otherTag}
+                                
+
+            aside.sidebar.speaking.sm-12.md-3
+                h2 Tag Cloud
+                section.tag-cloud
+
+        include footer.jade
+
+        include scripts.jade
+
+        script.
+            jk.init({
+                tags: {
+                    elem: '.tag-cloud'
+                }
+            });

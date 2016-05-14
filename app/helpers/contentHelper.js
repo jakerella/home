@@ -4,7 +4,7 @@ var fs = require('fs'),
     q = require('q'),
     _ = require('lodash'),
     marked = require('marked'),
-    
+
     WORD_COUNT = 100,
     CACHE_FILE = path.join(__dirname, '..', 'tmp', 'contentcache.json'),
     EXPIRE_TIME = (30 * 24 * 60 * 60 * 1000);
@@ -49,11 +49,46 @@ module.exports = function(site) {
             });
 
             return def.promise;
+        },
+
+        getTags: function() {
+            var cache = getCache(),
+                tags = {},
+                posts = Object.keys(cache);
+
+            posts.forEach(function(post) {
+                cache[post].tags.forEach(function(tag) {
+                    if (!tags[tag.trim()]) {
+                        tags[tag.trim()] = [];
+                    }
+                    tags[tag.trim()].push({
+                        slug: cache[post].slug,
+                        publishTime: cache[post].publishTime,
+                        tags: cache[post].tags
+                    });
+                });
+            });
+
+            return tags;
         }
     };
 
 
     // ------------------ Private Helpers ------------------- //
+
+    function getCache() {
+        var cache = {};
+
+        try {
+            // first we clear out the content cache file from require's own cache
+            // otherwise cache updates won't be detected by any other request
+            require.cache[CACHE_FILE] = null;
+            cache = require(CACHE_FILE);
+        } catch(err) {
+            // ignore me! The default (empty) value will be used
+        }
+        return cache;
+    }
 
     function getAllFiles(fileList, options) {
         var def = q.defer();
@@ -137,20 +172,11 @@ module.exports = function(site) {
     }
 
     function getFileData(fileList, options) {
-        var cache = {},
+        var cache = getCache(),
             fileReads = [],
             data = [],
             now = (new Date()).getTime(),
             def = q.defer();
-
-        try {
-            // first we clear out the content cache file from require's own cache
-            // otherwise cache updates won't be detected by any other request
-            require.cache[CACHE_FILE] = null;
-            cache = require(CACHE_FILE);
-        } catch(err) {
-            // ignore me! The default (empty) value will be used
-        }
 
         fileList.forEach(function(file) {
             if (cache[file.slug] && cache[file.slug].expires > now) {
@@ -175,7 +201,7 @@ module.exports = function(site) {
                 });
 
                 // We'll initiate the cache writing here, but we will not wait
-                // to resolve the parent action. If cache writing fails, we'll 
+                // to resolve the parent action. If cache writing fails, we'll
                 // just build it again on the next request
                 if (results.length) {
                     writeNewCacheFile(cache);

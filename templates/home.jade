@@ -2,7 +2,7 @@ doctype html
 html
     head
         include head.jade
-    
+
     body.off-canvas-contain(data-slug=slug)
         include header.jade
 
@@ -13,6 +13,8 @@ html
             aside.sidebar.speaking.sm-12.md-3
                 h2 Upcoming Events
                 ul.upcoming-events
+                h2 Tag Cloud
+                section.tag-cloud
 
             nav.paging
                 a.next-page(href='?page=2', title='View next page')
@@ -27,4 +29,8 @@ html
         include scripts.jade
 
         script.
-            jk.init();
+            jk.init({
+                tags: {
+                    elem: '.tag-cloud'
+                }
+            });

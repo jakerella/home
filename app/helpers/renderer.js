@@ -2,7 +2,8 @@
 var fs = require('fs'),
     path = require('path'),
     jade = require('jade'),
-    _ = require('lodash');
+    _ = require('lodash'),
+    dateFormat = require('dateformat');
 
 /**
  * Renders content for the site based on a slug and the site options
@@ -40,7 +41,7 @@ module.exports = {
             content = jade.renderFile(path.join(site.templateDir, data.template), data);
         } catch(e) {
             // We'll send back the error instead of content
-            // This seems weird, but the way errors are thrown down in here they 
+            // This seems weird, but the way errors are thrown down in here they
             // may not otherwise get caught by the Express error handling middleware
             content = e;
         }
@@ -55,14 +56,14 @@ module.exports = {
             var content = '';
 
             if (/\.jade$/.test(data.slides)) {
-                
+
                 content = jade.render(
                     fs.readFileSync(path.join(site.publicDir, slug, data.slides)),
                     { filename: 'FOOBAR' } // this option must be here, but is not used
                 );
-                
+
             } else if (/\.md$/.test(data.slides)) {
-                
+
                 content = [
                     '<section data-markdown="' + data.slides + '"',
                     'data-separator="^\\r?\\n\\-\\-\\-\\r?\\n"',
@@ -71,7 +72,7 @@ module.exports = {
                     'data-charset="utf-8">',
                     '</section>'
                 ].join(' ');
-                
+
             } else {
                 content = fs.readFileSync(path.join(site.publicDir, slug, data.slides));
             }
@@ -80,5 +81,34 @@ module.exports = {
         };
 
         return jade.renderFile(path.join(site.templateDir, 'preso.jade'), data);
+    },
+
+    renderTagPosts: function(tag, site) {
+        var contentHelper = require('./contentHelper')(site),
+            posts = [],
+            tags = contentHelper.getTags();
+
+        tag = tag.replace(/\+/g, ' ');
+
+        if (tags[tag]) {
+            tags[tag].forEach(function(post) {
+                var title = post.slug
+                    .replace(/\-/g, ' ')
+                    .replace(/\w*/g, function(t){ return t.charAt(0).toUpperCase()+t.substr(1).toLowerCase(); });
+                posts.push({
+                    title: title,
+                    link: '/' + post.slug,
+                    tags: post.tags,
+                    published: dateFormat(post.publishTime, 'mmm d, yyyy'),
+                    publishTime: post.publishTime
+                });
+            });
+
+            posts = posts.sort(function(a, b) {
+                return b.publishTime - a.publishTime;
+            });
+        }
+
+        return jade.renderFile(path.join(site.templateDir, 'tag.jade'), { tag: tag, posts: posts });
     }
 };
