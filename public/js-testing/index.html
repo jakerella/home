@@ -42,7 +42,7 @@
 
         <div class="reveal">
             <div class="slides">
-                
+
                 <section>
                     <section>
                         <h2>Browser Eyeballing !=<br>JavaScript Testing</h2>
@@ -54,12 +54,6 @@
 
                     <section>
                         <img src='/images/hobbes_large_trans.png' alt='Hobbes'>
-                    </section>
-
-                    <section>
-                        <a href="http://nomadjavascript.com">
-                            <img src="/images/nomad-js.png" alt="NomadJS" style="width:25%" />
-                        </a>
                     </section>
 
                     <section>
@@ -117,7 +111,7 @@
                         <h3>Writing Testable Code</h3>
 
                         <aside class="notes">
-                            Talk about the fact that we want a more unit-testable approach, but that 
+                            Talk about the fact that we want a more unit-testable approach, but that
                             integration testing can be very helpful as well.
                         </aside>
                     </section>
@@ -156,7 +150,7 @@
 
                         <aside class="notes">
                             In production we may have minified code, and be unable to see what's
-                            really going on. Even if it isn't minified, this can make for much 
+                            really going on. Even if it isn't minified, this can make for much
                             easier diagnosis of a problem.
                         </aside>
 
@@ -189,7 +183,7 @@
 
                         <pre><code class='lang-javascript' data-srcbyline='example/src/bad.js?11;13-15;18;24-25;27;31-32'></code></pre>
                     </section>
-                    
+
                 </section>
 
 
@@ -279,9 +273,9 @@
                         <pre><code class='lang-javascript' data-srcbyline='example/src/app.js?62-72'></code></pre>
 
                         <aside class="notes">
-                            There are LOTS of ways this could be improved, but the basic idea 
-                            is to refactor JavaScript code to be testable independent of as 
-                            much of the rest of your code as possible. This ensures that that 
+                            There are LOTS of ways this could be improved, but the basic idea
+                            is to refactor JavaScript code to be testable independent of as
+                            much of the rest of your code as possible. This ensures that that
                             little bit of code works as expected.
                         </aside>
 
@@ -301,7 +295,7 @@
                         <h3>Testing Frameworks</h3>
 
                         <aside class="notes">
-                            Discuss what a testing framework gets you, the general idea behind a 
+                            Discuss what a testing framework gets you, the general idea behind a
                             "test", a "group" (or "module"), and a "suite"
                         </aside>
                     </section>
@@ -324,10 +318,10 @@
                         </p>
 
                         <aside class="notes">
-                            Mention that they general do the same things, although Selenium handles 
+                            Mention that they general do the same things, although Selenium handles
                             things very differently and is much more user-experience focused.
                             <br />
-                            Also mention that the terminology is not shared among frameworks, so be 
+                            Also mention that the terminology is not shared among frameworks, so be
                             careful (e.g. "expect" means different things).
                         </aside>
                     </section>
@@ -350,7 +344,7 @@
                         </p>
 
                         <aside class="notes">
-                            Why QUnit? It's very simple, does what we need, and it was developed 
+                            Why QUnit? It's very simple, does what we need, and it was developed
                             by the jQuery team (of which appendTo happens to be stocked full of).
                         </aside>
                     </section>
@@ -369,7 +363,7 @@
                         <h3>Setting up QUnit</h3>
 
                         <aside class="notes">
-                            Show web site, discuss that there are NO dependencies, and only two 
+                            Show web site, discuss that there are NO dependencies, and only two
                             source files (JS library and CSS).
                         </aside>
                     </section>
@@ -427,8 +421,8 @@
                         <h3>Writing Tests</h3>
 
                         <aside class="notes">
-                            Talk about unit versus functional tests, what you want to test 
-                            (every decision tree), testing for valid and invalid input to 
+                            Talk about unit versus functional tests, what you want to test
+                            (every decision tree), testing for valid and invalid input to
                             functions, etc.
                         </aside>
                     </section>
@@ -472,7 +466,7 @@
                         <pre><code class='lang-javascript' data-srcbyline='example/tests/assertions.js?3-6;67-68'></code></pre>
 
                         <pre class='fragment'><code class='lang-javascript' data-srcbyline='example/tests/assertions.js?8-9'></code></pre>
-                        
+
                         <pre class='fragment'><code class='lang-javascript' data-srcbyline='example/tests/assertions.js?10-11'></code></pre>
                     </section>
 
@@ -528,7 +522,7 @@
                         <h3>MOAR TESTS</h3>
 
                         <pre><code class='lang-html' data-srcbyline='example/tests/search.html?11-21;36'></code></pre>
-                        
+
                         <aside class="notes">
                             Remind about how #qunit-fixture works
                         </aside>
@@ -557,7 +551,7 @@
 
                         <pre><code class='lang-javascript' data-srcbyline='example/tests/search-tests.js?62-67;72-73'></code></pre>
                     </section>
-                    
+
                     <section>
                         <h3>MOAR TESTS - <span style='text-transform:none;'>initSearch()</h3>
 
@@ -578,7 +572,7 @@
                         </em></p>
 
                         <aside class="notes">
-                            Discuss the issue, that the anonymous function that IS the test will 
+                            Discuss the issue, that the anonymous function that IS the test will
                             silently fail because the function returns before the async action
                             is finished (and then the next test will start).
                         </aside>
@@ -655,28 +649,28 @@
 
                         <pre><code class='lang-html' data-srcbyline='example/tests/example.html?27-33'></code></pre>
                     </section>
-                    
+
                     <section>
                         <h3>Testing Lifecycle</h3>
 
                         <pre><code class='lang-html' data-srcbyline='example/tests/example.html?35-41'></code></pre>
                     </section>
-                    
+
                     <section>
                         <h2>Idempotency</h2>
                     </section>
-                    
+
                     <section>
                         <h3>Module Lifecycle</h3>
 
                         <pre><code class='lang-html' data-srcbyline='example/tests/show-modules.html?18;21-22'></code></pre>
-                        
+
                         <pre class='fragment'><code class='lang-javascript' data-srcbyline='example/tests/search-tests.js?8-10;12;29-30;33;35;39;41-42'></code></pre>
                     </section>
-                    
+
                     <section>
                         <h3>Module Lifecycle</h3>
-                        
+
                         <pre><code class='lang-javascript' data-srcbyline='example/tests/search-tests.js?8-10;14-19;29-30;33;37;39;41-42'></code></pre>
                     </section>
 
@@ -701,10 +695,10 @@
                     </p>
 
                     <aside class="notes">
-                        Browserstack (automation with Testswarm, Testem, etc); 
-                        Saucelabs (automation with Travic CI or Grunt); 
-                        Testem (automation with Browserstack-cli); 
-                        Testswarm; 
+                        Browserstack (automation with Testswarm, Testem, etc);
+                        Saucelabs (automation with Travic CI or Grunt);
+                        Testem (automation with Browserstack-cli);
+                        Testswarm;
                         Selenium (using the Remote WebDriver server)
                     </aside>
                 </section>
@@ -717,8 +711,8 @@
                         <h3>Automating Tests</h3>
 
                         <aside class="notes">
-                            We're talking about more than just automation. QUnit, for example, can be 
-                            run in any browser, but it is cumbersome to do so. Therefore we need 
+                            We're talking about more than just automation. QUnit, for example, can be
+                            run in any browser, but it is cumbersome to do so. Therefore we need
                             two types of automation: cross-browser testing and task running.
                         </aside>
                     </section>
@@ -733,13 +727,13 @@
                         </p>
 
                         <aside class="notes">
-                            Remember, we're talking about automation mainly. Cross-browser testing 
-                            is obviously important, but if we can automate everything it'll be 
+                            Remember, we're talking about automation mainly. Cross-browser testing
+                            is obviously important, but if we can automate everything it'll be
                             that much easier.
                             <br />
                             Grunt let's us run arbitrary tasks using out favorite language: JavaScript.
                             <br />
-                            I also use it as a build system for things like concatenation, 
+                            I also use it as a build system for things like concatenation,
                             minification, JS linting, template assembling, etc.
                         </aside>
                     </section>
@@ -758,12 +752,12 @@
                         </code></pre>
 
                         <aside class="notes">
-                            Mention that Grunt is built in JavaScript and runs on NodeJS, so we'll 
+                            Mention that Grunt is built in JavaScript and runs on NodeJS, so we'll
                             have to install Node first (>= v0.8.0).
                             <br />
                             We are using the Node Package Manager (npm) to install this library.
                             <br />
-                            Note that the "-g" flag means the Grunt CLI will be installed 
+                            Note that the "-g" flag means the Grunt CLI will be installed
                             globally (this is what we want).
                             <br />
                             Also, while these examples were written in Linux, the same commands
@@ -832,7 +826,7 @@
                         <aside class="notes">
                             Talk about "semantic versioning" briefly
                             <br />
-                            Mention that the "scripts" section is entirely optional, and mostly 
+                            Mention that the "scripts" section is entirely optional, and mostly
                             useful if you are using a Continuous Integration server of some kind.
                         </aside>
                     </section>
@@ -874,7 +868,7 @@
                         <h3>Setting Up Grunt</h3>
 
                         <aside class="notes">
-                            Talk about the Gruntfile which defines all tasks, and that it is 
+                            Talk about the Gruntfile which defines all tasks, and that it is
                             just JavaScript code, but it does use some Node features.
                         </aside>
                     </section>
@@ -886,7 +880,7 @@
                         <pre><code class='lang-javascript' data-srcbyline='example/Gruntfile.js?3-8;41-44;46-47;54;56;58'></code></pre>
 
                         <aside class="notes">
-                            Note that this is the general structure of a Gruntfile, but a lot will 
+                            Note that this is the general structure of a Gruntfile, but a lot will
                             go in here...
                             <br />
                             Mention that you could also write this file in coffeescript.
@@ -901,11 +895,11 @@
                         </code></pre>
 
                         <aside class="notes">
-                            Two types: "contrib" which are approved (and many times maintained) 
+                            Two types: "contrib" which are approved (and many times maintained)
                             by the core team, and then everything else, submitted by the community.
                             <br />
-                            Mention how the "--save-dev" option adds the package to your 
-                            package.json "devDependencies" for you (so you don't need to edit 
+                            Mention how the "--save-dev" option adds the package to your
+                            package.json "devDependencies" for you (so you don't need to edit
                             that file manually and add it).
                         </aside>
                     </section>
@@ -987,7 +981,7 @@ Testing tests/core.html .....<span style="color:green;">OK</span>
     <span style="color:red;">>></span> Actual: <span style="color:purple;">0</span>
     <span style="color:red;">>></span> Expected: <span style="color:purple;">1</span></strong>
     <span style="color:red;">>></span> at file:///myproject/tests/lib/qunit-1.12.0.js:556
-    <span style="color:red;">>></span> at file:///myproject/tests/tests.js:38   
+    <span style="color:red;">>></span> at file:///myproject/tests/tests.js:38
        ...
 
     <span style="color:orange;">Warning: 1/12 assertions failed (21ms) Use --force to continue.</span>
@@ -1012,7 +1006,7 @@ Testing tests/core.html .....<span style="color:green;">OK</span>
 
                         <pre><code class='lang-javascript' data-srcbyline='example/Gruntfile.js?5-6;9;17;19-20;22;25-26;42-43;'></code></pre>
                     </section>
-                    
+
                     <section>
                         <h3>Multiple Test Files</h3>
 
@@ -1042,9 +1036,9 @@ Testing tests/core.html .....<span style="color:green;">OK</span>
                         <a href="http://JordanKasper.com/js-testing">jordankasper.com/js-testing</a>
                     </p>
                 </section>
-                
-                
-                
+
+
+
                 <section>
 
                     <section>
@@ -1073,7 +1067,7 @@ Testing tests/core.html .....<span style="color:green;">OK</span>
                         <pre><code class='lang-javascript' data-srcbyline='example/Gruntfile.js?5-6;29-33;39-40;43;45-46;48-49'></code></pre>
 
                         <aside class="notes">
-                            Note that this will only match "something-tests.html" inside of the 
+                            Note that this will only match "something-tests.html" inside of the
                             "tests/search" directory or any subdirectory therein.
                             <br />
                             Also mention that this file globbing is common to all Grunt tasks
@@ -1098,7 +1092,7 @@ Waiting...</span>
                         </code></pre>
 
                         <aside class="notes">
-                            Talk about what happens when you run the command, and the fact 
+                            Talk about what happens when you run the command, and the fact
                             that you don't have to watch a specific target (although you can).
                         </aside>
                     </section>

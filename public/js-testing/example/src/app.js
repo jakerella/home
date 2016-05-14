@@ -3,8 +3,8 @@ var jk = (window.jk || {});
 
 
 // We would put this somewhere else...
-$(document).ready( function initPage() {
-    
+$(document).ready(function initPage() {
+
     jk.initSearch("#search-form", "#search-field");
 
 });
@@ -39,7 +39,7 @@ jk.doSearch = function doSearch( query, callback ) {
     callback = (callback || function(){});
 
     var xhr = $.ajax({
-        
+
         url: "/api/search",
         data: { "query": query },
         dataType: "json",
@@ -49,7 +49,7 @@ jk.doSearch = function doSearch( query, callback ) {
             callback( data );
         },
         // ...
-        
+
         error: function searchErrorHandler(xhr) {
             callback({ error: xhr.responseText, status: xhr.status });
         }
@@ -83,9 +83,8 @@ jk.showError = function showError( msg, msgNode ) {
     if ( !msgNode.length ) { return null; }
 
     console && console.error(msg);
-    
+
     $error = $("<p class='error'>" + msg + "</p>");
     msgNode.append( $error );
     return $error;
 };
-
