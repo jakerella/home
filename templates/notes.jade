@@ -28,5 +28,8 @@ html
             jk.init({
                 notes: {
                     bin: '#{bin}'
+                },
+                posts: {
+                    template: '<article><p class="published-on"><i class="icon-calendar"></i>{{published}}</p><h3><a href="/{{slug}}">{{title}}</a></h3></article>'
                 }
             });
