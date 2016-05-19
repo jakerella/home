@@ -104,13 +104,6 @@ window.jk = (function (jk, $) {
             ].join('');
             return false;
         });
-
-        $('body').on('keypress', function(e) {
-            if (e.which === 47 || e.which === 63) {
-                e.preventDefault();
-                input.focus();
-            }
-        });
     }
 
     return {
