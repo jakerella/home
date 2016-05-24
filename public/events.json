@@ -561,6 +561,15 @@
             ]
         },
         {
+            "name": "TIY Crash Course",
+            "url": "http://www.meetup.com/The-Iron-Yard-DC/events/231341704/",
+            "location": "Washington, DC",
+            "date": "Jun 15 2016",
+            "topics": [
+                "Intro to Node.js"
+            ]
+        },
+        {
             "name": "The Iron Yard FEE Course",
             "url": "https://www.theironyard.com/courses/javascript-and-mvc-frameworks.html",
             "location": "Washington, DC",
