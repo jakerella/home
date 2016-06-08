@@ -4,3 +4,4 @@ public/js/vendor/
 public/css/style.css
 public/keybase.txt
 .well-known/
+.DS_Store
