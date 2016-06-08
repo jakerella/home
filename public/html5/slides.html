@@ -210,8 +210,7 @@ localStorage.setItem('data', JSON.stringify({ foo: 'bar' }));</code></pre>
   alert('Hmm... it looks like you may be offline.');
 });
 
-  window.addEventListener('online',  updateOnlineStatus);
-  </code></pre>
+window.addEventListener('online',  updateOnlineStatus);</code></pre>
 </section>
 
 <section>
@@ -233,6 +232,9 @@ localStorage.setItem('data', JSON.stringify({ foo: 'bar' }));</code></pre>
             <input type='submit'>
         </form>
     </div>
+
+    <pre class='fragment'><code class='lang-css'>input:invalid { background-color: #fdd; }</code></pre>
+    <pre class='fragment'><code class='lang-javascript'>myFormElem.checkValidity();  // true/false</code></pre>
 </section>
 
 <section>
@@ -372,7 +374,7 @@ document.getElementById('stream').play(); // or .pause()</code></pre>
         document.getElementById('getCoord').innerText = position.coords.latitude + ', ' + position.coords.longitude;
       },
       function(e) {
-        document.getElementById('getCoord').innerText = 'ERROR!';
+        document.getElementById('getCoord').innerText = 'ERROR! ' + (e.message || e);
         console.error( 'hmm... something went wrong', e );
       }
     );
@@ -512,13 +514,13 @@ imgList.addEventListener('drop', function(e) {
 
   <pre class='fragment'><code class='lang-javascript'>navigator.vibrate(1000);</code></pre>
 
-  <pre class='fragment'><code class='lang-javascript'>navigator.vibrate([3000, 2000, 1000]);</code></pre>
+  <pre class='fragment'><code class='lang-javascript'>navigator.vibrate([2000, 500, 1000]);</code></pre>
 
   <button class='fragment vibrate'>Vibrate!</button>
 
   <script>
   document.querySelector('.vibrate').addEventListener('click', function() {
-    navigator.vibrate([2000, 500, 1000]);
+    navigator.vibrate([1000, 500, 500, 500, 1000]);
   });
   </script>
 </section>
@@ -527,15 +529,66 @@ imgList.addEventListener('drop', function(e) {
 <section>
   <h3>Feature Detection</h3>
 
-  if (navigator.geolocation) { ... }
-  Modernizr
+  <p class='fragment'>
+    For new JavaScript APIs this is easy...
+  </p>
+
+  <pre class='fragment'><code class='lang-javascript'>if (!navigator.geolocation) {
+  alert('Your browser does not support Geolocation!');
+}</code></pre>
 </section>
 
+<section>
+  <h3>Feature Detection</h3>
+
+  <p>
+    But what about things like the <code>&lt;form></code> validation?
+  </p>
+
+  <ul>
+    <li class='fragment'>Create a <code>&lt;form></code> element</li>
+    <li class='fragment'>See if it has a <code>checkValidity</code> method</li>
+    <li class='fragment'>Create an <code>&lt;input></code> element with the <code>required</code> attribute</li>
+    <li class='fragment'>Add an <code>invalid</code> event handler</li>
+    <li class='fragment'>Check that the handler fires on form submission</li>
+    <li class='fragment'>ಠ_ಠ</li>
+  </ul>
+</section>
 
 <section>
-  <h2>And so. much. more.</h2>
+  <h3>Feature Detection</h3>
 
-  https://www.w3.org/TR/html5/
+  <p>Or you could just use a tool like <a href='https://modernizr.com/'>Modernizr</a>!</p>
+
+  <pre class='fragment'><code class='lang-javascript'>if ( Modernizr.geolocation ) {
+  // you can use it!
+}</code></pre>
+
+  <pre class='fragment'><code class='lang-javascript'>if ( Modernizr.formvalidation ) {
+  // you can use it!
+}</code></pre>
+
+<pre class='fragment'><code class='lang-javascript'>if ( !Modernizr.csstransitions ) {
+  // It can detect cool new CSS3 features, too!
+  // So you can provide JS fallbacks if necessary...
+}</code></pre>
+
+</section>
+
+<section>
+  <h2>Cool.</h2>
+
+  <p>
+    What else is in HTML5/CSS3/JS?
+  </p>
+</section>
+
+<section>
+  <h2>So. much. more.</h2>
+
+  <p><a href='http://html5index.org/'>html5index.org</a></p>
+
+  <p><a href='https://www.w3.org/TR/html5/'>www.w3.org/TR/html5/</a></p>
 </section>
 
 
