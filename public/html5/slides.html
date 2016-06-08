@@ -1,0 +1,550 @@
+
+<style>
+button { font-size: 0.6em; }
+progress.bat-level::after {
+  content: attr(value);
+}
+.form-demo input { font-size: 0.6em; }
+.form-demo input:invalid { background-color: #fdd; }
+progress::-webkit-progress-bar {
+  background-color: #eee;
+  border: 1px solid transparent;
+  border-radius: 0.3em;
+  box-shadow: 1px 2px 3px rgba(0, 0, 0, 0.3) inset;
+}
+progress::-webkit-progress-value {
+  background-color: #6a6;
+  border: 1px solid transparent;
+  border-radius: 0.3em 0 0 0.3em;
+}
+progress.styled {
+  color: #0063a6;
+  width: 5em;
+  height: 0.7em;
+  border: 1px solid transparent;
+  border-radius: 0.3em;
+  box-shadow: 1px 2px 3px rgba(0, 0, 0, 0.3) inset;
+}
+[contenteditable]:focus {
+  background-color: #fff;
+  outline: none;
+  padding: 0.3em;
+  border: 1px solid #999;
+  box-shadow: 1px 2px 2px #ccc inset;
+}
+.reveal .slides .boxed-list {
+  padding: 0;
+  list-style: none;
+  border: 1px solid #666;
+  min-height: 2em;
+  background-color: #eee;
+  text-align: left;
+}
+.reveal .slides .boxed-list li {
+  display: inline-block;
+}
+</style>
+
+
+<section class='no-footer'>
+  <h2>A Tour of HTML5 APIs</h2>
+  <p style="margin-top: 3em">Jordan Kasper</p>
+  <p class="fine">
+      <a href="http://twitter.com/jakerella">@jakerella</a> |
+      <a href="http://JordanKasper.com/html5">jordankasper.com/html5</a>
+  </p>
+</section>
+
+<section>
+  <img src="/images/hobbes_large_trans.png" alt="me" style="width:40%" /><br>
+  <a href="http://twitter.com/jakerella">@jakerella</a>
+</section>
+
+<section>
+  <h2>HTML5 Specification</h2>
+
+  <p>What's in it?</p>
+</section>
+
+<section data-background='/images/tsunami.gif'>
+  <h1 style='color:#fff;'><strong>SO. MUCH.</strong></h1>
+</section>
+
+<section>
+  <p>Okay, so we can't cover everything...</p>
+</section>
+
+<section>
+  <h3><a href='https://developer.mozilla.org/en-US/docs/Web/API/History_API'>Manipulating Browser History</a></h3>
+
+  <pre class='fragment'><code class='lang-javascript'>window.history.pushState({ foo: 'bar' }, 'Foobar', '/foo/bar');
+
+window.history.back();
+window.history.forward();
+window.history.go(-3);</code></pre>
+</section>
+
+<section>
+  <h3><a href='https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA'>ARIA</a></h3>
+
+
+  <pre class='fragment'><code class='lang-html'>&lt;button aria-hidden='true' aria-describedby='tip1'>Action&lt;/button>
+&lt;div id='tip1' role='tooltip' aria-hidden='true'>
+  This is the tooltip
+&lt;/div>
+&lt;!-- also use css: visibility:hidden; or just: display:none; -->
+
+
+&lt;ul role='tablist'>
+  &lt;li id='tab1' role='tab'>Tab One&lt;/li>
+  ...
+&lt;/ul>
+&lt;section aria-labelledby='tab1' aria-live='polite'>
+  ...
+&lt;/section></code></pre>
+</section>
+
+<section>
+  <h3><a href='http://www.html5rocks.com/en/tutorials/service-worker/introduction/'>Service Workers</a> *</h3>
+
+  <pre class='fragment'><code class='lang-javascript'>// in your main page
+navigator.serviceWorker.register('/subtree/my-script.js')
+  .then(function(registration) {
+    console.log('Success with limited:', registration.scope);
+  }).catch(function(err) {
+    console.log('ServiceWorker failed:', err);
+  });</code></pre>
+
+  <pre class='fragment'><code class='lang-javascript'>// inside the worker script
+self.addEventListener('fetch', function(event) {
+  event.respondWith( JSON.stringify({ fake: 'data' }) );
+  // or we could use appcache to determine what to return...
+});</code></pre>
+</section>
+
+<section>
+  <h3><a href='https://developer.mozilla.org/en-US/docs/Web/API/Battery_Status_API'>Battery Level</a> *</h3>
+
+  <div class='fragment'>
+    <pre><code class='lang-javascript'>navigator.getBattery()
+  .then(function(battery) {
+    console.log( battery.level );
+
+    battery.addEventListener('levelchange', function() {
+      console.log( 'battery level has changed:', battery.level );
+    });
+});</code></pre>
+
+    <progress class='bat-level' value='0' max='100'></progress>
+    <script>
+    navigator.getBattery().then(function(battery) {
+      let el = document.querySelector('.bat-level');
+      el.value = battery.level * 100;
+      el.innerText = battery.level;
+    });
+    </script>
+  </div>
+</section>
+
+<section>
+  <h3><a href='http://diveintohtml5.info/storage.html'>Web Storage</a> *</h3>
+  <p class='fine'>localStorage and sessionStorage</p>
+
+  <pre class='fragment'><code class='lang-javascript'>localStorage.setItem('username', 'jakerella');
+sessionStorage.setItem('currentPage', '/html5');
+
+localStorage.getItem('username');
+
+localStorage.setItem('data', JSON.stringify({ foo: 'bar' }));</code></pre>
+</section>
+
+<section>
+  <h3><a href='http://www.html5rocks.com/en/tutorials/cors/'>Cross-Origin Resource Sharing</a> (CORS) *</h3>
+
+  <p class='fragment'>In other words: Ajax calls to other domains.</p>
+
+  <pre class='fragment'><code class='no-highlight'>GET https://other.server.com HTTP/1.1
+  Origin: https://my.server.com
+  Host: my.server.com
+  ...</code></pre>
+
+  <pre class='fragment'><code class='no-highlight'>HTTP/1.1 200 OK
+  Content-Type: application/json
+  Access-Control-Allow-Origin: https://my.server.com
+  ...</code></pre>
+</section>
+
+<section>
+  <h3><a href='https://www.w3.org/TR/2001/WD-css3-roadmap-20010523/'>CSS 3</a></h3>
+
+  <p class='fragment'><em>(Actually a collection of numerous, separate specifications)</em></p>
+
+  <h4 class='fragment'>new selectors</h4>
+  <h4 class='fragment'>animations</h4>
+  <h4 class='fragment'>transitions</h4>
+  <h4 class='fragment'>tranforms</h4>
+  <h4 class='fragment'>shadows</h4>
+  <h4 class='fragment'>gradients</h4>
+  <h4 class='fragment'>etc</h4>
+  <h4 class='fragment'>etc</h4>
+  <h4 class='fragment'>etc</h4>
+</section>
+
+<section>
+  <h3><a href='http://www.htmlgoodies.com/tutorials/html5/new-tags-in-html5.html'>Semantic Tags</a></h3>
+
+  <h4 class='fragment'>header</h4>
+  <h4 class='fragment'>nav</h4>
+  <h4 class='fragment'>main</h4>
+  <h4 class='fragment'>section</h4>
+  <h4 class='fragment'>article</h4>
+  <h4 class='fragment'>aside</h4>
+  <h4 class='fragment'>footer</h4>
+  <h4 class='fragment'>and much more!</h4>
+</section>
+
+<section>
+  <h3><a href='https://developer.mozilla.org/en-US/docs/Online_and_offline_events'>Network State Events</a></h3>
+
+  <pre class='fragment'><code class='lang-javascript'>window.addEventListener('offline', function() {
+  alert('Hmm... it looks like you may be offline.');
+});
+
+  window.addEventListener('online',  updateOnlineStatus);
+  </code></pre>
+</section>
+
+<section>
+    <h3>Forms: input types and validation</h3>
+
+    <div class='fragment'>
+        <pre><code class='lang-html'>&lt;input type='text' autocomplete='off' required>
+&lt;input type='email' placeholder='me@email.com' autofocus>
+&lt;input type='date' min='2016-06-01'>
+&lt;input type='number' min='1' max='10'>
+&lt;input type='text' pattern='[a-z\-0-9]+'></code></pre>
+
+        <form class='form-demo'>
+            <input type='text' name='username' required autocomplete='off'>
+            <input type='email' placeholder='me@email.com'><br>
+            <input type='date' min='2016-06-01'><br>
+            <input type='number' min='1' max='10'><br>
+            <input type='text' pattern='[a-z\-0-9]+'><br>
+            <input type='submit'>
+        </form>
+    </div>
+</section>
+
+<section>
+    <h3>Forms: new elements</h3>
+
+    <div class='fragment'>
+        <pre><code class='lang-html'>&lt;progress value='25' max='100'>&lt;/progress>
+&lt;progress value='25' max='100' class='styled'>&lt;/progress>
+
+&lt;input type='text' list='hobbies' placeholder='favorite hobby'>
+&lt;datalist id='hobbies'>
+  &lt;option value='reading'>&lt;/option>
+  &lt;option value='board games'>&lt;/option>
+  &lt;option value='coding'>&lt;/option>
+&lt;/datalist></code></pre>
+
+        <form class='form-demo'>
+            <progress value='25' max='100'></progress>
+            <progress value='25' max='100' class='styled'></progress>
+            <br>
+            <input type='text' list='hobbies' placeholder='favorite hobby'>
+            <datalist id='hobbies'>
+              <option value='reading'></option>
+              <option value='board games'></option>
+              <option value='coding'></option>
+            </datalist>
+        </form>
+    </div>
+
+    <p class='fragment'>
+      Style the <code>&lt;progress></code> element with:<br>
+      <code class='lang-css'>progress::-webkit-progress-bar</code> and <code class='lang-css'>progress::-webkit-progress-value</code>
+    </p>
+</section>
+
+<section>
+    <h3>Forms: contentEditable</h3>
+
+    <div class='fragment'>
+        <pre><code class='lang-html'>&lt;h4 class='username' contentEditable>jakerella&lt;/h4>
+&lt;p class='bio' contentEditable>
+  I am the very model of a modern major general
+&lt;/p></code></pre>
+
+        <h4 class='username' contentEditable onblur='alert("Saving username as " + this.innerText)'>jakerella</h4>
+        <p class='bio' contentEditable>I am the very model of a modern major general</p>
+    </div>
+</section>
+
+<section>
+  <h3>Audio and Video</h3>
+
+  <pre class='fragment'><code class='lang-html'>&lt;video id='myVid' src='myVideoFile.mp4' controls>&lt;/video>
+&lt;audio src='myAudioFile.mp3' controls>&lt;/audio></code></pre>
+
+  <div style='display:flex; justify-content: space-around;'>
+    <video class='fragment' src='/images/keyboard_cat.mp4'></video>
+    <video class='fragment' src='/images/keyboard_cat.mp4' controls></video>
+  </div>
+
+  <pre style='clear:both;' class='fragment'><code class='lang-javascript'>myVidElement.play();
+myVidElement.pause();
+myVidElement.addEventListener('pause', function() {
+  console.log( 'You paused my video!' );
+});</code></pre>
+</pre>
+</section>
+
+<section>
+  <h3><a href='http://www.html5rocks.com/en/tutorials/getusermedia/intro/'>User Media</a> *</h3>
+
+  <div>
+    <pre class='fragment'><code class='lang-html'>&lt;video id='my-stream'>&lt;/video>
+&lt;button id='stream'>Toggle&lt;/button></code></pre>
+
+    <pre class='fragment'><code class='lang-javascript'>window.navigator.webkitGetUserMedia(
+  {video: true, audio: false},
+  function(stream) {
+    document.getElementById('my-stream').src = window.URL.createObjectURL(stream);
+  },
+  function(e) { /* stream acquisition failed... */ }
+);
+
+document.getElementById('stream').play(); // or .pause()</code></pre>
+
+  <div class='fragment'>
+    <video id='my-stream' style='width:300px;'></video><br>
+    <button onclick='toggleStream()' style='font-size:1em;'>Stream</button>
+
+    <script>
+      var streamVid = document.getElementById('my-stream');
+      var streamSetup = false;
+
+      function toggleStream() {
+        if (!streamSetup) {
+          navigator.webkitGetUserMedia({video: true, audio: false}, function(stream) {
+            streamVid.setAttribute('src', window.URL.createObjectURL(stream));
+            streamVid.play();
+            streamSetup = true;
+          }, function(e) {
+            console.error('Video no worky...', e);
+          });
+        } else {
+          if (streamVid.paused) { streamVid.play(); } else { streamVid.pause(); }
+        }
+      }
+    </script>
+  </div>
+
+</section>
+
+<section>
+  <h3><a href='http://www.html5rocks.com/en/tutorials/geolocation/trip_meter/'>Geolocation</a> *</h3>
+
+  <div class='fragment'>
+    <pre><code class='lang-javascript'>navigator.geolocation.getCurrentPosition(
+  function success(position) {
+    console.log(
+      position.coords.latitude,
+      position.coords.longitude
+    );
+  },
+  function failure(err) {
+    console.log( 'hmm... something went wrong', err );
+  }
+);</code></pre>
+
+    <p id='getCoord'></p>
+    <button id='getGeo'>Get Location</button>
+  </div>
+
+  <script>
+  document.getElementById('getGeo').addEventListener('click', function() {
+    document.getElementById('getCoord').innerText = 'Acquiring location...';
+    navigator.geolocation.getCurrentPosition(
+      function(position) {
+        document.getElementById('getCoord').innerText = position.coords.latitude + ', ' + position.coords.longitude;
+      },
+      function(e) {
+        document.getElementById('getCoord').innerText = 'ERROR!';
+        console.error( 'hmm... something went wrong', e );
+      }
+    );
+  });
+  </script>
+</section>
+
+<section>
+  <h3><a href='https://developer.mozilla.org/en-US/docs/Using_files_from_web_applications'>File API</a> *</h3>
+
+  <div class='fragment'>
+    <fieldset style='height:100px;'>
+      <input type='file' id='fileSelector'>
+      <img id='preview' style='width:100px; margin:0; vertical-align:top;'>
+    </fieldset>
+
+    <pre><code class='lang-html'>&lt;input type='file' id='fileSelector'>
+&lt;img id='preview' style='width:100px;'></code></pre>
+
+    <pre class='fragment'><code class='lang-javascript'>document.getElementById('fileSelector')
+  .addEventListener('change', function(e) {
+    var reader = new FileReader();
+
+    reader.onload = function(readEvent) {
+      document.getElementById('preview')
+        .setAttribute('src', readEvent.target.result);
+    };
+    reader.readAsDataURL(e.target.files[0]);
+  });</code></pre>
+  </div>
+
+  <script>
+  document.getElementById('fileSelector').addEventListener('change', function(e) {
+    var reader = new FileReader();
+
+    reader.readAsDataURL(e.target.files[0]);
+
+    reader.onload = function(readEvent) {
+      console.log(readEvent.target.result);
+      document.getElementById('preview')
+        .setAttribute('src', readEvent.target.result);
+    };
+  });
+  </script>
+</section>
+
+<section>
+  <h3><a href='http://www.html5rocks.com/en/tutorials/dnd/basics/'>Drag and Drop</a> **</h3>
+
+  <div style='width:40%; float:left;'>
+    <img src='/images/hobbes_small.png' alt='hobbes' draggable style='width:50px;'>
+    <img src='/images/github.png' alt='github' draggable style='width:50px;'>
+    <img src='/images/twitter.png' alt='twitter' draggable style='width:50px;'>
+    <img src='/images/grunt-logo.png' alt='grunt' draggable style='width:50px;'>
+  </div>
+  <ul class='image-drops boxed-list' style='width:58%; float:left;'></ul>
+
+  <pre style='clear:both;' class='fragment'><code class='lang-html'>&lt;img src='/hobbes.png' draggable>
+&lt;ul class='image-drops'>&lt;/ul></code></pre>
+
+  <pre class='fragment'><code class='lang-javascript'>var dragged = null;
+imgElem.addEventListener('dragstart', function(e) {
+  dragged = this;
+});
+
+imgList.addEventListener('dragover', function(e) {
+  e.preventDefault(); // tell the browser this is a drop zone
+});
+imgList.addEventListener('drop', function(e) {
+  e.target.innerHTML += '<li>' + dragged.outerHTML + '</li>';
+  dragged = null;
+});</code></pre>
+
+  <script>
+  var dragged;
+  var images = document.querySelectorAll('img[draggable]');
+  [].slice.call(images).forEach(function(img) {
+    img.addEventListener('dragstart', function(e) {
+      dragged = this;
+    });
+  });
+  document.querySelector('.image-drops')
+    .addEventListener('dragover', function(e) {
+      e.preventDefault(); // tell the browser this is a drop zone
+    });
+  document.querySelector('.image-drops')
+    .addEventListener('drop', function(e) {
+      e.target.innerHTML += '<li>' + dragged.outerHTML + '</li>';
+    });
+  </script>
+
+</section>
+
+<section>
+  <h3><a href='https://developer.mozilla.org/en-US/docs/Web/API/notification'>Notifications</a> *</h3>
+
+  <pre class='fragment'><code class='lang-javascript'>new Notification('Hello World!');</code></pre>
+
+  <div class='fragment'>
+    <pre><code class='lang-javascript'>if (Notification.permission === "granted") {
+  new Notification('Hello World!');
+} else {
+  Notification.requestPermission().then(function(result) {
+    new Notification('Hello World!');
+  });
+}</code></pre>
+
+    <button class='notify'>Notify Me!</button>
+  </div>
+
+  <script>
+  document.querySelector('.notify').addEventListener('click', function() {
+    if (Notification.permission === "granted") {
+      sendNotification();
+    } else {
+      Notification.requestPermission().then(function(result) {
+        sendNotification();
+      });
+    }
+  });
+  function sendNotification() {
+    new Notification('Hello World!', {
+      body: 'This is the body of the message',
+      icon: '/images/hobbes_small.png'
+    });
+  }
+  </script>
+
+  <pre class='fragment'><code class='lang-javascript'>new Notification('Hello World!', {
+    body: 'This is the body of the message',
+    icon: '/images/hobbes_icon.png'
+  });</code></pre>
+</section>
+
+<section>
+  <h3><a href='https://davidwalsh.name/vibration-api'>Vibration</a> *</h3>
+
+  <pre class='fragment'><code class='lang-javascript'>navigator.vibrate(1000);</code></pre>
+
+  <pre class='fragment'><code class='lang-javascript'>navigator.vibrate([3000, 2000, 1000]);</code></pre>
+
+  <button class='fragment vibrate'>Vibrate!</button>
+
+  <script>
+  document.querySelector('.vibrate').addEventListener('click', function() {
+    navigator.vibrate([2000, 500, 1000]);
+  });
+  </script>
+</section>
+
+
+<section>
+  <h3>Feature Detection</h3>
+
+  if (navigator.geolocation) { ... }
+  Modernizr
+</section>
+
+
+<section>
+  <h2>And so. much. more.</h2>
+
+  https://www.w3.org/TR/html5/
+</section>
+
+
+<section class='no-footer'>
+    <h2>Thank You!</h2>
+    <h3 style="margin-top:2em;">A Tour of HTML5 APIs</h3>
+    <p style="margin-top: 3em">Jordan Kasper</p>
+    <p class="fine">
+        <a href="http://twitter.com/jakerella">@jakerella</a> |
+        <a href="http://JordanKasper.com/html5">jordankasper.com/html5</a>
+    </p>
+</section>
