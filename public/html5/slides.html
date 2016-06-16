@@ -55,10 +55,12 @@ progress.styled {
   </p>
 </section>
 
+
 <section>
   <img src="/images/hobbes_large_trans.png" alt="me" style="width:40%" /><br>
   <a href="http://twitter.com/jakerella">@jakerella</a>
 </section>
+
 
 <section>
   <h2>HTML5 Specification</h2>
@@ -70,109 +72,25 @@ progress.styled {
   <h1 style='color:#fff;'><strong>SO. MUCH.</strong></h1>
 </section>
 
+
 <section>
   <p>Okay, so we can't cover everything...</p>
 </section>
 
-<section>
-  <h3><a href='https://developer.mozilla.org/en-US/docs/Web/API/History_API'>Manipulating Browser History</a></h3>
-
-  <pre class='fragment'><code class='lang-javascript'>window.history.pushState({ foo: 'bar' }, 'Foobar', '/foo/bar');
-
-window.history.back();
-window.history.forward();
-window.history.go(-3);</code></pre>
-</section>
 
 <section>
-  <h3><a href='https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA'>ARIA</a></h3>
+  <h3><a href='http://www.htmlgoodies.com/tutorials/html5/new-tags-in-html5.html'>Semantic Tags</a></h3>
 
-
-  <pre class='fragment'><code class='lang-html'>&lt;button aria-hidden='true' aria-describedby='tip1'>Action&lt;/button>
-&lt;div id='tip1' role='tooltip' aria-hidden='true'>
-  This is the tooltip
-&lt;/div>
-&lt;!-- also use css: visibility:hidden; or just: display:none; -->
-
-
-&lt;ul role='tablist'>
-  &lt;li id='tab1' role='tab'>Tab One&lt;/li>
-  ...
-&lt;/ul>
-&lt;section aria-labelledby='tab1' aria-live='polite'>
-  ...
-&lt;/section></code></pre>
+  <h4 class='fragment'>header</h4>
+  <h4 class='fragment'>nav</h4>
+  <h4 class='fragment'>main</h4>
+  <h4 class='fragment'>section</h4>
+  <h4 class='fragment'>article</h4>
+  <h4 class='fragment'>aside</h4>
+  <h4 class='fragment'>footer</h4>
+  <h4 class='fragment'>and much more!</h4>
 </section>
 
-<section>
-  <h3><a href='http://www.html5rocks.com/en/tutorials/service-worker/introduction/'>Service Workers</a> *</h3>
-
-  <pre class='fragment'><code class='lang-javascript'>// in your main page
-navigator.serviceWorker.register('/subtree/my-script.js')
-  .then(function(registration) {
-    console.log('Success with limited:', registration.scope);
-  }).catch(function(err) {
-    console.log('ServiceWorker failed:', err);
-  });</code></pre>
-
-  <pre class='fragment'><code class='lang-javascript'>// inside the worker script
-self.addEventListener('fetch', function(event) {
-  event.respondWith( JSON.stringify({ fake: 'data' }) );
-  // or we could use appcache to determine what to return...
-});</code></pre>
-</section>
-
-<section>
-  <h3><a href='https://developer.mozilla.org/en-US/docs/Web/API/Battery_Status_API'>Battery Level</a> *</h3>
-
-  <div class='fragment'>
-    <pre><code class='lang-javascript'>navigator.getBattery()
-  .then(function(battery) {
-    console.log( battery.level );
-
-    battery.addEventListener('levelchange', function() {
-      console.log( 'battery level has changed:', battery.level );
-    });
-});</code></pre>
-
-    <progress class='bat-level' value='0' max='100'></progress>
-    <script>
-    navigator.getBattery().then(function(battery) {
-      let el = document.querySelector('.bat-level');
-      el.value = battery.level * 100;
-      el.innerText = battery.level;
-    });
-    </script>
-  </div>
-</section>
-
-<section>
-  <h3><a href='http://diveintohtml5.info/storage.html'>Web Storage</a> *</h3>
-  <p class='fine'>localStorage and sessionStorage</p>
-
-  <pre class='fragment'><code class='lang-javascript'>localStorage.setItem('username', 'jakerella');
-sessionStorage.setItem('currentPage', '/html5');
-
-localStorage.getItem('username');
-
-localStorage.setItem('data', JSON.stringify({ foo: 'bar' }));</code></pre>
-</section>
-
-<section>
-  <h3><a href='http://www.html5rocks.com/en/tutorials/cors/'>Cross-Origin Resource Sharing</a> (CORS) *</h3>
-
-  <p class='fragment'>In other words: Ajax calls to other domains.</p>
-
-  <pre class='fragment'><code class='no-highlight'>GET https://other.server.com HTTP/1.1
-  Origin: https://my.server.com
-  Host: my.server.com
-  ...</code></pre>
-
-  <pre class='fragment'><code class='no-highlight'>HTTP/1.1 200 OK
-  Content-Type: application/json
-  Access-Control-Allow-Origin: https://my.server.com
-  ...</code></pre>
-</section>
 
 <section>
   <h3><a href='https://www.w3.org/TR/2001/WD-css3-roadmap-20010523/'>CSS 3</a></h3>
@@ -190,31 +108,9 @@ localStorage.setItem('data', JSON.stringify({ foo: 'bar' }));</code></pre>
   <h4 class='fragment'>etc</h4>
 </section>
 
-<section>
-  <h3><a href='http://www.htmlgoodies.com/tutorials/html5/new-tags-in-html5.html'>Semantic Tags</a></h3>
-
-  <h4 class='fragment'>header</h4>
-  <h4 class='fragment'>nav</h4>
-  <h4 class='fragment'>main</h4>
-  <h4 class='fragment'>section</h4>
-  <h4 class='fragment'>article</h4>
-  <h4 class='fragment'>aside</h4>
-  <h4 class='fragment'>footer</h4>
-  <h4 class='fragment'>and much more!</h4>
-</section>
 
 <section>
-  <h3><a href='https://developer.mozilla.org/en-US/docs/Online_and_offline_events'>Network State Events</a></h3>
-
-  <pre class='fragment'><code class='lang-javascript'>window.addEventListener('offline', function() {
-  alert('Hmm... it looks like you may be offline.');
-});
-
-window.addEventListener('online',  updateOnlineStatus);</code></pre>
-</section>
-
-<section>
-    <h3>Forms: input types and validation</h3>
+    <h3><a href='http://www.html5rocks.com/en/tutorials/forms/constraintvalidation/'>Forms: input types and validation</a></h3>
 
     <div class='fragment'>
         <pre><code class='lang-html'>&lt;input type='text' autocomplete='off' required>
@@ -236,6 +132,7 @@ window.addEventListener('online',  updateOnlineStatus);</code></pre>
     <pre class='fragment'><code class='lang-css'>input:invalid { background-color: #fdd; }</code></pre>
     <pre class='fragment'><code class='lang-javascript'>myFormElem.checkValidity();  // true/false</code></pre>
 </section>
+
 
 <section>
     <h3>Forms: new elements</h3>
@@ -270,8 +167,9 @@ window.addEventListener('online',  updateOnlineStatus);</code></pre>
     </p>
 </section>
 
+
 <section>
-    <h3>Forms: contentEditable</h3>
+    <h3><a href='http://html5doctor.com/the-contenteditable-attribute/'>Forms: contentEditable</a></h3>
 
     <div class='fragment'>
         <pre><code class='lang-html'>&lt;h4 class='username' contentEditable>jakerella&lt;/h4>
@@ -279,10 +177,169 @@ window.addEventListener('online',  updateOnlineStatus);</code></pre>
   I am the very model of a modern major general
 &lt;/p></code></pre>
 
-        <h4 class='username' contentEditable onblur='alert("Saving username as " + this.innerText)'>jakerella</h4>
+        <h4 class='username' contentEditable>jakerella</h4>
         <p class='bio' contentEditable>I am the very model of a modern major general</p>
+
+        <script>
+        document.querySelector('[contenteditable].username').addEventListener('blur', function() {
+          alert('Saving username as ' + this.innerText);
+        });
+        </script>
     </div>
+
+    <pre class='fragment'><code class='lang-javascript'>myHeader.addEventListener('blur', function() {
+  alert('Saving username as ' + this.innerText);
+});</code></pre>
+
 </section>
+
+
+<section>
+  <h3><a href='https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA'>ARIA</a></h3>
+
+  <pre class='fragment'><code class='lang-html'>&lt;button aria-hidden='true' aria-describedby='tip1'>Action&lt;/button>
+&lt;div id='tip1' role='tooltip' aria-hidden='true'>
+  This is the tooltip
+&lt;/div>
+&lt;!-- also use css: visibility:hidden; or just: display:none; --></code></pre>
+
+  <pre class='fragment'><code class='lang-html'>&lt;ul role='tablist'>
+  &lt;li id='tab1' role='tab'>Tab One&lt;/li>
+  ...
+&lt;/ul>
+&lt;section aria-labelledby='tab1' aria-live='polite'>
+  ...
+&lt;/section></code></pre>
+</section>
+
+
+<section>
+  <h3><a href='https://developer.mozilla.org/en-US/docs/Web/API/History_API'>Manipulating Browser History</a></h3>
+
+  <pre class='fragment'><code class='lang-javascript'>window.history.pushState({name: 'Jordan'}, 'Foobar', '/foo/bar');</code></pre>
+
+  <pre class='fragment'><code class='lang-javascript'>window.history.back();
+window.history.forward();
+window.history.go(-3);
+
+window.addEventListener('popstate', function(evt) { /* ... */ });</code></pre>
+</section>
+
+
+<section>
+  <h3><a href='http://www.html5rocks.com/en/tutorials/service-worker/introduction/'>Service Workers</a> *</h3>
+
+  <pre class='fragment'><code class='lang-javascript'>// in your main html page script
+navigator.serviceWorker.register('/foo/my-script.js')
+  .then(function(registration) {
+
+    // scope restricted to /foo
+    console.log('Success!', registration.scope);
+
+  }).catch(function(err) {
+    console.log('ServiceWorker failed:', err);
+  });</code></pre>
+
+  <pre class='fragment'><code class='lang-javascript'>// inside the worker script
+self.addEventListener('install', function(event) {
+  // do whatever setup is needed
+});</code></pre>
+</section>
+
+
+<section>
+  <h3><a href='http://www.html5rocks.com/en/tutorials/service-worker/introduction/'>Service Workers</a> *</h3>
+
+  <p>
+    Sending messages back and forth...
+  </p>
+
+  <pre class='fragment'><code class='lang-javascript'>// in main page script
+var channel = new MessageChannel();
+channel.port1.onmessage = function(evt) {
+  if (evt.data.error) {
+    console.log('message not received', evt.data.error);
+  } else {
+    console.log('reveived message back!', evt.data);
+  }
+};
+navigator.serviceWorker.controller
+  .postMessage('hello worker!', [channel.port2]);</code></pre>
+
+  <pre class='fragment'><code class='lang-javascript'>// in the service worker
+self.addEventListener('message', function (evt) {
+  console.log('message received!', evt.data);
+  evt.ports[0].postMessage({ 'foo': 'this is my response'});
+});</code></pre>
+
+</section>
+
+
+<section>
+  <h3><a href='https://developer.mozilla.org/en-US/docs/Web/API/Battery_Status_API'>Battery Level</a> *</h3>
+
+  <div class='fragment'>
+    <pre><code class='lang-javascript'>navigator.getBattery()
+  .then(function(battery) {
+    console.log( battery.level );
+
+    battery.addEventListener('levelchange', function() {
+      console.log( 'battery level has changed:', battery.level );
+    });
+});</code></pre>
+
+    <progress class='bat-level' value='0' max='100'></progress>
+    <script>
+    navigator.getBattery().then(function(battery) {
+      let el = document.querySelector('.bat-level');
+      el.value = battery.level * 100;
+      el.innerText = battery.level;
+    });
+    </script>
+  </div>
+</section>
+
+
+<section>
+  <h3><a href='http://www.html5rocks.com/en/tutorials/cors/'>Cross-Origin Resource Sharing</a> (CORS) *</h3>
+
+  <p class='fragment'>In other words: Ajax calls to other domains.</p>
+
+  <pre class='fragment'><code class='no-highlight'>GET https://other.server.com HTTP/1.1
+  Origin: https://my.server.com
+  Host: my.server.com
+  ...</code></pre>
+
+  <pre class='fragment'><code class='no-highlight'>HTTP/1.1 200 OK
+  Content-Type: application/json
+  Access-Control-Allow-Origin: https://my.server.com
+  ...</code></pre>
+</section>
+
+
+<section>
+  <h3><a href='http://diveintohtml5.info/storage.html'>Web Storage</a> *</h3>
+  <p class='fine'>localStorage and sessionStorage</p>
+
+  <pre class='fragment'><code class='lang-javascript'>localStorage.setItem('username', 'jakerella');
+sessionStorage.setItem('currentPage', '/html5');
+
+localStorage.getItem('username');
+
+localStorage.setItem('data', JSON.stringify({ foo: 'bar' }));</code></pre>
+</section>
+
+
+<section>
+  <h3><a href='https://developer.mozilla.org/en-US/docs/Online_and_offline_events'>Network State Events</a></h3>
+
+  <pre class='fragment'><code class='lang-javascript'>window.addEventListener('offline', function() {
+  alert('Hmm... it looks like you may be offline.');
+});
+
+window.addEventListener('online',  updateOnlineStatus);</code></pre>
+</section>
+
 
 <section>
   <h3>Audio and Video</h3>
@@ -302,6 +359,7 @@ myVidElement.addEventListener('pause', function() {
 });</code></pre>
 </pre>
 </section>
+
 
 <section>
   <h3><a href='http://www.html5rocks.com/en/tutorials/getusermedia/intro/'>User Media</a> *</h3>
@@ -346,6 +404,7 @@ document.getElementById('stream').play(); // or .pause()</code></pre>
 
 </section>
 
+
 <section>
   <h3><a href='http://www.html5rocks.com/en/tutorials/geolocation/trip_meter/'>Geolocation</a> *</h3>
 
@@ -381,6 +440,7 @@ document.getElementById('stream').play(); // or .pause()</code></pre>
   });
   </script>
 </section>
+
 
 <section>
   <h3><a href='https://developer.mozilla.org/en-US/docs/Using_files_from_web_applications'>File API</a> *</h3>
@@ -420,6 +480,7 @@ document.getElementById('stream').play(); // or .pause()</code></pre>
   });
   </script>
 </section>
+
 
 <section>
   <h3><a href='http://www.html5rocks.com/en/tutorials/dnd/basics/'>Drag and Drop</a> **</h3>
@@ -468,6 +529,7 @@ imgList.addEventListener('drop', function(e) {
 
 </section>
 
+
 <section>
   <h3><a href='https://developer.mozilla.org/en-US/docs/Web/API/notification'>Notifications</a> *</h3>
 
@@ -509,6 +571,7 @@ imgList.addEventListener('drop', function(e) {
   });</code></pre>
 </section>
 
+
 <section>
   <h3><a href='https://davidwalsh.name/vibration-api'>Vibration</a> *</h3>
 
@@ -527,6 +590,13 @@ imgList.addEventListener('drop', function(e) {
 
 
 <section>
+  <h3>Can I Use These?</h3>
+
+  <h4><a href='http://caniuse.com'>CanIUse.com</a></h4>
+</section>
+
+
+<section>
   <h3>Feature Detection</h3>
 
   <p class='fragment'>
@@ -537,6 +607,7 @@ imgList.addEventListener('drop', function(e) {
   alert('Your browser does not support Geolocation!');
 }</code></pre>
 </section>
+
 
 <section>
   <h3>Feature Detection</h3>
@@ -554,6 +625,7 @@ imgList.addEventListener('drop', function(e) {
     <li class='fragment'>ಠ_ಠ</li>
   </ul>
 </section>
+
 
 <section>
   <h3>Feature Detection</h3>
@@ -575,6 +647,7 @@ imgList.addEventListener('drop', function(e) {
 
 </section>
 
+
 <section>
   <h2>Cool.</h2>
 
@@ -582,6 +655,7 @@ imgList.addEventListener('drop', function(e) {
     What else is in HTML5/CSS3/JS?
   </p>
 </section>
+
 
 <section>
   <h2>So. much. more.</h2>
