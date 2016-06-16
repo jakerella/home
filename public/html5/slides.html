@@ -1,5 +1,6 @@
 
 <style>
+.reveal footer .copyright { font-size: 0.3em; color: #aaa; }
 button { font-size: 0.6em; }
 progress.bat-level::after {
   content: attr(value);
@@ -46,19 +47,19 @@ progress.styled {
 </style>
 
 
-<section class='no-footer'>
-  <h2>A Tour of HTML5 APIs</h2>
-  <p style="margin-top: 3em">Jordan Kasper</p>
-  <p class="fine">
-      <a href="http://twitter.com/jakerella">@jakerella</a> |
-      <a href="http://JordanKasper.com/html5">jordankasper.com/html5</a>
-  </p>
+<section class='no-footer' data-background='/images/html5-background.jpg'>
+  <h2 style='font-weight:bold; color:#fff; position:absolute; bottom:-13em; width:100%;'>A Tour of HTML5 APIs</h2>
+  <cite style='position:absolute; bottom:-38em; left:-10em;'>https://www.youtube.com/watch?v=q6AeGPtvAp8</cite>
 </section>
 
 
 <section>
   <img src="/images/hobbes_large_trans.png" alt="me" style="width:40%" /><br>
-  <a href="http://twitter.com/jakerella">@jakerella</a>
+  <p style="margin-top: 1em">Jordan Kasper</p>
+  <p class="fine">
+      <a href="http://twitter.com/jakerella">@jakerella</a> |
+      <a href="http://JordanKasper.com/html5">jordankasper.com/html5</a>
+  </p>
 </section>
 
 
@@ -95,7 +96,7 @@ progress.styled {
 <section>
   <h3><a href='https://www.w3.org/TR/2001/WD-css3-roadmap-20010523/'>CSS 3</a></h3>
 
-  <p class='fragment'><em>(Actually a collection of numerous, separate specifications)</em></p>
+  <p><em>(Actually a collection of numerous, separate specifications)</em></p>
 
   <h4 class='fragment'>new selectors</h4>
   <h4 class='fragment'>animations</h4>
@@ -103,7 +104,6 @@ progress.styled {
   <h4 class='fragment'>tranforms</h4>
   <h4 class='fragment'>shadows</h4>
   <h4 class='fragment'>gradients</h4>
-  <h4 class='fragment'>etc</h4>
   <h4 class='fragment'>etc</h4>
   <h4 class='fragment'>etc</h4>
 </section>
@@ -371,7 +371,8 @@ myVidElement.addEventListener('pause', function() {
     <pre class='fragment'><code class='lang-javascript'>window.navigator.webkitGetUserMedia(
   {video: true, audio: false},
   function(stream) {
-    document.getElementById('my-stream').src = window.URL.createObjectURL(stream);
+    document.getElementById('my-stream').src =
+                        window.URL.createObjectURL(stream);
   },
   function(e) { /* stream acquisition failed... */ }
 );
@@ -547,6 +548,11 @@ imgList.addEventListener('drop', function(e) {
     <button class='notify'>Notify Me!</button>
   </div>
 
+  <pre class='fragment'><code class='lang-javascript'>new Notification('Hello World!', {
+  body: 'This is the body of the message',
+  icon: '/images/hobbes_icon.png'
+});</code></pre>
+
   <script>
   document.querySelector('.notify').addEventListener('click', function() {
     if (Notification.permission === "granted") {
@@ -564,11 +570,6 @@ imgList.addEventListener('drop', function(e) {
     });
   }
   </script>
-
-  <pre class='fragment'><code class='lang-javascript'>new Notification('Hello World!', {
-    body: 'This is the body of the message',
-    icon: '/images/hobbes_icon.png'
-  });</code></pre>
 </section>
 
 
@@ -589,10 +590,22 @@ imgList.addEventListener('drop', function(e) {
 </section>
 
 
-<section>
-  <h3>Can I Use These?</h3>
+<section data-background='/images/ermahgerd.jpg'></section>
 
-  <h4><a href='http://caniuse.com'>CanIUse.com</a></h4>
+
+<section data-background='#fff'>
+  <h3>Can I Use These?</h3>
+</section>
+
+
+<section data-background='#fff'>
+  <img src='/images/obama-maybe.gif' alt='Obama Maybe' style='width:80%;'>
+</section>
+
+
+<section>
+  <h3>Just need a quick check?</h3>
+  <h3><a href='http://caniuse.com'>CanIUse.com</a></h3>
 </section>
 
 
@@ -666,11 +679,9 @@ imgList.addEventListener('drop', function(e) {
 </section>
 
 
-<section class='no-footer'>
-    <h2>Thank You!</h2>
-    <h3 style="margin-top:2em;">A Tour of HTML5 APIs</h3>
-    <p style="margin-top: 3em">Jordan Kasper</p>
-    <p class="fine">
+<section class='no-footer' data-background='/images/obama-mic-drop.gif'>
+    <h2 style='color:#fff;'>Thank You!</h2>
+    <p>
         <a href="http://twitter.com/jakerella">@jakerella</a> |
         <a href="http://JordanKasper.com/html5">jordankasper.com/html5</a>
     </p>
