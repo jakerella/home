@@ -577,6 +577,15 @@
             "topics": [
                 "Front End Engineering - HTML, CSS, JS"
             ]
+        },
+        {
+            "name": "Madison PHP Conference",
+            "url": "http://2016.madisonphpconference.com/talks/A1/",
+            "location": "Madison, WI",
+            "date": "Oct 1 2016",
+            "topics": [
+                "Advanced Git"
+            ]
         }
     ]
 }
