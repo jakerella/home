@@ -586,6 +586,15 @@
             "topics": [
                 "Advanced Git"
             ]
+        },
+        {
+            "name": "NoVa ColdFusion UG",
+            "url": "http://www.meetup.com/nvcfug/",
+            "location": "Vienna, VA",
+            "date": "July 19 2016",
+            "topics": [
+                "Intro to Node.js"
+            ]
         }
     ]
 }
