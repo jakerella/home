@@ -595,6 +595,15 @@
             "topics": [
                 "Intro to Node.js"
             ]
+        },
+        {
+            "name": "node.dc",
+            "url": "http://www.meetup.com/node-dc/",
+            "location": "Washington, DC",
+            "date": "Aug 18 2016",
+            "topics": [
+                "Building an Amazon Echo App"
+            ]
         }
     ]
 }
