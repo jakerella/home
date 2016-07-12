@@ -46,7 +46,7 @@ module.exports = function (grunt) {
     });
 
     // Load NPM Tasks
-    require('matchdep').filterDev('grunt-*', grunt.config.get('pkg')).forEach(grunt.loadNpmTasks);
+    require('matchdep').filter('grunt-*', grunt.config.get('pkg')).forEach(grunt.loadNpmTasks);
 
     grunt.registerTask('default', ['jshint', 'sass']);
 };
