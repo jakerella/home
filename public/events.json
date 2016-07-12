@@ -604,6 +604,15 @@
             "topics": [
                 "Building an Amazon Echo App"
             ]
+        },
+        {
+            "name": "Connect.Tech",
+            "url": "http://connect.tech/",
+            "location": "Atlanta, GA",
+            "date": "Oct 21 2016",
+            "topics": [
+                "New HTML5 APIs"
+            ]
         }
     ]
 }
