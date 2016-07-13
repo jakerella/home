@@ -8,7 +8,7 @@ var express = require('express'),
 // ---------------- Primary Server Config --------------- //
 
 var server = express();
-server.set('port', process.env.PORT || options.port || 3000);
+server.set('port', options.port || process.env.PORT || 3000);
 
 require('marked').setOptions(require('./helpers/markdownOptions.js')({
     publishTime: options.publishTimeTemplate || null,
