@@ -1,0 +1,496 @@
+<section data-background='black'>
+    <img src='/images/nodejs.png' alt='Node.js Logo' style='width:80%;'>
+
+    <p style='margin-top:2em; color:white;'>Jordan Kasper | <a href='http://twitter.com/jakerella'>@jakerella</a></p>
+</section>
+
+<section>
+    <h1>What is Node.js?</h1>
+    <h3 class="fragment">Node is not "JavaScript" exactly...</h3>
+    <p class="fragment">"JavaScript" is a trademarked term!
+    </p>
+</section>
+
+<section>
+    <h2>Node is ECMAScript</h2>
+    <h3 class="fragment">So what is ECMAScript?</h3>
+</section>
+
+<section>
+    <h3>ECMAScript is a Language Specification...</h3>
+    <p>...with various implementations:</p>
+    <ul>
+        <li class="fragment">Mozilla's SpiderMonkey</li>
+        <li class="fragment">Microsoft's Chakra</li>
+        <li class="fragment">Adobe's Tamarin (ActionScript)</li>
+        <li class="fragment">Rhino (early server-side implenentation; written in Java)</li>
+        <li class="fragment">Chrome's V8</li>
+    </ul>
+</section>
+
+<section data-background='white'>
+    <h3>The Node Core</h3>
+    <p>Node builds on V8 with C++ and JavaScript code.</p>
+    <p><img src="/images/Node-Architecture.png" alt="" class="fragment"></p>
+</section>
+
+<section>
+    <h2>Why Node?</h2>
+    <ul>
+        <li class="fragment">
+            Node is fast.
+            <ul style='padding-left:1em;'>
+                <li class="fragment">Non-blocking I/O</li>
+                <li class="fragment">JavaScript arms race (V8)</li>
+            </ul>
+        </li>
+        <li class="fragment">One language to rule them all</li>
+        <li class="fragment">Vibrant Ecosystem (npm)</li>
+    </ul>
+</section>
+
+<section>
+    <h2>Node... What is it good for?</h2>
+
+    <h2 class="fragment">APIs</h2>
+    <p class="fragment">And specifically ones with high concurrency that interact with multiple back ends.</p>
+</section>
+
+<section>
+    <h2>Caveats</h2>
+    <ul>
+        <li class="fragment">Have to think in async (Callback Hell)</li>
+        <li class="fragment">Frameworks and tools are still growing</li>
+        <li class="fragment">JavaScript "quirks"</li>
+    </ul>
+</section>
+
+<section>
+    <h3>Node is Single-Threaded</h3>
+    <p><em>(But that's ok...)</em></p>
+</section>
+
+<section data-background='white'>
+    <p><img src="https://training.strongloop.com/images/threaded.png"></p>
+    <cite>https://training.strongloop.com/images/threaded.png</cite>
+</section>
+
+<section data-background='white'>
+    <p><img src="https://training.strongloop.com/images/event-loop.png" style="width:90%;"></p>
+    <cite>https://training.strongloop.com/images/event-loop.png</cite>
+</section>
+
+<section>
+    <h2>Using <code>npm</code></h2>
+    <p>"Node Package Manager"</p>
+    <p class="fragment">More than just dependencies!</p>
+</section>
+
+<section>
+    <h3>Project Meta: <code>package.json</code></h3>
+    <pre class="fragment"><code class="lang-no-highlight" data-trim>/my-project$ npm init
+
+This utility will walk you through creating a package.json
+file.  It only covers the most common items, and tries to
+guess sane defaults.
+...
+
+Press ^C at any time to quit
+name: (my-package-name)
+    </code></pre>
+</section>
+
+<section>
+    <h3>A Basic <code>package.json</code></h3>
+    <pre><code class="lang-javascript" data-trim>
+{
+    "name": "my-project",
+    "version": "1.0.0",
+    "description": "This is my project!",
+    "main": "main.js",
+    "scripts": {
+        "test": "echo \"You have no tests!\""
+    },
+    "author": "John Doe &lt;john@doe.com&gt;",
+
+    "license": "MIT",
+    "private": true
+}
+    </code></pre>
+</section>
+
+<section>
+    <h3>Adding Dependencies</h3>
+    <pre><code class="lang-no-highlight" data-trim>/my-project$ npm install express --save
+/my-project$ npm install mocha --save-dev
+    </code></pre>
+    <pre class="fragment"><code class="lang-javascript" data-trim>{
+    ...,
+    dependencies: {
+        "express": "^4.12.4"
+    },
+    devDependencies: {
+        "mocha": "^2.3.3"
+    }
+}
+    </code></pre>
+</section>
+
+<section>
+    <h3>Adding Node Dependencies</h3>
+    <pre><code class="lang-no-highlight" data-trim>
+/my-project$ npm install express --save
+    </code></pre>
+    <pre><code class="lang-no-highlight" data-trim>
+my-project
+  |_ node_modules
+    |_ express
+    |_ mocha
+    |_ bluebird
+    ...
+  |_ server
+    ...</code></pre>
+</section>
+
+<section>
+    <h3>A word on versions...</h3>
+    <p>Node encourages <em>Semantic Versioning</em> (semver)...</p>
+    <pre class="fragment"><code class="lang-no-highlight">  4   .   2   .   1
+major   minor   patch</code></pre>
+</section>
+
+<section>
+    <h3>A word on versions...</h3>
+    <p>When adding a dependency in Node:</p>
+    <pre><code class="lang-javascript" data-trim>dependencies: {
+    "express": "^4.12.4"
+},
+    </code></pre>
+    <p class="fragment"><strong>"^4.12.4"</strong> &gt;&gt; 4.12.5, 4.12.6, 4.13.0, 4.14.1, <del>5.0.0</del></p>
+
+    <p class="fragment"><strong>"~4.12.4"</strong> &gt;&gt; 4.12.5, 4.12.6, <del>4.13.0</del>, <del>4.14.1</del>, <del>5.0.0</del></p>
+
+    <p class="fragment"><strong>"4.12.*"</strong> &gt;&gt; 4.12.5, 4.12.6, <del>4.13.0</del>, <del>4.14.1</del>, <del>5.0.0</del></p>
+
+    <p class="fragment"><strong>"*"</strong> &gt;&gt; ಠ_ಠ</p>
+</section>
+
+<section>
+    <h3>Global Packages</h3>
+    <p>Used for various tooling<br>(scaffolding, testing, build, deploy, etc)</p>
+    <pre><code class="lang-no-highlight" data-trim>~$ npm install -g grunt-cli</code></pre>
+    <pre class="fragment"><code class="lang-no-highlight" data-trim>~/my-project$ grunt build</code></pre>
+</section>
+
+<section>
+    <h3>How do I use module X?</h3>
+    <p class="fragment">READ THE DOCS.
+    </p>
+    <p class="fragment">Doesn't have docs? Use a different module.
+    </p>
+</section>
+
+<section>
+    <h3>Choosing a Module</h3>
+    <ol>
+        <li class="fragment">Documentation</li>
+        <li class="fragment">Tests</li>
+        <li class="fragment">Project Velcity</li>
+        <li class="fragment">Community Involvement</li>
+    </ol>
+</section>
+
+<section>
+    <h2>Basic Module Usage</h2>
+</section>
+
+<section>
+    <h2>Basic Module Usage</h2>
+    <pre><code class="lang-javascript" data-trim>var express = require('express');
+
+var app = express();
+
+app.set('foo', 'bar');
+    </code></pre>
+</section>
+
+<section>
+    <h3>Requiring Modules</h3>
+    <p>Modules can live different places:</p>
+    <pre><code class="lang-javascript" data-trim>var filesystem = require('fs'),          // core Node module
+    express = require('express'),        // from /node_modules/
+    router = require('./app/router.js'), // app file
+    config = require('../config/config.json');
+    </code></pre>
+</section>
+
+<section>
+    <h2>Building Node Modules</h2>
+</section>
+
+<section>
+    <h3>Hello World</h3>
+    <pre><code class="lang-javascript" data-trim>// hello-world.js
+module.exports = function sayHello( recipient ) {
+    console.log( "Hello " + recipient );
+};
+    </code></pre>
+    <pre class="fragment"><code class="lang-javascript" data-trim>// main.js
+var foobar = require('./hello-world');
+
+foobar( 'Everyone!' );
+    </code></pre>
+    <pre class="fragment"><code class="lang-no-highlight" data-trim>$ node main.js
+Hello Everyone!
+    </code></pre>
+</section>
+
+<section>
+    <h3>Module Exports</h3>
+    <p>Whatever is on the <code>module.exports</code> property becomes<br>the return value of <code>require('...')</code>!</p>
+</section>
+
+<section>
+    <h3>Module Exports</h3>
+    <pre><code class="lang-javascript" data-trim>//answer.js
+module.exports = 42;
+    </code></pre>
+    <pre><code class="lang-javascript" data-trim>// main.js
+var theAnswer = require('./answer.js');
+
+theAnswer === 42; // true!
+    </code></pre>
+</section>
+
+<section>
+    <h3>Module Patterns</h3>
+    <ul>
+        <li class="fragment">Simple Object API</li>
+        <li class="fragment">Revealing Module</li>
+        <li class="fragment">Object Constructors</li>
+    </ul>
+</section>
+
+<section>
+    <h3>Simple Object API</h3>
+    <pre><code class="lang-javascript" data-trim>// company.js
+module.exports = {
+    name: "Foo's Widgets",
+    sayHello: function() {
+        return "Hello " + this.name;
+    }
+};
+    </code></pre>
+    <pre class="fragment"><code class="lang-javascript" data-trim>var api = require('./company');
+console.log( api.sayHello() );  // "Hello Foo's Widgets"
+    </code></pre>
+</section>
+
+<section>
+    <h3>Why not use a simple Object?</h3>
+    <p><strong class="fragment">Modules are cached by Node!</strong>
+    </p>
+    <p class="fragment">Requiring a module twice could yield unexpected results!
+    </p>
+</section>
+
+<section>
+    <h3>Module Caching</h3>
+    <pre class="fragment"><code class="lang-javascript" data-trim>module.exports = {
+    salary: 50000,
+    giveRaise: function(amount) {
+        this.salary += amount;
+    }
+};
+</code></pre>
+<pre class="fragment"><code class="lang-javascript" data-trim>var workerOne = require('./worker');
+workerOne.giveRaise(10000);
+console.log( workerOne.salary );  // 60000
+</code></pre>
+<pre class="fragment"><code class="lang-javascript" data-trim>
+var workerTwo = require('./worker');
+workerTwo.giveRaise(10000);
+console.log( workerTwo.salary );  // 70000!
+</code></pre>
+</section>
+
+<section>
+    <h2>Revealing Module Pattern</h2>
+</section>
+
+<section>
+    <h3>Revealing Module Pattern</h3>
+    <pre><code class="lang-javascript" data-trim>module.exports = function createWorker(options) {
+    return {
+        salary: options.salary,
+        giveRaise: function(amount) {
+            this.salary += amount;
+        }
+    };
+};
+    </code></pre>
+    <pre class="fragment"><code class="lang-javascript" data-trim>var getWorker = require('./worker');
+
+var workerOne = getWorker({ salary: 30000 });
+workerOne.giveRaise(7000);  // workerOne.salary === 37000
+    </code></pre>
+    <pre class="fragment"><code class="lang-javascript" data-trim>
+var workerTwo = getWorker({ salary: 50000 });
+workerTwo.giveRaise(5000);  // workerTwo.salary === 55000
+    </code></pre>
+</section>
+
+<section>
+    <h2>Object Constructor Pattern</h2>
+
+    <p class="fragment">Use JavaScript prototypes and constructor functions to construct objects.</p>
+</section>
+
+<section>
+    <h3>Object Constructor Pattern</h3>
+    <pre><code class="lang-javascript" data-trim>var Worker = module.exports = function Worker(options) {
+    // ... worker initialization stuff
+};
+
+Worker.prototype.giveRaise = function(amount) {
+    this.salary += amount;
+};
+    </code></pre>
+</section>
+
+<section>
+    <h1>What else can Node do?</h1>
+</section>
+
+<section>
+    <h2>The Node <code>process</code></h2>
+    <p>An interface to the current Node system process:</p>
+    <ul>
+        <li>Environment variables (<code>process.env</code>)</li>
+        <li>CLI args (<code>process.argv</code>)</li>
+        <li>System Process ID (<code>process.pid</code>)</li>
+        <li>Memory (<code>process.memoryUsage()</code>)</li>
+        <li>etc, etc...</li>
+    </ul>
+</section>
+
+<section>
+    <h2>HTTP (in 10 lines)</h2>
+    <pre class="fragment"><code class="lang-javascript" data-trim>var http = require( 'http' );
+
+var server = http.createServer( function request( req, res ) {
+    res.writeHead( 200, {
+        'Content-Type': 'text/html'
+    } );
+    res.end( '&lt;h1&gt;Hello World!&lt;/h1&gt;' );
+} );
+
+server.listen( 3000, '127.0.0.1', function() {
+    console.log( 'The server is up!' );
+} );
+    </code></pre>
+</section>
+
+<section>
+    <h2>FileSystem</h2>
+    <pre><code class="lang-javascript" data-trim>var fs = require( 'fs' );
+
+fs.readFile( 'config.json', function( err, data ) {
+    if ( err ) {
+        // handle it!
+        console.error( err.stack );
+        return;
+    }
+
+    // `data` is a Buffer, so decode it first...
+    console.log( JSON.parse( data.toString('utf-8') ) );
+});
+    </code></pre>
+</section>
+
+<section>
+    <h2>More Core</h2>
+    <ul>
+        <li>Child Processes</li>
+        <li>Streams</li>
+        <li>Crypto</li>
+        <li>Cluster</li>
+        <li>Events</li>
+        <li>OS</li>
+        <li>...</li>
+    </ul>
+</section>
+
+<section>
+    <h1>Data Sources</h1>
+    <p>Easy to connect to most database management systems</p>
+    <p>Native drivers for:</p>
+    <ul>
+        <li>Oracle</li>
+        <li>MySQL</li>
+        <li>MSSQL</li>
+        <li>MongoDB</li>
+        <li>DB2</li>
+        <li>Cloudant</li>
+    </ul>
+</section>
+
+<section>
+    <h2>MySQL</h2>
+    <pre><code class="lang-no-highlight" data-trim>~/my-app$ npm install mysql --save
+    </code></pre>
+</section>
+
+<section>
+    <h3>MySQL Module Usage</h3>
+    <pre><code class="lang-javascript" data-trim>var mysql = require('mysql');
+
+var connection = mysql.createConnection({
+    host: 'localhost',
+    port: 3306,
+    // ...
+});
+connection.connect();
+    </code></pre>
+    <pre class="fragment"><code class="lang-javascript" data-trim>
+connection.query(
+    "SELECT * FROM `books` WHERE author='Tolstoy'",
+    function(err, rows, fields) {
+        if (err) { /* ... */ return; }
+
+        rows.forEach(function(row) { /* ... */ });
+
+        connection.end();
+    }
+);
+    </code></pre>
+</section>
+
+<section>
+    <h3>ORMs and ODMs</h3>
+    <h4 class="fragment"><a href="http://docs.sequelizejs.com/en/latest/">sequelize</a></h4>
+    <h4 class="fragment"><a href="http://mongoosejs.com/">Mongoose (MongoDB)</a></h4>
+    <h4 class="fragment"><a href="https://github.com/balderdashy/waterline">Waterline</a></h4>
+</section>
+
+<section data-background='white'>
+    <h2>So it's just... &nbsp;&nbsp;JavaScript?</h2>
+    <p><br><br></p>
+    <h1 class="fragment">YES!</h1>
+</section>
+
+<section data-background='white'>
+    <h1>Cool.</h1>
+    <p class="fragment">Iknowright?
+    </p>
+</section>
+
+<section data-background='white'>
+    <h1>Thank You!</h1>
+
+    <p>
+        <a href='https://jordankasper.com/intro-to-node'>jordankasper.com/intro-to-node</a>
+    </p>
+
+    <p style='margin-top:2em;'>Jordan Kasper | <a href='http://twitter.com/jakerella'>@jakerella</a></p>
+</section>
