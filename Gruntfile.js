@@ -6,19 +6,11 @@ module.exports = function (grunt) {
 
         jshint: {
             options: {
-                jshintrc: '.jshintrc',
+                jshintrc: true,
                 ignores: ['public/js/vendor/**/*.js']
             },
-            client: {
-                files: {
-                    src: ['public/js/**/*.js']
-                }
-            },
-            server: {
-                files: {
-                    src: ['app/**/*.js']
-                }
-            }
+            client: ['public/js/**/*.js'],
+            server: ['app/**/*.js']
         },
 
         sass: {
@@ -46,7 +38,7 @@ module.exports = function (grunt) {
     });
 
     // Load NPM Tasks
-    require('matchdep').filter('grunt-*', grunt.config.get('pkg')).forEach(grunt.loadNpmTasks);
+    require('matchdep').filterDev('grunt-*', grunt.config.get('pkg')).forEach(grunt.loadNpmTasks);
 
     grunt.registerTask('default', ['jshint', 'sass']);
 };
