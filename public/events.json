@@ -618,9 +618,18 @@
             "name": "TIY Crash Course",
             "url": "http://www.meetup.com/The-Iron-Yard-DC/events/232736644/",
             "location": "Washington, DC",
-            "date": "July 27 2016",
+            "date": "Jul 27 2016",
             "topics": [
                 "Intro to Web Development"
+            ]
+        },
+        {
+            "name": "TIY Crash Course",
+            "url": "http://www.meetup.com/The-Iron-Yard-DC/events/233157810",
+            "location": "Washington, DC",
+            "date": "Aug 15 2016",
+            "topics": [
+                "Intro to JavaScript"
             ]
         }
     ]
