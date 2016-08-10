@@ -1,0 +1,42 @@
+
+.game td {
+    width: 10px;
+    height: 10px;
+    background-color: #eeeeee;
+}
+.alive, .game td.alive {
+    background-color: #669966;
+}
+.game td.alive.new {
+    background-color: #66bb66;
+}
+.game td.departed {
+    background-color: #ffdddd;
+}
+.game td:hover {
+    background-color: #aaaadd;
+}
+.game.running td:hover {
+    background-color: #eeeeee;
+}
+
+.saved ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+.saved li {
+    float: left;
+    border: 1px solid #cccccc;
+    cursor: pointer;
+}
+.saved div {
+    margin: 0;
+    line-height: 1px;
+}
+.saved span {
+    display: inline-block;
+    height: 3px;
+    width: 3px;
+    border: 1px solid #eee;
+}
