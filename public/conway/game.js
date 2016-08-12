@@ -6,6 +6,7 @@
     var dayCounter = 0;
     var gameLoopHandle = null;
     var cells = [];
+    var startState;
     var size = {
         rows: 30,
         cols: 30
@@ -117,6 +118,8 @@
             stopTime();
             resetWorld();
         });
+        $('.save').on('click', saveStartState);
+
         $('.saved ul').on('click', 'li', function() {
             var index = Number(this.getAttribute('data-index'));
             useSavedState(index);
@@ -138,6 +141,8 @@
             .removeClass('departed')
             .removeClass('new');
         dayCounter = 0;
+        startState = null;
+        $('.save')[0].disabled = true;
         $('time')[0].innerText = '';
 
         var i, j;
@@ -161,11 +166,16 @@
     }
 
     function startTime() {
+        var i, l;
         console.info('Starting time...');
         $('.game').addClass('running');
         if (dayCounter === 0 && !$('.game')[0].classList.contains('fromSaved')) {
             console.log('Saving start state');
-            saveStartState();
+            startState = [];
+            for (i=0, l=cells.length; i<l; i++) {
+                startState.push(cells[i].slice());
+            }
+            $('.save')[0].disabled = false;
         }
 
         gameLoopHandle = window.setInterval(function() {
@@ -181,8 +191,12 @@
     }
 
     function saveStartState() {
+        if (!startState) {
+            return;
+        }
+
         var states = getSavedStates();
-        states.unshift(cells);
+        states.unshift(startState);
         if (states.length > 10) {
             states.pop();
         }

@@ -1,4 +1,9 @@
 
+.fine {
+    color: #777;
+    font-size: 0.7em;
+}
+
 .game td {
     width: 10px;
     height: 10px;
@@ -34,7 +39,7 @@
     margin: 0;
     line-height: 1px;
 }
-.saved span {
+.saved ul span {
     display: inline-block;
     height: 3px;
     width: 3px;
