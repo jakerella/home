@@ -3,17 +3,20 @@ html
     head
         include preso-head.jade
 
-    body
+    body(style='background:#{backgroundColor};')
         div.reveal
 
             footer.left
-                p.copyright.
-                    &copy; Jordan Kasper
+                if footer
+                    p.copyright= footer
+                else
+                    p.copyright.
+                        &copy; Jordan Kasper
 
             div.slides
                 != renderSlideContent()
 
-        script(src="/js/vendor/reveal.js/lib/js/head.min.js")
-        script(src="/js/vendor/reveal.js/js/reveal.js")
+        script(src='/js/vendor/reveal.js/lib/js/head.min.js')
+        script(src='/js/vendor/reveal.js/js/reveal.js')
         script(src='/js/vendor/highlightjs/highlight.pack.js')
-        script(src="/js/preso.js")
+        script(src='/js/preso.js')
