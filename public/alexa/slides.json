@@ -1,0 +1,6 @@
+{
+    "title": "Building an Amazon Alexa Skill",
+    "description": "A presentation on building an Amazon Alexa (Echo) Skill using Node.js!",
+    "slides": "slides.html",
+    "backgroundColor": "white"
+}

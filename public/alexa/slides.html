@@ -1,0 +1,192 @@
+<style>
+    .reveal .small-inline-list {
+        list-style: none;
+        padding: 0;
+        font-size: 0.7em;
+        margin: 3em 0;
+        text-align: center;
+    }
+    .reveal .small-inline-list li {
+        display: inline;
+    }
+    .reveal .small-inline-list li::after {
+        content: ' | ';
+    }
+    .reveal .small-inline-list li:last-child::after {
+        content: '';
+    }
+
+    .reveal .circle-of-life {
+        height: 600px;
+        position: relative;
+    }
+    .reveal .circle-of-life::after {
+        display: table;
+        clear: both;
+        content: '';
+    }
+    .reveal .circle-of-life img {
+        width: 5em;
+        position: absolute;
+        z-index: 6;
+    }
+    .reveal .circle-of-life .echo {
+        width: 6em;
+        top: 30%;
+        left: 40%;
+    }
+    .reveal .circle-of-life .arrow {
+        z-index: 7;
+    }
+</style>
+
+
+<!--           INTRO SLIDES             -->
+
+<section style='text-align:left;' class='no-footer' data-background='images/echo-background.jpg' data-background-position='bottom right' data-background-size='auto 100%'>
+    <h2>Hello Alexa</h2>
+</section>
+
+<section class='no-footer'>
+    <img src='/images/hobbes_large_trans.png' alt='me' style='width:40%' /><br>
+    <p style='margin-top: 1em'>Jordan Kasper</p>
+    <p class='fine'>
+        <a href='http://twitter.com/jakerella'>@jakerella</a> |
+        <a href='http://JordanKasper.com/alexa'>jordankasper.com/alexa</a>
+    </p>
+</section>
+
+<!--        END OF INTRO, BEGIN MAIN CONTENT          -->
+
+<section style='text-align:left;' class='no-footer' data-background='images/echo-background.jpg' data-background-position='bottom right' data-background-size='auto 100%'>
+    <h2>Amazon Echo</h2>
+    <h3>(Alexa)</h3>
+</section>
+
+<section>
+
+    <div class='circle-of-life'>
+        <img src='images/speech.png' alt='Speak' class='fragment' style='top: 0; right: 22%;'>
+        <div class='fragment'>
+            <img src='images/curved-arrow.png' alt='' style='width: 4em; top: 22%; right: 15%; transform: rotate(-62deg);' class='arrow'>
+            <img src='images/alexa-logo.png' alt='Alexa' style='top: 40%; right: 10%;'>
+        </div>
+        <div class='fragment'>
+            <img src='images/curved-arrow.png' alt='' style='top: 57%; right: 20%; transform: rotate(15deg);' class='arrow'>
+            <img src='images/cloud-host.png' alt='Web Server' style='bottom: -5%; right: 40%;'>
+        </div>
+        <div class='fragment'>
+            <img src='images/curved-arrow.png' alt='' style='top: 60%; left: 20%; transform: rotate(90deg);' class='arrow'>
+            <img src='images/alexa-logo.png' alt='Alexa' style='top: 40%; left: 10%;'>
+        </div>
+        <div class='fragment'>
+            <img src='images/curved-arrow.png' alt='' style='width: 4em; top: 22%; left: 15%; transform: rotate(180deg);' class='arrow'>
+            <img src='images/speaker.gif' alt='Listen' style='top: 0; left: 25%;'>
+        </div>
+
+        <img src='images/echo.png' alt='Amazon Echo' class='echo'>
+    </div>
+
+</section>
+
+<section>
+    <h2>How?</h2>
+
+    <p class='fragment'>
+        Simple `POST` webhooks over HTTPS using <strong>JSON</strong> paylods
+    </p>
+</section>
+
+<section>
+    <h2>The Request</h2>
+
+    <pre style='font-size: 0.8em;'><code data-trim>{
+  "session": {
+    "sessionId": "SessionId.6a4789.....",
+    "application": { "applicationId": "amzn1.ask.skill.2ec93....." },
+    "attributes": {
+        "weatherProvided": true
+    },
+    "user": { "userId": "amzn1.ask.account.AFP3ZWK564FDOQ6....." },
+    "new": true
+  },
+  "request": {
+    "type": "IntentRequest",
+    "requestId": "EdwRequestId.ba6dbc3f.....",
+    "locale": "en-US",
+    "timestamp": "2016-08-14T20:15:27Z",
+    "intent": {
+      "name": "Weather",
+      "slots": {
+        "When": { "name": "When", "value": "2016-08-18" }
+      }
+    }
+  },
+  "version": "1.0"
+}</code></pre>
+</section>
+
+<section>
+    <h2>The Response</h2>
+
+    <pre style='font-size: 0.8em;'><code data-trim>{
+  "version": "1.0",
+  "response": {
+    "outputSpeech": {
+      "type": "SSML",
+      "ssml": "<speak>It's going to be nasty.</speak>"
+    },
+    "card": {
+      "text": "It's going to be nasty.",
+      "title": "Weather for 2016-08-15",
+      "image": {
+        "smallImageUrl": "https://s3.amazonaws.com/alexa-forecaster/rain.png",
+        "largeImageUrl": "https://s3.amazonaws.com/alexa-forecaster/rain.png"
+      },
+      "type": "Standard"
+    },
+    "shouldEndSession": false
+  },
+  "sessionAttributes": {
+      "weatherProvided": true
+  }
+}</code></pre>
+</section>
+
+<section>
+    <h1>Let's See It!</h1>
+</section>
+
+<section>
+    <h2>Considerations...</h2>
+
+    <ul>
+        <li class='fragment'>Use ANY back end!</li>
+        <li class='fragment'>Server must verify ALL requests</li>
+        <li class='fragment'>No way to interject text without request</li>
+        <li class='fragment'>No easy way to accept arbitrary-length input</li>
+        <li class='fragment'>Only simple audio playback (up to 90-seconds)</li>
+        <li class='fragment'>Must get skill certified for public use</li>
+    </ul>
+</section>
+
+
+<!--     END OF CONTENT, BEGIN THANK YOU SLIDE     -->
+
+<section class='no-footer'>
+    <h2>Thank You!</h2>
+    <p style='margin-top:2em;'>
+        <a href='http://twitter.com/jakerella'>@jakerella</a> |
+        <a href='http://JordanKasper.com/alexa'>jordankasper.com/alexa</a>
+    </p>
+
+    <ul class='small-inline-list'>
+        <li><a href='https://github.com/jakerella/alexa-forecaster'>Weather Forecaster Repo</a></li>
+        <li><a href='https://developer.amazon.com/public/solutions/alexa/alexa-skills-kit/getting-started-guide'>Getting Started Guide</a></li>
+        <li><a href='https://developer.amazon.com/public/solutions/alexa/alexa-skills-kit/docs/alexa-skills-kit-interface-reference'>JSON Interface Reference</a></li>
+        <li><a href='https://developer.amazon.com/home.html'>Developer Portal</a></li>
+        <li><a href='https://github.com/alexa/alexa-skills-kit-sdk-for-nodejs'>Skills Kit SDK for Node (Lamda)</a></li>
+        <li><a href='https://echosim.io/'>Echosim Testing Tool</a></li>
+        <li><a href='https://github.com/mreinstein/alexa-verifier'>Skill Request Verification Library</a></li>
+    </ul>
+</section>
