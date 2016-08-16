@@ -1,4 +1,8 @@
 <style>
+    .reveal p {
+        margin-top: 1em;
+    }
+
     .reveal .small-inline-list {
         list-style: none;
         padding: 0;
@@ -12,7 +16,8 @@
     .reveal .small-inline-list li::after {
         content: ' | ';
     }
-    .reveal .small-inline-list li:last-child::after {
+    .reveal .small-inline-list li:last-child::after,
+    .reveal .small-inline-list li:first-child::after {
         content: '';
     }
 
@@ -66,7 +71,7 @@
 <section>
 
     <div class='circle-of-life'>
-        <img src='images/speech.png' alt='Speak' class='fragment' style='top: 0; right: 22%;'>
+        <img src='images/speech.png' alt='Speak' class='fragment' style='top: 0; right: 22%; transform: scaleX(-1);'>
         <div class='fragment'>
             <img src='images/curved-arrow.png' alt='' style='width: 4em; top: 22%; right: 15%; transform: rotate(-62deg);' class='arrow'>
             <img src='images/alexa-logo.png' alt='Alexa' style='top: 40%; right: 10%;'>
@@ -98,9 +103,198 @@
 </section>
 
 <section>
-    <h2>The Request</h2>
+    <h2>No seriously, how?</h2>
 
-    <pre style='font-size: 0.8em;'><code data-trim>{
+    <ol>
+        <li class='fragment'>
+            Write your skill app
+            <ul style='padding-left: 1em;'>
+                <li class='fragment'>Accept POST requests</li>
+                <li class='fragment'>Verify requests using Amazon certs</li>
+                <li class='fragment'>Process JSON request</li>
+                <li class='fragment'>Return JSON response</li>
+            </ul>
+        </li>
+        <li class='fragment' style='margin-top:1em;'>
+            Define skill in Amazon Developer Portal
+            <ul style='padding-left: 1em;'>
+                <li class='fragment'>Specify an "invocation" name</li>
+                <li class='fragment'>Define expected "intents" and "slots"</li>
+                <li class='fragment'>(Possibly creating custom "slots")</li>
+                <li class='fragment'>Specify sample utterances</li>
+            </ul>
+        </li>
+        <li class='fragment' style='margin-top:1em;'>Get certified, and <del>profit</del> enjoy!</li>
+    </ol>
+</section>
+
+<section>
+    <h2>Invocation Names</h2>
+
+    <p>
+        What user's will "invoke" to hit your app.
+    </p>
+
+    <p class='fragment'>
+        For example:<br>"Alexa, ask the <strong>bartender</strong> what's in a manhattan."
+    </p>
+
+    <p class='fragment'>
+        There are a LOT of restrictions.<br>
+        Read the <a href='https://developer.amazon.com/appsandservices/solutions/alexa/alexa-skills-kit/docs/choosing-the-invocation-name-for-an-alexa-skill'>Alexa Documentation</a>!
+    </p>
+</section>
+
+<section>
+    <h2>Intents and Slots</h2>
+
+    <p>
+        What is the user trying to do?<br>
+        And what data does the app need to do it?
+    </p>
+</section>
+
+<section>
+    <h2>Intents and Slots</h2>
+
+    <pre><code data-trim>
+{
+  "intents": [
+    {
+      "intent": "Weather",
+      "slots": [
+        {
+          "name": "Day",
+          "type": "AMAZON.DATE"
+        }
+      ]
+    }
+  ]
+}
+    </code></pre>
+</section>
+
+<section>
+    <h2>Sample Utterances</h2>
+
+    <p>
+        Alexa, ask the <strong>forecaster</strong> about the weather on <strong>Friday</strong>
+    </p>
+
+    <p class='fragment'>
+        Alexa, tell the <strong>forecaster</strong> to give me <strong>Friday's</strong> forecast
+    </p>
+</section>
+
+<section>
+    <h2>Sample Utterances</h2>
+
+    <pre><code data-trim>
+Weather  about the weather on {Day}
+Weather  to give me {Day} forecast
+Weather  what's the weather on {Day}
+Weather  {Day} weather
+Weather  to tell me the weather for {Day}
+......
+....
+..
+.
+    </code></pre>
+</section>
+
+<section>
+    <h2>Built-In Intents and Slot Types</h2>
+
+    <aside class='fragment'>
+        <h3><a href='https://developer.amazon.com/public/solutions/alexa/alexa-skills-kit/docs/implementing-the-built-in-intents#available-built-in-intents'>Intents</a></h3>
+        <p>
+            CancelIntent, NoIntent, YesIntent, HelpIntent, etc...
+        </p>
+    </aside>
+
+    <aside class='fragment'>
+        <h3><a href='https://developer.amazon.com/public/solutions/alexa/alexa-skills-kit/docs/defining-the-voice-interface#h2_speech_input'>Slot Types</a></h3>
+        <p>AMAZON.NUMBER and AMAZON.FOUR_DIGIT_NUMBER</p>
+        <p class='fragment'>
+            .DATE, .TIME, and .DURATION
+        </p>
+        <p class='fragment'>
+            .US_CITY, .US_STATE
+        </p>
+        <p class='fragment'>
+            .US_FIRST_NAME
+        </p>
+    </aside>
+</section>
+
+<section>
+    <h2>Custom Slots</h2>
+
+    <pre><code data-trim>
+{
+  "intents": [
+    {
+      "intent": "FavoriteColor",
+      "slots": [
+        {
+          "name": "Color",
+          "type": "COLOR_SLOT"
+        }
+      ]
+    }
+  ]
+}
+    </code></pre>
+</section>
+
+<section>
+    <h2>Verifying Requests</h2>
+
+    <a href='https://developer.amazon.com/public/solutions/alexa/alexa-skills-kit/docs/developing-an-alexa-skill-as-a-web-service'>Alexa Documentation</a>
+
+    <ol style='margin-top: 1em;'>
+        <li class='fragment'>Server must use SSL with certificate from CA</li>
+        <li class='fragment'>Check `SignatureCertChainUrl` header validity</li>
+        <li class='fragment'>Retrieve cert file from header URL</li>
+        <li class='fragment'>Check cert for validity</li>
+        <li class='fragment'>Extract public key from cert file</li>
+        <li class='fragment'>Decode encrypted `Signature` header (base64)</li>
+        <li class='fragment'>Use public key to decrypt signature and retrieve hash</li>
+        <li class='fragment'>Compare hash to SHA-1 hash of entire raw request body</li>
+        <li class='fragment'>Check timestamp of request, reject if older than 150 sec</li>
+    </ol>
+</section>
+
+<section>
+    <h1 style='font-size:5em;'>ಠ_ಠ</h1>
+</section>
+
+<section>
+    <h2>Verifying Requests</h2>
+
+    <p>
+        Or just use this library:<br>
+        <a href='https://github.com/mreinstein/alexa-verifier'>mreinstein/alexa-verifier</a>
+    </p>
+</section>
+
+<section>
+    <h2>The Request Body</h2>
+
+    <pre style='font-size: 0.9em;'><code data-trim>
+{
+    "session": { ... },
+    "request": { ... },
+    "version": "1.0"
+}
+    </code></pre>
+</section>
+
+<section>
+    <h2>The Request - <code>"session"</code></h2>
+
+    <pre style='font-size: 0.9em;'><code data-trim>
+{
   "session": {
     "sessionId": "SessionId.6a4789.....",
     "application": { "applicationId": "amzn1.ask.skill.2ec93....." },
@@ -110,6 +304,17 @@
     "user": { "userId": "amzn1.ask.account.AFP3ZWK564FDOQ6....." },
     "new": true
   },
+  "request": { ... },
+  "version": "1.0"
+}
+    </code></pre>
+</section>
+<section>
+    <h2>The Request - <code>"request"</code></h2>
+
+    <pre style='font-size: 0.9em;'><code data-trim>
+{
+  "session": { ... },
   "request": {
     "type": "IntentRequest",
     "requestId": "EdwRequestId.ba6dbc3f.....",
@@ -123,13 +328,15 @@
     }
   },
   "version": "1.0"
-}</code></pre>
+}
+    </code></pre>
 </section>
 
 <section>
     <h2>The Response</h2>
 
-    <pre style='font-size: 0.8em;'><code data-trim>{
+    <pre style='font-size: 0.85em;' class='fragment'><code data-trim>
+{
   "version": "1.0",
   "response": {
     "outputSpeech": {
@@ -150,7 +357,26 @@
   "sessionAttributes": {
       "weatherProvided": true
   }
-}</code></pre>
+}
+    </code></pre>
+</section>
+
+<section>
+    <h2>SSML?</h2>
+
+    <p class='fragment'>
+        <strong>Speech Synthesis Markup Language</strong>
+        <br>
+        (a w3c rec from 2004)
+        <br><br>
+        <a href='https://developer.amazon.com/public/solutions/alexa/alexa-skills-kit/docs/speech-synthesis-markup-language-ssml-reference'>
+            Read Amazon's docs on it.
+        </a>
+    </p>
+
+    <p class='fragment fine'>
+        (You can also use "PlainText")
+    </p>
 </section>
 
 <section>
@@ -161,10 +387,15 @@
     <h2>Considerations...</h2>
 
     <ul>
-        <li class='fragment'>Use ANY back end!</li>
+        <li class='fragment'>
+            Use ANY back end!
+            <ul style='margin-left:1em;'>
+                <li class='fragment'>Consider Amazon Lamda to reduce friction</li>
+            </ul>
+        </li>
         <li class='fragment'>Server must verify ALL requests</li>
-        <li class='fragment'>No way to interject text without request</li>
-        <li class='fragment'>No easy way to accept arbitrary-length input</li>
+        <li class='fragment'>No way to speak without request (no server push)</li>
+        <li class='fragment'>No easy way to accept arbitrary length/format input</li>
         <li class='fragment'>Only simple audio playback (up to 90-seconds)</li>
         <li class='fragment'>Must get skill certified for public use</li>
     </ul>
@@ -173,14 +404,15 @@
 
 <!--     END OF CONTENT, BEGIN THANK YOU SLIDE     -->
 
-<section class='no-footer'>
+<section style='text-align:left;' class='no-footer' data-background='images/echo-background.jpg' data-background-position='bottom right' data-background-size='auto 100%'>
     <h2>Thank You!</h2>
     <p style='margin-top:2em;'>
         <a href='http://twitter.com/jakerella'>@jakerella</a> |
         <a href='http://JordanKasper.com/alexa'>jordankasper.com/alexa</a>
     </p>
 
-    <ul class='small-inline-list'>
+    <ul class='small-inline-list' style='text-align:left; width: 70%;'>
+        <li><h5>Useful Links</h5></li>
         <li><a href='https://github.com/jakerella/alexa-forecaster'>Weather Forecaster Repo</a></li>
         <li><a href='https://developer.amazon.com/public/solutions/alexa/alexa-skills-kit/getting-started-guide'>Getting Started Guide</a></li>
         <li><a href='https://developer.amazon.com/public/solutions/alexa/alexa-skills-kit/docs/alexa-skills-kit-interface-reference'>JSON Interface Reference</a></li>
