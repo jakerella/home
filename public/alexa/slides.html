@@ -256,7 +256,7 @@ Weather  to tell me the weather for {Day}
         <li class='fragment'>Server must use SSL with certificate from CA</li>
         <li class='fragment'>Check `SignatureCertChainUrl` header validity</li>
         <li class='fragment'>Retrieve cert file from header URL</li>
-        <li class='fragment'>Check cert for validity</li>
+        <li class='fragment'>Check cert for validity (PEM-encoded X.509)</li>
         <li class='fragment'>Extract public key from cert file</li>
         <li class='fragment'>Decode encrypted `Signature` header (base64)</li>
         <li class='fragment'>Use public key to decrypt signature and retrieve hash</li>
@@ -333,7 +333,58 @@ Weather  to tell me the weather for {Day}
 </section>
 
 <section>
+    <h2>Request Types</h2>
+
+    <pre style='font-size: 0.9em;'><code data-trim>
+{
+  "session": { ... },
+  "request": {
+    "type": "IntentRequest",
+    // ...
+  },
+  "version": "1.0"
+}
+    </code></pre>
+
+    <ul>
+        <li class='fragment'>LaunchRequest</li>
+        <li class='fragment'>IntentRequest</li>
+        <li class='fragment'>SessionEndedRequest</li>
+    </ul>
+</section>
+
+<section>
     <h2>The Response</h2>
+
+    <pre style='font-size: 0.85em;' class='fragment'><code data-trim>
+{
+  "version": "1.0",
+  "response": { ... },
+  "sessionAttributes": {
+      "dateRequested": "2016-08-18"
+  }
+}
+    </code></pre>
+</section>
+
+<section>
+    <h2>The Response</h2>
+
+    <pre style='font-size: 0.85em;' class='fragment'><code data-trim>
+{
+  "version": "1.0",
+  "response": {
+    "outputSpeech": { ... },
+    "card": { ... },
+    "shouldEndSession": true
+  },
+  "sessionAttributes": { ... }
+}
+    </code></pre>
+</section>
+
+<section>
+    <h2>The Response - Output Speech</h2>
 
     <pre style='font-size: 0.85em;' class='fragment'><code data-trim>
 {
@@ -343,20 +394,10 @@ Weather  to tell me the weather for {Day}
       "type": "SSML",
       "ssml": "<speak>It's going to be nasty.</speak>"
     },
-    "card": {
-      "text": "It's going to be nasty.",
-      "title": "Weather for 2016-08-15",
-      "image": {
-        "smallImageUrl": "https://s3.amazonaws.com/alexa-forecaster/rain.png",
-        "largeImageUrl": "https://s3.amazonaws.com/alexa-forecaster/rain.png"
-      },
-      "type": "Standard"
-    },
-    "shouldEndSession": false
+    "card": { ... },
+    "shouldEndSession": true
   },
-  "sessionAttributes": {
-      "weatherProvided": true
-  }
+  "sessionAttributes": { ... }
 }
     </code></pre>
 </section>
@@ -380,7 +421,31 @@ Weather  to tell me the weather for {Day}
 </section>
 
 <section>
-    <h1>Let's See It!</h1>
+    <h2>The Response</h2>
+
+    <pre style='font-size: 0.85em;' class='fragment'><code data-trim>
+{
+  "version": "1.0",
+  "response": {
+    "outputSpeech": { ... },
+    "card": {
+      "text": "It's going to be nasty.",
+      "title": "Weather for Friday",
+      "image": {
+        "smallImageUrl": "https://s3.amazonaws.com/alexa-forecaster/rain.png",
+        "largeImageUrl": "https://s3.amazonaws.com/alexa-forecaster/rain.png"
+      },
+      "type": "Standard"
+    },
+    "shouldEndSession": true
+  },
+  "sessionAttributes": { ... }
+}
+    </code></pre>
+</section>
+
+<section>
+    <h1>Let's See Some Code!</h1>
 </section>
 
 <section>
