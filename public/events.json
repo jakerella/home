@@ -631,6 +631,15 @@
             "topics": [
                 "Intro to JavaScript"
             ]
+        },
+        {
+            "name": "TIY Crash Course",
+            "url": "https://www.meetup.com/The-Iron-Yard-DC/events/233158296/",
+            "location": "Washington, DC",
+            "date": "Sep 14 2016",
+            "topics": [
+                "Intro to Front End"
+            ]
         }
     ]
 }
