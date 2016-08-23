@@ -3,6 +3,18 @@
 
 <img src='/images/echo.png' alt='Amazon Echo ' class='left' style='width:13em; padding-top:0;'>
 
+Okay, first off, this is a loooong blog post. Over 3,500 words... _without_ code examples. Sorry about that, but I wanted it to be relatively complete. There is some high-level navigation directly below that I encourage you to use when you come back later after wasting a few hours here on the first couple sections.
+
+<nav>
+  <ul>
+    <li><a href='#custom-skills'>Custom Skills</a></li>
+    <li><a href='#defining-the-skill'>Skill Definition</a></li>
+    <li><a href='#creating-your-skill'>Skill Creation (Code)</a></li>
+    <li><a href='#testing-out-your-skillz'>Testing</a></li>
+    <li><a href='#wrapping-things-up-and-caveats'>Wrap Up and Caveats</a></li>
+  </ul>
+</nav>
+
 Building an [Amazon Echo](https://www.amazon.com/Amazon-Echo-Bluetooth-Speaker-with-WiFi-Alexa/dp/B00X4WHP5E) (Alexa) skill is extremely simple, if a bit cumbersome. If you're not familiar, the Echo is an always-on voice interface for your home that allows developers to extend its functionality with "skills". These skills get the benefit of Amazon's full speech analysis engine and they work through a simple JSON web API. In this post I'll will show you how we can use Node.js to write the skill ([a small web app](https://github.com/jakerella/alexa-forecaster)) and what else we need to do to get up and running. You [don't need to own an Echo](https://echosim.io) to write a skill... although they sure are fun to play with!
 
 You might first be asking what's the difference between the "Echo" and "Alexa" - "Echo" refers to the device, but "Alexa" is the name given to the voice interface software itself. This manifests in the keyword that an end user must say in order to trigger the device to take any action. For example, you can ask Alexa facts about our world. While the device is on, simply utter the phrase:
@@ -13,9 +25,9 @@ The device (in the "Alexa" voice) will respond with:
 
 > **The population of the United States is about 324 million.**
 
-### High-Level Overview
+Let's dive in...
 
-> TODO: exec summary and jump nav
+---
 
 ### Custom Skills
 
