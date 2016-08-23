@@ -57,13 +57,17 @@ I mentioned that the skill is "installed" earlier, but to be clear: none of thes
 1. Your server responds with a JSON payload including text to speak
 1. Amazon's server sends your text back to the device for voice output
 
+So how do we create custom skills? That's what this article is all about! While we'll be creating our skill using a custom Node.js application (and server), you could also do this with an [Amazon Lamda]((https://aws.amazon.com/lambda/)) function (written in Node or other languages). This does allow you to bypass the request validation (more on that later), but also means you're stuck on Amazon versus being portable and able to completely customize your app/server.
+
+Let's dive in!
+
 ### Defining the Skill
 
 Before we can use our skill, we must create it in the [Amazon Developer Portal](https://developer.amazon.com/edw/home.html#/skills/list). As mentioned previously, our skills are _not_ installed on the Echo, but rather simply added to your Amazon profile. As such, using our custom skills doesn't require us to be in "development" mode on our Echo or anything. You simply add your skill to your developer account on the portal and you're done!
 
-> You may want to define the skill in the developer portal first because it can help you [define your voice interface](https://developer.amazon.com/public/solutions/alexa/alexa-skills-kit/docs/defining-the-voice-interface). This can, in turn, inform how to build your Node application.
+> The first step is to [define your voice interface](https://developer.amazon.com/public/solutions/alexa/alexa-skills-kit/docs/defining-the-voice-interface). This is not a short step, and you should take time in thinking about how end users will actually speak to Alexa. What would they say? How would they say it? Are there regional dialects that you should consider? What about slang or contractions? The point here is **do not wait to think about how your users will speak to Alexa**, do this step _first_. It can help you develop your application.
 
-So what do we need to do to define our skill on the portal? Not much! Let's look at each piece:
+So what do we need to do to define our skill on the portal? Not too much! Let's look at each piece:
 
 #### 1. Specify an "Invocation Name"
 
