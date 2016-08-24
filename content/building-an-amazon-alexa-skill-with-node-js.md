@@ -406,6 +406,8 @@ You most certainly _do not_ have to write your skill in Node. So long as your ap
 
 If you're curious to see the [simple forecasting demo skill](https://github.com/jakerella/alexa-forecaster), check it out on GitHub! It is _not_ considered complete, but feel free to fork it and hack away!
 
+Also, big thanks to [Robbie](https://twitter.com/RobbieTheGeek), [Evan](https://twitter.com/evanjacobs), and [Phil](https://twitter.com/philwinkle) for reviewing!
+
 {{August 24, 2016}}
 
 @@ development, javascript, node, iot
