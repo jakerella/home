@@ -15,13 +15,13 @@ Okay, first off, this is a loooong blog post. Over 3,500 words... _without_ code
   </ul>
 </nav>
 
-Building an [Amazon Echo](https://www.amazon.com/Amazon-Echo-Bluetooth-Speaker-with-WiFi-Alexa/dp/B00X4WHP5E) (Alexa) skill is extremely simple, if a bit cumbersome. If you're not familiar, the Echo is an always-on voice interface for your home that allows developers to extend its functionality with "skills". These skills get the benefit of Amazon's full speech analysis engine and they work through a simple JSON web API. In this post I'll will show you how we can use Node.js to write the skill ([a small web app](https://github.com/jakerella/alexa-forecaster)) and what else we need to do to get up and running. You [don't need to own an Echo](https://echosim.io) to write a skill... although they sure are fun to play with!
+Building an [Amazon Echo](https://www.amazon.com/Amazon-Echo-Bluetooth-Speaker-with-WiFi-Alexa/dp/B00X4WHP5E) (Alexa) skill is quite simple, but requires many steps, and a few of them are bit cumbersome. If you're not familiar, the Echo is an always-on voice interface for your home that allows developers to extend its functionality with "skills". These skills get the benefit of Amazon's full speech analysis engine and they work through a simple JSON web API. In this post I'll will show you how we can use Node.js to write the skill ([a small web app](https://github.com/jakerella/alexa-forecaster)) and what else we need to do to get up and running. You [don't need to own an Echo](https://echosim.io) to write a skill... although they sure are fun to play with!
 
-You might first be asking what's the difference between the "Echo" and "Alexa" - "Echo" refers to the device, but "Alexa" is the name given to the voice interface software itself. This manifests in the keyword that an end user must say in order to trigger the device to take any action. For example, you can ask Alexa facts about our world. While the device is on, simply utter the phrase:
+You might first be asking what's the difference between the "Echo" and "Alexa" - "Echo" refers to the device, but "Alexa" is the name given to the voice interface software itself. This manifests in the keyword (my term, not theirs) that an end user must say in order to trigger the device to take any action. For example, you can ask Alexa facts about our world. While the device is on, simply utter the phrase:
 
 > **Alexa, what's the population of the United States?**
 
-The device (in the "Alexa" voice) will respond with:
+Notice that we identified what we want ("population") and input data (the location: "United States") - these are the keywords Alexa listens for. The device (in the "Alexa" voice) will then respond with:
 
 > **The population of the United States is about 324 million.**
 
@@ -326,7 +326,7 @@ app.post('/forecast', requestVerifier, function(req, res) {
 });
 ```
 
-Notice that above we check the "type" of the request first, handling a "LaunchRequest" a little different than the others. Next we might [handle the "SessionEndedRequest"](https://developer.amazon.com/public/solutions/alexa/alexa-skills-kit/docs/alexa-skills-kit-interface-reference#sessionendedrequest), which is also unique:
+Don't forget about our [`requestVerifier` that we created earlier](#verifying-requests) - that piece of middleware happens before our route. Inside our route handler we check the "type" of the request first, handling a "LaunchRequest" a little different than the others. Next we might [handle the "SessionEndedRequest"](https://developer.amazon.com/public/solutions/alexa/alexa-skills-kit/docs/alexa-skills-kit-interface-reference#sessionendedrequest), which is also unique:
 
 ```javascript
 app.post('/forecast', requestVerifier, function(req, res) {
@@ -406,6 +406,6 @@ You most certainly _do not_ have to write your skill in Node. So long as your ap
 
 If you're curious to see the [simple forecasting demo skill](https://github.com/jakerella/alexa-forecaster), check it out on GitHub! It is _not_ considered complete, but feel free to fork it and hack away!
 
-{{August 23, 2016}}
+{{August 24, 2016}}
 
 @@ development, javascript, node, iot
