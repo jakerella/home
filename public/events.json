@@ -640,6 +640,15 @@
             "topics": [
                 "Intro to Front End"
             ]
+        },
+        {
+            "name": "Nodevember",
+            "url": "http://nodevember.org/",
+            "location": "Nashville, TN",
+            "date": "Nov 20 2016",
+            "topics": [
+                "Async Workflows with Generators"
+            ]
         }
     ]
 }
