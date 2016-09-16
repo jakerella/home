@@ -74,10 +74,29 @@ module.exports = {
                 ].join(' ');
 
             } else {
-                content = fs.readFileSync(path.join(site.publicDir, slug, data.slides));
+                content = fs.readFileSync(path.join(__dirname, '..', '..', site.publicDir, slug, data.slides));
             }
 
-            return content;
+            content = content.toString('utf-8');
+            var includeRegex = /^\s*@include\s(.+)\s*$/gm;
+            var match, matches = [];
+            /* jshint boss:true */
+            while (match = includeRegex.exec(content)) {
+                matches.push(match[1]);
+            }
+            /* jshint boss:false */
+
+            if (matches.length) {
+                matches.forEach(function(include) {
+                    var partial;
+                    try {
+                        partial = fs.readFileSync(path.join(__dirname, '..', '..', 'templates', 'slide-partials', include + '.html'));
+                    } catch(e) { return; /* If not found, just kick out, no replacement to be done */ }
+                    content = content.replace(new RegExp('@include ' + include.replace(/\-/, '\\-'), 'g'), partial.toString('utf-8'));
+                });
+            }
+
+            return new Buffer(content);
         };
 
         return jade.renderFile(path.join(site.templateDir, 'preso.jade'), data);
