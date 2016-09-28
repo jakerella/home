@@ -17,7 +17,7 @@
 // Full list of configuration options available here:
 // https://github.com/hakimel/reveal.js#configuration
 Reveal.initialize({
-    controls: false,
+    controls: ((/hide\-controls/.test(document.location.search)) ? false : true),
     progress: false,
     history: true,
     center: true,
@@ -71,7 +71,7 @@ Reveal.initialize({
     function highlightBlock( event ) {
         window.hljs.highlightBlock( event.currentTarget );
     }
-    
+
     if( typeof window.addEventListener === 'function' ) {
         var code = document.querySelectorAll( 'pre code' );
 
@@ -94,7 +94,7 @@ Reveal.initialize({
     }
 
     window.hljs.initHighlighting();
-    
+
     setTimeout(function() {
         [].slice.call(document.querySelectorAll('pre code'))
             .forEach(function(n) {
