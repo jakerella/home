@@ -1,10 +1,15 @@
-
 <section>
-    <h2>Gitting More Out of Git</h2>
-    <p style='margin-top: 3em'>Jordan Kasper</p>
-    <p class='fine'>
-        <a href='http://twitter.com/jakerella'>@jakerella</a>
-    </p>
+    <section>
+        <h2>Gitting More Out of Git</h2>
+        <p style='margin-top: 3em'>Jordan Kasper</p>
+        <p class='fine'>
+            <a href='http://twitter.com/jakerella'>@jakerella</a>
+        </p>
+    </section>
+
+    @include company
+
+    @include me
 </section>
 
 <section data-background='#fff'>
@@ -99,10 +104,16 @@ origin  https://github.com/jakerella/repo-name.git (push)
         <div class='fragment'>
             <pre><code class='no-highlight' data-trim>
 ~$ git checkout -b new-feature
-~$ git push -u origin new-feature
+~$ git branch --set-upstream-to=origin/new-feature
             </code></pre>
 
-            <p>The <code>-u</code> option sets the "upstream" remote repo to track.</p>
+            <pre class='fragment'><code class='no-highlight' data-trim>
+~$ git branch -u origin/new-feature
+            </code></pre>
+
+            <pre class='fragment'><code class='no-highlight' data-trim>
+~$ git push -u origin new-feature
+            </code></pre>
 
             <pre class='fragment'><code class='no-highlight' data-trim>
 ~$ git branch -vv
@@ -144,24 +155,7 @@ jquery-source  https://github.com/jquery/jquery.git (push)
 <section>
 
     <section>
-        <h3>MOAR Branches</h3>
-    </section>
-
-    <section>
-        <h4>Listing Branches</h4>
-
-        <pre><code class='no-highlight' data-trim>
-~$ git branch
-  hot-fix
-* master
-  new-feature
-  stuff
-        </code></pre>
-
-        <pre class='fragment'><code class='no-highlight' data-trim>
-~$ git branch --no-merged
-stuff
-        </code></pre>
+        <h2>Branch Differences</h2>
     </section>
 
     <section>
@@ -182,9 +176,19 @@ diff --git a/STUFF.md b/STUFF.md
 <strong>new file mode 100644</strong>
 index 0000000..e69de29
         </code></pre>
+    </section>
 
-        <p class='fragment'>
-            This is ALL changes between <code>master</code> and <code>stuff</code><br>
+    <section>
+        <h4>Branch Differences</h4>
+
+        <pre><code class='no-highlight' data-trim>
+~$ git diff master stuff
+        </code></pre>
+
+        <p>
+            This is ALL changes between <code>master</code> and <code>stuff</code>
+        </p>
+        <p>
             (regardless of what branch those came from).
         </p>
     </section>
@@ -370,7 +374,7 @@ pick fd0091e This is the best.
         </code></pre>
     </section>
 
-    <section class='cut-me-1'>
+    <section class='cut-me-2'>
         <h4>Interactive Rebasing</h4>
 
         <pre><code class='no-highlight' data-trim data-noescape>
@@ -394,7 +398,7 @@ pick fd0091e This is the best.
         </code></pre>
     </section>
 
-    <section class='cut-me-1'>
+    <section class='cut-me-2'>
         <pre><code class='no-highlight' data-trim data-noescape>
 ~$ git rebase --interactive HEAD^^^
 <strong>Stopped at 72267fc26d88fa977d24760252da63b46ca3b81a... I did a thing!</strong>
@@ -414,7 +418,7 @@ Successfully rebased and updated refs/heads/new-feature.
         </div>
     </section>
 
-    <section class='cut-me-1'>
+    <section class='cut-me-2'>
         <p class='illuminate'>Careful! You've just changed<br><strong>ALL history</strong> from that point forward.</p>
 
         <pre><code class='no-highlight' data-trim data-noescape>
@@ -464,9 +468,12 @@ fd0091e HEAD@{9}: commit: This is the best
 nothing to commit (working directory clean)
         </code></pre>
 
-        <pre class='fragment'><code class='no-highlight' data-trim data-noescape>
+        <div  class='fragment'>
+            <p class='fine'>You can also `checkout` entire directories:</p>
+            <pre><code class='no-highlight' data-trim data-noescape>
 ~$ git checkout src/js/
-        </code></pre>
+            </code></pre>
+        </div>
     </section>
 
     <section>
@@ -477,8 +484,18 @@ nothing to commit (working directory clean)
         </p>
 
         <pre><code class='no-highlight' data-trim data-noescape>
-~$ git checkout content/
-~$ rm NewFile.md
+~$ git checkout src/js/
+~$ git status
+On branch master
+
+Untracked files:
+  (use "git add &lt;file>..." to include in what will be committed)
+
+       	src/js/foobar.js
+        </code></pre>
+
+        <pre class='fragment'><code class='no-highlight' data-trim data-noescape>
+~$ rm src/js/foobar.js
         </code></pre>
     </section>
 
@@ -491,24 +508,6 @@ nothing to commit (working directory clean)
         </code></pre>
 
         <pre class='fragment'><code class='no-highlight' data-trim data-noescape>
-~$ git status
-# On branch new-feature
-# Changes to be committed:
-#   (use "git reset HEAD &lt;file&gt;..." to unstage)
-#
-#   modified:   README.md
-        </code></pre>
-    </section>
-
-    <section data-transition='none'>
-        <h4>Staged Changes</h4>
-
-        <pre><code class='no-highlight' data-trim data-noescape>
-~$ echo "foobar" &gt;&gt; README.md
-~$ git add README.md
-        </code></pre>
-
-        <pre><code class='no-highlight' data-trim data-noescape>
 ~$ git status
 # On branch new-feature
 # Changes to be committed:
@@ -537,13 +536,21 @@ nothing to commit (working directory clean)
     </section>
 
     <section>
+        <h3><code>HEAD</code> is just a reference to the commit<br>at the end of the current branch!</h3>
+    </section>
+
+    <section>
+        <h3>So what is "staging" and "working directory"?</h3>
+    </section>
+
+    <section>
         <h4>Remember the Three States!</h4>
 
         <img src='images/git_checkout-commit.png' alt='checkout and push workflow diagram' style='width:60%;'>
     </section>
 
     <section>
-        <h3>Committed Changes</h3>
+        <h3>Undoing Committed Changes</h3>
         <p style='margin-top:3em' class='fine'>(a.k.a. Oops)</p>
     </section>
 
@@ -568,12 +575,20 @@ this is not a good change
     </section>
 
     <section>
+      <h2>Using <code>reset</code></h2>
+    </section>
+
+    <section data-transition='none'>
         <h4>Understanding the Three Seashells</h4>
 
         <img src='images/git_reset-1.png' alt='three states of a git repo' style='width:70%;'>
+
+        <p>&nbsp;</p>
     </section>
 
-    <section>
+    <section data-transition='none'>
+        <h4>Understanding the Three Seashells</h4>
+
         <img src='images/git_reset-2.png' alt='soft reset diagram' style='width:70%;'>
 
         <p><code>git reset --soft HEAD^</code></p>
@@ -697,6 +712,13 @@ e098369 HEAD@{4}: checkout: moving from master to new-feature
 b9bdb02 HEAD@{5}: commit: a really good change
 e098369 HEAD@{6}: pull: Fast-forward
         </code></pre>
+
+        <pre class='fragment'><code class='no-highlight' data-trim data-noescape>
+~$ git log --oneline
+<strong>d42c386</strong> this is not a good change
+<strong>b86e65d</strong> the immediately previous change (totally normal)
+<strong>b9bdb02</strong> a really good change
+        </code></pre>
     </section>
 
     <section>
@@ -730,21 +752,24 @@ e098369 HEAD@{6}: pull: Fast-forward
 
         <pre class='fragment'><code class='no-highlight' data-trim data-noescape>
 ~$ git checkout -b hot-fix-123
+        </code></pre>
 
+        <pre class='fragment'><code class='no-highlight' data-trim data-noescape>
 ~$ git status
-# On branch hot-fix-123
-# <strong>Changes not staged for commit:</strong>
-#   (use "git add &lt;file&gt;..." to update what will be committed)
-#   (use "git checkout -- &lt;file&gt;..." to discard changes in working directory)
-#
-#   <strong>modified:   some-unrelated-file.js</strong>
+On branch hot-fix-123
+Changes not staged for commit:
+    ...
+    <strong>modified:   borked-code.js</strong>
+    <strong>modified:   some-unrelated-file.js</strong>
+
+Untracked files:
+    ...
+    <strong>new-code.js</strong>
         </code></pre>
     </section>
 
     <section>
         <h4>Using the Stash</h4>
-
-        <p><strong>Before</strong> switching branches...</p>
 
         <div class='fragment'>
             <pre><code class='no-highlight' data-trim data-noescape>
@@ -806,12 +831,15 @@ stash@{2}: On hot-fix-456: attempt to fix bug #456, but incomplete
         </code></pre>
 
         <pre class='fragment'><code class='no-highlight' data-trim data-noescape>
-# On branch new-feature
-# <strong>Changes not staged for commit:</strong>
-#   (use "git add &lt;file&gt;..." to update what will be committed)
-#   (use "git checkout -- &lt;file&gt;..." to discard changes in working directory)
-#
-#   <strong>modified:   some-unrelated-file.js</strong>
+On branch new-feature
+Changes not staged for commit:
+    ...
+    <strong>modified:   borked-code.js</strong>
+    <strong>modified:   some-unrelated-file.js</strong>
+
+Untracked files:
+    ...
+    <strong>new-code.js</strong>
         </code></pre>
 
         <pre class='fragment'><code class='no-highlight' data-trim data-noescape>
@@ -841,13 +869,16 @@ Dropped refs/stash@{0} (a52d9c3ba1121dd94eb3925ba60d3f8ef30540c8)
         </code></pre>
 
         <pre class='fragment'><code class='no-highlight' data-trim data-noescape>
-# On branch new-feature
-# Changes not staged for commit:
-#   (use "git add &lt;file&gt;..." to update what will be committed)
-#   (use "git checkout -- &lt;file&gt;..." to discard changes in working directory)
-#
-#   modified:   some-unrelated-file.js
-...
+On branch new-feature
+Changes not staged for commit:
+    ...
+    modified:   borked-code.js
+    modified:   some-unrelated-file.js
+
+Untracked files:
+    ...
+    new-code.js
+
 <strong>Dropped refs/stash@{0} (a52d9c3ba1121dd94eb3925ba60d3f8ef30540c8)</strong>
         </code></pre>
 
@@ -1136,14 +1167,12 @@ src/js/some-file.js |   13 ++++--+++
 
         <p>When code in <code>feature</code> diverges from the current trunk...</p>
 
-        <div class='fragment'>
-            <img style='margin-right: 3.9em; width:40%;' src='images/git_merge-2.png' alt='git branch diagram with divergent changes'>
+        <img class='fragment' style='margin-right: 3.9em; width:40%;' src='images/git_merge-2.png' alt='git branch diagram with divergent changes'>
 
-            <pre><code class='no-highlight' data-trim data-noescape>
+        <pre class='fragment'><code class='no-highlight' data-trim data-noescape>
 ~$ git checkout master
 ~$ git merge feature
-            </code></pre>
-        </div>
+        </code></pre>
     </section>
 
     <section data-transition='none'>
@@ -1223,7 +1252,7 @@ more common text...
                 <code>~$ git commit</code>
             </li>
             <li class='fragment'>
-                Remove the "orig"inal file from the branch<br>
+                Remove the "orig"inal file from the branch <span class='fine'>(if present)</span><br>
                 <code>~$ rm README.md.orig</code>
             </li>
         </ol>
@@ -1239,11 +1268,6 @@ more common text...
         <h4>Divergent Changes</h4>
 
         <img style='margin: 0.1em 4.8em 0 0; width:40%;' src='images/git_rebase_1.png' alt='git rebase diagram with divergent changes'>
-
-        <pre><code class='no-highlight' data-trim data-noescape>
-~$ git checkout feature
-~$ git rebase master
-        </code></pre>
     </section>
 
     <section data-transition='none'>
@@ -1311,26 +1335,13 @@ Failed to merge in the changes.
 
         <div class='fragment'>
             <p>
-                You can skip an individual conflict...<br>
-                <span class='fine'>(probably not a good idea)</span>
+                You can abort the entire process...
             </p>
 
             <pre><code class='no-highlight' data-trim data-noescape>
-~$ git rebase --skip
+~$ git rebase --abort
             </code></pre>
         </div>
-    </section>
-
-    <section>
-        <h4>Too Much Confliction?</h4>
-
-        <p>
-            Or you can abort the entire process...
-        </p>
-
-        <pre><code class='no-highlight' data-trim data-noescape>
-~$ git rebase --abort
-        </code></pre>
     </section>
 
     <section>
