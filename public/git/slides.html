@@ -359,7 +359,32 @@ I did a thing!
 
         <pre class='fragment'><code class='no-highlight' data-trim data-noescape>
 pick 7e10e41 some old commit
-edit 72267fc I did a thing!
+pick 72267fc I did a thing!
+pick fd0091e This is the best.
+
+# Rebase 5a39902..fd0091e onto 5a39902 (3 command(s))
+#
+# Commands:
+#  p, pick = use commit
+#  r, reword = use commit, but edit the commit message
+#  e, edit = use commit, but stop for amending
+#  s, squash = use commit, but meld into previous commit
+#  f, fixup = like "squash", but discard this commit's log message
+#  x, exec = run command (the rest of the line) using shell
+...
+        </code></pre>
+    </section>
+
+    <section class='cut-me-2'>
+        <h4>Interactive Rebasing</h4>
+
+        <pre><code class='no-highlight' data-trim data-noescape>
+~$ git rebase --interactive HEAD^^^
+        </code></pre>
+
+        <pre><code class='no-highlight' data-trim data-noescape>
+pick 7e10e41 some old commit
+<strong>edit</strong> 72267fc I did a thing!
 pick fd0091e This is the best.
 
 # Rebase 5a39902..fd0091e onto 5a39902 (3 command(s))
