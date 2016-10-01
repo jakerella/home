@@ -350,7 +350,7 @@ I did a thing!
         <p class='fragment illuminate'>You'll need to use <code>git rebase --interactive</code></p>
     </section>
 
-    <section class='cut-me-1'>
+    <section class='cut-me-2'>
         <h4>Interactive Rebasing</h4>
 
         <pre><code class='no-highlight' data-trim data-noescape>
@@ -358,8 +358,8 @@ I did a thing!
         </code></pre>
 
         <pre class='fragment'><code class='no-highlight' data-trim data-noescape>
-pick 8d29c5c Some older work
-pick 72267fc I did a thing!
+pick 7e10e41 some old commit
+edit 72267fc I did a thing!
 pick fd0091e This is the best.
 
 # Rebase 5a39902..fd0091e onto 5a39902 (3 command(s))
@@ -368,30 +368,6 @@ pick fd0091e This is the best.
 #  p, pick = use commit
 #  r, reword = use commit, but edit the commit message
 #  <strong>e, edit = use commit, but stop for amending</strong>
-#  s, squash = use commit, but meld into previous commit
-#  f, fixup = like "squash", but discard this commit's log message
-#  x, exec = run command (the rest of the line) using shell
-...
-        </code></pre>
-    </section>
-
-    <section class='cut-me-2'>
-        <h4>Interactive Rebasing</h4>
-
-        <pre><code class='no-highlight' data-trim data-noescape>
-~$ git rebase --interactive HEAD^^^
-        </code></pre>
-
-        <pre><code class='no-highlight' data-trim data-noescape>
-<strong>edit</strong> 72267fc I did a thing!
-pick fd0091e This is the best.
-
-# Rebase 7e10e41..fd0091e onto 7e10e41
-#
-# Commands:
-#  p, pick = use commit
-#  r, reword = use commit, but edit the commit message
-#  e, edit = use commit, but stop for amending
 #  s, squash = use commit, but meld into previous commit
 #  f, fixup = like "squash", but discard this commit's log message
 #  x, exec = run command (the rest of the line) using shell
