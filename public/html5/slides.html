@@ -5,7 +5,7 @@ button { font-size: 0.6em; }
 progress.bat-level::after {
   content: attr(value);
 }
-.form-demo input { font-size: 0.6em; }
+.form-demo input { font-size: 1em; }
 .form-demo input:invalid { background-color: #fdd; }
 progress::-webkit-progress-bar {
   background-color: #eee;
@@ -53,7 +53,7 @@ progress.styled {
 </section>
 
 
-<section>
+<section data-background='white'>
   <img src="/images/hobbes_large_trans.png" alt="me" style="width:40%" /><br>
   <p style="margin-top: 1em">Jordan Kasper</p>
   <p class="fine">
@@ -106,6 +106,7 @@ progress.styled {
   <h4 class='fragment'>gradients</h4>
   <h4 class='fragment'>etc</h4>
   <h4 class='fragment'>etc</h4>
+  <h4 class='fragment'>etc</h4>
 </section>
 
 
@@ -113,24 +114,37 @@ progress.styled {
     <h3><a href='http://www.html5rocks.com/en/tutorials/forms/constraintvalidation/'>Forms: input types and validation</a></h3>
 
     <div class='fragment'>
-        <pre><code class='lang-html'>&lt;input type='text' autocomplete='off' required>
-&lt;input type='email' placeholder='me@email.com' autofocus>
-&lt;input type='date' min='2016-06-01'>
-&lt;input type='number' min='1' max='10'>
-&lt;input type='text' pattern='[a-z\-0-9]+'></code></pre>
-
         <form class='form-demo'>
+            <pre><code class='lang-html'>&lt;input type='text' name='username' autocomplete='off' required></code></pre>
             <input type='text' name='username' required autocomplete='off'>
-            <input type='email' placeholder='me@email.com'><br>
-            <input type='date' min='2016-06-01'><br>
-            <input type='number' min='1' max='10'><br>
-            <input type='text' pattern='[a-z\-0-9]+'><br>
+
+            <div class='fragment'>
+                <pre><code class='lang-html'>&lt;input type='email' placeholder='me@email.com' autofocus></code></pre>
+                <input type='email' placeholder='me@email.com'>
+            </div>
+            <div class='fragment'>
+                <pre><code class='lang-html'>&lt;input type='date' min='2016-10-21'></code></pre>
+                <input type='date' min='2016-10-21'>
+            </div>
+            <div class='fragment'>
+                <pre><code class='lang-html'>&lt;input type='number' min='1' max='10'></code></pre>
+                <input type='number' min='1' max='10'>
+            </div>
+            <div class='fragment'>
+                <pre><code class='lang-html'>&lt;input type='text' pattern='[a-z\-0-9]+'></code></pre>
+                <input type='text' pattern='[a-z\-0-9]+'>
+            </div>
+
             <input type='submit'>
         </form>
     </div>
+</section>
 
-    <pre class='fragment'><code class='lang-css'>input:invalid { background-color: #fdd; }</code></pre>
-    <pre class='fragment'><code class='lang-javascript'>myFormElem.checkValidity();  // true/false</code></pre>
+<section>
+    <h3><a href='http://www.html5rocks.com/en/tutorials/forms/constraintvalidation/'>Forms: input types and validation</a></h3>
+
+    <pre><code class='lang-css'>input:invalid { background-color: #fdd; }</code></pre>
+    <pre><code class='lang-javascript'>myFormElem.checkValidity();  // true/false</code></pre>
 </section>
 
 
@@ -138,35 +152,50 @@ progress.styled {
     <h3>Forms: new elements</h3>
 
     <div class='fragment'>
-        <pre><code class='lang-html'>&lt;progress value='25' max='100'>&lt;/progress>
-&lt;progress value='25' max='100' class='styled'>&lt;/progress>
+        <form class='form-demo'>
+            <pre><code class='lang-html'>&lt;progress value='25' max='100'>&lt;/progress>
+&lt;progress value='25' max='100' class='styled'>&lt;/progress></code></pre>
+            <progress value='25' max='100'></progress>
+            <progress value='25' max='100' class='styled'></progress>
 
-&lt;input type='text' list='hobbies' placeholder='favorite hobby'>
+            <div class='fragment'>
+                <pre><code class='lang-html'>&lt;input type='text' list='hobbies' placeholder='favorite hobby'>
 &lt;datalist id='hobbies'>
   &lt;option value='reading'>&lt;/option>
   &lt;option value='board games'>&lt;/option>
   &lt;option value='coding'>&lt;/option>
 &lt;/datalist></code></pre>
 
-        <form class='form-demo'>
-            <progress value='25' max='100'></progress>
-            <progress value='25' max='100' class='styled'></progress>
-            <br>
-            <input type='text' list='hobbies' placeholder='favorite hobby'>
-            <datalist id='hobbies'>
-              <option value='reading'></option>
-              <option value='board games'></option>
-              <option value='coding'></option>
-            </datalist>
+                <input type='text' list='hobbies' placeholder='favorite hobby'>
+                <datalist id='hobbies'>
+                  <option value='reading'></option>
+                  <option value='board games'></option>
+                  <option value='coding'></option>
+                </datalist>
+            </div>
         </form>
     </div>
-
-    <p class='fragment'>
-      Style the <code>&lt;progress></code> element with:<br>
-      <code class='lang-css'>progress::-webkit-progress-bar</code> and <code class='lang-css'>progress::-webkit-progress-value</code>
-    </p>
 </section>
 
+
+<section>
+    <h3>Forms: Progress Bars</h3>
+
+    <h4>
+      <a href='https://css-tricks.com/html5-progress-element/'>Styling these is hard.</a><br>
+    </h4>
+
+    <div class='fragment'>
+        <p>You'll probably need to use:</p>
+        <ul>
+          <li><code class='lang-css'>progress::-webkit-progress-bar</code></li>
+          <li><code class='lang-css'>progress::-webkit-progress-value</code></li>
+          <li><code class='lang-css'>progress::-moz-progress-bar</code></li>
+          <li>and of course, the <code>progress</code> element itself</li>
+          <li class='fragment'><strong>And what about IE? <span class='fragment' style='font-size: 1.5em;'>ಠ_ಠ</span></strong></li>
+        </ul>
+    </div>
+</section>
 
 <section>
     <h3><a href='http://html5doctor.com/the-contenteditable-attribute/'>Forms: contentEditable</a></h3>
@@ -218,85 +247,122 @@ progress.styled {
 
   <pre class='fragment'><code class='lang-javascript'>window.history.pushState({name: 'Jordan'}, 'Foobar', '/foo/bar');</code></pre>
 
-  <pre class='fragment'><code class='lang-javascript'>window.history.back();
+  <pre class='fragment'><code class='lang-javascript'>window.addEventListener('popstate', function(evt) { /* ... */ });
+
+window.history.back();
 window.history.forward();
-window.history.go(-3);
-
-window.addEventListener('popstate', function(evt) { /* ... */ });</code></pre>
+window.history.go(-3);</code></pre>
 </section>
 
 
 <section>
-  <h3><a href='http://www.html5rocks.com/en/tutorials/service-worker/introduction/'>Service Workers</a> *</h3>
+    <h3><a href='http://www.html5rocks.com/en/tutorials/service-worker/introduction/'>Service Workers</a> *</h3>
 
-  <pre class='fragment'><code class='lang-javascript'>// in your main html page script
+    <p>
+      A background, asynchronous intermediary<br>between client and server.
+    </p>
+
+    <pre class='fragment'><code class='lang-javascript'>// in your main html page script
 navigator.serviceWorker.register('/foo/my-script.js')
-  .then(function(registration) {
+    .then(function(registration) {
 
-    // scope restricted to /foo
-    console.log('Success!', registration.scope);
+        // scope restricted to /foo
+        console.log('Success!', registration.scope);
 
-  }).catch(function(err) {
-    console.log('ServiceWorker failed:', err);
-  });</code></pre>
+    }).catch(function(err) {
+        console.log('ServiceWorker failed:', err);
+    });</code></pre>
+</section>
 
-  <pre class='fragment'><code class='lang-javascript'>// inside the worker script
+<section>
+    <h3><a href='http://www.html5rocks.com/en/tutorials/service-worker/introduction/'>Service Workers</a> *</h3>
+
+    <pre><code class='lang-javascript'>// inside the worker script
+
 self.addEventListener('install', function(event) {
-  // do whatever setup is needed
+    // do whatever install is needed
+});
+
+self.addEventListener('activate', function(event) {
+    // do whatever activation is needed
 });</code></pre>
+
 </section>
 
-
 <section>
-  <h3><a href='http://www.html5rocks.com/en/tutorials/service-worker/introduction/'>Service Workers</a> *</h3>
+    <h3><a href='http://www.html5rocks.com/en/tutorials/service-worker/introduction/'>Service Workers</a> *</h3>
 
-  <p>
-    Sending messages back and forth...
-  </p>
+    <p>
+        Sending messages back and forth...
+    </p>
 
-  <pre class='fragment'><code class='lang-javascript'>// in main page script
+    <pre class='fragment'><code class='lang-javascript'>// in main page script
 var channel = new MessageChannel();
-channel.port1.onmessage = function(evt) {
-  if (evt.data.error) {
-    console.log('message not received', evt.data.error);
-  } else {
-    console.log('reveived message back!', evt.data);
-  }
-};
 navigator.serviceWorker.controller
-  .postMessage('hello worker!', [channel.port2]);</code></pre>
+    .postMessage('hello worker!', [channel.port2]);</code></pre>
 
-  <pre class='fragment'><code class='lang-javascript'>// in the service worker
+    <div class='fragment'>
+        <p>Then listen for messages back!<p>
+        <pre><code class='lang-javascript'>channel.port1.onmessage = function(evt) {
+    if (evt.data.error) {
+        console.log('message not received', evt.data.error);
+    } else {
+        console.log('reveived message back!', evt.data);
+    }
+};</code></pre>
+</section>
+
+<section>
+    <h3><a href='http://www.html5rocks.com/en/tutorials/service-worker/introduction/'>Service Workers</a> *</h3>
+
+    <p>
+        Listen on the worker end and send a response...
+    </p>
+
+    <pre class='fragment'><code class='lang-javascript'>// in the service worker
 self.addEventListener('message', function (evt) {
-  console.log('message received!', evt.data);
-  evt.ports[0].postMessage({ 'foo': 'this is my response'});
+    console.log('message received!', evt.data);
+
+    evt.ports[0].postMessage({ 'foo': 'this is my response'});
 });</code></pre>
 
 </section>
 
+<section>
+    <h3><a href='http://www.html5rocks.com/en/tutorials/service-worker/introduction/'>Service Workers</a> *</h3>
+
+    <h4>Some Notes...</h4>
+
+    <p class='fragment'>Workers have <strong>no DOM access</strong>.</p>
+    <p class='fragment'>Everything is <strong>Promise</strong> based.</p>
+    <p class='fragment'>They only work over <strong>HTTPS</strong>.</p>
+    <p class='fragment'>Workers die when their document is closed.</p>
+</section>
+
 
 <section>
-  <h3><a href='https://developer.mozilla.org/en-US/docs/Web/API/Battery_Status_API'>Battery Level</a> *</h3>
+    <h3><a href='https://developer.mozilla.org/en-US/docs/Web/API/Battery_Status_API'>Battery Level</a> *</h3>
 
-  <div class='fragment'>
-    <pre><code class='lang-javascript'>navigator.getBattery()
+    <div class='fragment'>
+        <pre><code class='lang-javascript'>navigator.getBattery()
   .then(function(battery) {
-    console.log( battery.level );
 
     battery.addEventListener('levelchange', function() {
-      console.log( 'battery level has changed:', battery.level );
+      let progress = document.querySelector('.bat-level');
+      progress.value = battery.level * 100;
     });
-});</code></pre>
 
-    <progress class='bat-level' value='0' max='100'></progress>
-    <script>
-    navigator.getBattery().then(function(battery) {
-      let el = document.querySelector('.bat-level');
-      el.value = battery.level * 100;
-      el.innerText = battery.level;
-    });
-    </script>
-  </div>
+  });</code></pre>
+
+        <progress class='bat-level' value='0' max='100'></progress>
+        <script>
+        navigator.getBattery().then(function(battery) {
+          let el = document.querySelector('.bat-level');
+          el.value = battery.level * 100;
+          el.innerText = battery.level;
+        });
+        </script>
+    </div>
 </section>
 
 
@@ -327,6 +393,8 @@ sessionStorage.setItem('currentPage', '/html5');
 localStorage.getItem('username');
 
 localStorage.setItem('data', JSON.stringify({ foo: 'bar' }));</code></pre>
+
+  <p class='fragment'>Storage limits vary around 5-10 MB</p>
 </section>
 
 
@@ -344,13 +412,15 @@ window.addEventListener('online',  updateOnlineStatus);</code></pre>
 <section>
   <h3>Audio and Video</h3>
 
-  <pre class='fragment'><code class='lang-html'>&lt;video id='myVid' src='myVideoFile.mp4' controls>&lt;/video>
-&lt;audio src='myAudioFile.mp3' controls>&lt;/audio></code></pre>
+  <pre class='fragment'><code class='lang-html'>&lt;video id='myVid' src='myVideoFile.mp4'>&lt;/video>
+&lt;video id='myVid' src='myVideoFile.mp4' controls>&lt;/video></code></pre>
 
   <div style='display:flex; justify-content: space-around;'>
     <video class='fragment' src='/images/keyboard_cat.mp4'></video>
     <video class='fragment' src='/images/keyboard_cat.mp4' controls></video>
   </div>
+
+  <pre class='fragment'><code class='lang-html'>&lt;audio src='myAudioFile.mp3' controls>&lt;/audio></code></pre>
 
   <pre style='clear:both;' class='fragment'><code class='lang-javascript'>myVidElement.play();
 myVidElement.pause();
@@ -368,20 +438,21 @@ myVidElement.addEventListener('pause', function() {
     <pre class='fragment'><code class='lang-html'>&lt;video id='my-stream'>&lt;/video>
 &lt;button id='stream'>Toggle&lt;/button></code></pre>
 
-    <pre class='fragment'><code class='lang-javascript'>window.navigator.webkitGetUserMedia(
+    <div class='fragment'>
+      <pre><code class='lang-javascript'>window.navigator.webkitGetUserMedia(
+
   {video: true, audio: false},
-  function(stream) {
-    document.getElementById('my-stream').src =
-                        window.URL.createObjectURL(stream);
+
+  function success(stream) {
+    $('#my-stream').src = window.URL.createObjectURL(stream);
   },
-  function(e) { /* stream acquisition failed... */ }
+  function fail(e) { /* handle errors */ }
 );
 
-document.getElementById('stream').play(); // or .pause()</code></pre>
+$('#stream').play();  // or .pause()</code></pre>
 
-  <div class='fragment'>
-    <video id='my-stream' style='width:300px;'></video><br>
-    <button onclick='toggleStream()' style='font-size:1em;'>Stream</button>
+      <video id='my-stream' style='width:300px; float: left;'></video>
+      <button onclick='toggleStream()' style='font-size:1em;'>Stream</button>
 
     <script>
       var streamVid = document.getElementById('my-stream');
@@ -411,11 +482,10 @@ document.getElementById('stream').play(); // or .pause()</code></pre>
 
   <div class='fragment'>
     <pre><code class='lang-javascript'>navigator.geolocation.getCurrentPosition(
-  function success(position) {
-    console.log(
-      position.coords.latitude,
-      position.coords.longitude
-    );
+  function success( pos ) {
+
+    console.log( pos.coords.latitude, pos.coords.longitude );
+
   },
   function failure(err) {
     console.log( 'hmm... something went wrong', err );
@@ -455,14 +525,13 @@ document.getElementById('stream').play(); // or .pause()</code></pre>
     <pre><code class='lang-html'>&lt;input type='file' id='fileSelector'>
 &lt;img id='preview' style='width:100px;'></code></pre>
 
-    <pre class='fragment'><code class='lang-javascript'>document.getElementById('fileSelector')
-  .addEventListener('change', function(e) {
+    <pre class='fragment'><code class='lang-javascript'>$('#fileSelector').addEventListener('change', function(e) {
     var reader = new FileReader();
 
     reader.onload = function(readEvent) {
-      document.getElementById('preview')
-        .setAttribute('src', readEvent.target.result);
+      $('#preview').setAttribute('src', readEvent.target.result);
     };
+
     reader.readAsDataURL(e.target.files[0]);
   });</code></pre>
   </div>
@@ -505,6 +574,7 @@ imgElem.addEventListener('dragstart', function(e) {
 imgList.addEventListener('dragover', function(e) {
   e.preventDefault(); // tell the browser this is a drop zone
 });
+
 imgList.addEventListener('drop', function(e) {
   e.target.innerHTML += '<li>' + dragged.outerHTML + '</li>';
   dragged = null;
@@ -635,7 +705,7 @@ imgList.addEventListener('drop', function(e) {
     <li class='fragment'>Create an <code>&lt;input></code> element with the <code>required</code> attribute</li>
     <li class='fragment'>Add an <code>invalid</code> event handler</li>
     <li class='fragment'>Check that the handler fires on form submission</li>
-    <li class='fragment'>ಠ_ಠ</li>
+    <li class='fragment' style='font-size:2em; list-style:none;'>ಠ_ಠ</li>
   </ul>
 </section>
 
@@ -680,9 +750,9 @@ imgList.addEventListener('drop', function(e) {
 
 
 <section class='no-footer' data-background='/images/obama-mic-drop.gif'>
-    <h2 style='color:#fff;'>Thank You!</h2>
-    <p>
-        <a href="http://twitter.com/jakerella">@jakerella</a> |
-        <a href="http://JordanKasper.com/html5">jordankasper.com/html5</a>
+    <h1 style='color:#fff; text-shadow:2px 3px 4px #000;'>Thank You!</h1>
+    <p style='text-shadow:2px 3px 4px #000;'>
+        <a href="http://twitter.com/jakerella" style='color:#ddd'>@jakerella</a> |
+        <a href="http://JordanKasper.com/html5" style='color:#ddd'>jordankasper.com/html5</a>
     </p>
 </section>
