@@ -48,20 +48,17 @@ progress.styled {
 
 
 <section class='no-footer' data-background='/images/html5-background.jpg'>
-  <h2 style='font-weight:bold; color:#fff; position:absolute; bottom:-13em; width:100%;'>A Tour of HTML5 APIs</h2>
+  <h2 style='font-weight:bold; color:#fff; position:absolute; bottom:-13.5em; width:100%;'>
+    <a href="http://JordanKasper.com/html5" style='color:#dff; font-weight:normal; text-transform:none;'>
+      jordankasper.com/html5
+    </a>
+  </h2>
   <cite style='position:absolute; bottom:-38em; left:-10em;'>https://www.youtube.com/watch?v=q6AeGPtvAp8</cite>
 </section>
 
+@include company
 
-<section data-background='white'>
-  <img src="/images/hobbes_large_trans.png" alt="me" style="width:40%" /><br>
-  <p style="margin-top: 1em">Jordan Kasper</p>
-  <p class="fine">
-      <a href="http://twitter.com/jakerella">@jakerella</a> |
-      <a href="http://JordanKasper.com/html5">jordankasper.com/html5</a>
-  </p>
-</section>
-
+@include me
 
 <section>
   <h2>HTML5 Specification</h2>
@@ -147,6 +144,7 @@ progress.styled {
     <pre><code class='lang-javascript'>myFormElem.checkValidity();  // true/false</code></pre>
 </section>
 
+<section data-background='/images/thank-you.gif'></section>
 
 <section>
     <h3>Forms: new elements</h3>
@@ -223,6 +221,9 @@ progress.styled {
 </section>
 
 
+<section data-background='/images/magic.gif'></section>
+
+
 <section>
   <h3><a href='https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA'>ARIA</a></h3>
 
@@ -255,115 +256,7 @@ window.history.go(-3);</code></pre>
 </section>
 
 
-<section>
-    <h3><a href='http://www.html5rocks.com/en/tutorials/service-worker/introduction/'>Service Workers</a> *</h3>
-
-    <p>
-      A background, asynchronous intermediary<br>between client and server.
-    </p>
-
-    <pre class='fragment'><code class='lang-javascript'>// in your main html page script
-navigator.serviceWorker.register('/foo/my-script.js')
-    .then(function(registration) {
-
-        // scope restricted to /foo
-        console.log('Success!', registration.scope);
-
-    }).catch(function(err) {
-        console.log('ServiceWorker failed:', err);
-    });</code></pre>
-</section>
-
-<section>
-    <h3><a href='http://www.html5rocks.com/en/tutorials/service-worker/introduction/'>Service Workers</a> *</h3>
-
-    <pre><code class='lang-javascript'>// inside the worker script
-
-self.addEventListener('install', function(event) {
-    // do whatever install is needed
-});
-
-self.addEventListener('activate', function(event) {
-    // do whatever activation is needed
-});</code></pre>
-
-</section>
-
-<section>
-    <h3><a href='http://www.html5rocks.com/en/tutorials/service-worker/introduction/'>Service Workers</a> *</h3>
-
-    <p>
-        Sending messages back and forth...
-    </p>
-
-    <pre class='fragment'><code class='lang-javascript'>// in main page script
-var channel = new MessageChannel();
-navigator.serviceWorker.controller
-    .postMessage('hello worker!', [channel.port2]);</code></pre>
-
-    <div class='fragment'>
-        <p>Then listen for messages back!<p>
-        <pre><code class='lang-javascript'>channel.port1.onmessage = function(evt) {
-    if (evt.data.error) {
-        console.log('message not received', evt.data.error);
-    } else {
-        console.log('reveived message back!', evt.data);
-    }
-};</code></pre>
-</section>
-
-<section>
-    <h3><a href='http://www.html5rocks.com/en/tutorials/service-worker/introduction/'>Service Workers</a> *</h3>
-
-    <p>
-        Listen on the worker end and send a response...
-    </p>
-
-    <pre class='fragment'><code class='lang-javascript'>// in the service worker
-self.addEventListener('message', function (evt) {
-    console.log('message received!', evt.data);
-
-    evt.ports[0].postMessage({ 'foo': 'this is my response'});
-});</code></pre>
-
-</section>
-
-<section>
-    <h3><a href='http://www.html5rocks.com/en/tutorials/service-worker/introduction/'>Service Workers</a> *</h3>
-
-    <h4>Some Notes...</h4>
-
-    <p class='fragment'>Workers have <strong>no DOM access</strong>.</p>
-    <p class='fragment'>Everything is <strong>Promise</strong> based.</p>
-    <p class='fragment'>They only work over <strong>HTTPS</strong>.</p>
-    <p class='fragment'>Workers die when their document is closed.</p>
-</section>
-
-
-<section>
-    <h3><a href='https://developer.mozilla.org/en-US/docs/Web/API/Battery_Status_API'>Battery Level</a> *</h3>
-
-    <div class='fragment'>
-        <pre><code class='lang-javascript'>navigator.getBattery()
-  .then(function(battery) {
-
-    battery.addEventListener('levelchange', function() {
-      let progress = document.querySelector('.bat-level');
-      progress.value = battery.level * 100;
-    });
-
-  });</code></pre>
-
-        <progress class='bat-level' value='0' max='100'></progress>
-        <script>
-        navigator.getBattery().then(function(battery) {
-          let el = document.querySelector('.bat-level');
-          el.value = battery.level * 100;
-          el.innerText = battery.level;
-        });
-        </script>
-    </div>
-</section>
+<section data-background='/images/back-to-the-future.gif'></section>
 
 
 <section>
@@ -395,6 +288,89 @@ localStorage.getItem('username');
 localStorage.setItem('data', JSON.stringify({ foo: 'bar' }));</code></pre>
 
   <p class='fragment'>Storage limits vary around 5-10 MB</p>
+</section>
+
+
+<section>
+  <h3><a href='http://www.html5rocks.com/en/tutorials/dnd/basics/'>Drag and Drop</a> **</h3>
+
+  <div style='width:40%; float:left;'>
+    <img src='/images/hobbes_small.png' alt='hobbes' draggable style='width:50px;'>
+    <img src='/images/github.png' alt='github' draggable style='width:50px;'>
+    <img src='/images/twitter.png' alt='twitter' draggable style='width:50px;'>
+    <img src='/images/grunt-logo.png' alt='grunt' draggable style='width:50px;'>
+  </div>
+  <ul class='image-drops boxed-list' style='width:58%; float:left;'></ul>
+
+  <pre style='clear:both;' class='fragment'><code class='lang-html'>&lt;img src='/hobbes.png' draggable>
+&lt;ul class='image-drops'>&lt;/ul></code></pre>
+
+  <pre class='fragment'><code class='lang-javascript'>var dragged = null;
+imgElem.addEventListener('dragstart', function(e) {
+  dragged = this;
+});
+
+imgList.addEventListener('dragover', function(e) {
+  e.preventDefault(); // tell the browser this is a drop zone
+});
+
+imgList.addEventListener('drop', function(e) {
+  e.target.innerHTML += '<li>' + dragged.outerHTML + '</li>';
+  dragged = null;
+});</code></pre>
+
+  <script>
+  var dragged;
+  var images = document.querySelectorAll('img[draggable]');
+  [].slice.call(images).forEach(function(img) {
+    img.addEventListener('dragstart', function(e) {
+      dragged = this;
+    });
+  });
+  document.querySelector('.image-drops')
+    .addEventListener('dragover', function(e) {
+      e.preventDefault(); // tell the browser this is a drop zone
+    });
+  document.querySelector('.image-drops')
+    .addEventListener('drop', function(e) {
+      e.target.innerHTML += '<li>' + dragged.outerHTML + '</li>';
+    });
+  </script>
+
+</section>
+
+
+<section data-background='/images/sad-cat-jquery.jpg'></section>
+
+
+<section data-background-color='white' data-background='/images/devices.png'>
+    <h2 style='position:absolute;top:-5.5em;left:-1.5em;font-size:1.8em;text-shadow:2px 4px 4px #999;'>Device Information</h2>
+</section>
+
+
+<section>
+    <h3><a href='https://developer.mozilla.org/en-US/docs/Web/API/Battery_Status_API'>Battery Level</a> *</h3>
+
+    <div class='fragment'>
+        <pre><code class='lang-javascript'>navigator.getBattery()
+  .then(function(battery) {
+
+    battery.addEventListener('levelchange', function() {
+      let progress = document.querySelector('.bat-level');
+      progress.value = battery.level * 100;
+    });
+
+  });</code></pre>
+
+        <progress class='bat-level' value='0' max='100'></progress>
+        <script>
+        navigator.getBattery().then(function(battery) {
+          let el = document.querySelector('.bat-level');
+          el.value = battery.level * 100;
+          el.innerText = battery.level;
+        });
+        </script>
+    </div>
 </section>
 
 
@@ -451,9 +427,10 @@ myVidElement.addEventListener('pause', function() {
 
 $('#stream').play();  // or .pause()</code></pre>
 
-      <video id='my-stream' style='width:300px; float: left;'></video>
-      <button onclick='toggleStream()' style='font-size:1em;'>Stream</button>
-
+      <div style='position:absolute; top:0; right:0;'>
+          <video id='my-stream' style='width:300px; background-color: #000;'></video><br>
+          <button onclick='toggleStream()' style='font-size:1em;'>Stream</button>
+      </div>
     <script>
       var streamVid = document.getElementById('my-stream');
       var streamSetup = false;
@@ -475,6 +452,9 @@ $('#stream').play();  // or .pause()</code></pre>
   </div>
 
 </section>
+
+
+<section data-background='/images/ceiling-cat.jpg'></section>
 
 
 <section>
@@ -549,55 +529,6 @@ $('#stream').play();  // or .pause()</code></pre>
     };
   });
   </script>
-</section>
-
-
-<section>
-  <h3><a href='http://www.html5rocks.com/en/tutorials/dnd/basics/'>Drag and Drop</a> **</h3>
-
-  <div style='width:40%; float:left;'>
-    <img src='/images/hobbes_small.png' alt='hobbes' draggable style='width:50px;'>
-    <img src='/images/github.png' alt='github' draggable style='width:50px;'>
-    <img src='/images/twitter.png' alt='twitter' draggable style='width:50px;'>
-    <img src='/images/grunt-logo.png' alt='grunt' draggable style='width:50px;'>
-  </div>
-  <ul class='image-drops boxed-list' style='width:58%; float:left;'></ul>
-
-  <pre style='clear:both;' class='fragment'><code class='lang-html'>&lt;img src='/hobbes.png' draggable>
-&lt;ul class='image-drops'>&lt;/ul></code></pre>
-
-  <pre class='fragment'><code class='lang-javascript'>var dragged = null;
-imgElem.addEventListener('dragstart', function(e) {
-  dragged = this;
-});
-
-imgList.addEventListener('dragover', function(e) {
-  e.preventDefault(); // tell the browser this is a drop zone
-});
-
-imgList.addEventListener('drop', function(e) {
-  e.target.innerHTML += '<li>' + dragged.outerHTML + '</li>';
-  dragged = null;
-});</code></pre>
-
-  <script>
-  var dragged;
-  var images = document.querySelectorAll('img[draggable]');
-  [].slice.call(images).forEach(function(img) {
-    img.addEventListener('dragstart', function(e) {
-      dragged = this;
-    });
-  });
-  document.querySelector('.image-drops')
-    .addEventListener('dragover', function(e) {
-      e.preventDefault(); // tell the browser this is a drop zone
-    });
-  document.querySelector('.image-drops')
-    .addEventListener('drop', function(e) {
-      e.target.innerHTML += '<li>' + dragged.outerHTML + '</li>';
-    });
-  </script>
-
 </section>
 
 
@@ -755,4 +686,94 @@ imgList.addEventListener('drop', function(e) {
         <a href="http://twitter.com/jakerella" style='color:#ddd'>@jakerella</a> |
         <a href="http://JordanKasper.com/html5" style='color:#ddd'>jordankasper.com/html5</a>
     </p>
+</section>
+
+
+<section data-backgroun='white'>
+    <h2>Bonus Content!</h2>
+</section>
+
+
+<section>
+    <h3><a href='http://www.html5rocks.com/en/tutorials/service-worker/introduction/'>Service Workers</a> *</h3>
+
+    <p>
+      A background, asynchronous intermediary<br>between client and server.
+    </p>
+
+    <pre class='fragment'><code class='lang-javascript'>// in your main html page script
+navigator.serviceWorker.register('/foo/my-script.js')
+    .then(function(registration) {
+
+        // scope restricted to /foo
+        console.log('Success!', registration.scope);
+
+    }).catch(function(err) {
+        console.log('ServiceWorker failed:', err);
+    });</code></pre>
+</section>
+
+<section>
+    <h3><a href='http://www.html5rocks.com/en/tutorials/service-worker/introduction/'>Service Workers</a> *</h3>
+
+    <pre><code class='lang-javascript'>// inside the worker script
+
+self.addEventListener('install', function(event) {
+    // do whatever install is needed
+});
+
+self.addEventListener('activate', function(event) {
+    // do whatever activation is needed
+});</code></pre>
+
+</section>
+
+<section>
+    <h3><a href='http://www.html5rocks.com/en/tutorials/service-worker/introduction/'>Service Workers</a> *</h3>
+
+    <p>
+        Sending messages back and forth...
+    </p>
+
+    <pre class='fragment'><code class='lang-javascript'>// in main page script
+var channel = new MessageChannel();
+navigator.serviceWorker.controller
+    .postMessage('hello worker!', [channel.port2]);</code></pre>
+
+    <div class='fragment'>
+        <p>Then listen for messages back!<p>
+        <pre><code class='lang-javascript'>channel.port1.onmessage = function(evt) {
+    if (evt.data.error) {
+        console.log('message not received', evt.data.error);
+    } else {
+        console.log('reveived message back!', evt.data);
+    }
+};</code></pre>
+</section>
+
+<section>
+    <h3><a href='http://www.html5rocks.com/en/tutorials/service-worker/introduction/'>Service Workers</a> *</h3>
+
+    <p>
+        Listen on the worker end and send a response...
+    </p>
+
+    <pre class='fragment'><code class='lang-javascript'>// in the service worker
+self.addEventListener('message', function (evt) {
+    console.log('message received!', evt.data);
+
+    evt.ports[0].postMessage({ 'foo': 'this is my response'});
+});</code></pre>
+
+</section>
+
+<section>
+    <h3><a href='http://www.html5rocks.com/en/tutorials/service-worker/introduction/'>Service Workers</a> *</h3>
+
+    <h4>Some Notes...</h4>
+
+    <p class='fragment'>Workers have <strong>no DOM access</strong>.</p>
+    <p class='fragment'>Everything is <strong>Promise</strong> based.</p>
+    <p class='fragment'>They only work over <strong>HTTPS</strong>.</p>
+    <p class='fragment'>Workers die when their document is closed.</p>
 </section>
