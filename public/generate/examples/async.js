@@ -24,14 +24,14 @@ readFile('./data-1.json')
 
 /**** 3 file reads in a row - still asynchronous */
 
-run(function* () {
-    
-    console.log( (yield readFile('data-1.json')).toString() );
-    
-    console.log( (yield readFile('data-2.json')).toString() );
-    
-    console.log( (yield readFile('data-5.json')).toString() );
-    
+run(function* readAllFiles() {
+
+  var one = JSON.parse(yield readFile('data-1.json'));
+  var more = JSON.parse(yield readFile('data-' + one.nextIndex + '.json'));
+  var extra = JSON.parse(yield readFile('data-' + more.nextIndex + '.json'));
+
+  console.log( one, more, extra );
+
 });
 
 
@@ -64,15 +64,15 @@ run(function* () {
     var nextIndex = 1,
         prevData = null,
         allData = [];
-    
+
     while (nextIndex) {
-        
+
         prevData = yield readFile('data-' + nextIndex + '.json');
         allData.push( prevData );
         nextIndex = prevData.nextIndex;
-        
+
     }
-    
+
     console.log('All data:\n' + allData);
 });
 
@@ -81,13 +81,13 @@ run(function* () {
 /**** Using a single yield statement for the 3 file reads */
 
 run(function* () {
-    
+
     var allData = yield Promise.all([
         readFile('data-1.json'),
         readFile('data-2.json'),
         readFile('data-5.json')
     ]);
-        
+
     console.log('All data in one yield: ' + allData);
 });
 
@@ -96,22 +96,21 @@ run(function* () {
 /**** Example of error handling with async calls */
 
 run(function* () {
-    var data = [];
-    
-    try {
-        
-        data.push( (yield readFile('data-1.json')).toString() );
-        data.push( (yield readFile('data-2.json')).toString() );
-        data.push( (yield readFile('data-infinity.json')).toString() );
+  var data = [];
 
-    } catch(err) {
-        console.log('ERROR!', err.message);
-        
-        // Notice that we can let this error go...
-    }
-    
-    
-    // We'll still get the data from the first two reads!
-    console.log('Retrieved data:', data);
+  try {
+
+    data.push( JSON.parse(yield readFile('data-1.json')) );
+    data.push( JSON.parse(yield readFile('data-' + one.nextIndex + '.json')) );
+    data.push( JSON.parse(yield readFile('data-infinity.json')) );
+
+  } catch(err) {
+      console.log('ERROR!', err.message);
+
+      // Notice that we can let this error go...
+  }
+
+
+  // We'll still get the data from the first two reads!
+  console.log('Retrieved data:', data);
 });
-

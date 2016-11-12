@@ -2,8 +2,8 @@
 
 
 setTimeout(function() {
-    console.log('1 ms timeout');
-}, 1);
+    console.log('100 ms timeout!');
+}, 100);
 
 var obj;
 
