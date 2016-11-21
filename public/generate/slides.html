@@ -16,9 +16,9 @@
         <cite style='position:absolute; bottom:-26em; width:100%; text-align:center; color: #555;'>http://science.howstuffworks.com/environmental/energy/question136.htm</cite>
     </section>
 
-    @include company
-
     @include me
+
+    @include company
 </section>
 
 
@@ -41,7 +41,8 @@
         <h3>Generators are <strong>NOT</strong><br>asynchronous.</h3>
     </section>
 
-    <section data-background='images/why-async.jpg'>
+    <section data-background='black'>
+        <img src='images/why-async.jpg' alt='Then why the title?' style='width: 100%;'>
     </section>
 
     <section>
@@ -63,7 +64,7 @@ Long run complete
         <h3 class='fragment'>...along with an <strong>event-based</strong> asynchronous loop.</h3>
     </section>
 
-    <section>
+    <section data-transition='none'>
         <p>This code runs without stopping to the end...</p>
 
         <!--<pre style='position:relative;'><code class='lang-javascript' data-srcbyline='examples/timeout.js?4-15;'></code><svg data-arrow='{"length":250, "thickness":10, "direction":2, "color":"green"}' style='position:absolute;top:1em;left:60%;'></svg></pre>-->
@@ -72,7 +73,7 @@ Long run complete
             data-arrow='{"length":300, "thickness":10, "direction":2, "color":"green", "vertPadding":20}'></code></pre>
     </section>
 
-    <section>
+    <section data-transition='none'>
         <p><code>setTimeout()</code> causes an asynchronous callback after 100 ms...</p>
 
         <pre style='position:relative;'><code class='lang-javascript'
@@ -80,7 +81,7 @@ Long run complete
             data-arrow='{"codelines":[1], "length":150, "thickness":10, "direction":3, "color":"orange", "vertPadding":3}'></code></pre>
     </section>
 
-    <section>
+    <section data-transition='none'>
         <p>...but this <code>for</code> loop will <strong>block</strong> the event loop until it's done.</p>
 
         <pre 'position:relative;'><code class='lang-javascript'
@@ -181,7 +182,7 @@ Long run complete
         <h3>Let's step back...</h3>
     </section>
 
-    <section>
+    <section data-transition='none'>
         <h4>This is a generator.</h4>
 
         <pre><code class='lang-javascript' data-srcbyline='examples/gen.js?6-7;9-11;13;16'></code></pre>
@@ -190,13 +191,121 @@ Long run complete
             <p class='fine'>And this is how you execute it...</p>
             <pre><code class='lang-javascript' data-srcbyline='examples/gen.js?18-20;23-26'></code></pre>
         </div>
+    </section>
 
-        <pre class='fragment'><code class='lang-none no-highlight' data-trim>
+    <section data-transition='none'>
+        <h4>This is a generator.</h4>
+
+        <pre><code class='lang-javascript'
+                    data-srcbyline='examples/gen.js?6-7;9-11;13;16'
+                    data-arrow='{"codelines":[1], "length":150, "thickness":10, "direction":3, "color":"green"}'></code></pre>
+
+        <p class='fine'>And this is how you execute it...</p>
+        <pre><code class='lang-javascript' data-srcbyline='examples/gen.js?18-20;23-26'></code></pre>
+    </section>
+
+    <section data-transition='none'>
+        <h4>This is a generator.</h4>
+
+        <pre><code class='lang-javascript' data-srcbyline='examples/gen.js?6-7;9-11;13;16'></code></pre>
+
+        <p class='fine'>And this is how you execute it...</p>
+        <pre><code class='lang-javascript'
+                    data-srcbyline='examples/gen.js?18-20;23-26'
+                    data-arrow='{"codelines":[1], "length":150, "thickness":10, "direction":3, "color":"green"}'></code></pre>
+    </section>
+
+    <section data-transition='none'>
+        <h4>This is a generator.</h4>
+
+        <pre><code class='lang-javascript'
+                    data-srcbyline='examples/gen.js?6-7;9-11;13;16'
+                    data-arrow='{"codelines":[2], "length":150, "thickness":10, "direction":3, "color":"green"}'></code></pre>
+
+        <p class='fine'>And this is how you execute it...</p>
+        <pre><code class='lang-javascript'
+                    data-srcbyline='examples/gen.js?18-20;23-26'
+                    data-arrow='{"codelines":[3], "length":150, "thickness":10, "direction":3, "color":"orange"}'></code></pre>
+    </section>
+
+    <section data-transition='none'>
+        <h4>This is a generator.</h4>
+
+        <pre><code class='lang-javascript'
+                    data-srcbyline='examples/gen.js?6-7;9-11;13;16'
+                    data-arrow='{"codelines":[3], "length":150, "thickness":10, "direction":3, "color":"orange"}'></code></pre>
+
+        <p class='fine'>And this is how you execute it...</p>
+        <pre><code class='lang-javascript'
+                    data-srcbyline='examples/gen.js?18-20;23-26'
+                    data-arrow='{"codelines":[3], "length":150, "thickness":10, "direction":3, "color":"green"}'></code></pre>
+    </section>
+
+    <section data-transition='none'>
+        <h4>This is a generator.</h4>
+
+        <pre><code class='lang-javascript' data-srcbyline='examples/gen.js?6-7;9-11;13;16'></code></pre>
+
+        <p class='fine'>And this is how you execute it...</p>
+        <pre><code class='lang-javascript'
+                    data-srcbyline='examples/gen.js?18-20;23-26'
+                    data-arrow='{"codelines":[5], "length":150, "thickness":10, "direction":3, "color":"green"}'></code></pre>
+    </section>
+
+    <section data-transition='none'>
+        <h4>This is a generator.</h4>
+
+        <pre><code class='lang-javascript'
+                    data-srcbyline='examples/gen.js?6-7;9-11;13;16'
+                    data-arrow='{"codelines":[4], "length":150, "thickness":10, "direction":3, "color":"green"}'></code></pre>
+
+        <p class='fine'>And this is how you execute it...</p>
+        <pre><code class='lang-javascript'
+                    data-srcbyline='examples/gen.js?18-20;23-26'
+                    data-arrow='{"codelines":[7], "length":150, "thickness":10, "direction":3, "color":"orange"}'></code></pre>
+    </section>
+
+    <section data-transition='none'>
+        <h4>This is a generator.</h4>
+
+        <pre><code class='lang-javascript'
+                    data-srcbyline='examples/gen.js?6-7;9-11;13;16'
+                    data-arrow='{"codelines":[5], "length":150, "thickness":10, "direction":3, "color":"green"}'></code></pre>
+
+        <p class='fine'>And this is how you execute it...</p>
+        <pre><code class='lang-javascript' data-srcbyline='examples/gen.js?18-20;23-26'></code></pre>
+    </section>
+
+    <section data-transition='none'>
+        <h4>This is a generator.</h4>
+
+        <pre><code class='lang-javascript'
+                    data-srcbyline='examples/gen.js?6-7;9-11;13;16'
+                    data-arrow='{"codelines":[6], "length":150, "thickness":10, "direction":3, "color":"orange"}'></code></pre>
+
+        <p class='fine'>And this is how you execute it...</p>
+        <pre><code class='lang-javascript'
+                    data-srcbyline='examples/gen.js?18-20;23-26'
+                    data-arrow='{"codelines":[7], "length":150, "thickness":10, "direction":3, "color":"green"}'></code></pre>
+    </section>
+
+    <section data-transition='none'>
+        <h4>This is a generator.</h4>
+
+        <pre><code class='lang-javascript' data-srcbyline='examples/gen.js?6-7;9-11;13;16'></code></pre>
+
+        <p class='fine'>And this is how you execute it...</p>
+        <pre><code class='lang-javascript' data-srcbyline='examples/gen.js?18-20;23-26'></code></pre>
+
+        <pre><code class='lang-none no-highlight' data-trim>
 Inside foo
 Outside foo
 Back inside foo
         </code></pre>
     </section>
+
+
+
 
     <section>
         <h3>This does <strong>not</strong> break the<br>"run to completion" paradigm!</h3>
@@ -222,7 +331,7 @@ Back inside foo
 
         <pre><code class='lang-javascript' data-srcbyline='examples/gen.js?6;9;13;16'></code></pre>
 
-        <pre><code class='lang-javascript' data-srcbyline='examples/gen.js?18-21;25-27;29-31'></code></pre>
+        <pre><code class='lang-javascript' data-srcbyline='examples/gen.js?18-21;26-27;30-31'></code></pre>
 
         <pre><code class='lang-none no-highlight' data-trim>
 { value: 'a', done: false }
@@ -282,17 +391,19 @@ a
     <section>
         <p>Receiving input from a <code>yield</code></p>
 
-        <pre><code class='lang-javascript' data-srcbyline='examples/gen.js?125-128;132-136;139-140'></code></pre>
+        <pre><code class='lang-javascript'
+                    data-srcbyline='examples/gen.js?125-128;132-136;139-140'
+                    data-arrow='{"codelines":[2], "length":150, "thickness":10, "direction":3, "color":"green", "horizPadding": -8, "vertPadding": 4}'></code></pre>
 
         <pre class='fragment'><code class='lang-javascript' data-srcbyline='examples/gen.js?142-146'></code></pre>
-        <pre class='fragment'><code class='no-highlight'>You will tell a bad joke.</code></pre>
     </section>
 
     <section>
         <h3>Error handling is easy.</h3>
     </section>
 
-    <section data-background='images/troll-meme.jpg'>
+    <section data-background='black'>
+        <img src='images/troll-meme.jpg' alt='Are you trolling me?' style='width: 100%; margin-top:-1em;'>
     </section>
 
     <section>
@@ -590,19 +701,20 @@ Retrieved data: [ '{ "foo": "bar", "nextIndex": 2 }',
     <section>
         <h3>Don't reinvent sliced bread!</h3>
 
-        <p>Don't write a <code>denodeify()</code> or <code>run()</code> function...</p>
+        <p>Don't write a <code>promisify()</code> or <code>run()</code> function...</p>
 
-        <h4>Use a library!</h4>
-
-        <p class='fragment'>
-            <a href='https://github.com/tj/co'>co</a>,
-            <a href='https://github.com/kriskowal/q'>q</a>,
-            <a href='https://github.com/caolan/async'>async</a>,
-            <a href='https://github.com/jmar777/suspend'>suspend</a>,
-            <a href='https://github.com/petkaantonov/bluebird'>bluebird</a>,
-            <a href='https://github.com/cujojs/when'>when</a>,
-            <a href='https://github.com/bjouhier/galaxy'>galaxy</a>
-        </p>
+        <div class='fragment'>
+            <h4>Use a library!</h4>
+            <p>
+                <a href='https://github.com/tj/co'>co</a>,
+                <a href='https://github.com/kriskowal/q'>q</a>,
+                <a href='https://github.com/caolan/async'>async</a>,
+                <a href='https://github.com/jmar777/suspend'>suspend</a>,
+                <a href='https://github.com/petkaantonov/bluebird'>bluebird</a>,
+                <a href='https://github.com/cujojs/when'>when</a>,
+                <a href='https://github.com/bjouhier/galaxy'>galaxy</a>
+            </p>
+        </div>
     </section>
 
     <section data-background='#2c4762'>
@@ -630,7 +742,7 @@ async function getData() {
     <section data-background='white'>
         <h4>And when can I use <code>async</code> and <code>await</code>?</h4>
 
-        <img class='fragment' src='images/obama-shrug.gif' alt='Obama shrugging' style='width:60%;'>
+        <img class='fragment' src='images/obama-shrug.gif' alt='Obama shrugging' style='width:80%;'>
 
         <p class='fragment'>
             In <strong>Node v7</strong> you can use them<br>behind the <code>--harmony-async-await</code> flag!
@@ -645,7 +757,6 @@ async function getData() {
     <h3 style="margin-top:2em;">Generating a New Async</h3>
     <p style="margin-top: 2em">Jordan Kasper | <a href="http://twitter.com/jakerella">@jakerella</a></p>
     <p class="fine">
-        <a href="http://JordanKasper.com/generate">jordankasper.com/generate</a><br>
-        <a href="http://bit.ly/generator-examples">bit.ly/generator-examples</a>
+        <a href="http://JordanKasper.com/generate">jordankasper.com/generate</a>
     </p>
 </section>
