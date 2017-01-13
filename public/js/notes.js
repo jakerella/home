@@ -10,7 +10,23 @@
 
         var field = $('.edit-notes')
             .val(data)
-            .keyup(function() {
+            .keydown(function(e) {
+                if (e.keyCode === 9) {
+                    e.preventDefault();
+                }
+            })
+            .keyup(function(e) {
+                var split;
+                if (e.keyCode === 9) {
+                    split = field[0].selectionStart;
+                    field.val(
+                        field.val().substr(0, split) +
+                        '  ' +
+                        field.val().substr(split)
+                    );
+                    field[0].selectionStart = split + 2;
+                    field[0].selectionEnd = split + 2;
+                }
                 storeData(options.bin, field.val());
             })
             .focus();
