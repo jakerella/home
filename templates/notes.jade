@@ -4,23 +4,13 @@ html
         include head.jade
 
     body.notes.off-canvas-contain(data-slug=slug)
-        include header.jade
 
         section.main-body.row
 
-            article.main-content.sm-12.md-9
+            article.main-content.sm-12.md-12
                 h2.
                     Live Notes (#{bin})
                 textarea.edit-notes
-
-            aside.sidebar.sm-12.md-3
-                div.events
-                    h2 Upcoming Events
-                    ul.upcoming-events
-                div.recent-posts
-                    h2 Recent Posts
-
-        include footer.jade
 
         include scripts.jade
 
@@ -28,8 +18,5 @@ html
             jk.init({
                 notes: {
                     bin: '#{bin}'
-                },
-                posts: {
-                    template: '<article><p class="published-on"><i class="icon-calendar"></i>{{published}}</p><h3><a href="/{{slug}}">{{title}}</a></h3></article>'
                 }
             });

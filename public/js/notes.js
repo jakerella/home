@@ -10,9 +10,6 @@
 
         var field = $('.edit-notes')
             .val(data)
-            .css({
-                height: ($('.main-content').height() * 0.95) + 'px'
-            })
             .keyup(function() {
                 storeData(options.bin, field.val());
             })
