@@ -685,6 +685,24 @@
             "topics": [
                 "Front End Engineering - HTML, CSS, JS"
             ]
+        },
+        {
+            "name": "Music City Code",
+            "url": "https://www.musiccitycode.com/",
+            "location": "Nashville, TN",
+            "date": "Jun 1, 2017",
+            "topics": [
+                "Advanced Git"
+            ]
+        },
+        {
+            "name": "Dutch PHP Conference",
+            "url": "https://www.phpconference.nl/",
+            "location": "Amsterdam, Netherlands",
+            "date": "Jun 29, 2017",
+            "topics": [
+                "JavaScript ES6/2015"
+            ]
         }
     ]
 }
