@@ -696,21 +696,21 @@
             ]
         },
         {
-            "name": "Music City Code",
-            "url": "https://www.musiccitycode.com/",
-            "location": "Nashville, TN",
-            "date": "Jun 1, 2017",
-            "topics": [
-                "Advanced Git", "JavaScript ES6/2015"
-            ]
-        },
-        {
             "name": "Dutch PHP Conference",
             "url": "https://www.phpconference.nl/",
             "location": "Amsterdam, Netherlands",
             "date": "Jun 29, 2017",
             "topics": [
                 "JavaScript ES6/2015"
+            ]
+        },
+        {
+            "name": "Madison PHP Conference",
+            "url": "http://2017.madisonphpconference.com/",
+            "location": "Madison, WI",
+            "date": "Sep 22 2017",
+            "topics": [
+                "Git Workshop"
             ]
         }
     ]
