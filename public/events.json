@@ -705,6 +705,15 @@
             ]
         },
         {
+            "name": "Connect Tech",
+            "url": "http://connect.tech/",
+            "location": "Atlanta, GA",
+            "date": "Sep 21 2017",
+            "topics": [
+                "TBD", "TBD"
+            ]
+        }
+        {
             "name": "Madison PHP Conference",
             "url": "http://2017.madisonphpconference.com/",
             "location": "Madison, WI",
