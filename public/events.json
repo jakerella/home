@@ -710,7 +710,7 @@
             "location": "Atlanta, GA",
             "date": "Sep 21 2017",
             "topics": [
-                "JavaScript ES6/2015",
+                "Alexa Skill Development",
                 "Regular Expressions"
             ]
         },
@@ -721,6 +721,16 @@
             "date": "Sep 22 2017",
             "topics": [
                 "Git Workshop"
+            ]
+        },
+        {
+            "name": "Confoo Vancouver",
+            "url": "https://confoo.ca/en/yvr2017",
+            "location": "Vancouver, Canada",
+            "date": "Dec 5 2017",
+            "topics": [
+                "Generating a New Async",
+                "ES6 Features"
             ]
         }
     ]
