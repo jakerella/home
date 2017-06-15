@@ -2,7 +2,7 @@
 .blog-post {
     p {
         line-height: 1.4em;
-        
+
         code {
             background-color: $codeBackground;
             border-radius: 4px;
@@ -18,6 +18,12 @@
 
     h2 {
         color: #446;
+
+        + h3 {
+            color: #666;
+            margin: -1em 0 1em 1em;
+            font-weight: normal;
+        }
     }
 
     blockquote {
@@ -77,4 +83,3 @@
         }
     }
 }
-
