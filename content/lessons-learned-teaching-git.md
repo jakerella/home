@@ -88,7 +88,7 @@ The issue with merging branches begins with students' complete fear that they're
 
 No, I don't mean that kind of 'stache.
 
-We've all been there: you're chugging along on that feature when the boss comes by and says we need to fix this or implement that, and it's gotta be done yesterday. My students would dutifully create a new branch for the fix (yay!), but they would soon discover that all those changes they are in the middle of came along for the ride. The issue is that Git doesn't maintain multiple different "working directories", there is only one. So when you switch branches, you do _not_ what files have been changed but not committed!
+We've all been there: you're chugging along on that feature when the boss comes by and says we need to fix this or implement that, and it's gotta be done yesterday. My students would dutifully create a new branch for the fix (yay!), but they would soon discover that all those changes they are in the middle of came along for the ride. The issue is that Git doesn't maintain multiple different "working directories", there is only one. So when you switch branches, you do _not_ want files that have been changed but not committed!
 
 When you combine this issue - and often times a lack of realization that this has even occurred - with another common issue: using `git add .`, students quickly run into unstable branches with code committed that they did not intend. This is often followed by extreme panic. Step one is to reassure the student that **Git does not delete data** and almost everything is recoverable.
 
