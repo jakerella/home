@@ -64,5 +64,6 @@ This talk will help demystify regular expressions: what are they and why should 
   * Playground: regex101.com
   * Engine info: en.wikipedia.org/wiki/Comparison_of_regular_expression_engines
   * Reference: regular-expressions.info
+  * Diagramer: regexper.com
   * Dead tree version: "Mastering Regular Expressions" (O'Reilly)
   * Fun: regexcrossword.com

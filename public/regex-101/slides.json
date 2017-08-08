@@ -1,5 +1,5 @@
 {
-    "title": "/^[Rr]eg(ular\\s)?[Ee]x(p|pressions?)?$/",
+    "title": "Regular Expressions",
     "description": "Diving into regular expressions. What are they? Why would you use them? What are the basics?",
     "slides": "slides.html"
 }
