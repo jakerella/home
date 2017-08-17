@@ -52,6 +52,11 @@ Reveal.initialize({
             src: '/js/draw-arrow.js',
             async: true,
             callback: function() { setTimeout(function() { window.drawarrow.init();}, 1000); }
+        },
+        {
+            src: '/js/run-code.js',
+            async: true,
+            callback: function() { setTimeout(function() { window.runCode.init(); }, 1000); }
         }
     ]
 });
