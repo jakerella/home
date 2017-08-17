@@ -60,6 +60,7 @@ This talk will help demystify regular expressions: what are they and why should 
   * Don't try to regex _large_, unstructured data (i.e. HTML, see StackOverflow)
   * Use anchors pretty much all the time
   * Be careful with efficiency, especially with matching groups
+
 * Tools & Resources
   * Playground: regex101.com
   * Engine info: en.wikipedia.org/wiki/Comparison_of_regular_expression_engines

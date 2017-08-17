@@ -8,12 +8,170 @@
 
 @include me
 
+<section data-background='images/rubber-duck.jpg'>
+    <h1 style='text-shadow: 4px 4px 0 #000; color: #fff; font-size: 3em; font-weight: bold; text-transform: none; margin: 2em 0 0 2em;'>wat</h1>
+    <cite style='bottom: -11em;'>www.thebigduck.us</cite>
+</section>
+
+<section>
+    <h2>String Pattern Matching</h2>
+
+    <p class='fragment'>Often used for data validation</p>
+    <p class='fragment'>Test against pattern (true/false)</p>
+    <p class='fragment'>
+        Find matching groups <br>
+        <span class='fragment'>(and possibly replace content)</span>
+    </p>
+</section>
+
+<section data-transition='none'>
+    <h2>What Language?</h2>
+
+    <h3>&nbsp;</h3>
+</section>
+
+<section data-transition='none'>
+    <h2><del>What Language?</del></h2>
+
+    <h3>What Engine?</h3>
+</section>
+
+<section>
+    <h2>Regex Engines</h2>
+
+    <p>Same language, engines.</p>
+    <p>For example: PHP native versus PCRE</p>
+
+    <p class='fragment'>
+        POSIX (standard), BRE/ERE (Linux (grep)), Perl, java.util.regex, XRegExp (JS)</span>
+    </p>
+</section>
+
+<section>
+    <h2>What do they look like?</h2>
+
+    <pre><code class='no-highlight'>/the regex goes in here/</code></pre>
+
+    <pre class='fragment'><code class='no-highlight'>`the regex goes in here`</code></pre>
+
+    <pre class='fragment'><code class='no-highlight'>"the regex goes in here"</code></pre>
+</section>
+
+<section>
+    <h2>Okay, but what does it <em>really</em> look like?</h2>
+
+    <pre class='fragment'><code class='lang-javascript'>/foo/.test("foobar");</code></pre>
+
+    <pre class='fragment'><code class='lang-php'>preg_match("/foo/", "foobar");</code></pre>
+
+    <pre class='fragment'><code class='lang-ruby'>/foo/ =~ "foobar"</code></pre>
+
+    <pre class='fragment'><code class='lang-perl'>"foobar" =~ /foo/</code></pre>
+</section>
+
+<section>
+    <h2>Simple Character Test</h2>
+
+    <pre><code class='lang-javascript'>/t/.test("Connect Tech");  // true</code></pre>
+
+    <pre class='fragment'><code class='lang-javascript'>/z/.test("Connect Tech");  // false</code></pre>
+</section>
+
+<section>
+    <h2>Testing versus Matching</h2>
+
+    <p><strong>true/false</strong> vs. <strong>matched groups</strong></p>
+
+    <pre class='fragment'><code class='lang-javascript' data-trim>
+/t/.test("Connect Tech");  // true
+"Connect Tech".match(/t/);  // ["t"]
+    </code></pre>
+</section>
+
+<section>
+    <h2>Where's the other "n"?</h2>
+
+    <pre><code class='lang-javascript' data-trim>
+"Connect Tech".match(/n/);  // ["n"]
+    </code></pre>
+
+    <aside class='fragment'>
+        <p>We need to make it global!</p>
+
+        <pre><code class='lang-javascript' data-trim>
+"Connect Tech".match(/n/g);  // ["n", "n"]
+        </code></pre>
+
+        <p>The "g" here is called a "flag", the "global" flag.</p>
+    </aside>
+</section>
+
 <section data-background='#fff'>
-    <h3>wut</h3>
+    <h2>Other Flags</h2>
+
+    <img src='images/flag.png' alt='USA flag' style='width:80%;'>
+</section>
+
+<section>
+    <h2>Other Flags</h2>
+
+    <pre><code class='lang-javascript' data-trim>
+"Connect Tech".match(/t/);  // ["t"]
+    </code></pre>
+
+    <pre class='fragment'><code class='lang-javascript' data-trim>
+// case-insensitive AND global
+"Connect Tech".match(/t/ig);  // ["t", "T"]
+    </code></pre>
+
+    <p class='fragment'>There's also a "multi-line" flag: <code>m</code></p>
+</section>
+
+<section>
+    <h2>Multiple Characters</h2>
+
+    <iframe src='https://regex101.com/r/nhwFWt/1' style='width: 20em; height: 8em;'></iframe>
+</section>
+
+<section>
+    <h2>Any Character (.)</h2>
+
+    <iframe src='https://regex101.com/r/OFXB5T/1' style='width: 20em; height: 8em;'></iframe>
+</section>
+
+<section>
+    <h2>Classes, Ranges, Repition</h2>
+
+    <iframe src='https://regex101.com/r/pO0Xh9/1' style='width: 20em; height: 8em;'></iframe>
+    <p>[ ], ?, +, *, { }</p>
+</section>
+
+<section>
+    <h2>Escaping Characters</h2>
+
+    <iframe src='https://regex101.com/r/z8CEbC/1' style='width: 20em; height: 8em;'></iframe>
+    <p>\ . ? * + - | [ ] ( ) { } ^ $</p>
+</section>
+
+<section>
+    
 </section>
 
 
+<section>
+    <h2>Resources</h2>
 
+    <p><a href='https://jordankasper.com/regex-101'>jordankasper.com/regex-101</a></p>
+
+    <ul class='fragment'>
+        <li>Playground: <a href='http://regex101.com'>regex101.com</a></li>
+        <li>Various Engine Info: <a href='https://en.wikipedia.org/wiki/Comparison_of_regular_expression_engines'>Wikipedia</a></li>
+        <li>Reference: <a href='http://regular-expressions.info'>regular-expressions.info</a></li>
+        <li>Diagramer: <a href='http://regexper.com'>regexper.com</a></li>
+        <li>Dead Tree Version: <a href='http://shop.oreilly.com/product/9780596528126.do'>"Mastering Regular Expressions"</a></li>
+        <li>Fun: <a href='http://regexcrossword.com'>regexcrossword.com</a></li>
+    </ul>
+</section>
 
 <section data-background='#f5ffff'>
     <h2>Thank You!</h2>
