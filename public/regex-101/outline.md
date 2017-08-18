@@ -27,6 +27,7 @@ This talk will help demystify regular expressions: what are they and why should 
   * Ranges
     * Use hex color example: `/#[0-9a-f]/` (problem is the repetition)
   * Repetition (`?`, `+`, `*`, `{...}`)
+  * Negation (`[^"]`)
   * Escaping characters (`[^$.|?*+-(){}\`)
     * Character class for first part of email: `[a-z_\.\-\+]+@`
     * Issues with string regexes (double escaping: `new RegExp("[a-z\\.\\-\\+]+@")`)
@@ -51,11 +52,6 @@ This talk will help demystify regular expressions: what are they and why should 
   * Line (`^` and `$`)
   * Word boundary (`\b`) CAUTION, varies with implementation (might be `\B`)
 
-* **_If time:_** Look Arounds
-  * Ahead (positive): `/(the)(?=\sfat)/i` -> The fat cat sat on the mat
-  * Ahead (negative): ?<= `/(the)(?!\sfat)/i` -> The fat cat sat on the mat
-  * Behind: `?<=` and `?<!` (not supported in JS)
-
 * Warnings
   * Don't try to regex _large_, unstructured data (i.e. HTML, see StackOverflow)
   * Use anchors pretty much all the time
@@ -68,3 +64,8 @@ This talk will help demystify regular expressions: what are they and why should 
   * Diagramer: regexper.com
   * Dead tree version: "Mastering Regular Expressions" (O'Reilly)
   * Fun: regexcrossword.com
+
+* **_If time:_** Look Arounds
+  * Ahead (positive): `/(the)(?=\sfat)/i` -> The fat cat sat on the mat
+  * Ahead (negative): ?<= `/(the)(?!\sfat)/i` -> The fat cat sat on the mat
+  * Behind: `?<=` and `?<!` (not supported in JS)

@@ -24,13 +24,13 @@
     </p>
 </section>
 
-<section data-transition='none'>
+<section data-transition='none' data-background='#ffffff'>
     <h2>What Language?</h2>
 
     <h3>&nbsp;</h3>
 </section>
 
-<section data-transition='none'>
+<section data-transition='none' data-background='#ffffff'>
     <h2><del>What Language?</del></h2>
 
     <h3>What Engine?</h3>
@@ -106,12 +106,6 @@
     </aside>
 </section>
 
-<section data-background='#fff'>
-    <h2>Other Flags</h2>
-
-    <img src='images/flag.png' alt='USA flag' style='width:80%;'>
-</section>
-
 <section>
     <h2>Other Flags</h2>
 
@@ -119,42 +113,147 @@
 "Connect Tech".match(/t/);  // ["t"]
     </code></pre>
 
-    <pre class='fragment'><code class='lang-javascript' data-trim>
+    <aside class='fragment'>
+        <p>Case Insensitive</p>
+
+        <pre><code class='lang-javascript' data-trim>
 // case-insensitive AND global
 "Connect Tech".match(/t/ig);  // ["t", "T"]
-    </code></pre>
+        </code></pre>
+    </aside>
 
     <p class='fragment'>There's also a "multi-line" flag: <code>m</code></p>
 </section>
 
 <section>
-    <h2>Multiple Characters</h2>
+    <h2><a href='https://regex101.com/r/nhwFWt/1'>Multiple Characters</a></h2>
 
     <iframe src='https://regex101.com/r/nhwFWt/1' style='width: 20em; height: 8em;'></iframe>
 </section>
 
 <section>
-    <h2>Any Character (.)</h2>
+    <h2><a href='https://regex101.com/r/OFXB5T/1'>Any Character</a> (.)</h2>
 
     <iframe src='https://regex101.com/r/OFXB5T/1' style='width: 20em; height: 8em;'></iframe>
 </section>
 
 <section>
-    <h2>Classes, Ranges, Repition</h2>
+    <h2><a href='https://regex101.com/r/pO0Xh9/1'>Classes, Ranges, and Repetition</a></h2>
 
     <iframe src='https://regex101.com/r/pO0Xh9/1' style='width: 20em; height: 8em;'></iframe>
     <p>[ ], ?, +, *, { }</p>
 </section>
 
 <section>
-    <h2>Escaping Characters</h2>
+    <h2>Negation</h2>
 
-    <iframe src='https://regex101.com/r/z8CEbC/1' style='width: 20em; height: 8em;'></iframe>
-    <p>\ . ? * + - | [ ] ( ) { } ^ $</p>
+    <iframe src='https://regex101.com/r/3aDYAb/1' style='width: 20em; height: 8em;'></iframe>
+    <p>[^]</p>
 </section>
 
 <section>
-    
+    <h2><a href='https://regex101.com/r/z8CEbC/1'>Escaping Characters</a></h2>
+
+    <iframe src='https://regex101.com/r/z8CEbC/1' style='width: 20em; height: 8em;'></iframe>
+    <p>\ . ? * + - | [ ] ( ) { } ^ $</em></p>
+</section>
+
+<section>
+    <h2><a href='https://regex101.com/r/V4YN7W/1'>Grouping and Alternation</a></h2>
+
+    <iframe src='https://regex101.com/r/V4YN7W/1' style='width: 20em; height: 8em;'></iframe>
+    <p>( | )</p>
+</section>
+
+<section>
+    <h2>Group Matching Caution</h2>
+
+    <p>Creating a matched group adds processing time!</p>
+
+    <aside class='fragment'>
+        <h3><a href='https://regex101.com/r/wp4DFu/1'>Non-matching Groups</a></h3>
+
+        <iframe src='https://regex101.com/r/wp4DFu/1' style='width: 20em; height: 8em;'></iframe>
+    </aside>
+</section>
+
+<section>
+    <h2>Replacement</h2>
+
+    <p>This differs from engine to engine!</p>
+
+    <pre class='fragment'><code class='lang-javascript' data-trim>
+"I like {{fav}} the most".replace(/{{fav}}/, "dogs");
+    </code></pre>
+
+    <pre class='fragment'><code class='lang-javascript' data-trim>
+"jordan@jordankasper.com"
+    .replace(/([a-z]+)@([a-z.]+)/i, "https://$2/users/$1");
+    </code></pre>
+</section>
+
+<section>
+    <h2>Whitespace &amp; Shorthands</h2>
+
+    <aside style='display:flex;'>
+        <div class='fragment' style='flex:2;'>
+            <strong>Whitespace:</strong>
+            <blockquote>
+                <p>Tabs: <code>\t</code></p>
+                <p>Newline: <code>\n</code></p>
+                <p>Carriage return: <code>\r</code></p>
+            </blockquote>
+        </div>
+        <div class='fragment' style='flex:3;'>
+            <strong>Shorthands:</strong>
+            <blockquote>
+                <p class='fragment'>Whitespace: <code>\s</code></p>
+                <p class='fragment'>NON-Whitespace: <code>\S</code></p>
+                <p class='fragment'>Digits: <code>\d</code> (or not: <code>\D</code>)</p>
+                <p class='fragment'>Word characters: <code>\w</code> (or not: <code>\W</code>)</p>
+            </blockquote>
+        </div>
+    </aside>
+</section>
+
+<section>
+    <h2>Shorthand Example</h2>
+
+    <iframe src='https://regex101.com/r/kduAOL/1' style='width: 20em; height: 8em;'></iframe>
+</section>
+
+<section>
+    <h2>Anchors</h2>
+
+    <iframe src='https://regex101.com/r/2GkXc8/1' style='width: 20em; height: 8em;'></iframe>
+
+    <p>^ and $</p>
+</section>
+
+<section>
+    <h2>Anchors</h2>
+
+    <iframe src='https://regex101.com/r/PAlfvT/1' style='width: 20em; height: 8em;'></iframe>
+
+    <p>^ and $</p>
+</section>
+
+<section>
+    <h2>Efficiency Warnings</h2>
+
+    <p>Watch out for:</p>
+
+    <ul>
+        <li class='fragment'>Too many groups (use non-matching)</li>
+        <li class='fragment'>Large source texts (use anchors)</li>
+        <li class='fragment'>Unstructured data (like HTML)</li>
+    </ul>
+</section>
+
+<section>
+    <h2>HTML Warning</h2>
+
+    <p><a href='https://stackoverflow.com/questions/1732348/regex-match-open-tags-except-xhtml-self-contained-tags'>HTML is not well structured, be careful!</a></p>
 </section>
 
 
@@ -181,4 +280,13 @@
     <p contenteditable>
       <a href='https://jordankasper.com/regex-101'>jordankasper.com/regex-101</a>
     </p>
+</section>
+
+<section data-background='#fff'>
+    <h2>Bonus Content!</h2>
+</section>
+
+<section>
+    <h2>Look Arounds</h2>
+
 </section>
