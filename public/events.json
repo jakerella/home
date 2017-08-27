@@ -732,6 +732,16 @@
                 "Generating a New Async",
                 "ES6 Features"
             ]
+        },
+        {
+            "name": "php[world]",
+            "url": "https://world.phparch.com",
+            "location": "Washington, DC",
+            "date": "Nov 15 2017",
+            "topics": [
+                "Regular Expressions",
+                "ES6 Features"
+            ]
         }
     ]
 }
