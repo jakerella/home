@@ -68,4 +68,5 @@ This talk will help demystify regular expressions: what are they and why should 
 * **_If time:_** Look Arounds
   * Ahead (positive): `/(the)(?=\sfat)/i` -> The fat cat sat on the mat
   * Ahead (negative): ?<= `/(the)(?!\sfat)/i` -> The fat cat sat on the mat
+  * Real world: `/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{6,10}$/` (lower, upper, and digit in password)
   * Behind: `?<=` and `?<!` (not supported in JS)

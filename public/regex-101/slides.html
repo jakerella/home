@@ -289,4 +289,40 @@
 <section>
     <h2>Look Arounds</h2>
 
+    <p>They are <strong>not</strong> matches, but <strong>assertions</strong>.</p>
+
+</section>
+
+<section>
+    <h2>Positive Look Ahead</h2>
+
+    <pre><code class='no-highlight'>/(the)(?=\sfat)/i</code></pre>
+
+    <p><strong>The</strong> fat cat sat on the mat</p>
+</section>
+
+<section>
+    <h2>Negative Look Ahead</h2>
+
+    <pre><code class='no-highlight'>/(the)(?!\sfat)/i</code></pre>
+
+    <p>The fat cat sat on <strong>the</strong> mat</p>
+</section>
+
+<section>
+    <h2>Positive Look Ahead</h2>
+
+    <p>Real world example: password checker</p>
+
+    <iframe src='https://regex101.com/r/SaFtzb/1' style='width: 20em; height: 8em;'></iframe>
+
+    <p>(?=)</p>
+</section>
+
+<section>
+    <h2>Look Behind</h2>
+
+    <p>Same idea, but looking backward instead of forward.</p>
+
+    <p>Not supported in all languages!<br>(notabley: JavaScript)</p>
 </section>
