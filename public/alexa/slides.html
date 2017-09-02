@@ -1,6 +1,7 @@
 <style>
     .reveal p {
         margin-top: 1em;
+        line-height: 1.2em;
     }
 
     .reveal .small-inline-list {
@@ -107,25 +108,25 @@
 
     <ol>
         <li class='fragment'>
-            Write your skill app
-            <ul style='padding-left: 1em;'>
-                <li class='fragment'>Accept POST requests</li>
-                <li class='fragment'>Verify requests using Amazon certs</li>
-                <li class='fragment'>Process JSON request</li>
-                <li class='fragment'>Return JSON response</li>
-            </ul>
+            Write your skill app (more on this later)
         </li>
         <li class='fragment' style='margin-top:1em;'>
             Define skill in Amazon Developer Portal
             <ul style='padding-left: 1em;'>
                 <li class='fragment'>Specify an "invocation" name</li>
                 <li class='fragment'>Define expected "intents" and "slots"</li>
-                <li class='fragment'>(Possibly creating custom "slots")</li>
+                <li class='fragment'>(Possibly create custom "slots")</li>
                 <li class='fragment'>Specify sample utterances</li>
             </ul>
         </li>
         <li class='fragment' style='margin-top:1em;'>Get certified, and <del>profit</del> enjoy!</li>
     </ol>
+</section>
+
+<section>
+    <h2>Defining Your Skill</h2>
+
+    <p><a href='https://developer.amazon.com/edw/home.html#/skills'>Amazon Developer Portal</a></p>
 </section>
 
 <section>
@@ -136,11 +137,13 @@
     </p>
 
     <p class='fragment'>
-        For example:<br>"Alexa, ask the <strong>bartender</strong> what's in a manhattan."
+        For example:<br>"Alexa, ask <strong>connect tech</strong> where the after party is Friday"
     </p>
 
     <p class='fragment'>
-        There are a LOT of restrictions.<br>
+        Must be multiple words,<br>no copyright infringing,<br>no proper names,<br>no confusion with built-in skills,<br>...
+    </p>
+    <p class='fragment'>
         Read the <a href='https://developer.amazon.com/appsandservices/solutions/alexa/alexa-skills-kit/docs/choosing-the-invocation-name-for-an-alexa-skill'>Alexa Documentation</a>!
     </p>
 </section>
@@ -157,11 +160,14 @@
 <section>
     <h2>Intents and Slots</h2>
 
-    <pre><code data-trim>
+    <pre><code data-trim class='lang-javascript'>
 {
   "intents": [
     {
-      "intent": "Weather",
+        "intent": "StopIntent"
+    },
+    {
+      "intent": "Schedule",
       "slots": [
         {
           "name": "Day",
@@ -175,31 +181,15 @@
 </section>
 
 <section>
-    <h2>Sample Utterances</h2>
+    <h2>Intents and Slots</h2>
 
-    <p>
-        Alexa, ask the <strong>forecaster</strong> about the weather on <strong>Friday</strong>
-    </p>
+    <p>Where is this file?</p>
 
     <p class='fragment'>
-        Alexa, tell the <strong>forecaster</strong> to give me <strong>Friday's</strong> forecast
+        <strong>Copied and pasted</strong> into the developer portal.<br>
+        (Under "Interaction Model")<br><br>
+        <span style='font-size:1.4em;'>ಠ_ಠ</span>
     </p>
-</section>
-
-<section>
-    <h2>Sample Utterances</h2>
-
-    <pre><code data-trim>
-Weather  about the weather on {Day}
-Weather  to give me {Day} forecast
-Weather  what's the weather on {Day}
-Weather  {Day} weather
-Weather  to tell me the weather for {Day}
-......
-....
-..
-.
-    </code></pre>
 </section>
 
 <section>
@@ -208,21 +198,21 @@ Weather  to tell me the weather for {Day}
     <aside class='fragment'>
         <h3><a href='https://developer.amazon.com/public/solutions/alexa/alexa-skills-kit/docs/implementing-the-built-in-intents#available-built-in-intents'>Intents</a></h3>
         <p>
-            CancelIntent, NoIntent, YesIntent, HelpIntent, etc...
+            CancelIntent, HelpIntent, NoIntent, StopIntent, YesIntent<br>
+            <span style='font-size:0.9em;'>(plus audio-streaming specific intents)</span>
         </p>
     </aside>
 
     <aside class='fragment'>
         <h3><a href='https://developer.amazon.com/public/solutions/alexa/alexa-skills-kit/docs/defining-the-voice-interface#h2_speech_input'>Slot Types</a></h3>
-        <p>AMAZON.NUMBER and AMAZON.FOUR_DIGIT_NUMBER</p>
+        <p>numbers, dates, times, durations</p>
+
         <p class='fragment'>
-            .DATE, .TIME, and .DURATION
+            Lists of things...<br>
+            cities, states, first names
         </p>
         <p class='fragment'>
-            .US_CITY, .US_STATE
-        </p>
-        <p class='fragment'>
-            .US_FIRST_NAME
+            More lists coming: airlines, books, colors, desserts, event types, food, musicians, rooms, ...
         </p>
     </aside>
 </section>
@@ -230,7 +220,7 @@ Weather  to tell me the weather for {Day}
 <section>
     <h2>Custom Slots</h2>
 
-    <pre><code data-trim>
+    <pre><code data-trim class='lang-javascript'>
 {
   "intents": [
     {
@@ -245,6 +235,143 @@ Weather  to tell me the weather for {Day}
   ]
 }
     </code></pre>
+</section>
+
+<section>
+    <h2>Custom Slot Values</h2>
+
+    <pre><code data-trim class='no-highlight'>
+red
+orange
+yellow
+green
+blue
+violet
+black
+white
+navy blue
+royal purple
+    </code></pre>
+</section>
+
+<section>
+    <h2>Custom Slots</h2>
+
+    <p>Where in my code do I put those values?</p>
+
+    <p class='fragment'>
+        <strong>Copy and paste</strong> them into the developer portal.<br>
+        (Under "Interaction Model")<br><br>
+        <span style='font-size:1.4em;'>ಠ_ಠ</span>
+    </p>
+</section>
+
+<section>
+    <h2>Pro Tip</h2>
+
+    <p>Add a "config" directory to your application:</p>
+
+    <ul>
+        <li>intents.json</li>
+        <li>slots.txt</li>
+        <li>...</li>
+    </ul>
+</section>
+
+<section>
+    <h2>Custom Slot Values</h2>
+
+    <p>There is a <strong>50,000 entry limit</strong> across <strong>ALL</strong> slots in your skill!</p>
+</section>
+
+<section>
+    <h2>Sample Utterances</h2>
+
+    <p class='fragment'>
+        Alexa, ask <strong>connect tech</strong> where the after party is <strong>Friday</strong>
+    </p>
+
+    <p class='fragment'>
+        Alexa, ask <strong>connect tech</strong> where <strong>Friday's</strong> party is
+    </p>
+</section>
+
+<section>
+    <h2>Sample Utterances</h2>
+
+    <p>Remember your intents!</p>
+
+    <pre><code data-trim class='lang-javascript'>
+{
+  "intent": "Schedule",
+  "slots": [
+    {
+      "name": "Day",
+      "type": "AMAZON.DATE"
+    }
+  ]
+}
+    </code></pre>
+</section>
+
+<section>
+    <h2>Sample Utterances</h2>
+
+    <pre><code data-trim class='no-highlight'>
+IntentName  the phrase with any {SlotNames} embedded
+    </code></pre>
+
+    <pre class='fragment'><code data-trim class='no-highlight'>
+Schedule  about the after party on {Day}
+Schedule  when the after party is on {Day}
+Schedule  about {Day} after party
+Schedule  when {Day} party is
+...
+    </code></pre>
+</section>
+
+<section>
+    <h2>Sample Utterances</h2>
+
+    <p>Where do I put these?</p>
+
+    <p class='fragment'>
+        <strong>Copy and paste</strong> them into the developer portal.<br>
+        (Under "Interaction Model")<br><br>
+        <span style='font-size:1.4em;'>ಠ_ಠ</span>
+    </p>
+
+    <p class='fragment'>
+        (There is a ~200,000 character limit.)
+    </p>
+</section>
+
+
+<section>
+    <h2>Back to the beginning</h2>
+
+    <h3>Writing your skill app</h3>
+</section>
+
+<section>
+    <h2>Writing your skill app</h2>
+
+    <ol style='padding-left: 1em;'>
+        <li class='fragment'>Accept POST request</li>
+        <li class='fragment'>Verify request using Amazon certs, etc</li>
+        <li class='fragment'>Process JSON request data</li>
+        <li class='fragment'>Respond with JSON document</li>
+    </ol>
+</section>
+
+<section>
+    <h2>Wait, what language am I writing in?</h2>
+
+    <p class='fragment'>Doesn't matter!</p>
+
+    <p class='fragment'>
+        So long as you can accept POST requests over HTTPS.
+    </p>
 </section>
 
 <section>
@@ -272,16 +399,20 @@ Weather  to tell me the weather for {Day}
 <section>
     <h2>Verifying Requests</h2>
 
-    <p>
-        Or just use this library:<br>
-        <a href='https://github.com/mreinstein/alexa-verifier'>mreinstein/alexa-verifier</a>
-    </p>
+    <p>Just use a library:</p>
+
+    <ul>
+        <li>Node: <a href='https://github.com/mreinstein/alexa-verifier'>mreinstein/alexa-verifier</a></li>
+        <li>PHP: <a href='https://github.com/maxbeckers/amazon-alexa-php'>maxbeckers/amazon-alexa-php</a></li>
+        <li>Ruby: <a href='https://github.com/mulev/alexa-ruby'>mulev/alexa-ruby</a></li>
+        <li>Or try <a href='https://developer.amazon.com/public/solutions/alexa/alexa-skills-kit/docs/developing-an-alexa-skill-as-a-lambda-function'>Amazon Lambda</a> (verification is done for you)</li>
+    </ul>
 </section>
 
 <section>
     <h2>The Request Body</h2>
 
-    <pre style='font-size: 0.9em;'><code data-trim>
+    <pre style='font-size: 0.9em;'><code data-trim class='lang-javascript'>
 {
     "session": { ... },
     "request": { ... },
@@ -293,13 +424,13 @@ Weather  to tell me the weather for {Day}
 <section>
     <h2>The Request - <code>"session"</code></h2>
 
-    <pre style='font-size: 0.9em;'><code data-trim>
+    <pre style='font-size: 0.9em;'><code data-trim class='lang-javascript'>
 {
   "session": {
     "sessionId": "SessionId.6a4789.....",
     "application": { "applicationId": "amzn1.ask.skill.2ec93....." },
     "attributes": {
-        "weatherProvided": true
+        "someSessionDataThing": "jordan"
     },
     "user": { "userId": "amzn1.ask.account.AFP3ZWK564FDOQ6....." },
     "new": true
@@ -312,18 +443,18 @@ Weather  to tell me the weather for {Day}
 <section>
     <h2>The Request - <code>"request"</code></h2>
 
-    <pre style='font-size: 0.9em;'><code data-trim>
+    <pre style='font-size: 0.9em;'><code data-trim class='lang-javascript'>
 {
   "session": { ... },
   "request": {
     "type": "IntentRequest",
     "requestId": "EdwRequestId.ba6dbc3f.....",
     "locale": "en-US",
-    "timestamp": "2016-08-14T20:15:27Z",
+    "timestamp": "2017-09-21T09:15:27Z",
     "intent": {
-      "name": "Weather",
+      "name": "Schedule",
       "slots": {
-        "When": { "name": "When", "value": "2016-08-18" }
+        "Day": { "name": "Day", "value": "2017-09-22" }
       }
     }
   },
@@ -335,12 +466,12 @@ Weather  to tell me the weather for {Day}
 <section>
     <h2>Request Types</h2>
 
-    <pre style='font-size: 0.9em;'><code data-trim>
+    <pre style='font-size: 0.9em;'><code data-trim class='lang-javascript'>
 {
   "session": { ... },
   "request": {
     "type": "IntentRequest",
-    // ...
+    ...
   },
   "version": "1.0"
 }
@@ -354,14 +485,50 @@ Weather  to tell me the weather for {Day}
 </section>
 
 <section>
+    <h2 style='text-transform: none;'>LaunchRequest</h2>
+
+    <p class='fragment'>No explicit intent</p>
+    <p class='fragment'>
+        Example: "Alexa, launch <strong>connect tech</strong>"
+    </p>
+    <p class='fragment'>Think about what you should say back!</p>
+</section>
+
+<section>
+    <h2 style='text-transform: none;'>SessionEndedRequest</h2>
+
+    <p class='fragment'>User cancels action, times out, or there is an error.</p>
+
+    <p class='fragment'>
+        Your skill app <strong>MUST NOT RESPOND</strong> to this request... at all.
+    </p>
+
+    <p class='fragment' style='font-size:1.6em;'>ಠ_ಠ</p>
+</section>
+
+<section>
+    <h2><a href='https://developer.amazon.com/public/solutions/alexa/alexa-skills-kit/docs/custom-audioplayer-interface-reference#requests'>Streaming Audio Requests</a></h2>
+
+    <p><code>AudioPlayer</code> and <code>PlaybackController</code> requests</p>
+
+    <p class='fragment'>
+        (I don't know much on those, so we'll move on.)
+    </p>
+</section>
+
+<section>
+    <h2>Responding to Intents</h2>
+</section>
+
+<section>
     <h2>The Response</h2>
 
-    <pre style='font-size: 0.85em;' class='fragment'><code data-trim>
+    <pre style='font-size: 0.85em;' class='fragment'><code data-trim class='lang-javascript'>
 {
   "version": "1.0",
   "response": { ... },
   "sessionAttributes": {
-      "dateRequested": "2016-08-18"
+      "someSessionDataThing": "jordan"
   }
 }
     </code></pre>
@@ -370,7 +537,7 @@ Weather  to tell me the weather for {Day}
 <section>
     <h2>The Response</h2>
 
-    <pre style='font-size: 0.85em;' class='fragment'><code data-trim>
+    <pre style='font-size: 0.85em;'><code data-trim class='lang-javascript'>
 {
   "version": "1.0",
   "response": {
@@ -386,13 +553,13 @@ Weather  to tell me the weather for {Day}
 <section>
     <h2>The Response - Output Speech</h2>
 
-    <pre style='font-size: 0.85em;' class='fragment'><code data-trim>
+    <pre style='font-size: 0.85em;'><code data-trim class='lang-javascript'>
 {
   "version": "1.0",
   "response": {
     "outputSpeech": {
       "type": "SSML",
-      "ssml": "<speak>It's going to be nasty.</speak>"
+      "ssml": "<speak>The party is on at <emphasis level="strong">7:30 p.m.</emphasis>!</speak>"
     },
     "card": { ... },
     "shouldEndSession": true
@@ -421,19 +588,25 @@ Weather  to tell me the weather for {Day}
 </section>
 
 <section>
-    <h2>The Response</h2>
+    <h2>The Response - Cards</h2>
 
-    <pre style='font-size: 0.85em;' class='fragment'><code data-trim>
+    <img src='images/card.jpg' alt='Alexa app card example' class='fragment'>
+</section>
+
+<section>
+    <h2>The Response - Cards</h2>
+
+    <pre style='font-size: 0.85em;'><code data-trim>
 {
   "version": "1.0",
   "response": {
     "outputSpeech": { ... },
     "card": {
-      "text": "It's going to be nasty.",
-      "title": "Weather for Friday",
+      "title": "Friday After Party",
+      "text": "This is going to be cray cray",
       "image": {
-        "smallImageUrl": "https://s3.amazonaws.com/alexa-forecaster/rain.png",
-        "largeImageUrl": "https://s3.amazonaws.com/alexa-forecaster/rain.png"
+        "smallImageUrl": "https://s3.amazonaws.com/connect-tech/party.png",
+        "largeImageUrl": "https://s3.amazonaws.com/connect-tech/party.png"
       },
       "type": "Standard"
     },
@@ -445,25 +618,52 @@ Weather  to tell me the weather for {Day}
 </section>
 
 <section>
-    <h1>Let's See Some Code!</h1>
+    <h1>Whew... that was a lot.</h1>
 </section>
 
 <section>
-    <h2>Considerations...</h2>
+    <h2>I know... and there's more.</h2>
+
+    <p>(Dialogs/Conversations, AudioPlayer, Echo Show, Smart Home skills, Reprompts, ...)</p>
+</section>
+
+<section>
+    <h2>Some Considerations...</h2>
 
     <ul>
-        <li class='fragment'>
-            Use ANY back end!
-            <ul style='margin-left:1em;'>
-                <li class='fragment'>Consider Amazon Lamda to reduce friction</li>
-            </ul>
-        </li>
+        <li class='fragment'>Use ANY back end!</li>
         <li class='fragment'>Server must verify ALL requests</li>
         <li class='fragment'>No way to speak without request (no server push)</li>
         <li class='fragment'>No easy way to accept arbitrary length/format input</li>
-        <li class='fragment'>Only simple audio playback (up to 90-seconds)</li>
         <li class='fragment'>Must get skill certified for public use</li>
     </ul>
+</section>
+
+<section>
+    <h2>Testing your skill</h2>
+
+    <ul>
+        <li class='fragment'>Amazon Developer Portal</li>
+        <li class='fragment'>Amazon Echo device</li>
+        <li class='fragment'><a href='https://echosim.io'>Echosim.io</a></li>
+    </ul>
+</section>
+
+<section>
+    <h2><a href='https://developer.amazon.com/public/solutions/alexa/alexa-skills-kit/docs/alexa-skills-kit-submission-checklist#submission-checklist'>Getting Certified</a></h2>
+
+    <ol>
+        <li class='fragment'>policy checks</li>
+        <li class='fragment'>security checks</li>
+        <li class='fragment'>functional checks</li>
+        <li class='fragment'>voice interface and UX tests</li>
+    </ol>
+</section>
+
+<section>
+    <h2>How long will it take?</h2>
+
+    <h1 class='fragment' style='font-family:arial;'>¯\_(ツ)_/¯</h1>
 </section>
 
 
@@ -478,12 +678,10 @@ Weather  to tell me the weather for {Day}
 
     <ul class='small-inline-list' style='text-align:left; width: 70%;'>
         <li><h5>Useful Links</h5></li>
-        <li><a href='https://github.com/jakerella/alexa-forecaster'>Weather Forecaster Repo</a></li>
+        <li><a href='https://github.com/jakerella/alexa-forecaster'>Example Code Repo</a></li>
         <li><a href='https://developer.amazon.com/public/solutions/alexa/alexa-skills-kit/getting-started-guide'>Getting Started Guide</a></li>
         <li><a href='https://developer.amazon.com/public/solutions/alexa/alexa-skills-kit/docs/alexa-skills-kit-interface-reference'>JSON Interface Reference</a></li>
         <li><a href='https://developer.amazon.com/home.html'>Developer Portal</a></li>
         <li><a href='https://github.com/alexa/alexa-skills-kit-sdk-for-nodejs'>Skills Kit SDK for Node (Lamda)</a></li>
-        <li><a href='https://echosim.io/'>Echosim Testing Tool</a></li>
-        <li><a href='https://github.com/mreinstein/alexa-verifier'>Skill Request Verification Library</a></li>
     </ul>
 </section>
