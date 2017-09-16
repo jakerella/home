@@ -83,8 +83,12 @@
     <p><strong>true/false</strong> vs. <strong>matched groups</strong></p>
 
     <pre class='fragment'><code class='lang-javascript' data-trim>
-/t/.test("Connect Tech");  // true
+/t/.test("Connect Tech");   // true
 "Connect Tech".match(/t/);  // ["t"]
+    </code></pre>
+
+    <pre class='fragment'><code class='lang-javascript' data-trim>
+"Connect Tech".match(/z/);  // null
     </code></pre>
 </section>
 
@@ -113,6 +117,11 @@
 "Connect Tech".match(/t/);  // ["t"]
     </code></pre>
 
+    <pre class='fragment'><code class='lang-javascript' data-trim>
+// global
+"Connect Tech".match(/t/g);  // ["t"]
+    </code></pre>
+
     <aside class='fragment'>
         <p>Case Insensitive</p>
 
@@ -121,8 +130,6 @@
 "Connect Tech".match(/t/ig);  // ["t", "T"]
         </code></pre>
     </aside>
-
-    <p class='fragment'>There's also a "multi-line" flag: <code>m</code></p>
 </section>
 
 <section>
@@ -187,8 +194,16 @@
     </code></pre>
 
     <pre class='fragment'><code class='lang-javascript' data-trim>
+"I like dogs the most"
+    </code></pre>
+
+    <pre class='fragment'><code class='lang-javascript' data-trim>
 "jordan@jordankasper.com"
     .replace(/([a-z]+)@([a-z.]+)/i, "https://$2/users/$1");
+    </code></pre>
+
+    <pre class='fragment'><code class='lang-javascript' data-trim>
+"https://jordankasper.com/jordan"
     </code></pre>
 </section>
 
@@ -217,13 +232,13 @@
 </section>
 
 <section>
-    <h2>Shorthand Example</h2>
+    <h2><a href='https://regex101.com/r/kduAOL/1'>Shorthand Example</a></h2>
 
     <iframe src='https://regex101.com/r/kduAOL/1' style='width: 20em; height: 8em;'></iframe>
 </section>
 
 <section>
-    <h2>Anchors</h2>
+    <h2><a href='https://regex101.com/r/2GkXc8/1'>Anchors</a></h2>
 
     <iframe src='https://regex101.com/r/2GkXc8/1' style='width: 20em; height: 8em;'></iframe>
 
@@ -231,7 +246,7 @@
 </section>
 
 <section>
-    <h2>Anchors</h2>
+    <h2><a href='https://regex101.com/r/PAlfvT/1'>Anchors</a></h2>
 
     <iframe src='https://regex101.com/r/PAlfvT/1' style='width: 20em; height: 8em;'></iframe>
 
@@ -310,7 +325,7 @@
 </section>
 
 <section>
-    <h2>Positive Look Ahead</h2>
+    <h2><a href='https://regex101.com/r/SaFtzb/1'>Positive Look Ahead</a></h2>
 
     <p>Real world example: password checker</p>
 
