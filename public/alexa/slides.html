@@ -588,6 +588,30 @@ Schedule  when {Day} party is
 </section>
 
 <section>
+    <h2>SSML</h2>
+
+    <ul>
+        <li class='fragment'><code>&lt;speak></code> (root)</li>
+        <li class='fragment'><code>&lt;emphasis level="strong"></code></li>
+        <li class='fragment'>
+            <code>&lt;audio src="..."></code>
+            (<a href='https://developer.amazon.com/public/solutions/alexa/alexa-skills-kit/docs/speech-synthesis-markup-language-ssml-reference#audio'>some restrictions</a>)
+        </li>
+        <li class='fragment'><code>&lt;br time="2s"></code></li>
+        <li class='fragment'>
+            <code>&lt;phoneme alphabet="ipa" ph="pɪˈkɑːn">pecan&lt;/phoneme></code>
+            <br>(vs "pi.kæn")
+        </li>
+        <li class='fragment'>
+            <code>&lt;say-as interpret-as="cardinal">5&lt;/say-as></code> ("five")
+        </li>
+        <li class='fragment'>
+            <code>&lt;say-as interpret-as="ordinal">5&lt;/say-as></code> ("fifth")
+        </li>
+    </ul>
+</section>
+
+<section>
     <h2>The Response - Cards</h2>
 
     <img src='images/card.jpg' alt='Alexa app card example' class='fragment'>
