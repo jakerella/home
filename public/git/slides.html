@@ -1,12 +1,9 @@
-<section>
-    <section data-background='/images/morpheus.jpg'>
-        <h2 style='color:#fff;font-size:1.5em;position:absolute;top:-6em;left:-1em;text-shadow:3px 3px 4px #000;'>Gitting More Out of Git</h2>
-    </section>
 
-    @include company
-
-    @include me
+<section data-background='/images/morpheus.jpg'>
+    <h2 style='color:#fff;font-size:1.5em;position:absolute;top:-6em;left:-1em;text-shadow:3px 3px 4px #000;'>Gitting More Out of Git</h2>
 </section>
+
+@include me
 
 <section data-background='#fff'>
     <h3>
@@ -1007,7 +1004,7 @@ d35241e6 (Ryan      2014-03-13   3) function sum(x, y) {</span>
         <h4>Blame Game</h4>
 
         <pre><code class='no-highlight' data-trim data-noescape>
-~$ git <strong>L3,5</strong> blame src/js/utilities.js
+~$ git blame <strong>-L3,5</strong> src/js/utilities.js
 d35241e6 (Ryan      2014-03-13   3) function sum(x, y) {
 27cc7225 (Jordan    2014-03-15   4)     return x * y;
 d35241e6 (Ryan      2014-03-13   5) }
