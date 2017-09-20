@@ -55,6 +55,8 @@
     <pre class='fragment'><code class='no-highlight'>`the regex goes in here`</code></pre>
 
     <pre class='fragment'><code class='no-highlight'>"the regex goes in here"</code></pre>
+
+    <pre class='fragment'><code class='no-highlight'>"/the regex goes in here/"</code></pre>
 </section>
 
 <section>
@@ -203,7 +205,7 @@
     </code></pre>
 
     <pre class='fragment'><code class='lang-javascript' data-trim>
-"https://jordankasper.com/jordan"
+"https://jordankasper.com/users/jordan"
     </code></pre>
 </section>
 
@@ -325,19 +327,19 @@
 </section>
 
 <section>
-    <h2><a href='https://regex101.com/r/SaFtzb/1'>Positive Look Ahead</a></h2>
-
-    <p>Real world example: password checker</p>
-
-    <iframe src='https://regex101.com/r/SaFtzb/1' style='width: 20em; height: 8em;'></iframe>
-
-    <p>(?=)</p>
-</section>
-
-<section>
     <h2>Look Behind</h2>
 
     <p>Same idea, but looking backward instead of forward.</p>
 
     <p>Not supported in all languages!<br>(notabley: JavaScript)</p>
+</section>
+
+<section>
+    <h2>Look Behind</h2>
+
+    <pre><code class='no-highlight'>/(?<=the\s)([a-z]at)/i</code></pre>
+
+    <p>The <strong>fat</strong> cat sat on the <strong>mat</strong></p>
+
+    <p class='fragment'> We also have negative look behind with: <code>(?&lt;!)</code></p>
 </section>
