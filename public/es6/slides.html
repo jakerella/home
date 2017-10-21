@@ -1,10 +1,10 @@
 
 <section data-background='images/delorian-lego.jpg'>
-    <h2 style='font-size: 1.6em; color: #fff; text-shadow: 2px 2px 2px #000; position: relative; top: -4em;'>
+    <h2 style='font-size: 1.6em; color: #fff; text-shadow: 2px 2px 2px #000; position: relative; top: -0.5em; left: -3.5em;'>
         ES6 and You: The Future is Now!
     </h2>
 
-    <cite style='position: relative; top: 17em;'>JD Hancock (http://photos.jdhancock.com/photo/2013-08-18-224606-do-you-remember-the-future.html)</cite>
+    <cite style='bottom: -27em;'>JD Hancock (http://photos.jdhancock.com/photo/2013-08-18-224606-do-you-remember-the-future.html)</cite>
 </section>
 
 @include me
@@ -18,39 +18,125 @@
 <section>
     <h2>Topics</h2>
 
-    <ul>
-        <li>"Classes" (constructors, extends, super)</li>
-        <li>Default Function Args</li>
-        <li>Internationalization</li>
-        <li>New Variable Declarations and Scope</li>
-        <li>Object Deconstruction</li>
-        <li>Arrow Functions</li>
-        <li>Promises</li>
-        <li>String Templates</li>
+    <ul style='list-style: none;'>
+        <li class='fragment' style='text-align: center;'>"Classes" (constructors, extends, super)</li>
+        <li class='fragment' style='text-align: center;'>Default Function Args</li>
+        <li class='fragment' style='text-align: center;'>New Variable Declarations and Scope</li>
+        <li class='fragment' style='text-align: center;'>Object Literals &amp; Deconstruction</li>
+        <li class='fragment' style='text-align: center;'>Arrow Functions</li>
+        <li class='cut-me-1 fragment' style='text-align: center;'>Promises</li>
+        <li class='fragment' style='text-align: center;'>String Templates</li>
     </ul>
 </section>
 
 <section>
-    <h2>What about ES6 Modules?</h2>
+    <h2>What about Native Modules?</h2>
 
-    <img class='fragment' src='images/module-support.png' alt='ES6 Module support from caniuse.com' style='width: 120%; margin-left: -10%;'>
+    <img class='fragment' src='images/module-support.png' alt='Native Module support from caniuse.com' style='width: 120%; margin-left: -10%;'>
     <cite>http://caniuse.com/#feat=es6-module</cite>
 </section>
 
 <section>
     <h2>Let's build something.</h2>
 
-    <p class='fragment'><a href='https://github.com/jakerella/es6-todos'>github.com/jakerella/es6-todos</a></p>
+    <p><a href='https://github.com/jakerella/es6-todos'>github.com/jakerella/es6-todos</a></p>
 </section>
 
 <section>
-    <h2>Well that was fun.</h2>
+    <h2>Well that was fun...</h2>
+
+    <p class='fragment'>... but can I use these today?</p>
+</section>
+
+
+<section data-background='#fff'>
+    <h2>Feature Support</h2>
+
+    <style>
+        .reveal table { border-collapse: collapse; }
+        .reveal table th, .reveal table td { border: 1px solid #000; width: 7em; padding: 0.2em 1em; background: #eee; }
+        .reveal tbody th { width: 10em; }
+        .reveal thead th { background: #ddd; font-style: italic; }
+        .reveal tbody td { background-color: #ee7777; }
+        .reveal td.yes { background-color: #66bb66; }
+    </style>
+
+    <table >
+        <thead>
+            <tr>
+                <th>Feature</th>
+                <th>Modern Browsers?</th>
+                <th>IE 11?</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th>Classes</th>
+                <td class='yes'>◕‿◕</td>
+                <td>ಠ_ಠ</td>
+            </tr>
+            <tr>
+                <th>Default Fn args</th>
+                <td class='yes'>◕‿◕</td>
+                <td>ಠ_ಠ</td>
+            </tr>
+            <tr>
+                <th>let and const</th>
+                <td class='yes'>◕‿◕</td>
+                <td class='yes'>o_o</td>
+            </tr>
+            <tr>
+                <th>Object literals &amp; deconstruction</th>
+                <td class='yes'>◕‿◕</td>
+                <td>ಠ_ಠ</td>
+            </tr>
+            <tr>
+                <th>Arrow functions</th>
+                <td class='yes'>◕‿◕</td>
+                <td>ಠ_ಠ</td>
+            </tr>
+            <tr class='cut-me-1'>
+                <th>Promises</th>
+                <td class='yes'>◕‿◕</td>
+                <td>ಠ_ಠ</td>
+            </tr>
+            <tr>
+                <th>String Templates</th>
+                <td class='yes'>◕‿◕</td>
+                <td>ಠ_ಠ</td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+
+<section>
+    <h2>Or use a preprocessor!</h2>
+
+    <h3><a href='https://babeljs.io/'>BabelJS</a></h3>
+
+    <aside class='fragment'>
+        <p>Install it (and the ES6 presets):</p>
+        <pre><code class='no-highlight'>npm i -s babel-cli babel-preset-env</code></pre>
+    </aside>
+
+    <aside class='fragment'>
+        <p>Create a <code>.babelrc</code> file and put this in it:</p>
+        <pre><code>{ "presets": ["env"] }</code></pre>
+    </aside>
+
+    <aside class='fragment'>
+        <p>Now run this command:</p>
+        <pre><code class='no-highlight'>babel src/ -d build/</code></pre>
+    </aside>
+</section>
+
+
+<section>
+    <h2>Try it yourself!</h2>
 
     <aside class='fragment'>
         <p>
-            Check out my solution with lots more stuff on the
-            <a href='https://github.com/jakerella/es6-todos/tree/solution'>"solution" branch</a>
-            of this repo:
+            Look at the <a href='https://github.com/jakerella/es6-todos/tree/solution'>"solution" branch</a>:
         </p>
 
         <p><a href='https://github.com/jakerella/es6-todos'>github.com/jakerella/es6-todos</a></p>
@@ -65,6 +151,7 @@
     <p style='margin-top: 2em'>Jordan Kasper | <a href='http://twitter.com/jakerella'>@jakerella</a></p>
 
     <p contenteditable>
-      <a href='https://jordankasper.com/es6'>jordankasper.com/es6</a>
+      <a href='https://jordankasper.com/es6'>jordankasper.com/es6</a><br>
+      <a href='https://github.com/jakerella/es6-todos'>github.com/jakerella/es6-todos</a>
     </p>
 </section>
