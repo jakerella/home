@@ -10,6 +10,6 @@
   "dependencies": {
     "reveal.js": "3.x",
     "source-by-line": "git://github.com/jakerella/source-by-line.git",
-    "highlightjs": "8.x"
+    "highlightjs": "9.x"
   }
 }
