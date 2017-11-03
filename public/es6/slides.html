@@ -16,30 +16,830 @@
 </section>
 
 <section>
-    <h2>Topics</h2>
+    <h2 style='text-transform: none;'>What about ES7? Or ES.next?</h2>
+</section>
+
+<section>
+    <h2>Topics for Today</h2>
 
     <ul style='list-style: none;'>
         <li class='fragment' style='text-align: center;'>"Classes" (constructors, extends, super)</li>
         <li class='fragment' style='text-align: center;'>Default Function Args</li>
         <li class='fragment' style='text-align: center;'>New Variable Declarations and Scope</li>
-        <li class='fragment' style='text-align: center;'>Object Literals &amp; Deconstruction</li>
+        <li class='fragment' style='text-align: center;'>Template Literals</li>
+        <li class='fragment' style='text-align: center;'>Object Deconstruction</li>
         <li class='fragment' style='text-align: center;'>Arrow Functions</li>
-        <li class='cut-me-1 fragment' style='text-align: center;'>Promises</li>
-        <li class='fragment' style='text-align: center;'>String Templates</li>
+        <li class='fragment' style='text-align: center;'>Promises and fetch (maybe)</li>
     </ul>
 </section>
 
 <section>
-    <h2>What about Native Modules?</h2>
+    <h2 style='text-transform: none;'>What about Native Modules?</h2>
 
     <img class='fragment' src='images/module-support.png' alt='Native Module support from caniuse.com' style='width: 120%; margin-left: -10%;'>
     <cite>http://caniuse.com/#feat=es6-module</cite>
 </section>
 
 <section>
-    <h2>Let's build something.</h2>
+    <h2 style='text-transform: none;'>What about Promises?</h2>
 
-    <p><a href='https://github.com/jakerella/es6-todos'>github.com/jakerella/es6-todos</a></p>
+    <p class='fragment'>
+        They're awesome, and you should
+        <a href='https://developers.google.com/web/fundamentals/getting-started/primers/promises'>look into them</a>...
+    </p>
+    <p class='fragment'>
+        ... especially in combination with the
+        <a href='https://fetch.spec.whatwg.org/'>new fetch API</a><br>(versus traditional Ajax libraries).
+    </p>
+</section>
+
+<section>
+    <h2><a href='https://github.com/tastejs/todomvc'>Todo MVC</a></h2>
+
+    <p class='fragment'>For Reference: <strong>jordankasper.com/es6</strong></p>
+</section>
+
+<section>
+    <h2>Our Todo Class</h2>
+
+    <pre><code class='lang-javascript' data-trim>
+class Todo {
+
+    constructor(text) {
+        this.text = text;
+        this.isComplete = false;
+        this._dueDate = Date.now() + 86400000;  // due tomorrow
+    }
+
+}
+    </code></pre>
+
+    <pre class='fragment'><code class='lang-javascript' data-trim>
+let item = new Todo('finish presentation');
+    </code></pre>
+</section>
+
+<section>
+    <h2>Default Function Arguments</h2>
+
+    <pre><code class='lang-javascript' data-trim>
+class Todo {
+
+    constructor(text = 'do stuff', due) {
+        this.text = text;
+        this.isComplete = false;
+        this._dueDate = due;
+        this.id = 1234567890;
+    }
+
+}
+    </code></pre>
+</section>
+
+<section>
+    <h2>Default Function Arguments</h2>
+
+    <pre><code class='lang-javascript' data-trim>
+class Todo {
+
+    constructor(text = 'do stuff', due = Date.now() + 86400000) {
+        this.text = text;
+        this.isComplete = false;
+        this._dueDate = due;
+        this.id = 1234567890;
+    }
+
+}
+    </code></pre>
+</section>
+
+<section>
+    <h2>Making Our App</h2>
+
+    <pre><code class='lang-javascript' data-trim>
+class App {
+
+    constructor() {
+        document.querySelector('.create-todo')
+            .addEventListener('submit', App.createTodo);
+    }
+
+    static createTodo() {
+        const text = document.querySelector('.todo-text').value;
+        const item = new Todo(text);
+    }
+
+}
+// Start up our application...
+new App();
+    </code></pre>
+</section>
+
+<section>
+    <h2 style='text-transform: none;'><code>let</code> AND <code>const</code></h2>
+    <p>a short tangent</p>
+</section>
+
+<section>
+    <h2 style='text-transform: none;'><code>let</code> and block scoping</h2>
+
+    <pre><code class='lang-javascript' data-trim>
+let z = 1;
+if (x === y) {
+    let z = 10;
+    z++;
+}
+// what is `z`?
+    </code></pre>
+</section>
+
+<section>
+    <h2 style='text-transform: none;'><code>let</code> and block scoping</h2>
+
+    <pre><code class='lang-javascript' data-trim>
+for (var i=0; i&lt;10; i++) {
+    // do some stuff...
+}
+console.log(i);  // i is defined as 10
+    </code></pre>
+
+    <pre class='fragment'><code class='lang-javascript' data-trim>
+for (let i=0; i&lt;10; i++) {
+    // do some stuff...
+}
+console.log(i);  // ReferenceError!
+    </code></pre>
+</section>
+
+<section>
+    <h2 style='text-transform: none;'><code>let</code> vs <code>const</code></h2>
+
+    <pre><code class='lang-javascript' data-trim>
+let counter = 1;
+counter++;       // totally fine
+
+const index = 1;
+index++;         // TypeError
+    </code></pre>
+</section>
+
+<section>
+    <h2 style='text-transform: none;'><code>let</code> vs <code>const</code></h2>
+
+    <pre><code class='lang-javascript' data-trim>
+const o = {};
+o.foo = 'bar';  // totally fine
+    </code></pre>
+
+    <p class='fragment'>constant <strong>reference</strong> vs. constant <strong>value</strong></p>
+</section>
+
+<section>
+    <h2>Back to the main story...</h2>
+</section>
+
+<section>
+    <h2>Rendering the Todo Item</h2>
+
+    <pre><code class='lang-javascript' data-trim>
+class App {
+    constructor() { /* ... */ }
+
+    static createTodo() {
+        const text = document.querySelector('.todo-text').value;
+        const item = new Todo(text);
+
+        // put it into the DOM...
+    }
+}
+    </code></pre>
+</section>
+
+<section>
+    <h2>Template Literals</h2>
+
+    <pre><code class='lang-javascript' data-trim>
+class Todo {
+    constructor() { /* ... */ }
+
+    render() {
+        return
+            `<li data-id="${this.id}">
+                <p>${this.text}</p>
+                <time>${this._dueDate}</time>
+            </li>`;
+    }
+}
+    </code></pre>
+</section>
+
+<section>
+    <h2>Rendering the Todo Item</h2>
+
+    <pre><code class='lang-javascript' data-trim>
+class App {
+    // ...
+
+    static createTodo() {
+        const text = document.querySelector('.todo-text').value;
+        const item = new Todo(text);
+
+        const list = document.querySelector('.todo-list');
+
+        list.innerHTML += item.render();
+    }
+}
+    </code></pre>
+</section>
+
+<section>
+    <h2>This is fine...</h2>
+
+    <pre><code class='lang-html' data-trim>
+&lt;li data-id="1234567890">
+                &lt;p>finish presentation&lt;/p>
+                &lt;time>1508702292483&lt;/time>
+            &lt;/li>
+    </code></pre>
+</section>
+
+<section>
+    <h2>Getters and Setters</h2>
+    <h4>(ES5, not 6!)</h4>
+
+    <pre><code class='lang-javascript' data-trim>
+class Todo {
+    constructor() { /* ... */ }
+    render() { /* ... */ }
+
+    get dueDate() {
+        return (new Date(this._dueDate)).toLocaleString();
+    }
+    set dueDate(value) {
+        this._dueDate = (new Date(value)).getTime();
+    }
+}
+    </code></pre>
+</section>
+
+<section>
+    <h2>User Getters by Property Access</h2>
+
+    <pre><code class='lang-javascript' data-trim>
+render() {
+    return
+        `<li data-id="${this.id}">
+            <p>${this.text}</p>
+            <time>${this.dueDate}</time>
+        </li>`;
+}
+    </code></pre>
+</section>
+
+<section>
+    <h2>This is better...</h2>
+
+    <pre><code class='lang-html' data-trim>
+&lt;li data-id="1234567890">
+                &lt;p>finish presentation&lt;/p>
+                &lt;time>10/22/2017, 4:07:55 PM&lt;/time>
+            &lt;/li>
+    </code></pre>
+</section>
+
+<section>
+    <h2>Object Destructuring</h2>
+
+    <pre><code class='lang-javascript' data-trim>
+render() {
+    const { id, text, dueDate } = this;
+
+    return
+        `<li data-id="${id}">
+            <p>${text}</p>
+            <time>${dueDate}</time>
+        </li>`;
+}
+    </code></pre>
+</section>
+
+<section>
+    <p>What about saving the Todo Item?</p>
+
+    <pre class='fragment' style='background: none;'><code class='no-highlight'>
+                          Resource
+                           |    |
+                         Todo  User
+                                |
+                              Admin</code></pre>
+</section>
+
+<section>
+    <h2>The Resource Class</h2>
+
+    <pre><code class='lang-javascript' data-trim>
+class Resource {
+
+    constructor() { }
+
+    save() { }
+}
+    </code></pre>
+</section>
+
+<section>
+    <h2>Inheritance</h2>
+
+    <pre><code class='lang-javascript' data-trim>
+class Todo extends Resource {
+    constructor( /* ... */ ) {
+        super();
+
+        // ...
+    }
+}
+    </code></pre>
+</section>
+
+<section>
+    <h2>Inheritance</h2>
+
+    <pre><code class='lang-javascript' data-trim>
+function Todo() {
+    Resource.prototype.constructor.apply(this, Array.from(arguments));
+
+    // ...
+}
+Todo.prototype = Object.create(Resource.prototype);
+Todo.prototype.constructor = Todo;
+    </code></pre>
+</section>
+
+<section>
+    <h2>This is just syntactic sugar!</h2>
+
+    <p class='fragment'>...which is fine,<br>but you <strong>still need to know about prototypes</strong>!</p>
+</section>
+
+<section>
+    <h2>Back to Our Resource Class</h2>
+
+    <pre><code class='lang-javascript' data-trim>
+class Resource {
+
+    constructor() { }  // You need this, but it can be blank
+
+    save() { }
+}
+    </code></pre>
+</section>
+
+<section>
+    <h2>A Quick Side Story in Fetch</h2>
+
+    <pre><code class='lang-javascript' data-trim>
+save() {
+
+    // fetch() is the new $.ajax()
+    fetch(
+        `/api/${this.constructor.name}/${this.id || ""}`,
+        {
+            method: (this.id) ? "PUT" : "POST",
+            body: JSON.stringify(this),
+            headers: {
+                "Content-Type": "application/json"
+            }
+        }
+    );
+
+}
+    </code></pre>
+</section>
+
+<section>
+    <h2>Fetch Uses Promises!</h2>
+
+    <pre><code class='lang-javascript' data-trim>
+save() {
+
+    const thePromise = fetch(
+        `/api/${this.constructor.name}/${this.id || ""}`,
+        { /* ... */ }
+    );
+
+    return thePromise;
+}
+    </code></pre>
+</section>
+
+<section>
+    <h2>Did it work?</h2>
+
+    <pre><code class='lang-javascript' data-trim>
+class App {
+    constructor() { /* ... */ }
+
+    static createTodo() {
+        const text = document.querySelector('.todo-text').value;
+        const item = new Todo(text);
+
+        // This should only happen if the item was saved!
+        const list = document.querySelector('.todo-list');
+        list.innerHTML += item.render();
+    }
+
+}
+    </code></pre>
+</section>
+
+<section>
+    <h2>Did it work?</h2>
+
+    <pre><code class='lang-javascript' data-trim>
+static createTodo() {
+    const text = document.querySelector('.todo-text').value;
+    const item = new Todo(text);
+
+    item.save()
+        .then(function(response) {
+            if (response.ok) {  // shortcut for status code: 200-299
+                const list = document.querySelector('.todo-list');
+                list.innerHTML += item.render();
+            }
+        });
+}
+    </code></pre>
+</section>
+
+<section>
+    <h2>Arrow functions!</h2>
+
+    <pre><code class='lang-javascript' data-trim>
+static createTodo() {
+    const text = document.querySelector('.todo-text').value;
+    const item = new Todo(text);
+
+    item.save()
+        // notice the short syntax!
+        .then((response) => {
+            if (response.ok) {  // shortcut for status code: 200-299
+                const list = document.querySelector('.todo-list');
+                list.innerHTML += item.render();
+            }
+        });
+}
+    </code></pre>
+</section>
+
+<section>
+    <h2>What if the "save" failed?</h2>
+</section>
+
+<section>
+    <h2>Did it fail?</h2>
+
+    <pre><code class='lang-javascript' data-trim>
+static createTodo() {
+    const text = document.querySelector('.todo-text').value;
+    const item = new Todo(text);
+
+    item.save()
+        .then((response) => {
+            if (response.ok) {
+                // handle success...
+            } else {
+                // handle bad status code...
+            }
+        })
+        .catch((error) => {
+            // this is NOT bad status codes,
+            // most likely a network connection issue
+            console.error(error);
+        })
+}
+    </code></pre>
+</section>
+
+<section>
+    <p>So Promises are just more callbacks?</p>
+
+    <p class='fragment'>Sort of...</p>
+</section>
+
+<section>
+    <h2>Promises</h2>
+
+    <pre><code class='lang-javascript' data-trim>
+item.save(function(response) {
+    if (response.error) {
+        // ...
+    }
+    // add Todo to UI...
+
+    app.updateReports(function(response) {
+        if (response.error) {
+            // ...
+        }
+
+        user.notify("todo added", function(response) {
+            if (response.error) {
+                // ...
+            }
+
+            // do something else...
+        });
+    });
+});
+    </code></pre>
+</section>
+
+<section>
+    <h2>Promises</h2>
+
+    <pre><code class='lang-javascript' data-trim>
+item.save()
+    .then((response) => {
+        // update UI
+        return app.updateReports();
+    })
+    .then((response) => {
+        return user.notify("todo added");
+    })
+    .then((response) => {
+        // do something else...
+    })
+    .catch((error) => {
+        // ...
+    });
+    </code></pre>
+</section>
+
+<section>
+    <h2>Making your own Promises</h2>
+
+    <pre class='fragment'><code class='lang-javascript' data-trim>
+save() {
+    const thePromise = fetch(
+        `/api/${this.constructor.name}/${this.id || ""}`,
+        { /* all of our options... */ }
+    );
+    return thePromise;
+}
+    </code></pre>
+</section>
+
+<section>
+    <h2>Making your own Promises</h2>
+
+    <pre><code class='lang-javascript' data-trim>
+save() {
+    //  these are just: callback1, callback2
+    return new Promise(( resolve ,  reject  ) => {
+
+        fetch( `/api/...`, { /* all of our options... */ } )
+            .then(resolve)
+            .catch(reject);
+
+    });
+}
+    </code></pre>
+</section>
+
+<section>
+    <h2>Making your own Promises</h2>
+
+    <pre><code class='lang-javascript' data-trim>
+save() {
+    return new Promise((resolve, reject) => {
+
+        fetch( `/api/...`, { /* all of our options... */ } )
+            .then((response) => {
+                if (response.ok) {
+                    resolve(response.body);
+                } else {
+                    reject(new Error("Oopsy"));
+                }
+            })
+            .catch(reject);
+
+    });
+}
+    </code></pre>
+</section>
+
+<section>
+    <h2>Making your own Promises</h2>
+
+    <pre><code class='lang-javascript' data-trim>
+save() {
+    return new Promise((resolve, reject) => {
+
+        fetch( `/api/...`, { /* all of our options... */ } )
+            .then((response) => {
+                if (response.ok) {
+                    resolve(response.body);
+                } else  if (response.status === 401) {
+                    reject(new Error("You are not allowed"));
+                } else if (response.status === 404) {
+                    reject(new Error("Hmm, looks like this Todo may be deleted."));
+                } else {
+                    reject(new Error("Oopsy"));
+                }
+            })
+            .catch(reject);
+
+    });
+}
+    </code></pre>
+</section>
+
+<section>
+    <h2>Key Takeaway:</h2>
+
+    <p>Promises are just a mechanism for managing asynchronous callbacks.</p>
+</section>
+
+<section>
+    <h2>More Inheritance!</h2>
+</section>
+
+<section>
+    <h2>Back to Our Resource Class</h2>
+
+    <pre><code class='lang-javascript' data-trim>
+class Resource {
+    constructor() { }
+
+    save() {
+        return new Promise((resolve, reject) => {
+
+            // What if there's bad data?
+            // We need audits!
+
+            fetch(/* ... */)
+                .then( /* ... */ )
+                .catch( /* ... */ );
+        });
+    }
+}
+    </code></pre>
+</section>
+
+<section>
+    <h2>Call a "validate" method</h2>
+
+    <pre><code class='lang-javascript' data-trim>
+class Resource {
+    constructor() { }
+
+    save() {
+        return new Promise((resolve, reject) => {
+
+            const err = this.validate();
+            if (err) {
+                return reject(err);
+            }
+
+            fetch(/* ... */).then( /* ... */ ).catch( /* ... */ );
+        });
+    }
+}
+    </code></pre>
+</section>
+
+<section>
+    <h2>Write the "vaidate" method</h2>
+
+    <pre><code class='lang-javascript' data-trim>
+class Resource {
+    constructor() { }
+
+    save() {
+        /* ... */
+    }
+
+    validate() {
+        if (this.id && typeof(this.id) !== "number") {
+            return new Error("Invalid resource ID");
+        }
+    }
+}
+    </code></pre>
+</section>
+
+<section>
+    <h3>But we're in the <strong>parent</strong> class.</h3>
+</section>
+
+<section>
+    <h2>Implement "vaidate" in subclass</h2>
+
+    <pre><code class='lang-javascript' data-trim>
+class Todo extends Resource {
+    constructor() {
+        super();
+        /* other stuff... */
+    }
+
+    render() { /* ... */ }
+
+    validate() {
+        const err = super.validate();
+        if (err) { return err; }
+
+        if (typeof(this.text) !== "string") {
+            return new Error("Invalid Todo text");
+        }
+        // ...
+    }
+}
+    </code></pre>
+</section>
+
+<section>
+    <h2 style='text-transform: none;'><strong>super()</strong> versus <strong>super.whatever()</strong></h2>
+
+    <p class='fragment'>This is still just prototypes!</p>
+
+    <aside class='fragment'>
+        <p><code>super</code> is a shortcut to the parent constructor.</p>
+        <pre><code class='lang-javascript' data-trim>
+super.constructor === Resource;
+super.constructor.prototype.save === Resource.prototype.save;
+        </code></pre>
+    </aside>
+</section>
+
+<section>
+    <h2>More Syntactic Sugar!</h2>
+
+    <p class='fine'>(You still need to know about prototypes.)</p>
+</section>
+
+<section>
+    <h2>Some Notes on Arrow Functions</h2>
+
+    <ul style='list-style: none;'>
+        <li class='fragment' style='text-align: center;'>No context (<code>this</code>)</li>
+        <li class='fragment' style='text-align: center;'>Implicit return value <span class='fragment'>(sometimes)</span></li>
+    </ul>
+</section>
+
+<section>
+    <h2>No Context</h2>
+
+    <pre><code class='lang-javascript' data-trim>
+someNode.addEventListener("click", function (eventObj) {
+    console.log(this);  // someNode  (in most browsers)
+});
+    </code></pre>
+
+    <pre class='fragment'><code class='lang-javascript' data-trim>
+someNode.addEventListener("click", (eventObj) => {
+    console.log(this);  // undefined
+});
+    </code></pre>
+</section>
+
+<section>
+    <h3 style='text-transform: none;'>Wait, don't I want `this`?</h3>
+
+    <p class='fragment'>The question is: do you need it?</p>
+</section>
+
+<section>
+    <h2>No Context</h2>
+
+    <pre><code class='lang-javascript' data-trim>
+someNode.addEventListener("click", (eventObj) => {
+    console.log(this);             // undefined
+    console.log(eventObj.target);  // someNode
+});
+    </code></pre>
+
+    <p class='fragment'>
+        One note: if you delegate events this gets tricky!
+    </p>
+</section>
+
+
+<section>
+    <h2>Implicit Return</h2>
+
+    <pre><code class='no-highlight' data-trim>
+console.log( ( (x) => x + 1 )(1) );   // logs: 2
+    </code></pre>
+
+    <p class='fragment'>
+        Note there are <strong>no curly braces</strong>!<br><br>
+        <code>(x) => x + 1</code>
+    </p>
+</section>
+
+<section>
+    <h2>Implicit Return</h2>
+
+    <p>Only when there is no code block (curly braces).</p>
 </section>
 
 <section>
@@ -86,22 +886,27 @@
                 <td class='yes'>o_o</td>
             </tr>
             <tr>
-                <th>Object literals &amp; deconstruction</th>
+                <th>Template Literals</th>
                 <td class='yes'>◕‿◕</td>
                 <td>ಠ_ಠ</td>
             </tr>
             <tr>
-                <th>Arrow functions</th>
+                <th>Object Deconstruction</th>
                 <td class='yes'>◕‿◕</td>
                 <td>ಠ_ಠ</td>
             </tr>
-            <tr class='cut-me-1'>
+            <tr>
                 <th>Promises</th>
                 <td class='yes'>◕‿◕</td>
                 <td>ಠ_ಠ</td>
             </tr>
             <tr>
-                <th>String Templates</th>
+                <th>Arrow Functions</th>
+                <td class='yes'>◕‿◕</td>
+                <td>ಠ_ಠ</td>
+            </tr>
+            <tr>
+                <th>fetch</th>
                 <td class='yes'>◕‿◕</td>
                 <td>ಠ_ಠ</td>
             </tr>
