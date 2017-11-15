@@ -74,9 +74,9 @@
 <section>
     <h2>Simple Character Test</h2>
 
-    <pre><code class='lang-javascript'>/t/.test("Connect Tech");  // true</code></pre>
+    <pre><code class='lang-javascript'>/a/.test("JavaScript Rules");  // true</code></pre>
 
-    <pre class='fragment'><code class='lang-javascript'>/z/.test("Connect Tech");  // false</code></pre>
+    <pre class='fragment'><code class='lang-javascript'>/z/.test("JavaScript Rules");  // false</code></pre>
 </section>
 
 <section>
@@ -85,27 +85,27 @@
     <p><strong>true/false</strong> vs. <strong>matched groups</strong></p>
 
     <pre class='fragment'><code class='lang-javascript' data-trim>
-/t/.test("Connect Tech");   // true
-"Connect Tech".match(/t/);  // ["t"]
+/a/.test("JavaScript Rules");   // true
+"JavaScript Rules".match(/a/);  // ["a"]
     </code></pre>
 
     <pre class='fragment'><code class='lang-javascript' data-trim>
-"Connect Tech".match(/z/);  // null
+"JavaScript Rules".match(/z/);  // null
     </code></pre>
 </section>
 
 <section>
-    <h2>Where's the other "n"?</h2>
+    <h2>Where's the other "a"?</h2>
 
     <pre><code class='lang-javascript' data-trim>
-"Connect Tech".match(/n/);  // ["n"]
+"JavaScript Rules".match(/a/);  // ["a"]
     </code></pre>
 
     <aside class='fragment'>
         <p>We need to make it global!</p>
 
         <pre><code class='lang-javascript' data-trim>
-"Connect Tech".match(/n/g);  // ["n", "n"]
+"JavaScript Rules".match(/a/g);  // ["a", "a"]
         </code></pre>
 
         <p>The "g" here is called a "flag", the "global" flag.</p>
@@ -116,12 +116,12 @@
     <h2>Other Flags</h2>
 
     <pre><code class='lang-javascript' data-trim>
-"Connect Tech".match(/t/);  // ["t"]
+"JavaScript Rules".match(/r/);  // ["r"]
     </code></pre>
 
     <pre class='fragment'><code class='lang-javascript' data-trim>
 // global
-"Connect Tech".match(/t/g);  // ["t"]
+"JavaScript Rules".match(/r/g);  // ["r"]
     </code></pre>
 
     <aside class='fragment'>
@@ -129,7 +129,7 @@
 
         <pre><code class='lang-javascript' data-trim>
 // case-insensitive AND global
-"Connect Tech".match(/t/ig);  // ["t", "T"]
+"JavaScript Rules".match(/r/ig);  // ["r", "R"]
         </code></pre>
     </aside>
 </section>
