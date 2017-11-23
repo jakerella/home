@@ -18,8 +18,8 @@ function* luckyNumber() {
 
 try {
 
-    var gen = luckyNumber();
-    var number = gen.next();
+    const gen = luckyNumber();
+    const number = gen.next();
 
     if (number.value === 13) {
         gen.throw( new Error( 'I did it again.' ) );
@@ -34,7 +34,7 @@ try {
 
 try {
 
-    var gen = luckyNumber();
+    const gen = luckyNumber();
 
     gen.throw( new Error('batbaz') );
 
@@ -47,7 +47,7 @@ try {
 
 try {
 
-    var gen = luckyNumber();
+    const gen = luckyNumber();
     gen.next();
 
     throw new Error('bazfoo');
@@ -60,9 +60,9 @@ try {
 
 
 try {
-    var gen = LuckyNumber();
+    const gen = LuckyNumber();
 
-    var myNumber = gen.next();
+    const myNumber = gen.next();
 
     gen.next();
 

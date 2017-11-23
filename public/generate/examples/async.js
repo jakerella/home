@@ -1,11 +1,11 @@
 'use strict';
 
-var fs = require('fs');
-var denodeify = require('./denodeify');
-var run = require('./run');
+const fs = require('fs');
+const denodeify = require('./denodeify');
+const run = require('./run');
 
 
-var readFile = denodeify(fs.readFile);
+const readFile = denodeify(fs.readFile);
 
 
 /**** Using the denodeified readFile method */
@@ -26,9 +26,9 @@ readFile('./data-1.json')
 
 run(function* readAllFiles() {
 
-  var one = JSON.parse(yield readFile('data-1.json'));
-  var more = JSON.parse(yield readFile('data-' + one.nextIndex + '.json'));
-  var extra = JSON.parse(yield readFile('data-' + more.nextIndex + '.json'));
+  const one = JSON.parse(yield readFile('data-1.json'));
+  const more = JSON.parse(yield readFile('data-' + one.nextIndex + '.json'));
+  const extra = JSON.parse(yield readFile('data-' + more.nextIndex + '.json'));
 
   console.log( one, more, extra );
 
@@ -39,19 +39,19 @@ run(function* readAllFiles() {
 /**** Example converted from readfile-sync.js */
 
 run(function* getData() {
-    var data = yield readFile('data-1.json');
+    const data = yield readFile('data-1.json');
 
     data = JSON.parse( data );
     // Do something with the data...
     console.log('Data from file 1', data);
 
-    var moreData = yield readFile('data-' + data.nextIndex + '.json');
+    const moreData = yield readFile('data-' + data.nextIndex + '.json');
 
     moreData = JSON.parse( moreData );
     console.log('Data from file 2', moreData);
 
     if (moreData.whatever) {
-        var otherData = yield readFile('some-other-data.json');
+        const otherData = yield readFile('some-other-data.json');
     }
 });
 
@@ -61,7 +61,7 @@ run(function* getData() {
 /**** 3 file reads in a row using a while loop with returned data */
 
 run(function* () {
-    var nextIndex = 1,
+    const nextIndex = 1,
         prevData = null,
         allData = [];
 
@@ -82,7 +82,7 @@ run(function* () {
 
 run(function* () {
 
-    var allData = yield Promise.all([
+    const allData = yield Promise.all([
         readFile('data-1.json'),
         readFile('data-2.json'),
         readFile('data-5.json')
@@ -96,7 +96,7 @@ run(function* () {
 /**** Example of error handling with async calls */
 
 run(function* () {
-  var data = [];
+  const data = [];
 
   try {
 

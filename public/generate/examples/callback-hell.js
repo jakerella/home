@@ -1,5 +1,5 @@
 
-var fs = require('fs');
+const fs = require('fs');
 
 fs.readFile('data-1.json', function(err, one) {
     if (err) {
