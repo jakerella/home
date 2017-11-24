@@ -6,26 +6,23 @@
 // similarly named function:
 // https://github.com/kriskowal/q/wiki/API-Reference#qspawngeneratorfunction
 
-module.exports = function run(generator) {
+module.exports =
+function run(generator) {
     const genObj = generator();
 
     function runGen(result) {
-
         const item = genObj.next(result);
 
         if (!item.done) {
             item.value
-                .then(
-                    function(data) {
-                        runGen(data);
-                    },
-                    function(err) {
-                        genObj.throw(err);
-                        runGen();
-                    }
-                );
+                .then(function(data) {
+                    runGen(data);
+                })
+                .catch(function(err) {
+                    genObj.throw(err);
+                    runGen();
+                });
         }
     }
-
     runGen();
 }

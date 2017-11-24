@@ -1,24 +1,24 @@
 'use strict';
 
 const fs = require('fs');
-const denodeify = require('./denodeify');
+const promisify = require('./promisify');
 const run = require('./run');
 
 
-const readFile = denodeify(fs.readFile);
+const readFile = promisify(fs.readFile);
 
 
 /**** Using the denodeified readFile method */
 
 readFile('./data-1.json')
-    .then(
-        function(data) {
-            console.log('File data!', data.toString());
-        },
-        function(err) {
-            console.log('error...', err.message);
-        }
-    );
+    .then(function(data) {
+        console.log('File data!', data.toString());
+    })
+    .catch(function(err) {
+        console.log('error...', err.message);
+    });
+
+
 
 
 

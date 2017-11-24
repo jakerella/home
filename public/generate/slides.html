@@ -3,22 +3,157 @@
     .slides pre {
         width: 110%;
         margin-left: -5%;
+        font-size: 0.85em;
     }
     .slides p, .slides h3 {
         line-height: 1.4em;
     }
 </style>
 
-<section class='no-footer'>
-    <section data-background='images/generate-electricity.jpg'>
-        <h2 style='color:#fff;margin-top:3em;'>Generating a New Async</h2>
+<section data-background='images/generate-electricity.jpg'>
+    <h2 style='color:#fff;margin-top:3em;'>Rethinking Async Workflows</h2>
 
-        <cite style='position:absolute; bottom:-26em; width:100%; text-align:center; color: #555;'>http://science.howstuffworks.com/environmental/energy/question136.htm</cite>
+    <cite style='position:absolute; bottom:-26em; width:100%; text-align:center; color: #555;'>http://science.howstuffworks.com/environmental/energy/question136.htm</cite>
+</section>
+
+@include me
+
+
+<section class='no-footer'>
+
+    <section data-transition='none'>
+        <h3>A Solveable Problem...</h3>
+
+        <pre class='fragment'><code class='lang-javascript' data-srcbyline='examples/callback-hell.js?2-6;8-10;13;31;'></code></pre>
     </section>
 
-    @include me
+    <section data-transition='none'>
+        <h3>A Solveable Problem...</h3>
 
-    @include company
+        <pre><code class='lang-javascript' data-srcbyline='examples/callback-hell.js?2;4-6;8;13-14;25-27;30-31'></code></pre>
+    </section>
+
+    <section data-transition='none'>
+        <h3>A Solveable Problem...</h3>
+
+        <pre style='font-size:0.8em;'><code class='lang-javascript' data-srcbyline='examples/callback-hell.js?2;4-6;8-10;13-16;18-19;23-31'></code></pre>
+    </section>
+
+    <section data-background='white'>
+        <img src='images/meme-functions.jpg' style='width:75%;' alt='Functions inside functions inside functions'>
+    </section>
+
+    <section>
+        <h4>We <em>could</em> just make this code <strong>synchronous</strong>...</h4>
+
+        <pre style='font-size:0.85em;'><code class='lang-javascript' data-srcbyline='examples/readfile-sync.js?6-8;11-13;17-19'></code></pre>
+    </section>
+
+    <section data-background='#000000'>
+        <img src='images/mario-jump.gif' style='width:75%;' alt='Mario not able to jump very high' style='width:50%;'>
+    </section>
+
+    <section>
+        <h3 style='line-height:1.5em;'>
+            We want to <em>write</em> code<br>
+            in a <strong>synchronous</strong> fashion,<br><br>
+            <span class='fragment'>
+                but with the <em>runtime</em> benefits<br>
+                of <strong>asynchronicity</strong>.
+            </span>
+        </h3>
+    </section>
+
+</section>
+
+<section>
+
+    <section data-background='#ffffff'>
+        <h2 style='text-transform: none;'>So that's what promises do?</h2>
+
+        <p class='fragment'>Not quite.</p>
+
+        <p class='fragment'>Promises are a mechanism for managing callbacks.</p>
+    </section>
+
+    <section>
+        <h2>Using a Promise</h2>
+
+        <aside class='fragment'>
+            <p>Via the new <code>fetch()</code> function</p>
+            <p class='fine'>(essentially jQuery's <code>ajax()</code> method)</p>
+
+            <pre><code class='lang-javascript' data-srcbyline='examples/promises.js?2'></code></pre>
+        </aside>
+    </section>
+
+    <section>
+        <h2>Using a Promise</h2>
+
+        <pre><code class='lang-javascript' data-srcbyline='examples/promises.js?4-6;15;20-23'></code></pre>
+    </section>
+
+    <section>
+        <h2>Multiple Promises</h2>
+
+        <pre><code class='lang-javascript' data-srcbyline='examples/promises.js?4-12;15'></code></pre>
+    </section>
+
+    <section>
+        <h2>Multiple Promises</h2>
+
+        <pre><code class='lang-javascript' data-srcbyline='examples/promises.js?4-7;14-19'></code></pre>
+    </section>
+
+    <section>
+        <h2>Multiple Promises</h2>
+
+        <pre><code class='lang-javascript' data-srcbyline='examples/promises.js?4-7;14-23'></code></pre>
+    </section>
+
+    <section data-background='#000000' style='position:relative'>
+        <h2 style='position:absolute;top: 8em; width:100%; color: #ffffff; font-weight: bold;'>Making a Promise</h2>
+
+        <img src='images/ring.png' alt='The one ring' style='width: 80%; transform: rotate(-25deg);'>
+
+        <cite>https://en.wikipedia.org/wiki/One_Ring</cite>
+    </section>
+
+    <section>
+        <h2>Async Callbacks</h2>
+        <pre><code class='lang-javascript' data-srcbyline='examples/promises.js?26-36'></code></pre>
+    </section>
+
+    <section>
+        <h2>Creating a Promise</h2>
+
+        <pre><code class='lang-javascript' data-srcbyline='examples/promises.js?38-52'></code></pre>
+    </section>
+
+    <section>
+        <h2>What's the Difference?</h2>
+
+        <pre class='fragment'><code class='lang-javascript' data-srcbyline='examples/promises.js?54-67'></code></pre>
+    </section>
+
+    <section>
+        <h2>That's nice...</h2>
+
+        <p class='fragment'>...but it doesn't really get us where we want to be.</p>
+    </section>
+
+</section>
+
+
+<section data-background='images/two-paths.jpg'>
+    <h2 style='color: white; font-weight: bold;'>Two Paths</h2>
+
+    <aside style='display: flex;'>
+        <p class='fragment' style='flex:1; color: white; font-weight: bold;'>Generators</p>
+        <p class='fragment' style='flex:1; color: white; font-weight: bold;'>async/await</p>
+    </aside>
+
+    <cite style='position: relative; top: 10em;'>https://www.americaninno.com/boston/switch-review-site-for-alternative-learning-programs-and-developer-bootcamps/</cite>
 </section>
 
 
@@ -50,7 +185,7 @@
 
         <pre><code class='lang-javascript' data-srcbyline='examples/timeout.js?4-6'></code></pre>
 
-        <pre class='fragment'><code class='lang-javascript' data-srcbyline='examples/timeout.js?8-15;'></code></pre>
+        <pre class='fragment'><code class='lang-javascript' data-srcbyline='examples/timeout.js?8-13;'></code></pre>
 
         <pre class='fragment'><code class='lang-none no-highlight' data-trim>
 Long run complete
@@ -69,15 +204,15 @@ Long run complete
 
         <!--<pre style='position:relative;'><code class='lang-javascript' data-srcbyline='examples/timeout.js?4-15;'></code><svg data-arrow='{"length":250, "thickness":10, "direction":2, "color":"green"}' style='position:absolute;top:1em;left:60%;'></svg></pre>-->
         <pre style='position:relative;'><code class='lang-javascript'
-            data-srcbyline='examples/timeout.js?4-15;'
-            data-arrow='{"length":300, "thickness":10, "direction":2, "color":"green", "vertPadding":20}'></code></pre>
+            data-srcbyline='examples/timeout.js?4-13;'
+            data-arrow='{"length":240, "thickness":10, "direction":2, "color":"green", "vertPadding":10}'></code></pre>
     </section>
 
     <section data-transition='none'>
         <p><code>setTimeout()</code> causes an asynchronous callback after 100 ms...</p>
 
         <pre style='position:relative;'><code class='lang-javascript'
-            data-srcbyline='examples/timeout.js?4-15;'
+            data-srcbyline='examples/timeout.js?4-13;'
             data-arrow='{"codelines":[1], "length":150, "thickness":10, "direction":3, "color":"orange", "vertPadding":3}'></code></pre>
     </section>
 
@@ -85,8 +220,8 @@ Long run complete
         <p>...but this <code>for</code> loop will <strong>block</strong> the event loop until it's done.</p>
 
         <pre 'position:relative;'><code class='lang-javascript'
-            data-srcbyline='examples/timeout.js?4-15;'
-            data-arrow='{"codelines":[8], "length":150, "thickness":10, "direction":3, "color":"red"}'></code></pre>
+            data-srcbyline='examples/timeout.js?4-13;'
+            data-arrow='{"codelines":[6], "length":150, "thickness":10, "direction":3, "color":"red", "horizPadding":-5}'></code></pre>
     </section>
 
     <section data-background='images/face-palm.png'>
@@ -102,59 +237,6 @@ Long run complete
 
 <section class='no-footer'>
 
-    <section data-transition='none'>
-        <h3>A Solveable Problem...</h3>
-
-        <pre class='fragment'><code class='lang-javascript' data-srcbyline='examples/callback-hell.js?2-6;8-10;13;31;'></code></pre>
-    </section>
-
-    <section data-transition='none'>
-        <h3>A Solveable Problem...</h3>
-
-        <pre><code class='lang-javascript' data-srcbyline='examples/callback-hell.js?2;4-6;8-10;13-14;25-27;30-31'></code></pre>
-    </section>
-
-    <section data-transition='none'>
-        <h3>A Solveable Problem...</h3>
-
-        <pre><code class='lang-javascript' data-srcbyline='examples/callback-hell.js?2;4-6;8-10;13-16;18-19;23-31'></code></pre>
-    </section>
-
-    <section data-background='white'>
-        <img src='images/meme-functions.jpg' style='width:75%;' alt='Functions inside functions inside functions'>
-    </section>
-
-    <section>
-        <h4>We <em>could</em> just make this code <strong>synchronous</strong>...</h4>
-
-        <pre><code class='lang-javascript' data-srcbyline='examples/readfile-sync.js?6-8;11-13;17-19'></code></pre>
-    </section>
-
-    <section data-background='white'>
-        <img src='images/mario-jump.gif' style='width:75%;' alt='Mario not able to jump very high' style='width:50%;'>
-    </section>
-
-    <section>
-        <h3 style='line-height:1.5em;'>
-            We want to <em>write</em> code<br>
-            in a <strong>synchronous</strong> fashion,<br><br>
-            <span class='fragment'>
-                but with the <em>runtime</em> benefits<br>
-                of <strong>asynchronicity</strong>.
-            </span>
-        </h3>
-    </section>
-
-</section>
-
-
-
-<section class='no-footer'>
-
-    <section>
-        <h2>Enter Generators</h2>
-    </section>
-
     <section>
         <p style='width:60%; margin: 0 auto;'>
             Generators allow functions to
@@ -163,19 +245,22 @@ Long run complete
     </section>
 
     <section>
-        <h4>Remember our <strong>synchronous</strong> code?</h4>
+        <h3>Remember our <strong>synchronous</strong> code?</h3>
 
         <pre><code class='lang-javascript' data-srcbyline='examples/readfile-sync.js?6-8;11-13;17-19'></code></pre>
     </section>
 
     <section>
-        <h4>Now with 100% more generators...</h4>
+        <h3>Async with generators...</h3>
 
         <pre><code class='lang-javascript' data-srcbyline='examples/async.js?27-35'></code></pre>
+
+        <h4 class='fragment' style='font-weight: bold;'>I don't see any generators.</h4>
     </section>
 
     <section data-background='white'>
-        <img src='images/popcorn.gif' alt='Eating popcorn in anticipation' style='width:50%;'>
+        <h3>Wait for it...</h3>
+        <img src='images/popcorn.gif' alt='Eating popcorn in anticipation' style='width:45%;'>
     </section>
 
     <section>
@@ -257,23 +342,12 @@ Long run complete
 
         <pre><code class='lang-javascript'
                     data-srcbyline='examples/gen.js?6-7;9-11;13;16'
-                    data-arrow='{"codelines":[4], "length":150, "thickness":10, "direction":3, "color":"green"}'></code></pre>
+                    data-arrow='{"codelines":[5], "length":150, "thickness":10, "direction":3, "color":"green"}'></code></pre>
 
         <p class='fine'>And this is how you execute it...</p>
         <pre><code class='lang-javascript'
                     data-srcbyline='examples/gen.js?18-20;23-26'
                     data-arrow='{"codelines":[7], "length":150, "thickness":10, "direction":3, "color":"orange"}'></code></pre>
-    </section>
-
-    <section data-transition='none'>
-        <h4>This is a generator.</h4>
-
-        <pre><code class='lang-javascript'
-                    data-srcbyline='examples/gen.js?6-7;9-11;13;16'
-                    data-arrow='{"codelines":[5], "length":150, "thickness":10, "direction":3, "color":"green"}'></code></pre>
-
-        <p class='fine'>And this is how you execute it...</p>
-        <pre><code class='lang-javascript' data-srcbyline='examples/gen.js?18-20;23-26'></code></pre>
     </section>
 
     <section data-transition='none'>
@@ -305,8 +379,6 @@ Back inside foo
     </section>
 
 
-
-
     <section>
         <h3>This does <strong>not</strong> break the<br>"run to completion" paradigm!</h3>
     </section>
@@ -316,43 +388,52 @@ Back inside foo
 
         <pre><code class='lang-javascript' data-srcbyline='examples/gen.js?6;9;13;16'></code></pre>
 
-        <div class='fragment'>
-            <pre><code class='lang-javascript' data-srcbyline='examples/gen.js?18-21;25-27'></code></pre>
+        <aside>
+            <pre><code class='lang-javascript'
+                data-srcbyline='examples/gen.js?18-21;25-27'
+                data-arrow='{"codelines":[4,7], "length":150, "thickness":10, "direction":3, "color":"green"}'></code></pre>
 
-            <pre><code class='lang-none no-highlight' data-trim>
+            <pre><code class='lang-none no-highlight' data-trim
+                        data-arrow='{"codelines":[2], "length":150, "thickness":10, "direction":3, "color":"orange", "horizPadding":-5}'>
 { value: 'a', done: false }
 { value: { b: 2 }, done: false }
             </code></pre>
-        </div>
+        </aside>
     </section>
 
     <section data-transition='none'>
-        <p>Notice that my generator "yielded" two values:</p>
+        <p>Call the <code>next()</code> one last time...</p>
 
         <pre><code class='lang-javascript' data-srcbyline='examples/gen.js?6;9;13;16'></code></pre>
 
-        <pre><code class='lang-javascript' data-srcbyline='examples/gen.js?18-21;26-27;30-31'></code></pre>
+        <pre><code class='lang-javascript'
+            data-srcbyline='examples/gen.js?18-21;26-27;30-31'
+            data-arrow='{"codelines":[7], "length":150, "thickness":10, "direction":3, "color":"green", "horizPadding":-5}'></code></pre>
 
-        <pre><code class='lang-none no-highlight' data-trim>
+        <pre><code class='lang-none no-highlight' data-trim
+                    data-arrow='{"codelines":[3], "length":150, "thickness":10, "direction":3, "color":"orange", "horizPadding":-5}'>
 { value: 'a', done: false }
 { value: { b: 2 }, done: false }
 { value: undefined, done: true }
         </code></pre>
     </section>
 
-    <section>
+    <section data-transition='none'>
         <p>Adding a <code>return</code> statement:</p>
 
-        <pre><code class='lang-javascript' data-srcbyline='examples/gen.js?6;9-10;13;14-16'></code></pre>
+        <pre><code class='lang-javascript'
+            data-srcbyline='examples/gen.js?6;9-10;13;14-16'
+            data-arrow='{"codelines":[6], "length":150, "thickness":10, "direction":3, "color":"green"}'></code></pre>
 
         <pre><code class='lang-javascript' data-trim>
-var genObj = foo();
+const genObj = foo();
 console.log( genObj.next() );
 console.log( genObj.next() );
 console.log( genObj.next() );
         </code></pre>
 
-        <pre class='fragment'><code class='lang-none no-highlight' data-trim>
+        <pre><code class='lang-none no-highlight' data-trim
+                    data-arrow='{"codelines":[3], "length":150, "thickness":10, "direction":3, "color":"orange", "horizPadding":-5}'>
 { value: 'a', done: false }
 { value: { b: 2 }, done: false }
 { value: 'c', done: true }
@@ -395,7 +476,9 @@ a
                     data-srcbyline='examples/gen.js?125-128;132-136;139-140'
                     data-arrow='{"codelines":[2], "length":150, "thickness":10, "direction":3, "color":"green", "horizPadding": -8, "vertPadding": 4}'></code></pre>
 
-        <pre class='fragment'><code class='lang-javascript' data-srcbyline='examples/gen.js?142-146'></code></pre>
+        <pre><code class='lang-javascript'
+                    data-srcbyline='examples/gen.js?142-146'
+                    data-arrow='{"codelines":[4], "length":150, "thickness":10, "direction":3, "color":"orange", "horizPadding":-5}'></code></pre>
     </section>
 
     <section>
@@ -467,28 +550,28 @@ Caught outside generator: Nope nope nope.
     </section>
 
     <section class='cut-me-1'>
-        <h4>But what if I have <strong>Node-style callbacks</strong>?</h4>
+        <h4>But what if I have <strong>callbacks</strong> everywhere?</h4>
 
-        <p class='fragment'>Easy, just <code>denodify</code> the function!</p>
+        <p class='fragment'>Easy, just <code>promisify</code> the function!</p>
 
         <pre class='fragment'><code class='lang-javascript' data-srcbyline='examples/async.js?4;8'></code></pre>
 
-        <pre class='fragment'><code class='lang-javascript' data-srcbyline='examples/async.js?13-21'></code></pre>
+        <pre class='fragment'><code class='lang-javascript' data-srcbyline='examples/async.js?13-19'></code></pre>
     </section>
 
     <section class='cut-me-1'>
         <h3>
-            Denodification Breakdown<br>
+            Promisification Breakdown<br>
             <span class='fine'>(simplified)</span>
         </h3>
 
         <pre><code class='lang-javascript' data-trim>
-function denodify( nodeStyleFn ) {
+function promisify( callbackStyleFn ) {
     return function promiseStyleFn(originalArg) {
 
         return new Promise(function( resolve, reject ) {
 
-            nodeStyleFn(originalArg, function(err, value) {
+            callbackStyleFn(originalArg, function(err, value) {
 
                 if (err) { return reject(err); }
                 resolve(value);
@@ -499,11 +582,11 @@ function denodify( nodeStyleFn ) {
 }
         </code></pre>
 
-        <p><em>(Warning: do not use this code! It is not complete by far.)</em></p>
+        <p><em><strong>(Warning: do not use this code!)</strong></em></p>
     </section>
 
     <section>
-        <h3>But generators are cumbersome...</h3>
+        <h3>Generators are cumbersome...</h3>
 
         <ol style='width:65%'>
             <li class='fragment'>Create the generator object</li>
@@ -542,15 +625,15 @@ function denodify( nodeStyleFn ) {
 
     <section data-transition='none'>
         <pre><code class='lang-javascript'
-                data-srcbyline='examples/run.js?9-12;14-28;30-31'>
+                data-srcbyline='examples/run.js?10-28'>
         </code></pre>
 
-        <p><em>(Warning: do not use this code! It is not complete.)</em></p>
+        <p><em><strong>(Warning: do not use this code! It is not complete.)</strong></em></p>
     </section>
 
     <section data-transition='none'>
         <pre><code class='lang-javascript'
-                data-srcbyline='examples/run.js?9-12;14-28;30-31'
+                data-srcbyline='examples/run.js?10-28'
                 data-arrow='{"codelines":[2], "length":150, "thickness":10, "direction":3, "color":"green", "vertPadding": 10}'>
         </code></pre>
 
@@ -559,7 +642,7 @@ function denodify( nodeStyleFn ) {
 
     <section data-transition='none'>
         <pre><code class='lang-javascript'
-                data-srcbyline='examples/run.js?9-12;14-28;30-31'
+                data-srcbyline='examples/run.js?10-28'
                 data-arrow='{"codelines":[4], "length":150, "thickness":10, "direction":3, "color":"green", "vertPadding": 5}'>
         </code></pre>
 
@@ -568,7 +651,7 @@ function denodify( nodeStyleFn ) {
 
     <section data-transition='none'>
         <pre><code class='lang-javascript'
-                data-srcbyline='examples/run.js?9-12;14-28;30-31'
+                data-srcbyline='examples/run.js?10-28'
                 data-arrow='{"codelines":[5], "length":150, "thickness":10, "direction":3, "color":"green", "vertPadding": 5, "horizPadding": -5}'>
         </code></pre>
 
@@ -577,8 +660,8 @@ function denodify( nodeStyleFn ) {
 
     <section data-transition='none'>
         <pre><code class='lang-javascript'
-                data-srcbyline='examples/run.js?9-12;14-28;30-31'
-                data-arrow='{"codelines":[11,15,20], "length":150, "thickness":10, "direction":3, "color":"orange", "vertPadding": 2}'>
+                data-srcbyline='examples/run.js?10-28'
+                data-arrow='{"codelines":[10,14,18], "length":150, "thickness":10, "direction":3, "color":"orange", "vertPadding": 2}'>
         </code></pre>
 
         <p><em>(Warning: do not use this code! It is not complete.)</em></p>
@@ -586,7 +669,7 @@ function denodify( nodeStyleFn ) {
 
     <section data-transition='none'>
         <pre><code class='lang-javascript'
-                data-srcbyline='examples/run.js?9-12;14-28;30-31'
+                data-srcbyline='examples/run.js?10-28'
                 data-arrow='{"codelines":[5], "length":150, "thickness":10, "direction":3, "color":"green", "vertPadding": 5, "horizPadding": -5}'>
         </code></pre>
 
@@ -595,7 +678,7 @@ function denodify( nodeStyleFn ) {
 
     <section data-transition='none'>
         <pre><code class='lang-javascript'
-                data-srcbyline='examples/run.js?9-12;14-28;30-31'
+                data-srcbyline='examples/run.js?10-28'
                 data-arrow='{"codelines":[7], "length":150, "thickness":10, "direction":3, "color":"orange", "vertPadding": 5, "horizPadding": -5}'>
         </code></pre>
 
@@ -604,7 +687,7 @@ function denodify( nodeStyleFn ) {
 
     <section data-transition='none'>
         <pre><code class='lang-javascript'
-                data-srcbyline='examples/run.js?9-12;14-28;30-31'
+                data-srcbyline='examples/run.js?10-28'
                 data-arrow='{"codelines":[8], "length":150, "thickness":10, "direction":3, "color":"green", "vertPadding": 5, "horizPadding": -3}'>
         </code></pre>
 
@@ -613,8 +696,8 @@ function denodify( nodeStyleFn ) {
 
     <section data-transition='none'>
         <pre><code class='lang-javascript'
-                data-srcbyline='examples/run.js?9-12;14-28;30-31'
-                data-arrow='{"codelines":[11,14], "length":150, "thickness":10, "direction":3, "color":"green", "vertPadding": 5, "horizPadding": -5}'>
+                data-srcbyline='examples/run.js?10-28'
+                data-arrow='{"codelines":[10,13], "length":150, "thickness":10, "direction":3, "color":"green", "vertPadding": 5, "horizPadding": -5}'>
         </code></pre>
 
         <p><em>(Warning: do not use this code! It is not complete.)</em></p>
@@ -626,9 +709,9 @@ function denodify( nodeStyleFn ) {
         <pre class='fragment'><code class='lang-javascript' data-srcbyline='examples/async.js?27-35'></code></pre>
 
         <pre class='fragment'><code class='lang-none no-highlight' data-trim>
-{ "foo": "bar", "nextIndex": 2, "message": "Jordan" }
-{ "foo": "bat", "nextIndex": 5, "message": "misses" }
-{ "foo": "baz", "nextIndex": null, "message": "Nashville" }
+{ "foo": "bar", "nextIndex": 2, "message": "Generators" }
+{ "foo": "bat", "nextIndex": 5, "message": "are" }
+{ "foo": "baz", "nextIndex": null, "message": "cool" }
         </code></pre>
     </section>
 
@@ -639,10 +722,10 @@ function denodify( nodeStyleFn ) {
         <pre><code class='lang-javascript' data-srcbyline='examples/async.js?27;29-31;33;35'></code></pre>
 
         <pre class='fragment'><code class='lang-none no-highlight' data-trim>
-{ "foo": "bar", "nextIndex": 2, "message": "Jordan" }
+{ "foo": "bar", "nextIndex": 2, "message": "Generators" }
 100 ms timeout!
-{ "foo": "bat", "nextIndex": 5, "message": "misses" }
-{ "foo": "baz", "nextIndex": null, "message": "Nashville" }
+{ "foo": "bat", "nextIndex": 5, "message": "are" }
+{ "foo": "baz", "nextIndex": null, "message": "cool" }
         </code></pre>
     </section>
 
@@ -663,6 +746,39 @@ Retrieved data: [ '{ "foo": "bar", "nextIndex": 2 }',
 
 <section class='no-footer'>
 
+    <section data-background='#2c4762'>
+        <img src='images/es7-meme.jpg' alt='Why not ES7?'>
+    </section>
+
+    <section>
+        <h3><code>async</code> and <code>await</code></h3>
+
+        <pre class='fragment'><code class='lang-javascript' data-trim>
+async function getData() {
+  try {
+
+    const one = JSON.parse(await readFile('data-1.json'));
+    const two = JSON.parse(await readFile('data-' + one.nextIndex + '.json'));
+    const three = JSON.parse(await readFile('data-' + two.nextIndex + '.json'));
+
+  } catch(err) {
+    // Handle the error...
+  }
+}
+        </code></pre>
+    </section>
+
+    <section>
+        <h2>This looks familiar...</h2>
+
+        <p class='fragment'>Because it is!</p>
+        <p class='fragment'><code>async</code> functions are based on "pausing" in generators</p>
+        <p class='fragment'>and <code>await</code> requires a Promise!</p>
+    </section>
+
+</section>
+
+<section>
     <section data-background='white'>
         <h3>So you're thinking...</h3>
 
@@ -675,18 +791,18 @@ Retrieved data: [ '{ "foo": "bar", "nextIndex": 2 }',
 
     <section>
         <h3>
-            Generators are
-            <a href='https://kangax.github.io/compat-table/es6/' title='ES6 support table'>supported</a> in:
+            async/await are
+            <a href='https://caniuse.com/#feat=async-functions' title='async/await support table'>supported</a> in:
         </h3>
 
         <ul>
             <li>Chrome (stable)</li>
             <li>Firefox (stable)</li>
+            <li>Edge (stable)</li>
             <li>Safari (stable + mobile)</li>
-            <li>Opera (stable)</li>
-            <li>Node (4.x+)</li>
+            <li>Node (7+)</li>
 
-            <li style='margin-top:1em'>And if all else fails... in Traceur and Babel!</li>
+            <li style='margin-top:1em'>And if all else fails... use Babel or Traceur!</li>
         </ul>
     </section>
 
@@ -694,17 +810,15 @@ Retrieved data: [ '{ "foo": "bar", "nextIndex": 2 }',
         <h3>And Internet Explorer?</h3>
 
         <h4 class='fragment' style='font-size:4em;'>ಠ_ಠ</h4>
-
-        <h4 class='fragment' style='margin-top:2em;'>But they <em>are</em> in Edge!</h4>
     </section>
 
     <section>
-        <h3>Don't reinvent sliced bread!</h3>
+        <h2>Want to use generators?</h2>
+        <h3 class='fragment'>Don't reinvent sliced bread!</h3>
 
-        <p>Don't write a <code>promisify()</code> or <code>run()</code> function...</p>
+        <aside class='fragment'>
+            <p>Don't write a <code>promisify()</code> or <code>run()</code> function...</p>
 
-        <div class='fragment'>
-            <h4>Use a library!</h4>
             <p>
                 <a href='https://github.com/tj/co'>co</a>,
                 <a href='https://github.com/kriskowal/q'>q</a>,
@@ -714,39 +828,7 @@ Retrieved data: [ '{ "foo": "bar", "nextIndex": 2 }',
                 <a href='https://github.com/cujojs/when'>when</a>,
                 <a href='https://github.com/bjouhier/galaxy'>galaxy</a>
             </p>
-        </div>
-    </section>
-
-    <section data-background='#2c4762'>
-        <img src='images/es7-meme.jpg' alt='Why not ES7?'>
-    </section>
-
-    <section>
-        <h3><code>async</code> and <code>await</code></h3>
-
-        <pre class='fragment'><code class='lang-javascript' data-trim>
-async function getData() {
-  try {
-
-    var one = JSON.parse(await readFile('data-1.json'));
-    var two = JSON.parse(await readFile('data-' + one.nextIndex + '.json'));
-    var three = JSON.parse(await readFile('data-' + two.nextIndex + '.json'));
-
-  } catch(err) {
-    // Handle the error...
-  }
-}
-        </code></pre>
-    </section>
-
-    <section data-background='white'>
-        <h4>And when can I use <code>async</code> and <code>await</code>?</h4>
-
-        <img class='fragment' src='images/obama-shrug.gif' alt='Obama shrugging' style='width:80%;'>
-
-        <p class='fragment'>
-            In <strong>Node v7</strong> you can use them<br>behind the <code>--harmony-async-await</code> flag!
-        </p>
+        </aside>
     </section>
 
 </section>
@@ -754,9 +836,9 @@ async function getData() {
 
 <section class='no-footer' data-background='white'>
     <h2>Thank You!</h2>
-    <h3 style="margin-top:2em;">Generating a New Async</h3>
+    <h3 style="margin-top:2em;">Rethinking Async Workflows</h3>
     <p style="margin-top: 2em">Jordan Kasper | <a href="http://twitter.com/jakerella">@jakerella</a></p>
     <p class="fine">
-        <a href="http://JordanKasper.com/generate">jordankasper.com/generate</a>
+        <a href="http://JordanKasper.com/async">jordankasper.com/async</a>
     </p>
 </section>

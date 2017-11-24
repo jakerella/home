@@ -6,7 +6,7 @@
 // similarly named function:
 // https://github.com/kriskowal/q/wiki/API-Reference#qnfbindnodefunc-args
 
-module.exports = function denodeify(nodeStyle) {
+module.exports = function promisify(nodeStyle) {
     return function promiseStyle() {
         const nodeArgs = [].slice.call(arguments);
 
