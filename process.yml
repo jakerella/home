@@ -1,0 +1,11 @@
+apps:
+  - script: app/server.js
+    instances: 1
+    name: jsk-home
+    exec_mode: cluster
+    env:
+      PORT: 8686
+      NODE_ENV: development
+    env_production:
+      PORT: 80
+      NODE_ENV: production

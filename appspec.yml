@@ -1,0 +1,33 @@
+version: 0.0
+os: linux
+files:
+  - source: /
+    destination: /home/ubuntu/app
+permissions:
+  - object: /home/ubuntu/app
+    owner: ubuntu
+    group: ubuntu
+    type:
+      - directory
+      - file
+hooks:
+  BeforeInstall:
+    - location: deploy/global-install.sh
+      timeout: 300
+      runas: ubuntu
+  AfterInstall:
+    - location: deploy/app-install.sh
+      timeout: 600
+      runas: ubuntu
+  ApplicationStart:
+    - location: deploy/run.sh
+      timeout: 120
+      runas: ubuntu
+  ApplicationStop:
+    - location: deploy/stop.sh
+      timeout: 120
+      runas: ubuntu
+  ValidateService:
+    - location: deploy/validate.sh
+      timeout: 60
+      runas: ubuntu
