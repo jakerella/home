@@ -12,7 +12,7 @@ else
 fi
 
 cd ~/app
-npm install
+sudo npm install
 
 # add app to startup
 hasRc=`grep "su -l $USER" /etc/rc.d/rc.local | cat`
