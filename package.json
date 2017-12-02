@@ -14,7 +14,9 @@
     "q": "^1.0.1",
     "rss": "^1.2.1",
     "serve-static": "^1.7.1",
-    "bower": "^1.7.9",
+    "bower": "^1.7.9"
+  },
+  "devDependencies": {
     "grunt": "^1.0.0",
     "grunt-contrib-jshint": "^1.0.0",
     "grunt-contrib-watch": "^0.6.1",
@@ -30,7 +32,7 @@
   "license": "CC-BY-NC-SA-4.0",
   "homepage": "http://jordankasper.com",
   "scripts": {
-    "postinstall": "bower install && grunt sass",
+    "postinstall": "bower install",
     "start": "node app/server.js"
   }
 }
