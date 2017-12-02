@@ -3,6 +3,7 @@
 set -e
 
 # setup NODE_ENV
+touch ~/.bash_profile
 hasEnv=`grep "export NODE_ENV" ~/.bash_profile | cat`
 if [ -z "$hasEnv" ]; then
     echo "export NODE_ENV=production" >> ~/.bash_profile
