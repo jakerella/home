@@ -13,9 +13,3 @@ fi
 
 cd ~/app
 npm install --only=prod
-
-# add app to startup
-hasRc=`grep "su -l $USER" /etc/rc.d/rc.local | cat`
-if [ -z "$hasRc" ]; then
-    sh -c "echo 'su -l $USER -c \"cd ~/app;sh ./run.sh\"' >> /etc/rc.d/rc.local"
-fi
