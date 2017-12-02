@@ -12,7 +12,7 @@ else
 fi
 
 cd ~/app
-npm install
+npm install --only=prod
 
 # add app to startup
 hasRc=`grep "su -l $USER" /etc/rc.d/rc.local | cat`
