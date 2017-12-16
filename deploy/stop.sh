@@ -3,4 +3,4 @@
 set -e
 
 cd ~/app || true
-pm2 stop jsk-home || true
+sudo pm2 stop jsk-home || true
