@@ -5,5 +5,5 @@ set -e
 export NODE_ENV="production"
 
 sudo npm install -g npm
-pm2 update
+sudo pm2 update
 sudo pm2 startup
