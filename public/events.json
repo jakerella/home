@@ -742,6 +742,24 @@
                 "Regular Expressions",
                 "ES6 Features"
             ]
+        },
+        {
+            "name": "DCJS",
+            "url": "https://www.meetup.com/DC-JavaScript/events/247263547/",
+            "location": "Washington, DC",
+            "date": "Feb 8 2018",
+            "topics": [
+                "Using ES6 to rewrite jQuery"
+            ]
+        },
+        {
+            "name": "GitHub Constellation",
+            "url": "https://githubconstellation.com/washington-dc/",
+            "location": "Washington, DC",
+            "date": "Apr 18 2018",
+            "topics": [
+                "Open Source in the Federal Government"
+            ]
         }
     ]
 }
