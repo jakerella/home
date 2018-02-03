@@ -1,0 +1,6 @@
+{
+    "title": "Using ES6 to Build a More Efficient jQuery",
+    "description": "jQuery is great, but it's big and bloated. What if we could use new ES6 (and ES5) JavaScript APIs to make a smaller, more efficient DOM manipulation framework?",
+    "slides": "slides.html",
+    "backgroundColor": "white"
+}
