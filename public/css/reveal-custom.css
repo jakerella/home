@@ -81,6 +81,16 @@ aside.title-text h3 {
     line-height: 1.2em;
 }
 
+.reveal .slides .centered-list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    list-style: none;
+}
+.reveal .slides .centered-list li {
+    flex: 1;
+}
+
 .slides pre {
     background-color: #fff;
     margin: 0.3em;
