@@ -758,7 +758,16 @@
             "location": "Washington, DC",
             "date": "Apr 18 2018",
             "topics": [
-                "Open Source in the Federal Government"
+                "Open Sourcing the DoD"
+            ]
+        },
+        {
+            "name": "OSEHRA Open Source Summit",
+            "url": "http://summit.osehra.org",
+            "location": "Bethesda, MD",
+            "date": "Jul 18 2018",
+            "topics": [
+                "Open Sourcing the DoD"
             ]
         }
     ]
