@@ -787,6 +787,24 @@
             "topics": [
                 "Open Sourcing the DoD"
             ]
+        ,
+        {
+            "name": "Open Source Summit North America",
+            "url": "https://events.linuxfoundation.org/events/open-source-summit-north-america-2018/",
+            "location": "Vancouver, Canada",
+            "date": "Aug 31 2018",
+            "topics": [
+                "Open Sourcing the DoD"
+            ]
+        },
+        {
+            "name": "All Things Open",
+            "url": "https://allthingsopen.org/",
+            "location": "Raleigh, NC",
+            "date": "Oct 21 2018",
+            "topics": [
+                "Open Sourcing the DoD"
+            ]
         }
     ]
 }
