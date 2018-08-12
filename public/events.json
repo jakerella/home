@@ -762,10 +762,46 @@
             ]
         },
         {
+            "name": "Code for America Summit",
+            "url": "http://www.cvent.com/events/code-for-america-summit-2018/event-summary-e12d85b157b94d69b80d8911cc641d36.aspx",
+            "location": "Oakland, CA",
+            "date": "May 31 2018",
+            "topics": [
+                "Open Source in Civic Tech"
+            ]
+        },
+        {
+            "name": "Digital Gov Interview",
+            "url": "https://digital.gov/event/2018/06/05/free-open-source-software-in-government-with-codemil/",
+            "location": "remote",
+            "date": "Jun 5 2018",
+            "topics": [
+                "Open Sourcing the DoD"
+            ]
+        },
+        {
             "name": "OSEHRA Open Source Summit",
             "url": "http://summit.osehra.org",
             "location": "Bethesda, MD",
             "date": "Jul 18 2018",
+            "topics": [
+                "Open Sourcing the DoD"
+            ]
+        },
+        {
+            "name": "Open Source Summit North America",
+            "url": "https://events.linuxfoundation.org/events/open-source-summit-north-america-2018/",
+            "location": "Vancouver, Canada",
+            "date": "Aug 31 2018",
+            "topics": [
+                "Open Sourcing the DoD"
+            ]
+        },
+        {
+            "name": "All Things Open",
+            "url": "https://allthingsopen.org/",
+            "location": "Raleigh, NC",
+            "date": "Oct 21 2018",
             "topics": [
                 "Open Sourcing the DoD"
             ]
