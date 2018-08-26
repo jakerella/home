@@ -2,7 +2,7 @@
     .reveal section h1 { text-transform: none; }
     .reveal section sup { font-size: 0.6em; position: relative; top: -1em; }
     .octocat, .slide-image { width: 20rem; }
-    .reveal section .dark-bg-header { color: #fff; font-weight: bold; font-size: 2em; text-shadow: 0.05em 0.05em 0.1em #000; }
+    .reveal section .dark-bg-header { color: #fff; font-weight: bold; text-shadow: 0.05em 0.05em 0.1em #000; }
     .reveal section .code-site { position: relative; text-align: center; bottom: -2em;  }
     .reveal .code-site:before { content: ""; }
     .reveal section cite { width: 100%; text-align: center; }
@@ -56,30 +56,31 @@
     <h1>Current State and Challenges</h1>
 </section>
 
-<section>
-    <h1>OSS is insecure</h1>
-    <!-- <cite style='color: #eee'>https://www.flickr.com/photos/thepreiserproject/</cite> -->
-    <img src='images/inspectocat.jpg' alt='Inspector Octocat' class='octocat'>
+<section data-background='images/hacking.jpg'>
+    <h1 class='dark-bg-header' style='margin-bottom: 5em;'>"OSS is insecure"</h1>
+    <cite style='color: #eee'>https://www.flickr.com/photos/thepreiserproject/</cite>
+</section>
+
+<section data-background='images/mine.jpg'>
+    <h1 class='dark-bg-header' style='margin-bottom: 5em;'>"We paid for it, it's ours."</h1>
+    <cite>http://disney.wikia.com/wiki/Seagulls_(Finding_Nemo)</cite>
 </section>
 
 <section>
-    <h1>We paid for it, it's ours.</h1>
-    <img src='images/minertocat.png' alt='Miner Octocat' class='octocat'>
-</section>
-
-<section>
-    <h1>It's illegal</h1>
+    <h1>"It's illegal"</h1>
     <img src='images/justicetocat.jpg' alt='Justice Octocat' class='octocat'>
 </section>
 
-<section data-background='#e3f1f5'>
+<section data-background='#fdefcb'>
     <h1>Set in our ways</h1>
-    <img src='images/father_timeout.jpg' alt='Father Time Octocat' class='octocat'>
+    <img src='images/sitting_skeleton.jpg' alt='Sitting skeleton' class='slide-image'>
+    <cite>https://commons.wikimedia.org/wiki/File:III-A-12.jpg</cite>
 </section>
 
 <section>
     <h1>Techincal Know-how</h1>
-    <img src='images/gobbleotron.gif' alt='Gobble-o-tron Octocat' class='octocat'>
+    <img src='images/hopper.jpg' alt='Grace Hopper' style=''>
+    <cite>http://www.doncio.navy.mil/CHIPS/ArticleDetails.aspx?ID=7076</cite>
 </section>
 
 <section data-background='#f99'>
@@ -97,7 +98,7 @@
 </section>
 
 <section data-background='images/source-code.jpg'>
-    <h1 class='dark-bg-header'>Federal Source Code Policy</h1>
+    <h1 class='dark-bg-header' style='margin-top: -4em;'>Federal Source Code Policy</h1>
 </section>
 
 <section>
@@ -111,10 +112,10 @@
 </section>
 
 <section>
-    <h2>Guidelines for how to OSS</h2>
-    <h2 class='fragment'>Outreach to DoD organizations</h2>
-    <h2 class='fragment'>Track OSS projects</h2>
-    <h2 class='fragment'>Outreach and Policy Work</h2>
+    <h2>Guidelines</h2>
+    <h2 class='fragment'>Outreach</h2>
+    <h2 class='fragment'>Project Tracking</h2>
+    <h2 class='fragment'>Policy Work</h2>
 </section>
 
 <section>
@@ -123,56 +124,58 @@
 </section>
 
 <section data-background='black'>
-    <h1 style='color: #fff;'>Army Research Lab (ARL)</h1>
     <img src='images/arl.png' alt='Army Research Lab logo' class='slide-image'>
+    <h1 style='color: #fff;'>Army Research Lab</h1>
     <cite class='code-site' style='color: #444;'>https://github.com/usarmyresearchlab</cite>
 </section>
 
 <section>
-    <h1>National Security Agency (NSA)</h1>
-    <img src='images/nsa.png' alt='National Security Agency' class='slide-image'>
+    <img src='images/nsa.png' alt='National Security Agency seal' class='slide-image'>
     <cite class='code-site'>https://github.com/nationalsecurityagency</cite>
 </section>
 
 <section>
-    <h1>Air Force</h1>
-    <img src='images/af.jpg' alt='Army Research Lab logo' class='slide-image'>
+    <img src='images/air_force.png' alt='Aitr Force logo' class='slide-image'>
 </section>
 
 <section>
-    <h1>Defense Digital Service (DDS)</h1>
     <img src='images/dds-logo.png' alt='Defense Digital Service logo' class='slide-image'>
     <cite class='code-site'>https://github.com/deptofdefense</cite>
 </section>
 
-<section>
-    <h1>What can you do?</h1>
+<section data-background='#555'>
     <img src='images/femalecodertocat.png' alt='Coder Octocat' class='octocat'>
+    <h1 style='color: #fff;'>What can you do?</h1>
 </section>
 
 <section>
-    <h1>Email us: <a href='mailto:code@dds.mil'>code@dds.mil</a></h1>
+    <h2 style='text-transform: none;'>Code.mil</h2>
+    <p style='text-transform: none;'><a href='https://github.com/code-dot-mil/code.mil/'>github.com/code-dot-mil/code.mil</a></p>
+</section>
+
+<section data-background='#00b1f2'>
+    <h1><a href='mailto:code@dds.mil' style='color: #fff;'>code@dds.mil</a></h1>
     <img src='images/email.png' alt='Email icon' class='slide-image'>
 </section>
 
 <section data-background='images/biden_coding.jpg'>
-    <h1 style='color: #fff; text-shadow: 2px 2px 2px #000; position: relative; top: 3em; line-height: 1.5em; font-weight: bold;'>
+    <h1 class='dark-bg-header' style=' margin-top: 4em; line-height: 1.5em;'>
         Write some code!<br>Code.gov/#/help-wanted
     </h1>
-    <cite class='code-site' style='top: 15em; color: #ddd;'>Official White House Photo by David Lienemann</cite>
+    <cite class='code-site' style='color: #ddd;'>Official White House Photo by David Lienemann</cite>
 </section>
 
+<section data-background='images/help_wanted.png'></section>
+
+<section>
+    <img src='images/usds.png' alt='United States Digital Service Logo'>
+    <p><a href='https://usds.gov/join'>usds.gov/join</a></p>
+</section>
 
 <section data-background='#f5ffff'>
-    <h1 style='text-transform: none; margin-top:1.5em;'><a href='https://Code.mil'>Code.mil</a>: Open Sourcing the DoD</h1>
+    <h1 style='text-transform: none;'><a href='https://Code.mil'>Code.mil</a>: Open Sourcing the DoD</h1>
 
-    <p>
-        <a href='https://dds.mil#join'><img src='images/dds-logo.png' alt='Defense Digital Service logo' style='width: 15rem;'></a>
-        <br>
-        Join us!
-        <br>
-        <a href='https://dds.mil#join'>dds.mil#join</a>
-    </p>
+    <a href='https://dds.mil'><img src='images/dds-logo.png' alt='Defense Digital Service logo' style='width: 15rem;'></a>
 
     <cite class='code-site'>
         All Octocats liberally sprung from https://octodex.github.com
